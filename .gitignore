@@ -1,0 +1,18 @@
+# Manuscripts and white papers kept out of version control until vetted
+paper-reproduction/Robust_Literature_Discovery_from_Minimal_Seeds.md
+paper-drafts
+
+# Optional manuscript-like artifacts
+*_Whitepaper*.md
+*_Whitepaper*.pdf
+*_draft*.md
+*_draft*.pdf
+
+# Local noise
+.DS_Store
+.Rhistory
+
+
+# Large local-only data artifacts
+data-aps/processed/
+deps-matlab/
