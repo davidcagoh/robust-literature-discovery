@@ -10,8 +10,8 @@ Computes and saves:
   6. Per-survey: in/out degree distribution of the 1-hop neighbourhood
   7. Per-survey: Lorenz curve of forward-neighbour citation counts (to motivate Pareto filter)
 
-All figures saved to /home/ubuntu/litreview-coverage/figures/
-All numeric results saved to /home/ubuntu/litreview-coverage/graph_stats.json
+All figures saved to data-aps/outputs/figures/
+All numeric results saved to data-aps/outputs/graph_stats.json
 """
 
 import json
@@ -25,9 +25,11 @@ from collections import defaultdict, deque
 from pathlib import Path
 
 # ── Setup ─────────────────────────────────────────────────────────────────────
-OUT   = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT   = _REPO / "data-aps" / "outputs"
 FIGS  = OUT / "figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 STYLE = {
     "S1_MIT":  {"color": "#2166ac", "label": "S1: Metal-insulator transitions (1998)"},
@@ -44,7 +46,7 @@ plt.rcParams.update({
 
 # ── Load data ─────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  {len(df):,} edges")
 
 with open(OUT / "ground_truth.json") as f:
@@ -76,19 +78,24 @@ def plot_degree_dist(deg_array, label, color, filename):
     ax.set_xscale("log"); ax.set_yscale("log")
     ax.set_xlabel("Degree $k$"); ax.set_ylabel("Count $N(k)$")
     ax.set_title(f"APS Citation Graph — {label} Degree Distribution")
-    # Power-law fit on the tail (k >= 5)
+    # MLE power-law fit on the tail (k >= 5); Clauset et al. estimator
     tail = mask & (k >= 5)
-    if tail.sum() > 5:
-        lx = np.log10(k[tail]); ly = np.log10(counts[tail])
-        gamma, intercept = np.polyfit(lx, ly, 1)
+    tail_vals = deg_array[deg_array >= 5].astype(float)
+    gamma_mle = None
+    if len(tail_vals) > 5:
+        x_min     = 5.0
+        gamma_mle = 1.0 + len(tail_vals) / np.sum(np.log(tail_vals / (x_min - 0.5)))
+        # Amplitude: least-squares fit of log C given fixed slope γ_MLE
+        log_C = np.mean(np.log10(counts[tail]) + gamma_mle * np.log10(k[tail]))
+        C = 10 ** log_C
         fit_k = np.logspace(np.log10(k[tail].min()), np.log10(k[tail].max()), 200)
-        fit_y = 10**intercept * fit_k**gamma
-        ax.plot(fit_k, fit_y, "k--", lw=1.2, label=f"Power-law fit $\\gamma={-gamma:.2f}$")
+        fit_y = C * fit_k ** (-gamma_mle)
+        ax.plot(fit_k, fit_y, "k--", lw=1.2, label=f"MLE power-law $\\gamma={gamma_mle:.2f}$")
         ax.legend(fontsize=9)
     fig.tight_layout()
     fig.savefig(FIGS / filename, dpi=150)
     plt.close(fig)
-    return float(-gamma) if tail.sum() > 5 else None
+    return float(gamma_mle) if gamma_mle is not None else None
 
 gamma_in  = plot_degree_dist(in_deg,  "In",  "#2166ac", "deg_in.png")
 gamma_out = plot_degree_dist(out_deg, "Out", "#d6604d", "deg_out.png")
@@ -167,51 +174,73 @@ fig.tight_layout()
 fig.savefig(FIGS / "wcc_dist.png", dpi=150)
 plt.close(fig)
 
-# ── 5. BFS reachability curves per survey ─────────────────────────────────────
-print("Computing BFS reachability curves...")
+# ── 5. BFS overlap with gold bibliography, varying seed size ──────────────────
+print("Computing BFS overlap curves (seeded from gold set, varying k)...")
 
-def bfs_reachability(start_doi, adj, max_depth=6):
-    """BFS from start_doi using adj dict. Returns list of (depth, cumulative_nodes_reached)."""
-    visited = {start_doi}
-    frontier = {start_doi}
-    curve = [(0, 1)]
+def bfs_overlap(seed_set, gold_refs, max_depth=6):
+    """
+    Bidirectional BFS from seed_set. Returns list of dicts:
+      depth, overlap (|visited ∩ gold_refs| / |gold_refs|), corpus_size.
+    Seeds come from the gold_refs neighbourhood, NOT from the survey DOI itself.
+    """
+    gold_refs = set(gold_refs)
+    visited   = set(seed_set)
+    frontier  = set(seed_set)
+    overlap0  = len(visited & gold_refs) / len(gold_refs) if gold_refs else 0.0
+    curve = [{"depth": 0, "overlap": overlap0, "corpus_size": len(visited)}]
     for d in range(1, max_depth + 1):
-        next_frontier = set()
+        nxt = set()
         for node in frontier:
-            for nb in adj.get(node, set()):
+            for nb in cites.get(node, set()):
                 if nb not in visited:
-                    visited.add(nb)
-                    next_frontier.add(nb)
-        frontier = next_frontier
-        curve.append((d, len(visited)))
+                    visited.add(nb); nxt.add(nb)
+            for nb in cited_by.get(node, set()):
+                if nb not in visited:
+                    visited.add(nb); nxt.add(nb)
+        frontier = nxt
+        overlap = len(visited & gold_refs) / len(gold_refs) if gold_refs else 0.0
+        curve.append({"depth": d, "overlap": overlap, "corpus_size": len(visited)})
         if not frontier:
             break
     return curve
 
-fig, axes = plt.subplots(1, 3, figsize=(14, 4), sharey=False)
+SEED_SIZES_REACH  = [1, 5, 10, 20]
+SEED_COLORS_REACH = ["#d73027", "#f46d43", "#74add1", "#313695"]
+
+fig, axes = plt.subplots(1, 3, figsize=(14, 4.5))
 
 bfs_results = {}
 for ax, (key, info) in zip(axes, gt.items()):
-    doi = info["doi"]
-    s = STYLE[key]
+    s         = STYLE[key]
+    gold_refs = set(info["gold_refs"])
+    # Seeds = top-k gold refs by in-degree within APS (most cited = easiest to find)
+    gold_sorted = sorted(gold_refs, key=lambda x: len(cited_by.get(x, set())), reverse=True)
 
-    bwd = bfs_reachability(doi, cites,    max_depth=6)   # follow references
-    fwd = bfs_reachability(doi, cited_by, max_depth=6)   # follow citations
+    key_curves = {}
+    for k_s, color in zip(SEED_SIZES_REACH, SEED_COLORS_REACH):
+        seeds = set(gold_sorted[:k_s])
+        curve = bfs_overlap(seeds, gold_refs, max_depth=6)
+        key_curves[str(k_s)] = curve
+        depths   = [pt["depth"]   for pt in curve]
+        overlaps = [pt["overlap"] for pt in curve]
+        ax.plot(depths, overlaps, "o-", color=color, lw=2, ms=5, label=f"k={k_s}")
 
-    bfs_results[key] = {"backward": bwd, "forward": fwd}
-
-    depths_b, counts_b = zip(*bwd)
-    depths_f, counts_f = zip(*fwd)
-
-    ax.plot(depths_b, counts_b, "o-", color=s["color"],       lw=2, ms=5, label="Backward (refs)")
-    ax.plot(depths_f, counts_f, "s--", color=s["color"],      lw=2, ms=5, alpha=0.6, label="Forward (citers)")
-    ax.set_xlabel("BFS depth"); ax.set_ylabel("Cumulative nodes reached")
+    bfs_results[key] = key_curves
+    ax.axhline(1.0, color="grey", lw=0.8, ls=":")
+    ax.set_xlabel("BFS depth")
+    ax.set_ylabel("Overlap with gold bibliography")
     ax.set_title(s["label"], fontsize=9, wrap=True)
-    ax.legend(fontsize=8)
-    ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x):,}"))
+    ax.set_ylim(0, 1.08)
+    ax.legend(fontsize=8, title="Seed size")
 
-fig.suptitle("BFS Reachability from Each Survey Paper", fontsize=12, y=1.01)
-fig.tight_layout()
+handles, labels_leg = axes[0].get_legend_handles_labels()
+fig.legend(handles, labels_leg, loc="lower center", ncol=4, fontsize=9,
+           bbox_to_anchor=(0.5, -0.03))
+fig.suptitle(
+    "BFS Overlap with Gold Bibliography vs. Depth\n"
+    "(seeds = top-k papers from gold set by citation count; bidirectional traversal)",
+    fontsize=11)
+fig.tight_layout(rect=[0, 0.07, 1, 1])
 fig.savefig(FIGS / "bfs_reachability.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
@@ -259,8 +288,8 @@ stats = {
     "n_edges": len(df),
     "in_degree_gini":   float(gini_in),
     "out_degree_gini":  float(gini_out),
-    "in_degree_gamma":  float(gamma_in)  if gamma_in  else None,
-    "out_degree_gamma": float(gamma_out) if gamma_out else None,
+    "in_degree_gamma":  float(gamma_in)  if gamma_in  is not None else None,
+    "out_degree_gamma": float(gamma_out) if gamma_out is not None else None,
     "n_wccs":           len(sizes),
     "largest_wcc_size": int(sizes[0]),
     "largest_wcc_frac": float(sizes[0] / N),

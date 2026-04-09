@@ -1,10 +1,15 @@
 """
-Phase 6-8 (Extended): Cold-Start Escape Hatch Simulation — Low-Seed Regime
+Cold-Start Escape Hatch Simulation — Low-Seed and Full-Coverage Regime
 
-Extends 04_cold_start_simulation.py to cover the realistic user seed range of
-k ∈ {2, 3, 4, 5, 6}, with k=10 and k=20 retained as anchors to the original
-results. All other parameters (PARETO_P, YIELD_THRESHOLD, N_ROUNDS, K_ESCAPE)
-are unchanged so results are directly comparable.
+Covers the realistic user seed range k ∈ {1, 2, 3, 4, 5} plus k=10 as the
+full-coverage anchor. N_ROUNDS=2 (round 1 does ~97-99% of the work; round 2
+is cheap insurance — see N_ROUNDS_Extension.md).
+
+No Pareto hub filter is applied. The APS corpus is homogeneous (all physics);
+yield-based stopping is sufficient corpus control. Cross-disciplinary explosion
+does not occur in a closed same-domain corpus. The Pareto filter is a production
+concern for heterogeneous open-web corpora (Semantic Scholar) where highly-cited
+papers have citers across disciplines.
 
 Output files are written to a separate figures_lowseed/ subdirectory so the
 original figures from script 04 are not overwritten.
@@ -24,7 +29,9 @@ import random
 random.seed(42)
 np.random.seed(42)
 
-OUT  = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT  = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "figures_lowseed"
 FIGS.mkdir(parents=True, exist_ok=True)
 
@@ -43,7 +50,7 @@ SURVEY_STYLE = {
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  {len(df):,} edges")
 
 with open(OUT / "ground_truth.json") as f:
@@ -57,17 +64,33 @@ for row in df.itertuples(index=False):
     cited_by[row.cited_doi].add(row.citing_doi)
 print("  Done.")
 
-# ── Core traversal engine (unchanged from 04) ─────────────────────────────────
-PARETO_P        = 80
+# ── Core traversal engine ─────────────────────────────────────────────────────
+PARETO_P        = 80     # keep citers whose out-degree ≤ 80th percentile
 YIELD_THRESHOLD = 0.05   # stop when screen yield drops below 5%
 MAX_DEPTH       = 8
 
-def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
-                            pareto_p=PARETO_P, yield_thresh=YIELD_THRESHOLD,
-                            max_depth=MAX_DEPTH):
+def bidir_traversal(seed_set, gold_refs, visited_already=None,
+                    pareto_p=PARETO_P, yield_thresh=YIELD_THRESHOLD,
+                    max_depth=MAX_DEPTH):
     """
-    Bidirectional BFS with Pareto filter on forward step.
-    Stops when screen yield (new gold / new nodes) drops below yield_thresh.
+    Bidirectional BFS with out-degree Pareto filter on forward step and
+    yield-based stopping.
+
+    Forward filter (out-degree on citers): after collecting all citers of the
+    frontier, discard citers whose own out-degree (number of papers they cite)
+    exceeds the pareto_p-th percentile of the collected citers' out-degrees.
+    High-out-degree citers are survey-like papers that cite broadly; their
+    additional references tend to be off-topic. Keeping only specialist citers
+    reduces corpus size without large recall cost.
+
+    Note: this is an APS-simulation proxy. The production system (traverse.py)
+    filters frontier papers by in-degree (citation_count) before forward
+    traversal, preventing queue explosion on heterogeneous corpora. Both
+    exploit the power-law citation distribution but at different points in
+    the traversal.
+
+    Yield stopping: after each BFS depth, if new_gold / new_nodes < yield_thresh
+    AND depth >= 2, stop traversal.
 
     Returns:
         visited:    set of all nodes visited
@@ -89,24 +112,29 @@ def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
         prev_gold = len(visited & gold_refs)
 
         nxt = set()
-        # Backward (unfiltered)
+        # Backward: follow references of all frontier papers (unfiltered)
         for node in frontier:
             for nb in cites.get(node, set()):
                 if nb not in visited:
                     visited.add(nb); nxt.add(nb)
 
-        # Forward (Pareto-filtered)
+        # Forward: collect citers then filter by out-degree
         fwd_candidates = []
         for node in frontier:
             for nb in cited_by.get(node, set()):
                 if nb not in visited:
                     fwd_candidates.append(nb)
         if fwd_candidates:
-            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
-            threshold = np.percentile(out_degs, pareto_p)
-            for nb, od in zip(fwd_candidates, out_degs):
-                if od <= threshold and nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+            if pareto_p is not None:
+                out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
+                threshold = np.percentile(out_degs, pareto_p)
+                for nb, od in zip(fwd_candidates, out_degs):
+                    if od <= threshold and nb not in visited:
+                        visited.add(nb); nxt.add(nb)
+            else:
+                for nb in fwd_candidates:
+                    if nb not in visited:
+                        visited.add(nb); nxt.add(nb)
 
         frontier  = nxt
         new_nodes = len(visited) - prev_size
@@ -164,8 +192,8 @@ def make_seeds_contaminated(gold_refs, all_nodes, k, contamination=0.5, rng=None
     return set(pool_good[:k_good]) | set(pool_bad[:k_bad])
 
 
-# ── Escape Hatch loop (unchanged from 04) ────────────────────────────────────
-def escape_hatch_loop(seed_set, gold_refs, all_nodes, n_rounds=3, k_escape=20,
+# ── Escape Hatch loop ────────────────────────────────────────────────────────
+def escape_hatch_loop(seed_set, gold_refs, all_nodes, n_rounds=2, k_escape=20,
                       pareto_p=PARETO_P, yield_thresh=YIELD_THRESHOLD):
     """
     Multi-round Escape Hatch simulation.
@@ -185,7 +213,7 @@ def escape_hatch_loop(seed_set, gold_refs, all_nodes, n_rounds=3, k_escape=20,
         visited_before = len(visited)
         gold_before    = len(visited & gold_refs)
 
-        visited, curve, stop_d = bidir_pareto_traversal(
+        visited, curve, stop_d = bidir_traversal(
             current_seeds, gold_refs,
             visited_already=visited,
             pareto_p=pareto_p,
@@ -233,11 +261,9 @@ print("\nRunning cold-start experiments (low-seed extension)...")
 
 all_nodes = set(cites.keys()) | set(cited_by.keys())
 
-# Extended seed range: 2–6 are the new realistic values; 10 and 20 are anchors
-SEED_SIZES_LOW    = [2, 3, 4, 5, 6]
-SEED_SIZES_ANCHOR = [10, 20]
-SEED_SIZES        = SEED_SIZES_LOW + SEED_SIZES_ANCHOR
-N_ROUNDS          = 4
+# Realistic seed range + full-coverage anchor; N_ROUNDS=2 per N_ROUNDS_Extension.md
+SEED_SIZES = [1, 2, 3, 4, 5, 10]
+N_ROUNDS   = 2
 K_ESCAPE          = 20
 
 all_results = {}
@@ -299,7 +325,7 @@ print("Generating figures...")
 
 # ── Fig A: Per-round recall for each low-seed k value (one panel per survey) ──
 # One figure per k in the low-seed range, mirroring the original fig5 style.
-for k_plot in SEED_SIZES_LOW:
+for k_plot in [k for k in SEED_SIZES if k <= 5]:
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     seed_styles = {
         "top_k":        {"color": "#1b7837", "ls": "-",  "lw": 2.0, "marker": "o",
@@ -357,7 +383,7 @@ for ax, (key, info) in zip(axes, gt.items()):
     ax.set_ylim(0, 1.08)
     ax.set_xticks(SEED_SIZES)
     # Shade the realistic user zone
-    ax.axvspan(2, 6, alpha=0.07, color="#f46d43", label="Typical user range (k=2–6)")
+    ax.axvspan(1, 5, alpha=0.07, color="#f46d43", label="Typical user range (k=1–5)")
 handles, labels_leg = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels_leg, loc="lower center", ncol=4, fontsize=9,
            bbox_to_anchor=(0.5, -0.05))
@@ -398,8 +424,8 @@ for i in range(len(survey_keys)):
                 fontsize=9, color=text_color, fontweight="bold")
 
 # Draw a vertical line between k=6 and k=10 to mark the realistic-user boundary
-ax.axvline(x=len(SEED_SIZES_LOW) - 0.5, color="black", lw=2, ls="--")
-ax.text(len(SEED_SIZES_LOW) - 0.5, -0.7, "← typical users | anchors →",
+ax.axvline(x=SEED_SIZES.index(10) - 0.5, color="black", lw=2, ls="--")
+ax.text(SEED_SIZES.index(10) - 0.5, -0.7, "← typical users | full-coverage →",
         ha="center", va="top", fontsize=8, color="black")
 
 plt.colorbar(im, ax=ax, label="Recall", fraction=0.03, pad=0.04)

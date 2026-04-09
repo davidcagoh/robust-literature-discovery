@@ -66,17 +66,19 @@ SURVEY = {
     "S3_TOPO": {"color": C["S3"], "label": "S3: Topological photonics (2019)",        "short": "S3 (2019)"},
 }
 
-OUT  = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT  = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "pub_figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 # ── Load data ─────────────────────────────────────────────────────────────────
 print("Loading data...")
-df_csv = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df_csv = pd.read_csv(APS_CSV)
 
 with open(OUT / "graph_stats.json")       as f: gstats = json.load(f)
 with open(OUT / "traversal_results.json") as f: trav   = json.load(f)
-with open(OUT / "cold_start_results.json") as f: cold  = json.load(f)
+with open(OUT / "cold_start_results_lowseed.json") as f: cold  = json.load(f)
 with open(OUT / "ground_truth.json")      as f: gt     = json.load(f)
 
 miss = {
@@ -173,44 +175,39 @@ print("  Saved fig1_degree_distributions.png")
 # ─────────────────────────────────────────────────────────────────────────────
 # FIG 2: BFS reachability curves
 # ─────────────────────────────────────────────────────────────────────────────
-print("Fig 2: BFS reachability...")
-fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=False)
+print("Fig 2: BFS overlap with gold bibliography (seed-size curves)...")
+# New format: gstats["bfs_reachability"][survey_key][str(k)] = [{depth, overlap, corpus_size}]
+SEED_SIZES_REACH  = [1, 5, 10, 20]
+SEED_COLORS_REACH = ["#d73027", "#f46d43", "#74add1", "#313695"]
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
 
 for ax, (key, info) in zip(axes, SURVEY.items()):
     bfs = gstats["bfs_reachability"][key]
-    bwd_x = [d for d, _ in bfs["backward"]]
-    bwd_y = [n for _, n in bfs["backward"]]
-    fwd_x = [d for d, _ in bfs["forward"]]
-    fwd_y = [n for _, n in bfs["forward"]]
-
-    ax.plot(bwd_x, bwd_y, "o-", color=C["bwd"], lw=2.5, ms=7, label="Backward (references)")
-    ax.plot(fwd_x, fwd_y, "s--", color=C["fwd"], lw=2.5, ms=7, label="Forward (citations)")
-
-    # Annotate gold set size at depth 1
     gold_size = len(gt[key]["gold_refs"])
-    ax.axhline(gold_size, color=C["gold"], lw=1.5, ls=":", alpha=0.9)
-    ax.text(0.5, gold_size * 1.12, f"Gold set: {gold_size}", color=C["gold"],
-            fontsize=9, ha="center", va="bottom")
 
-    ax.set_yscale("log")
+    for k_s, color in zip(SEED_SIZES_REACH, SEED_COLORS_REACH):
+        curve = bfs.get(str(k_s), [])
+        if not curve:
+            continue
+        depths   = [pt["depth"]   for pt in curve]
+        overlaps = [pt["overlap"] for pt in curve]
+        ax.plot(depths, overlaps, "o-", color=color, lw=2, ms=5, label=f"k={k_s}")
+
+    ax.axhline(1.0, color=C["gold"], lw=1.2, ls=":", alpha=0.9)
+    ax.text(0.1, 1.02, f"Full gold set ({gold_size} papers)", color=C["gold"],
+            fontsize=8, va="bottom")
     ax.set_xlabel("BFS depth")
-    ax.set_ylabel("Cumulative papers reached")
+    ax.set_ylabel("Overlap with gold bibliography")
     ax.set_title(info["label"], fontsize=10)
+    ax.set_ylim(0, 1.12)
     ax.set_xticks([0, 1, 2, 3, 4, 5, 6])
-    ax.legend(loc="upper left")
+    ax.legend(loc="lower right", fontsize=8, title="Seed size")
 
-    # Annotate corpus size at depth 3
-    bwd3 = bwd_y[3] if len(bwd_y) > 3 else bwd_y[-1]
-    fwd3 = fwd_y[3] if len(fwd_y) > 3 else fwd_y[-1]
-    ax.annotate(f"{bwd3:,}", xy=(3, bwd3), xytext=(3.3, bwd3 * 0.6),
-                fontsize=8, color=C["bwd"],
-                arrowprops=dict(arrowstyle="->", color=C["bwd"], lw=1))
-    ax.annotate(f"{fwd3:,}", xy=(3, fwd3), xytext=(3.3, fwd3 * 1.8),
-                fontsize=8, color=C["fwd"],
-                arrowprops=dict(arrowstyle="->", color=C["fwd"], lw=1))
-
-fig.suptitle("BFS Reachability: Backward vs Forward Traversal from Each Survey Paper",
-             fontsize=12, y=1.01)
+fig.suptitle(
+    "BFS Overlap with Gold Bibliography vs. Depth\n"
+    "(top-k seeds from gold set by citation count; bidirectional traversal)",
+    fontsize=12, y=1.02)
 fig.tight_layout()
 fig.savefig(FIGS / "fig2_bfs_reachability.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
@@ -309,7 +306,7 @@ for ax, (skey, sinfo) in zip(axes, SURVEY.items()):
                 color=sinfo["color"])
 
 fig.suptitle("Screen Yield per BFS Depth: Rapid Collapse Validates the Stopping Criterion\n"
-             "(Strategy: Bidirectional + Pareto-80 filter, seeded from survey paper)",
+             "(Strategy: Bidirectional + Pareto-80 filter, seeded from top-5 gold references)",
              fontsize=11, y=1.03)
 fig.tight_layout()
 fig.savefig(FIGS / "fig4_screen_yield_collapse.png", dpi=150, bbox_inches="tight")
@@ -323,14 +320,14 @@ print("Fig 5: Cold-start recall per round...")
 fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
 
 SEED_STYLES = {
-    "top_k":       {"color": C["S1"],   "ls": "-",  "marker": "o", "label": "Top-20 by citation count\n(best-case search)"},
-    "random":      {"color": C["p80"],  "ls": "--", "marker": "s", "label": "Random 20 gold refs\n(average-case search)"},
-    "contaminated":{"color": C["fwd"],  "ls": ":",  "marker": "^", "label": "20 seeds, 50% irrelevant\n(noisy search)"},
+    "top_k":       {"color": C["S1"],   "ls": "-",  "marker": "o", "label": "Top-5 by citation count\n(best-case search)"},
+    "random":      {"color": C["p80"],  "ls": "--", "marker": "s", "label": "Random 5 gold refs\n(average-case search)"},
+    "contaminated":{"color": C["fwd"],  "ls": ":",  "marker": "^", "label": "5 seeds, 50% irrelevant\n(noisy search)"},
 }
 
 for ax, (skey, sinfo) in zip(axes, SURVEY.items()):
     for sq, ss in SEED_STYLES.items():
-        rounds_data = cold[skey].get(sq, {}).get("20", [])
+        rounds_data = cold[skey].get(sq, {}).get("5", [])
         if not rounds_data: continue
         rounds  = [r["round"]  for r in rounds_data]
         recalls = [r["recall"] for r in rounds_data]
@@ -341,11 +338,11 @@ for ax, (skey, sinfo) in zip(axes, SURVEY.items()):
     ax.set_xlabel("Escape Hatch round")
     ax.set_ylabel("Recall (fraction of gold references recovered)")
     ax.set_title(sinfo["label"], fontsize=10)
-    ax.set_xticks([1, 2, 3, 4])
+    ax.set_xticks([1, 2])
     ax.set_ylim(0.75, 1.05)
     ax.legend(loc="lower right", fontsize=8.5)
 
-fig.suptitle("Cold-Start Recall Recovery per Escape Hatch Round ($k=20$ initial seeds)",
+fig.suptitle("Cold-Start Recall Recovery per Escape Hatch Round ($k=5$ initial seeds)",
              fontsize=12, y=1.01)
 fig.tight_layout()
 fig.savefig(FIGS / "fig5_cold_start_recall_per_round.png", dpi=150, bbox_inches="tight")
@@ -357,7 +354,7 @@ print("  Saved fig5_cold_start_recall_per_round.png")
 # ─────────────────────────────────────────────────────────────────────────────
 print("Fig 6: Recall vs seed size...")
 fig, axes = plt.subplots(1, 3, figsize=(15, 5), sharey=True)
-K_VALS = [5, 10, 20, 50]
+K_VALS = [1, 2, 3, 4, 5, 10]
 
 for ax, (skey, sinfo) in zip(axes, SURVEY.items()):
     for sq, ss in SEED_STYLES.items():
@@ -373,13 +370,13 @@ for ax, (skey, sinfo) in zip(axes, SURVEY.items()):
 
     ax.axhline(1.0, color="gray", lw=1, ls="--", alpha=0.5)
     ax.set_xlabel("Initial seed size $k$")
-    ax.set_ylabel("Final recall (after 4 rounds)")
+    ax.set_ylabel("Final recall (after 2 rounds)")
     ax.set_title(sinfo["label"], fontsize=10)
     ax.set_xticks(K_VALS)
-    ax.set_ylim(0.88, 1.05)
+    ax.set_ylim(0.75, 1.05)
     ax.legend(loc="lower right", fontsize=8.5)
 
-fig.suptitle("Final Recall vs Initial Seed Size (After 4 Escape Hatch Rounds)",
+fig.suptitle("Final Recall vs Initial Seed Size (After 2 Escape Hatch Rounds)",
              fontsize=12, y=1.01)
 fig.tight_layout()
 fig.savefig(FIGS / "fig6_recall_vs_seed_size.png", dpi=150, bbox_inches="tight")

@@ -29,9 +29,11 @@ from collections import defaultdict, deque
 from pathlib import Path
 import re
 
-OUT  = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT  = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 plt.rcParams.update({
     "font.family": "DejaVu Sans",
@@ -48,14 +50,11 @@ SURVEY_STYLE = {
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  {len(df):,} edges")
 
 with open(OUT / "ground_truth.json") as f:
     gt = json.load(f)
-
-with open(OUT / "cold_start_results.json") as f:
-    cold = json.load(f)
 
 print("Building adjacency index...")
 cites    = defaultdict(set)
@@ -100,7 +99,7 @@ def parse_doi(doi):
 # The cold_start_results.json only stores recall numbers, not the visited sets.
 # So we re-run the canonical case: k=20, top-k seeds.
 
-print("\nRe-running traversal to get exact visited sets (k=20 top-k)...")
+print("\nRe-running traversal to get exact visited sets (k=5 top-k, N_ROUNDS=2)...")
 
 import random
 random.seed(42)
@@ -109,9 +108,9 @@ np.random.seed(42)
 PARETO_P = 80
 YIELD_THRESHOLD = 0.05
 MAX_DEPTH = 8
-K_SEED = 20
+K_SEED = 5
 K_ESCAPE = 20
-N_ROUNDS = 4
+N_ROUNDS = 2
 
 def make_seeds_top_k(gold_refs, k, cited_by_map):
     scored = sorted(gold_refs, key=lambda x: len(cited_by_map.get(x, set())), reverse=True)
@@ -136,13 +135,12 @@ def bidir_pareto_traversal_full(seed_set, gold_refs, visited_already=None):
                 if nb not in visited:
                     visited.add(nb); nxt.add(nb)
 
-        fwd_candidates = []
-        for node in frontier:
-            for nb in cited_by.get(node, set()):
-                if nb not in visited:
-                    fwd_candidates.append(nb)
+        # Forward (Pareto-filtered on citers' out-degree)
+        fwd_candidates = [nb for node in frontier
+                          for nb in cited_by.get(node, set())
+                          if nb not in visited]
         if fwd_candidates:
-            out_degs = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
+            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
             threshold = np.percentile(out_degs, PARETO_P)
             for nb, od in zip(fwd_candidates, out_degs):
                 if od <= threshold and nb not in visited:

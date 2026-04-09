@@ -21,7 +21,10 @@ import pandas as pd
 import json
 from pathlib import Path
 
-OUT = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT = _REPO / "data-aps" / "outputs"
+OUT.mkdir(parents=True, exist_ok=True)
 
 SURVEYS = {
     "S1_MIT":   "10.1103/RevModPhys.70.1039",
@@ -36,7 +39,7 @@ SURVEY_META = {
 }
 
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  Edges: {len(df):,}")
 
 all_nodes = set(df["citing_doi"].unique()) | set(df["cited_doi"].unique())

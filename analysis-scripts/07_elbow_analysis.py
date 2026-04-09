@@ -23,9 +23,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-OUT = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+OUT = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "pub_figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 def evaluate_stopping_rule(cold_data, rule_func, rule_name):
     """

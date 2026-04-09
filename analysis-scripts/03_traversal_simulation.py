@@ -2,7 +2,7 @@
 Phase 4: Simulate traversal strategies on the APS citation graph and measure
 coverage of the gold reference set at each step.
 
-Strategies compared (all seeded with the survey paper itself):
+Strategies compared (all seeded with top-5 gold refs by in-degree — NOT the survey DOI):
   A. Backward-only BFS (follow references, depth 1..6)
   B. Forward-only BFS  (follow citations,  depth 1..6)
   C. Bidirectional BFS (both directions simultaneously, depth 1..6)
@@ -23,8 +23,8 @@ Gold set definition:
   - Primary gold = gold_refs (the papers the survey explicitly cites)
   - Extended gold = gold_1hop (refs + citers, i.e. everything 1-hop from survey)
 
-Results saved to /home/ubuntu/litreview-coverage/traversal_results.json
-Figures saved to /home/ubuntu/litreview-coverage/figures/
+Results saved to data-aps/outputs/traversal_results.json
+Figures saved to data-aps/outputs/figures/
 """
 
 import json
@@ -38,9 +38,11 @@ from collections import defaultdict
 from pathlib import Path
 
 # ── Setup ─────────────────────────────────────────────────────────────────────
-OUT  = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT  = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 STYLE = {
     "S1_MIT":  {"color": "#2166ac", "label": "S1: Metal-insulator transitions (1998)"},
@@ -60,7 +62,7 @@ PARETO_PERCENTILES = [50, 70, 80, 90]
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  {len(df):,} edges")
 
 with open(OUT / "ground_truth.json") as f:
@@ -72,19 +74,20 @@ cited_by = defaultdict(set)
 for row in df.itertuples(index=False):
     cites[row.citing_doi].add(row.cited_doi)
     cited_by[row.cited_doi].add(row.citing_doi)
+all_nodes_03 = set(cites.keys()) | set(cited_by.keys())
+global_in_deg_03 = {n: len(cited_by.get(n, set())) for n in all_nodes_03}
 print("  Done.")
 
 # ── Helper: compute metrics ───────────────────────────────────────────────────
 def metrics(visited, gold_refs, gold_1hop):
-    visited_no_seed = visited - {None}
-    tp_refs = len(visited_no_seed & gold_refs)
-    tp_1hop = len(visited_no_seed & gold_1hop)
-    rec_refs  = tp_refs / len(gold_refs)   if gold_refs  else 0.0
-    rec_1hop  = tp_1hop / len(gold_1hop)   if gold_1hop  else 0.0
-    prec      = tp_refs / len(visited_no_seed) if visited_no_seed else 0.0
-    f1        = 2*rec_refs*prec/(rec_refs+prec) if (rec_refs+prec) > 0 else 0.0
+    tp_refs  = len(visited & gold_refs)
+    tp_1hop  = len(visited & gold_1hop)
+    rec_refs = tp_refs / len(gold_refs)  if gold_refs else 0.0
+    rec_1hop = tp_1hop / len(gold_1hop) if gold_1hop else 0.0
+    prec     = tp_refs / len(visited)   if visited   else 0.0
+    f1       = 2*rec_refs*prec/(rec_refs+prec) if (rec_refs+prec) > 0 else 0.0
     return {
-        "corpus_size": len(visited_no_seed),
+        "corpus_size": len(visited),
         "recall_refs": rec_refs,
         "recall_1hop": rec_1hop,
         "precision":   prec,
@@ -94,9 +97,9 @@ def metrics(visited, gold_refs, gold_1hop):
     }
 
 # ── Strategy A: Backward-only BFS ─────────────────────────────────────────────
-def strategy_backward(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
-    visited  = {seed}
-    frontier = {seed}
+def strategy_backward(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
+    visited  = set(seed_set)
+    frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
         nxt = set()
@@ -111,9 +114,9 @@ def strategy_backward(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     return curve
 
 # ── Strategy B: Forward-only BFS ──────────────────────────────────────────────
-def strategy_forward(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
-    visited  = {seed}
-    frontier = {seed}
+def strategy_forward(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
+    visited  = set(seed_set)
+    frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
         nxt = set()
@@ -128,9 +131,9 @@ def strategy_forward(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     return curve
 
 # ── Strategy C: Bidirectional BFS ─────────────────────────────────────────────
-def strategy_bidir(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
-    visited  = {seed}
-    frontier = {seed}
+def strategy_bidir(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
+    visited  = set(seed_set)
+    frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
         nxt = set()
@@ -148,16 +151,17 @@ def strategy_bidir(seed, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     return curve
 
 # ── Strategy D: Bidirectional + Pareto filter on forward step ─────────────────
-def strategy_bidir_pareto(seed, gold_refs, gold_1hop, percentile=80, max_depth=MAX_DEPTH):
+def strategy_bidir_pareto(seed_set, gold_refs, gold_1hop, percentile=80, max_depth=MAX_DEPTH):
     """
     At each depth:
       - Backward step: add all references of frontier nodes (no filter)
-      - Forward step:  add citers of frontier nodes, BUT suppress any citer
-                       whose out-degree > p-th percentile of all citers' out-degrees
-                       (i.e. hub papers that cite everything are excluded)
+      - Forward step:  collect all citers of frontier nodes, then discard those
+                       whose out-degree exceeds the p-th percentile of the collected
+                       citers' out-degrees (high-out-degree citers are survey-like
+                       papers that cite broadly and tend to be off-topic).
     """
-    visited  = {seed}
-    frontier = {seed}
+    visited  = set(seed_set)
+    frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
         nxt = set()
@@ -166,14 +170,12 @@ def strategy_bidir_pareto(seed, gold_refs, gold_1hop, percentile=80, max_depth=M
             for nb in cites.get(node, set()):
                 if nb not in visited:
                     visited.add(nb); nxt.add(nb)
-        # Forward (Pareto-filtered)
-        fwd_candidates = []
-        for node in frontier:
-            for nb in cited_by.get(node, set()):
-                if nb not in visited:
-                    fwd_candidates.append(nb)
+        # Forward (Pareto-filtered on citers' out-degree)
+        fwd_candidates = [nb for node in frontier
+                          for nb in cited_by.get(node, set())
+                          if nb not in visited]
         if fwd_candidates:
-            out_degs = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
+            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
             threshold = np.percentile(out_degs, percentile)
             for nb, od in zip(fwd_candidates, out_degs):
                 if od <= threshold and nb not in visited:
@@ -194,20 +196,35 @@ for key, info in gt.items():
     gold_1hop = set(info["gold_1hop"])
     print(f"\n  {key} ({doi})")
 
+    # Representative seed: top-5 gold refs by in-degree within APS corpus.
+    # This mirrors the realistic cold-start condition: a user starts with a handful
+    # of well-known, highly-cited papers on the topic — NOT from the survey DOI itself.
+    gold_sorted = sorted(gold_refs, key=lambda x: len(cited_by.get(x, set())), reverse=True)
+    seed_set    = set(gold_sorted[:5])
+    print(f"    Seeds (top-5 by in-degree): {sorted(seed_set)[:3]}...")
+
+    def _d3(curve):
+        pt = next((p for p in curve if p["depth"] == 3), curve[-1])
+        return pt["recall_refs"], pt["corpus_size"]
+
     res = {}
-    res["backward"] = strategy_backward(doi, gold_refs, gold_1hop)
-    print(f"    Backward done. Depth-3 recall_refs={res['backward'][3]['recall_refs']:.3f}, corpus={res['backward'][3]['corpus_size']:,}")
+    res["backward"] = strategy_backward(seed_set, gold_refs, gold_1hop)
+    r, c = _d3(res["backward"])
+    print(f"    Backward done. Depth-3 recall_refs={r:.3f}, corpus={c:,}")
 
-    res["forward"]  = strategy_forward(doi, gold_refs, gold_1hop)
-    print(f"    Forward  done. Depth-3 recall_refs={res['forward'][3]['recall_refs']:.3f}, corpus={res['forward'][3]['corpus_size']:,}")
+    res["forward"]  = strategy_forward(seed_set, gold_refs, gold_1hop)
+    r, c = _d3(res["forward"])
+    print(f"    Forward  done. Depth-3 recall_refs={r:.3f}, corpus={c:,}")
 
-    res["bidir"]    = strategy_bidir(doi, gold_refs, gold_1hop)
-    print(f"    Bidir    done. Depth-3 recall_refs={res['bidir'][3]['recall_refs']:.3f}, corpus={res['bidir'][3]['corpus_size']:,}")
+    res["bidir"]    = strategy_bidir(seed_set, gold_refs, gold_1hop)
+    r, c = _d3(res["bidir"])
+    print(f"    Bidir    done. Depth-3 recall_refs={r:.3f}, corpus={c:,}")
 
     for p in PARETO_PERCENTILES:
         k = f"bidir_pareto{p}"
-        res[k] = strategy_bidir_pareto(doi, gold_refs, gold_1hop, percentile=p)
-        print(f"    Bidir+Pareto{p} done. Depth-3 recall_refs={res[k][3]['recall_refs']:.3f}, corpus={res[k][3]['corpus_size']:,}")
+        res[k] = strategy_bidir_pareto(seed_set, gold_refs, gold_1hop, percentile=p)
+        r, c = _d3(res[k])
+        print(f"    Bidir+Pareto{p} done. Depth-3 recall_refs={r:.3f}, corpus={c:,}")
 
     all_results[key] = res
 
@@ -384,7 +401,7 @@ for ax, (key, info) in zip(axes, gt.items()):
 handles, labels_leg = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels_leg, loc="lower center", ncol=4, fontsize=8,
            bbox_to_anchor=(0.5, -0.03))
-fig.suptitle("Screen Yield per BFS Depth Step\n(proxy for LitReview v2 fruitfulness signal)", fontsize=12)
+fig.suptitle("Screen Yield per BFS Depth Step\n(new gold refs / new nodes — fruitfulness signal)", fontsize=12)
 fig.tight_layout(rect=[0, 0.05, 1, 1])
 fig.savefig(FIGS / "traversal_screen_yield.png", dpi=150, bbox_inches="tight")
 plt.close(fig)

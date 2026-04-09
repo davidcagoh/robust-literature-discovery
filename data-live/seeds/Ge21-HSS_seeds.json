@@ -1,0 +1,35 @@
+[
+  {
+    "s2_id": "21c14412db0d5149803417c4042a826ac2d132c1",
+    "doi": "10.1038/s41562-018-0302-y",
+    "arxiv_id": null,
+    "title": "Asking about social circles improves election predictions",
+    "year": 2018,
+    "citation_count": 0,
+    "reference_count": 0,
+    "references_fetched": false,
+    "citations_fetched": false
+  },
+  {
+    "s2_id": "5c2ca4d9c270340778d8ab5d7a464a9128c398ee",
+    "doi": "10.1109/TKDE.2019.2940914",
+    "arxiv_id": "1802.06505",
+    "title": "\u201cWhat Do Your Friends Think?\u201d: Efficient Polling Methods for Networks Using Friendship Paradox",
+    "year": 2018,
+    "citation_count": 31,
+    "reference_count": 58,
+    "references_fetched": false,
+    "citations_fetched": false
+  },
+  {
+    "s2_id": "695ab471da68e9cb42f011a136a661fac117f8bf",
+    "doi": "10.1016/j.electstud.2021.102433",
+    "arxiv_id": null,
+    "title": "On the robustness of social-circle surveys: Respondent selection issues, egocentrism, and homophily",
+    "year": 2022,
+    "citation_count": 1,
+    "reference_count": 31,
+    "references_fetched": false,
+    "citations_fetched": false
+  }
+]

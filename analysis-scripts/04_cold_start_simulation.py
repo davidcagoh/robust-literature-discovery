@@ -22,9 +22,11 @@ import random
 random.seed(42)
 np.random.seed(42)
 
-OUT  = Path("/home/ubuntu/litreview-coverage")
+_REPO = Path(__file__).parent.parent
+APS_CSV = _REPO / "data-aps" / "processed" / "aps-dataset-citations-2022.csv"
+OUT  = _REPO / "data-aps" / "outputs"
 FIGS = OUT / "figures"
-FIGS.mkdir(exist_ok=True)
+FIGS.mkdir(parents=True, exist_ok=True)
 
 plt.rcParams.update({
     "font.family": "DejaVu Sans",
@@ -41,7 +43,7 @@ SURVEY_STYLE = {
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
-df = pd.read_csv("/home/ubuntu/aps-citations.csv")
+df = pd.read_csv(APS_CSV)
 print(f"  {len(df):,} edges")
 
 with open(OUT / "ground_truth.json") as f:

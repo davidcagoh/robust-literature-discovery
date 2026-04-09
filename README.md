@@ -26,6 +26,8 @@ Current white papers and manuscript drafts are intentionally excluded from versi
 | Path | Purpose |
 |---|---|
 | `analysis-scripts/` | Core APS benchmark and figure-generation scripts |
-| `pub_figures/` | Generated publication figures |
-| `paper-reproduction/` | Minimal copied materials for reproducing paper-facing outputs |
+| `data-aps/outputs/pub_figures/` | Generated publication figures |
+| `data-aps/outputs/` | All JSON/CSV artifacts and intermediate figures |
 | `app-validation-data/` | Exported supporting validation summaries |
+| `validation-surveys/` | Reference PDFs for live experiment ground truth |
+| `seed-papers/` | Seed paper PDFs |

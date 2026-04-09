@@ -1,12 +1,12 @@
 # CLAUDE.md
 
-This repository contains the APS-based empirical validation for **LitReview v2**, not the production application itself. The codebase is a small set of sequential Python analysis scripts that simulate the production system’s core discovery logic: **bidirectional citation traversal**, a **forward-direction Pareto hub filter**, and **screen-yield-based stopping** inside a multi-round **Escape Hatch** loop.
+This repository contains the APS-based empirical validation for **LitDiscover** (formerly "LitReview v2"), not the production application itself. The codebase is a small set of sequential Python analysis scripts that simulate the production system’s core discovery logic: **bidirectional citation traversal**, a **forward-direction Pareto hub filter**, and **screen-yield-based stopping** inside a multi-round **Escape Hatch** loop.
 
 ## What matters most
 
-The repository is best understood as a **data pipeline with a few extension studies**, not as a package or library. Most work happens in `analysis-scripts/`, and the important cross-file dependency is the JSON/CSV artifact chain written to **`/home/ubuntu/litreview-coverage`**. Several checked-in figures and notes exist in the repo, but the scripts themselves read from and write to hardcoded paths outside the repository tree.
+The repository is best understood as a **data pipeline with a few extension studies**, not as a package or library. Most work happens in `analysis-scripts/`, and the important cross-file dependency is the JSON/CSV artifact chain written to **`data-aps/outputs/`** (relative to the repo root). Publication-quality figures land in `data-aps/outputs/pub_figures/`.
 
-The production-system architecture memo in `Architecture Design_ LitReview v2.md` is important context: the scripts here are a closed-corpus simulation of the deployed LitReview v2 state machine, where discovery producers feed a unified screening queue and **screen yield** decides whether to continue local traversal or trigger a fresh search-based escape hatch.
+The production-system architecture memo in `paper-wiki/Architecture Design_ LitReview v2.md` is important context: the scripts here are a closed-corpus simulation of the deployed LitDiscover state machine, where discovery producers feed a unified screening queue and **screen yield** decides whether to continue local traversal or trigger a fresh search-based escape hatch.
 
 ## Environment and prerequisites
 
@@ -18,17 +18,11 @@ pip install pandas numpy matplotlib scipy networkx
 
 The APS citation CSV is expected at:
 
-```bash
-/home/ubuntu/aps-citations.csv
+```
+data-aps/processed/aps-dataset-citations-2022.csv
 ```
 
-The scripts also expect to write outputs under:
-
-```bash
-/home/ubuntu/litreview-coverage
-```
-
-If you are running outside that environment, updating the hardcoded paths at the top of the scripts is usually the first thing to check.
+All scripts resolve paths automatically via `Path(__file__).parent.parent` — no path editing is needed when running from any working directory.
 
 ## Common commands
 
@@ -60,14 +54,16 @@ The main pipeline has a strict artifact dependency chain.
 | `02_graph_characterisation.py` | Computes global APS graph structure and survey-centric reachability statistics | APS CSV, `ground_truth.json` | `graph_stats.json`, figures |
 | `03_traversal_simulation.py` | Compares backward, forward, bidirectional, and Pareto-filtered traversal strategies | APS CSV, `ground_truth.json` | `traversal_results.json`, figures |
 | `04_cold_start_simulation.py` | Main cold-start experiment: seed generation, Pareto-filtered traversal, within-round yield stopping, multi-round escape hatch | APS CSV, `ground_truth.json` | `cold_start_results.json`, figures |
-| `05_miss_analysis.py` | Explains what the canonical run misses structurally | APS CSV, `ground_truth.json`, `cold_start_results.json` | per-survey missed-paper CSVs, figures |
-| `06_publication_figures.py` | Assembles paper-quality figures from prior outputs | outputs from 02/03/04/05 plus APS CSV | `pub_figures/*.png` |
-| `07_elbow_analysis.py` | Pure post-processing of round-level outputs to test early-stop heuristics | `cold_start_results.json` | `elbow_stopping_results.csv`, `fig9_elbow_stopping_efficiency.png` |
-| `07_rounds_sweep.py` | Separate canonical-case sweep of the round cap | APS CSV, `ground_truth.json` | `n_rounds_sweep.csv`, `fig9_n_rounds_sweep.png` |
+| `04b_cold_start_lowseed.py` | Low-seed extension (k=1–5,10, N_ROUNDS=2); the active canonical experiment | APS CSV, `ground_truth.json` | `cold_start_results_lowseed.json`, `figures_lowseed/` |
+| `05_miss_analysis.py` | Explains what the canonical run misses structurally; reconstructs traversal from scratch | APS CSV, `ground_truth.json` | per-survey missed-paper CSVs, `figures/` |
+| `06_publication_figures.py` | Assembles paper-quality figures from prior outputs | outputs from 02/03/04b/05 plus APS CSV | `pub_figures/*.png` |
+| `07_elbow_analysis.py` | Post-processing of round-level outputs to test early-stop heuristics (requires `cold_start_results.json` from script 04 — not yet generated) | `cold_start_results.json` | `elbow_stopping_results.csv`, `fig9_elbow_stopping_efficiency.png` |
+| `07_rounds_sweep.py` | Separate canonical-case sweep of the round cap | APS CSV, `ground_truth.json` | `outputs/n_rounds_sweep.csv`, `fig9_n_rounds_sweep.png` |
+| `08_hyperparameter_sweep.py` | Full grid sweep: PARETO_P × YIELD_THRESHOLD × N_ROUNDS × K_ESCAPE. Fixed: k=5 top-k seeds, MAX_DEPTH=8. ~660 configs × 3 surveys, ~30–60 min runtime. | APS CSV, `ground_truth.json` | `hyperparameter_sweep.csv`, `pub_figures/fig9a–d_*.png` |
 
 Two practical implications follow from this layout.
 
-First, **script 04 is the conceptual center of the repository**. If you are trying to change the modeled LitReview v2 behavior, that is usually the file to start with. Second, `05_miss_analysis.py` is not a simple consumer of visited-node state from script 04; it **reconstructs the canonical traversal by rerunning the traversal logic**, because `cold_start_results.json` stores summary statistics rather than visited sets. If you change stopping behavior or round semantics in `04_cold_start_simulation.py`, you may also need to mirror that logic in `05_miss_analysis.py` if you want miss analysis to stay aligned.
+First, **script 04b is the active canonical experiment** (k=1–5,10, N_ROUNDS=2). Script 04 (k=5/10/20/50, N_ROUNDS=4) exists but `cold_start_results.json` has not yet been generated — `07_elbow_analysis.py` depends on it and is currently inoperable. Second, `05_miss_analysis.py` is not a simple consumer of visited-node state; it **reconstructs the canonical traversal by rerunning the traversal logic**, because `cold_start_results_lowseed.json` stores summary statistics rather than visited sets. If you change stopping behavior or round semantics in `04b`, mirror that logic in `05_miss_analysis.py` as well.
 
 ## Core concepts encoded across multiple files
 
@@ -91,7 +87,7 @@ The repository currently contains two important interpretation notes.
 
 `analysis-scripts/ELBOW_STOPPING_DESIGN.md` explains how to add **between-round early stopping** to `04_cold_start_simulation.py` with a small localized change inside `escape_hatch_loop()`. It also notes that `06_publication_figures.py` is already compatible with shorter round lists, while `05_miss_analysis.py` would need a mirrored change if you want miss analysis to honor the same stopping rule.
 
-`N_ROUNDS_Extension.md` records the stronger empirical claim that **round 1 does almost all the work and round 2 is mainly an inexpensive insurance pass**. If you are editing paper framing or defaults, this note matters more than the original four-round narrative.
+`paper-wiki/N_ROUNDS_Extension.md` records the stronger empirical claim that **round 1 does almost all the work and round 2 is mainly an inexpensive insurance pass**. If you are editing paper framing or defaults, this note matters more than the original four-round narrative.
 
 ## Repository-specific usage notes
 
