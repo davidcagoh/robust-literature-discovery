@@ -62,12 +62,20 @@ The right column shows what would break if this step were missing.
 
 ---
 
-## §7 Main Results: Live Discovery (MISSING ❌)
+## §7 Main Results: Live Discovery (PARTIALLY COMPLETE ⚠️)
 **Claim:** LitDiscover achieves high recall on real discovery tasks outside the training distribution (i.e., not APS benchmark surveys chosen post-hoc).
-**Evidence:** Kahle simplicial geometry + Galesic HSS live runs, compared against gold bibliographies from validation-surveys/.
+**Evidence:** K17-RGC (done), Ge21-HSS (in progress), Le25-GLLM (seeds added).
 **Without this:** The paper is purely a closed-corpus study. It validates the algorithm in a setting where the ground truth is known in advance. Live experiments are what make the paper about a usable system.
 
-**Status:** NOT RUN. This is the main gap. Everything else is secondary.
+**Status:**
+
+| Survey | ID | Gold papers | Result |
+|---|---|---|---|
+| Bobrowski & Kahle 2017 (random geometric complexes) | K17-RGC | 56 | ✅ **100% recall (56/56)**, depth 2, round 1. 1 seed. Corpus 31,168. |
+| Galesic et al. 2021 (human social sensing) | Ge21-HSS | 202 | 🔄 In progress |
+| Le et al. 2025 (grounded LLMs) | Le25-GLLM | TBD | ⏳ Seeds added, not yet run |
+
+K17-RGC is a strong result: 100% recall from a single seed paper, stopping at depth 2 with corpus yield = 0.16%. This validates yield-stopping fires correctly in the real system.
 
 ---
 
