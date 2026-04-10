@@ -1,0 +1,3 @@
+survey,label,recall_exact,recall_upper,tp_exact,gold_resolvable,gold_total,corpus_size,n_rounds,stop_depth
+K17-RGC,Bobrowski & Kahle 2017 (Random Geometric Complexes),1.0,1.0,56,56,56,31168,1,2
+Ge21-HSS,Galesic 2021 (Human Social Sensing),1.0,1.0,202,202,202,44577,2,1

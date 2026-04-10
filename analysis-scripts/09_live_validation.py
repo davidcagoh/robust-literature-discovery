@@ -104,7 +104,11 @@ SURVEYS: dict[str, dict] = {
         "survey_pdf": REPO / "validation-surveys" / "Le25-GLLM.pdf",
         "survey_doi": None,    # arXiv — add DOI or arXiv ID once known
         "survey_s2_id": None,  # fill in once paper is found in S2
-        "seed_pdfs": [],       # to be added
+        "seed_pdfs": [
+            REPO / "seed-papers" / "GLLM1_Je24.pdf",
+            REPO / "seed-papers" / "GLLM2_MXC25.pdf",
+            REPO / "seed-papers" / "GLLM3_We25.pdf",
+        ],
         "label": "Liu et al. 2025 (Graph-Augmented LLM Agents)",
     },
 }
@@ -290,6 +294,8 @@ def fetch_neighbors(s2_id: str, direction: str) -> list[dict]:
 
     results: list[dict] = []
     offset = 0
+    rate_limit_strikes = 0
+    MAX_RATE_LIMIT_STRIKES = 5
     while True:
         _s2_wait()
         try:
@@ -299,9 +305,15 @@ def fetch_neighbors(s2_id: str, direction: str) -> list[dict]:
                     params={"fields": S2_FIELDS, "limit": 1000, "offset": offset},
                 )
                 if r.status_code == 429:
-                    print("  [s2] rate limited — sleeping 30s")
-                    time.sleep(30)
+                    rate_limit_strikes += 1
+                    if rate_limit_strikes > MAX_RATE_LIMIT_STRIKES:
+                        print(f"  [s2] fetch_neighbors({s2_id}, {direction}) — gave up after {MAX_RATE_LIMIT_STRIKES} rate limits")
+                        break
+                    wait = 30 * rate_limit_strikes
+                    print(f"  [s2] rate limited — sleeping {wait}s (strike {rate_limit_strikes}/{MAX_RATE_LIMIT_STRIKES})")
+                    time.sleep(wait)
                     continue
+                rate_limit_strikes = 0  # reset on success
                 if r.status_code in (404, 400):
                     break
                 r.raise_for_status()
@@ -690,6 +702,10 @@ def bidir_pareto_traversal_live(
         if sy < yield_thresh and d >= 2:
             stop_depth = d
             print(f"    → yield {sy:.1%} < {yield_thresh:.0%} — stopping at depth {d}")
+            break
+        if recall >= 1.0:
+            stop_depth = d
+            print(f"    → 100% recall reached at depth {d} — stopping early")
             break
         if not frontier:
             stop_depth = d

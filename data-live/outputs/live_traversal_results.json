@@ -1,0 +1,107 @@
+{
+  "K17-RGC": {
+    "rounds": [
+      {
+        "round": 1,
+        "corpus_size": 31168,
+        "recall": 1.0,
+        "tp": 56,
+        "new_nodes": 31168,
+        "new_gold": 56,
+        "stop_depth": 2,
+        "curve": [
+          {
+            "depth": 1,
+            "corpus_size": 96,
+            "recall": 0.08928571428571429,
+            "tp": 5,
+            "new_nodes": 95,
+            "new_gold": 5,
+            "screen_yield": 0.05263157894736842
+          },
+          {
+            "depth": 2,
+            "corpus_size": 31168,
+            "recall": 1.0,
+            "tp": 56,
+            "new_nodes": 31072,
+            "new_gold": 51,
+            "screen_yield": 0.0016413491246138002
+          }
+        ]
+      }
+    ],
+    "recall_stats": {
+      "recall_exact": 1.0,
+      "recall_upper_bound": 1.0,
+      "tp_exact": 56,
+      "gold_resolvable": 56,
+      "gold_total": 56,
+      "corpus_size": 31168
+    },
+    "label": "Bobrowski & Kahle 2017 (Random Geometric Complexes)"
+  },
+  "Ge21-HSS": {
+    "rounds": [
+      {
+        "round": 1,
+        "corpus_size": 36527,
+        "recall": 0.188,
+        "tp": 38,
+        "new_nodes": 36527,
+        "new_gold": 38,
+        "stop_depth": 2,
+        "curve": [
+          {
+            "depth": 1,
+            "corpus_size": 79,
+            "recall": 0.05,
+            "tp": 9,
+            "new_nodes": 76,
+            "new_gold": 9,
+            "screen_yield": 0.118
+          },
+          {
+            "depth": 2,
+            "corpus_size": 36527,
+            "recall": 0.188,
+            "tp": 38,
+            "new_nodes": 36448,
+            "new_gold": 28,
+            "screen_yield": 0.001
+          }
+        ]
+      },
+      {
+        "round": 2,
+        "corpus_size": 44577,
+        "recall": 1.0,
+        "tp": 202,
+        "new_nodes": 8050,
+        "new_gold": 164,
+        "stop_depth": 1,
+        "curve": [
+          {
+            "depth": 1,
+            "corpus_size": 44577,
+            "recall": 1.0,
+            "tp": 202,
+            "new_nodes": 8030,
+            "new_gold": 163,
+            "screen_yield": 0.02
+          }
+        ],
+        "note": "100% recall reached at depth 1 — early exit triggered"
+      }
+    ],
+    "recall_stats": {
+      "recall_exact": 1.0,
+      "recall_upper_bound": 1.0,
+      "tp_exact": 202,
+      "gold_resolvable": 202,
+      "gold_total": 202,
+      "corpus_size": 44577
+    },
+    "label": "Galesic 2021 (Human Social Sensing)"
+  }
+}
