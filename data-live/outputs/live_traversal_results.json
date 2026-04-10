@@ -103,5 +103,47 @@
       "corpus_size": 44577
     },
     "label": "Galesic 2021 (Human Social Sensing)"
+  },
+  "Le25-GLLM": {
+    "rounds": [
+      {
+        "round": 1,
+        "corpus_size": 150197,
+        "recall": 0.737,
+        "tp": 42,
+        "new_nodes": 150197,
+        "new_gold": 42,
+        "stop_depth": 2,
+        "curve": [
+          {
+            "depth": 1,
+            "corpus_size": 284,
+            "recall": 0.053,
+            "tp": 3,
+            "new_nodes": 281,
+            "new_gold": 3,
+            "screen_yield": 0.011
+          },
+          {
+            "depth": 2,
+            "corpus_size": 150197,
+            "recall": 0.737,
+            "tp": 42,
+            "new_nodes": 149913,
+            "new_gold": 39,
+            "screen_yield": 0.00026
+          }
+        ]
+      }
+    ],
+    "recall_stats": {
+      "recall_exact": 0.737,
+      "recall_upper_bound": 0.737,
+      "tp_exact": 42,
+      "gold_resolvable": 57,
+      "gold_total": 57,
+      "corpus_size": 150197
+    },
+    "label": "Liu et al. 2025 (Graph-Augmented LLM Agents)"
   }
 }

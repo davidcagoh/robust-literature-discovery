@@ -1,0 +1,344 @@
+[
+  {
+    "raw_title": "Assemble Your Crew: Automatic Multi-agent Communication Topology Design via Autoregressive Graph Generation",
+    "doi": "10.48550/arXiv.2507.18224",
+    "s2_id": "2b941c5142d76054f2a753e6928345c28d3d4aaa",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AnyMAC: Cascading Flexible Multi-Agent Collaboration via Next-Agent Prediction",
+    "doi": "10.48550/arXiv.2506.17784",
+    "s2_id": "0af3aff3e0781dc32a706b722d4e1430702913f2",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AGENTSAFE: Benchmarking the Safety of Embodied Agents on Hazardous Instructions",
+    "doi": "10.48550/arXiv.2506.14697",
+    "s2_id": "d3f33abbf46353989aa3c04e1918ad0148274f07",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AgentAuditor: Human-Level Safety and Security Evaluation for LLM Agents",
+    "doi": "10.48550/arXiv.2506.00641",
+    "s2_id": "03a93e2e7f57d3e1d1c1aee921ccf2161ac03872",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "RMoA: Optimizing Mixture-of-Agents through Diversity Maximization and Residual Compensation",
+    "doi": "10.48550/arXiv.2505.24442",
+    "s2_id": "6fdc192ed7b3ca502c0d0f3deae8e2dbbe43f234",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A Survey on the Safety and Security Threats of Computer-Using Agents: JARVIS or Ultron?",
+    "doi": "10.48550/arXiv.2505.10924",
+    "s2_id": "d1466d620e6fe6e2085a87b6980d0eb574f6bc58",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "FlowReasoner: Reinforcing Query-Level Meta-Agents",
+    "doi": "10.48550/arXiv.2504.15257",
+    "s2_id": "0bcc3208ee89b533fbe7e3bbed00b6ac2ef68b09",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Manipulating Multimodal Agents via Cross-Modal Prompt Injection",
+    "doi": "10.1145/3746027.3755211",
+    "s2_id": "6da58f1bf1a4873c15f0862dd58ecdde4fe6a029",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Debate Only When Necessary: Adaptive Multiagent Collaboration for Efficient LLM Reasoning",
+    "doi": "10.48550/arXiv.2504.05047",
+    "s2_id": "3d3628e20a7499664345efcc95c231e5129ea6f9",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "VFlow: Discovering Optimal Agentic Workflows for Verilog Generation",
+    "doi": "10.1109/ASP-DAC66049.2026.11420713",
+    "s2_id": "802e31f0f20ea3691b0ac5c3f866714f9ecd74fe",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "GNNs as Predictors of Agentic Workflow Performances",
+    "doi": "10.48550/arXiv.2503.11301",
+    "s2_id": "36f8699a7bb48f378d568db4f89e188af60c920c",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "LocAgent: Graph-Guided LLM Agents for Code Localization",
+    "doi": "10.48550/arXiv.2503.09089",
+    "s2_id": "97b2ba5dc2e90b45a8d8a0aa9f3ec200fbf4e668",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Graphormer-Guided Task Planning: Beyond Static Rules with LLM Safety Perception",
+    "doi": "10.48550/arXiv.2503.06866",
+    "s2_id": "725f6a3e3a145605b29d8074e5401186d0342ee7",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AgentSafe: Safeguarding Large Language Model-based Multi-agent Systems via Hierarchical Data Management",
+    "doi": "10.48550/arXiv.2503.04392",
+    "s2_id": "a5e0b705c5346e6b3018050c7a3b851b5efc5258",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "ReSo: A Reward-driven Self-organizing LLM-based Multi-Agent System for Reasoning Tasks",
+    "doi": "10.48550/arXiv.2503.02390",
+    "s2_id": "499979b1347c53cc3cadedf66575623cc0d6a727",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A-MEM: Agentic Memory for LLM Agents",
+    "doi": "10.48550/arXiv.2502.12110",
+    "s2_id": "1f35a15fe9df43d24ec6ea551ec6c9766c17eccf",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "IceBerg: Debiased Self-Training for Class-Imbalanced Node Classification",
+    "doi": "10.1145/3696410.3714963",
+    "s2_id": "a4b9ecfd47a7e5651dd3bd6cf4e1188c416649c8",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Multi-agent Architecture Search via Agentic Supernet",
+    "doi": "10.48550/arXiv.2502.04180",
+    "s2_id": "01f257a840d271d766d741f911bb1078240fbbdf",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Multi-Agent Design: Optimizing Agents with Better Prompts and Topologies",
+    "doi": "10.48550/arXiv.2502.02533",
+    "s2_id": "9deeddd741c90d1b57b024966d0eea7323087e79",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Agent-SafetyBench: Evaluating the Safety of LLM Agents",
+    "doi": "10.48550/arXiv.2412.14470",
+    "s2_id": "7d11400eeb317ebee278f49e108226a4f8555dda",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Synergizing LLM Agents and Knowledge Graph for Socioeconomic Prediction in LBSN",
+    "doi": "10.48550/arXiv.2411.00028",
+    "s2_id": "b2f689a5d044733be3f32a590f080a687df1ed1c",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "ToolFlow: Boosting LLM Tool-Calling Through Natural and Coherent Dialogue Synthesis",
+    "doi": "10.48550/arXiv.2410.18447",
+    "s2_id": "c7eb85a0d7e70aac6cc547e73602e9afc9f570e9",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Self-Evolving Multi-Agent Collaboration Networks for Software Development",
+    "doi": "10.48550/arXiv.2410.16946",
+    "s2_id": "5324e982deeb2e3860e7c09e34341096df0a269f",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Improving Multi-Agent Debate with Sparse Communication Topology",
+    "doi": "10.48550/arXiv.2406.11776",
+    "s2_id": "c04e6bab808c0d5f0344159190ed21a20039c4e9",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Scaling Large-Language-Model-based Multi-Agent Collaboration",
+    "doi": "10.48550/arXiv.2406.07155",
+    "s2_id": "208d489c73ebf182faa974191355fb2505ce8da5",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "RATT: A Thought Structure for Coherent and Correct LLM Reasoning",
+    "doi": "10.48550/arXiv.2406.02746",
+    "s2_id": "f696ffb1f0408e06ab4d91985f3e3f837c370c77",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Can Graph Learning Improve Planning in LLM-based Agents?",
+    "doi": "10.52202/079017-0173",
+    "s2_id": "572935d7137521dc19649f354f39721f78696104",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Graph Sparsification via Mixture of Graphs",
+    "doi": "10.48550/arXiv.2405.14260",
+    "s2_id": "b8fa99e8aabf04eaa436943b2fbb83d63275e6f0",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AgentKit: Structured LLM Reasoning with Dynamic Graphs",
+    "doi": null,
+    "s2_id": "5c7a5bbcac94eb4ee97782a8708d8c2d85fc5984",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Thought Graph: Generating Thought Process for Biological Reasoning",
+    "doi": "10.1145/3589335.3651572",
+    "s2_id": "0b66d5b0e62ee0a134fafa770bc1c9d693011bf7",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context",
+    "doi": null,
+    "s2_id": "c811bedbe8f4c21d0cba9f9175f7c2eb203284a7",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "ToolNet: Connecting Large Language Models with Massive Tools via Tool Graph",
+    "doi": "10.48550/arXiv.2403.00839",
+    "s2_id": "b3dae5011b9b44b861f884b2b788f2fc9bf59a4e",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "KG-Agent: An Efficient Autonomous Agent Framework for Complex Reasoning over Knowledge Graph",
+    "doi": "10.48550/arXiv.2402.11163",
+    "s2_id": "fc3c717987218662f49243e2be6bacc093dd47d8",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Debating with More Persuasive LLMs Leads to More Truthful Answers",
+    "doi": "10.48550/arXiv.2402.06782",
+    "s2_id": "e5d297461c53153b9b7aae099c146741e97322b8",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Understanding the planning of LLM agents: A survey",
+    "doi": "10.48550/arXiv.2402.02716",
+    "s2_id": "7e281e8ab380affd3c5724feae038274df378511",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Two Heads Are Better Than One: Boosting Graph Sparse Training via Semantic and Topological Awareness",
+    "doi": "10.48550/arXiv.2402.01242",
+    "s2_id": "7a54af2a48c2a10d9db52e4ecf5484c0f59241df",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AppAgent: Multimodal Agents as Smartphone Users",
+    "doi": "10.1145/3706598.3713600",
+    "s2_id": "61c723e7d91ca308b9eeacab35a2fce7548ef9fc",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "GSLB: The Graph Structure Learning Benchmark",
+    "doi": "10.48550/arXiv.2310.05174",
+    "s2_id": "7d7f007fc4f641ead46235614c6c9ca396d43806",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Exploring Collaboration Mechanisms for LLM Agents: A Social Psychology View",
+    "doi": "10.48550/arXiv.2310.02124",
+    "s2_id": "9fcdbfdf28245010c875ce85502351fe05c04b49",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "The Rise and Potential of Large Language Model Based Agents: A Survey",
+    "doi": "10.48550/arXiv.2309.07864",
+    "s2_id": "0c72450890a54b68d63baa99376131fda8f06cf9",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A survey on large language model based autonomous agents",
+    "doi": "10.1007/s11704-024-40231-1",
+    "s2_id": "28c6ac721f54544162865f41c5692e70d61bccab",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate",
+    "doi": "10.48550/arXiv.2308.07201",
+    "s2_id": "ec58a564fdda29e6a9a0a7bab5eeb4c290f716d7",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Encouraging Divergent Thinking in Large Language Models through Multi-Agent Debate",
+    "doi": "10.48550/arXiv.2305.19118",
+    "s2_id": "385c74957858e7d6856d48e72b5a902b4c1aa28c",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Improving Factuality and Reasoning in Language Models through Multiagent Debate",
+    "doi": "10.48550/arXiv.2305.14325",
+    "s2_id": "4780d0a027c5c5a8e01d7cf697f6296880ffc945",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Augmenting large language models with chemistry tools",
+    "doi": "10.1038/s42256-024-00832-8",
+    "s2_id": "354dcdebf3f8b5feeed5c62090e0bc1f0c28db06",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A survey of multi-agent deep reinforcement learning with communication",
+    "doi": "10.1007/s10458-023-09633-6",
+    "s2_id": "d60742f6c1df48bc820a26564ae51cf527732ae2",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "DropGNN: Random Dropouts Increase the Expressiveness of Graph Neural Networks",
+    "doi": null,
+    "s2_id": "0d4184cff17f093e0487b27180be515c385feff6",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A Survey on Graph Structure Learning: Progress and Opportunities",
+    "doi": null,
+    "s2_id": "47baf71f85c59948010641c82a50898cf5a77be2",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Learning to Drop: Robust Graph Neural Network via Topological Denoising",
+    "doi": "10.1145/3437963.3441734",
+    "s2_id": "7eaa067078c96b383f2f2e6f1543cd063c5d6d45",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A Note on Over-Smoothing for Graph Neural Networks",
+    "doi": null,
+    "s2_id": "c6d550c3fcecf27b979be84c4cd444cc1c72bf47",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Graph Structure Learning for Robust Graph Neural Networks",
+    "doi": "10.1145/3394486.3403049",
+    "s2_id": "2d615707481030d271f2c888b13267b1681f4aa2",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Measuring and Relieving the Over-smoothing Problem for Graph Neural Networks from the Topological View",
+    "doi": "10.1609/AAAI.V34I04.5747",
+    "s2_id": "94194703e83b5447f519fd8bcbb903916e05aaf9",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "DropEdge: Towards Deep Graph Convolutional Networks on Node Classification",
+    "doi": null,
+    "s2_id": "0a6a9e6d4e3efd7c69357769305b70097281655f",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Graph sparsification by effective resistances",
+    "doi": "10.1145/1374376.1374456",
+    "s2_id": "b542c6847fd5ce9624d354041ac514d9764e60a8",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "AgentDropout: Dynamic Agent Elimination for Token-Efficient and High-Performance LLM-Based Multi-Agent Collaboration",
+    "doi": "10.48550/arXiv.2503.18891",
+    "s2_id": "ee552989a03693a441863af4c29dc594bfcd1ab5",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "Dynamic LLM-Agent Network: An LLM-agent Collaboration Framework with Agent Team Optimization",
+    "doi": "10.48550/arXiv.2310.02170",
+    "s2_id": "98ce7af921e7c52d81df64d632d34eb09522cd75",
+    "manual_s2_id": null
+  },
+  {
+    "raw_title": "A Comprehensive Survey on Graph Neural Networks",
+    "doi": "10.1109/TNNLS.2020.2978386",
+    "s2_id": "81a4fd3004df0eb05d6c1cef96ad33d5407820df",
+    "manual_s2_id": null
+  }
+]

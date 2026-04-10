@@ -1,0 +1,35 @@
+[
+  {
+    "s2_id": "a30bd328bc36a3f75aa18f653919611b1a8ea23d",
+    "doi": null,
+    "arxiv_id": "2404.07103",
+    "title": "Graph Chain-of-Thought: Augmenting Large Language Models by Reasoning on Graphs",
+    "year": 2024,
+    "citation_count": null,
+    "reference_count": null,
+    "references_fetched": false,
+    "citations_fetched": false
+  },
+  {
+    "s2_id": "e92cafd839cb8ac639d8330326546200446979e1",
+    "doi": null,
+    "arxiv_id": "2502.18847",
+    "title": "TabGLM: Tabular Graph Language Model for Learning Transferable Representations Through Multi-Modal Consistency Minimization",
+    "year": 2025,
+    "citation_count": null,
+    "reference_count": null,
+    "references_fetched": false,
+    "citations_fetched": false
+  },
+  {
+    "s2_id": "d1ef2da4abf608afcc1e8a36475ae2b7857face1",
+    "doi": null,
+    "arxiv_id": "2503.01642",
+    "title": "Graph-Augmented Reasoning: Evolving Step-by-Step Knowledge Graph Retrieval for LLM Reasoning",
+    "year": 2025,
+    "citation_count": null,
+    "reference_count": null,
+    "references_fetched": false,
+    "citations_fetched": false
+  }
+]

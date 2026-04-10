@@ -103,7 +103,7 @@ SURVEYS: dict[str, dict] = {
     "Le25-GLLM": {
         "survey_pdf": REPO / "validation-surveys" / "Le25-GLLM.pdf",
         "survey_doi": None,    # arXiv — add DOI or arXiv ID once known
-        "survey_s2_id": None,  # fill in once paper is found in S2
+        "survey_s2_id": "d9fcf869c0d2fef88b0330fe94a0c405b1104c16",
         "seed_pdfs": [
             REPO / "seed-papers" / "GLLM1_Je24.pdf",
             REPO / "seed-papers" / "GLLM2_MXC25.pdf",
