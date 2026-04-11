@@ -1,33 +1,50 @@
 # robust-literature-discovery
 
-This repository contains the analysis, figures, and reproducibility materials for the paper project currently titled **Robust Literature Discovery from Minimal Seeds**.
+This repository contains the analysis, figures, and reproducibility materials for the paper **Robust Literature Discovery from Minimal Seeds**, which validates the [LitDiscover](https://github.com/davidcagoh/automated-lit-reviews-v2) engine on the APS citation corpus.
 
 ## Scope
 
 The contents here are intended to support the paper's empirical claims and reproducibility workflow. In particular, this repository contains the APS benchmark analysis scripts, figure-generation scripts, paper-facing notes, and selected reproducibility materials used to generate the manuscript's results.
 
-## Relationship to `automated-lit-reviews-v2`
+## Relationship to LitDiscover
 
-This repository is intentionally separate from **`automated-lit-reviews-v2`**.
+This repository is intentionally separate from **[LitDiscover (automated-lit-reviews-v2)](https://github.com/davidcagoh/automated-lit-reviews-v2)**.
 
 | Repository | Role |
 |---|---|
-| `robust-literature-discovery` | Paper and reproducibility repository for the APS benchmark, analysis pipeline, and manuscript-facing artifacts |
-| `automated-lit-reviews-v2` | Broader application repository containing the deployed system, application logic, database integrations, and operational workflows |
+| `robust-literature-discovery` (this repo) | Paper and reproducibility repository: APS benchmark, analysis pipeline, publication figures, manuscript |
+| [**LitDiscover**](https://github.com/davidcagoh/automated-lit-reviews-v2) | Deployed engine: queue loop, DB integrations, LLM screening, extraction, synthesis |
 
-The paper repository may include limited exported artifacts or summaries derived from the application where they are relevant to validation, but it is designed so that a reader can understand and reproduce the paper-facing benchmark results **without needing the full application repository**.
+The paper repository is self-contained — you can reproduce all benchmark results without the full application.
 
-## Manuscript handling
+## Manuscript
 
-Current white papers and manuscript drafts are intentionally excluded from version control until they have been manually vetted.
+The active manuscript is at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md`. The compiled PDF is generated from `paper-drafts/litdiscover.tex`.
+
+## Quick start (reproduce all paper figures)
+
+```bash
+pip install pandas numpy matplotlib scipy networkx
+
+# Place the APS citation CSV at data-aps/processed/aps-dataset-citations-2022.csv
+# then run the full pipeline:
+cd analysis-scripts
+python3 01_extract_ground_truth.py
+python3 02_graph_characterisation.py
+python3 03_traversal_simulation.py
+python3 04b_cold_start_lowseed.py   # canonical experiment (k=1–10, 2 rounds)
+python3 05_miss_analysis.py
+python3 06_publication_figures.py    # writes fig1–fig7 to data-aps/outputs/pub_figures/
+```
 
 ## Main directories
 
 | Path | Purpose |
 |---|---|
 | `analysis-scripts/` | Core APS benchmark and figure-generation scripts |
-| `data-aps/outputs/pub_figures/` | Generated publication figures |
+| `data-aps/outputs/pub_figures/` | Generated publication figures (fig1–fig7) |
 | `data-aps/outputs/` | All JSON/CSV artifacts and intermediate figures |
 | `app-validation-data/` | Exported supporting validation summaries |
 | `validation-surveys/` | Reference PDFs for live experiment ground truth |
 | `seed-papers/` | Seed paper PDFs |
+| `paper-drafts/` | Manuscript source (`.md` and `.tex`) |
