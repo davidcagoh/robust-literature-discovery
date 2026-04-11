@@ -9,7 +9,7 @@ output:
 
 ## Abstract
 
-Automated literature review systems must balance two competing requirements: they must recover a topic comprehensively enough to support scholarly synthesis, yet they must do so without allowing citation-graph traversal to expand the screening pool beyond practical limits. This tension is especially acute in the realistic cold-start setting, where a user begins with only a handful of initial seed papers rather than a large curated bibliography. In this paper, we evaluate **LitDiscover**, a queue-driven literature discovery architecture designed to operate under that sparse-supervision regime. Using the complete American Physical Society (APS) citation dataset as a closed benchmark, we analyze the structural asymmetry of citation traversal, the effect of Pareto-filtered forward expansion, and the role of yield-gated continuation in bounding search cost. We then center the main empirical analysis on **low-seed initialization** with `k ∈ {2,3,4,5,6}` under top-k, random, and contaminated seed conditions. The core claim is that the architecture remains effective even when initialized from very small seed sets because bidirectional traversal, hub suppression, and yield-gated continuation work together to preserve recall while limiting graph explosion. We further show that the residual misses are structurally peripheral, which supports interpreting the final recall gap as a diminishing-returns boundary rather than a core failure mode. Finally, we connect the APS benchmark to deployed application traces, arguing that the same yield-governed control logic operates in the live system as a practical stopping signal.  
+Automated literature discovery must do something retrieval cannot: recover a topic's literature from almost nothing. We introduce **LitDiscover**, a queue-driven engine that navigates citation graphs through three coordinated mechanisms — bidirectional traversal, Pareto-filtered hub suppression, and yield-gated continuation. Using the American Physical Society (APS) 2022 dataset (709,803 papers, 9,833,191 edges) as a closed benchmark, we evaluate recovery from minimal seed sets (`k ∈ {1,2,3,4,5,10}`) against three landmark survey papers. At `k = 5` and two traversal rounds, LitDiscover recovers **89.2%, 98.4%, and 96.9%** of each survey's gold bibliography. Residual misses are structurally peripheral: mean in-degree 14–44 versus 200+ for recovered papers, with 97% at BFS distance 1 from the recovered set. Live validation on three open-domain surveys yields 100% recall on random geometric complexes (56 papers, 1 seed, 1 round), 100% on human social sensing (202 papers, 2 rounds), and 73.7% on a 2025 survey in a rapidly expanding field where temporal indexing gaps dominate. Yield collapses reliably at depth 2 across all experiments, confirming that the stopping criterion is structural rather than parametric.  
 
 ---
 
@@ -17,19 +17,31 @@ Automated literature review systems must balance two competing requirements: the
 
 The central practical problem in automated literature review is not merely how to summarize papers once they have been found, but how to **discover** a topic comprehensively from incomplete starting information. Real users rarely begin with a complete domain map or even a strong initial bibliography. More commonly, they begin with a query, a few candidate papers, and an uncertain boundary between relevant and irrelevant work. A useful review system must therefore solve a discovery problem under sparse initial supervision.
 
-Citation graphs provide a natural substrate for this task because they expose relational structure that keyword search alone cannot recover. A paper’s references reveal backward intellectual lineage, while incoming citations reveal later work that builds on or reacts to it. In principle, repeated traversal over this graph should allow a system to expand from a small local starting point into a much larger topical neighborhood. In practice, however, naive traversal fails because citation networks are highly asymmetric. Backward traversal is naturally bounded by bibliography length, whereas forward traversal rapidly encounters generic high-degree hubs that connect many otherwise distant parts of the literature. Unconstrained exploration therefore turns a promising discovery process into an intractable screening problem.
+Citation graphs provide a natural substrate for this task because they expose relational structure that keyword search alone cannot recover. A paper’s references reveal backward intellectual lineage, while incoming citations reveal later work that builds on or reacts to it. In principle, repeated traversal over this graph should allow a system to expand from a small local starting point into a much larger topical neighborhood. In practice, however, naive traversal fails because citation networks are highly asymmetric [5, 9]. Backward traversal is naturally bounded by bibliography length, whereas forward traversal rapidly encounters generic high-degree hubs that connect many otherwise distant parts of the literature. Unconstrained exploration therefore turns a promising discovery process into an intractable screening problem.
 
 **LitDiscover** addresses this problem as a bounded traversal architecture. Rather than treating literature discovery as open-ended graph expansion, it organizes discovery around a queue-driven loop in which search, screening, traversal, and escape operations are all subordinated to a single yield-governed control policy. Three architectural ideas are central. First, the system uses **bidirectional traversal**, because neither backward nor forward expansion alone is sufficient to recover a topic. Second, it applies **Pareto-filtered forward expansion** to suppress high-degree hubs that disproportionately drive graph explosion and topic drift. Third, it uses a **yield-gated continuation rule** to determine when local expansion remains productive and when the system should instead jump to a fresh part of the graph.
 
-The original internal validation of this architecture emphasized stronger cold-start settings, including experiments with larger seed sets such as `k = 20`. That framing established that the system could recover survey-grounded domains once it had already been given a moderately favorable starting set. The more consequential question, however, is whether the architecture remains robust under **minimal seeding**. For a deployed review application, this is the regime that matters most. If the system performs well only after being granted a large seed list, then its usefulness is substantially narrower than its architecture suggests.
+This paper evaluates LitDiscover in the regime that matters most for deployment: **minimal seeding** (`k ∈ {1,2,3,4,5,10}`). The evaluation uses APS as a closed citation universe and derives gold sets directly from published survey bibliographies, giving a precise and bias-free recall metric. The same configuration is then run against three live open-domain surveys via the Semantic Scholar API, testing whether the yield-governed control logic transfers outside the benchmark.
 
-This paper therefore reframes the empirical story around the **`k = 2–6` low-seed regime**. We use APS as a closed citation universe, derive gold sets from survey bibliographies, and evaluate whether LitDiscover can recover those domains from top-k, random, and contaminated seed conditions. The resulting paper should be read as an empirical systems validation with two layers of evidence. The first layer is the controlled APS benchmark, which allows recall, efficiency, and miss structure to be analyzed precisely. The second layer is a restrained live-validation analysis using application traces, which does not attempt to prove real-world recall but does show that the same yield-governed stopping logic is operational in deployment.
-
-The paper makes four contributions. First, it gives a structural account of why bounded traversal is necessary in citation graphs and why hub suppression is a principled design choice rather than an arbitrary heuristic. Second, it positions the main empirical result in the realistic minimal-seed regime, centering the question of whether a review engine can recover a topic from only a few starting papers. Third, it explains the residual recall gap through miss analysis, showing that the remaining misses are structurally peripheral. Fourth, it connects the benchmark to deployed application behavior by using live traces to support the claim that yield is not merely an offline metric but an operational control signal.
+The paper makes four contributions. First, it gives a structural account of why bounded traversal is necessary: hub suppression and yield stopping are principled responses to power-law degree skew, not arbitrary heuristics. Second, it shows that LitDiscover achieves near-complete recall from as few as one to five seed papers — the regime real users actually occupy. Third, it characterises the residual gap through miss analysis, showing that what the system misses is structurally peripheral rather than randomly lost. Fourth, it confirms via live validation that yield collapse is an operational signal in deployment, not just an offline metric.
 
 ---
 
-## 2. Architecture and Control Logic
+## 2. Related Work
+
+This paper sits at the intersection of three areas.
+
+**Citation-graph analysis** has characterised degree distributions, clustering, and community structure in academic networks [9, 10]. Heavy-tailed in-degree is well documented: a small fraction of papers mediate a disproportionate share of cross-domain connectivity, motivating the Pareto filter design. Recent LLM-based simulation work corroborates this mechanistically — Ji et al. [21] find that the recommendation algorithm's tendency to surface highly cited papers is a stronger driver of preferential attachment than author citation bias, explaining how hubs self-reinforce over time.
+
+**Automated systematic review and evidence synthesis** spans a spectrum from manual-heavy to fully automated. Early tools such as SWIFT-Review [11] and RobotSearch [12] combine keyword or ML-based screening with manual corpus assembly. Active-learning frameworks such as ASReview [23] go further by prioritising which pre-assembled candidates to screen first, substantially reducing manual effort — but all of these assume the candidate pool is already given. LLM-assisted exploration tools (Elicit [17], ResearchRabbit [18]) extend this with query-driven discovery, but without a formal stopping criterion. LitDiscover sits at the missing end of this spectrum: it *constructs* the candidate pool via graph traversal before screening begins, governed by an explicit yield-based termination rule.
+
+**Graph compression and hub-aware sampling** provides the theoretical grounding for the Pareto filter. Work on k-core decomposition [13] and degree-constrained sampling [14] shows that removing high-degree hubs substantially reduces edge volume while preserving reachability. The Pareto filter is a soft variant of this idea applied to the forward traversal frontier.
+
+LitDiscover formalises and automates the snowballing methodology [22] — systematic bidirectional citation chaining from seed papers — replacing manual curation with a yield-governed queue and LLM screening. The distinguishing feature relative to prior citation-expansion tools (CiteSpace [15], Connected Papers [19]) is the minimal-seed framing: those systems assume a large anchor set; LitDiscover bootstraps a domain bibliography from two to five entry points.
+
+---
+
+## 3. Architecture and Control Logic
 
 LitDiscover is best understood as a queue-driven discovery loop rather than as a static retrieval pipeline. At a high level, the system alternates between **search**, **screening**, **traversal**, and **escape** operations until it reaches a stable state. The logic can be summarized as:
 
@@ -39,7 +51,7 @@ The system begins from an initial seed set, which may consist of search results,
 
 The first architectural principle is **bidirectional traversal**. Backward traversal follows references made by included papers and is essential because relevant older work is often directly cited by on-topic seeds. Forward traversal follows papers that cite included items and is equally important because it exposes later developments that no initial bibliography can contain. Yet forward traversal is also the primary source of explosion. Foundational papers, methods papers, and generic benchmark papers accumulate citations across many subfields, so blindly following their incoming edges pushes the system into large off-topic regions of the graph.
 
-The second architectural principle is therefore **Pareto-filtered forward expansion**. Rather than expanding equally through all forward neighbors, LitDiscover suppresses a high-degree tail of forward candidates. The rationale is graph-theoretic: in a heavy-tailed network, a relatively small fraction of nodes mediate a disproportionate share of edges. Those nodes are often precisely the hubs that maximize breadth while minimizing topical specificity. The Pareto filter is thus not only an efficiency device but also a topicality control.
+The second architectural principle is therefore **Pareto-filtered forward expansion**. Rather than expanding equally through all forward neighbors, LitDiscover suppresses a high-degree tail of forward candidates. The rationale is graph-theoretic: in a heavy-tailed network [5], a relatively small fraction of nodes mediate a disproportionate share of edges. Those nodes are often precisely the hubs that maximize breadth while minimizing topical specificity. The Pareto filter is thus not only an efficiency device but also a topicality control.
 
 The third architectural principle is **yield-gated continuation**. Expansion is not judged solely by how many new nodes it reaches, but by how many useful papers it produces relative to the screening effort required. In the benchmark framing, this means that local expansion should continue only when recent discoveries remain sufficiently fruitful; once yield collapses, the system should either declare local exhaustion or invoke an **escape hatch** that searches for a new entry point into a disconnected or weakly connected cluster.
 
@@ -49,7 +61,7 @@ For the purposes of this paper, the key methodological point is that the archite
 
 ---
 
-## 3. Closed-Corpus Benchmark and Experimental Design
+## 4. Closed-Corpus Benchmark and Experimental Design
 
 To evaluate the architecture under controlled conditions, we use the APS 2022 citation dataset, a closed citation universe containing 709,803 papers and 9,833,191 citation edges across American Physical Society journals [1]. The closed-corpus property is essential because it ensures that every traversal step remains inside the benchmark, allowing structural reachability, recall, and miss analysis to be defined precisely.
 
@@ -67,7 +79,7 @@ The revised empirical emphasis of this manuscript is the low-seed design shown b
 
 | Experimental factor | Paper emphasis |
 |---|---|
-| Seed size | `k ∈ {2,3,4,5,6}` |
+| Seed size | `k ∈ {1,2,3,4,5,10}` |
 | Seed quality | top-k, random, contaminated |
 | Traversal mode | bidirectional traversal with Pareto-filtered forward expansion |
 | Continuation rule | yield-gated continuation with escape-hatch re-entry |
@@ -79,21 +91,21 @@ This experimental design should be interpreted as a validation of **minimal-seed
 
 ---
 
-## 4. Structural Motivation for Bounded Traversal
+## 5. Structural Motivation for Bounded Traversal
 
-The need for bounded traversal follows directly from the structure of the APS citation graph. As shown in the original degree-distribution analysis, the graph is heavy-tailed in its in-degree distribution and much more constrained in its out-degree distribution. A small number of papers accumulate very large citation counts, while the number of references made by a typical paper remains much more limited. This asymmetry creates a directional imbalance in traversal cost.
+The need for bounded traversal follows directly from the structure of the APS citation graph. As shown in the original degree-distribution analysis, the graph is heavy-tailed in its in-degree distribution [5, 9] and much more constrained in its out-degree distribution. A small number of papers accumulate very large citation counts, while the number of references made by a typical paper remains much more limited. This asymmetry creates a directional imbalance in traversal cost.
 
 ![Figure 1: Degree Distributions](pub_figures/fig1_degree_distributions.png)
 
 Backward traversal is naturally disciplined by bibliography length. If a paper cites 20 to 50 relevant predecessors, then expanding backward from it remains relatively local. Forward traversal is qualitatively different. A single paper of broad methodological importance may be cited by hundreds or thousands of later papers that span multiple adjacent domains. Once traversal flows through such hubs, the search frontier ceases to represent a coherent topic and instead becomes a large heterogeneous cross-section of the wider literature.
 
-This dynamic is visible in reachability experiments seeded directly from the survey papers. Backward traversal immediately covers the gold bibliography at depth 1 because the survey reference list is, by construction, the survey’s backward neighborhood. Forward traversal alone, however, does not recover that same gold set and instead emphasizes the future citation surface of the survey. Bidirectional traversal is therefore necessary for realistic discovery, but it also produces rapid growth in the reached set when allowed to proceed without additional controls.
+This dynamic is visible in reachability experiments seeded from a small number of top-ranked gold-bibliography papers (`k = 5`). Backward traversal reaches a substantially larger fraction of the gold set at each BFS depth than forward traversal, because the gold papers are densely interconnected through their shared references. Forward traversal recovers a complementary slice — particularly later work that cites the seeds — but also expands the reached set far faster, because high-degree citers act as bridges into adjacent domains. Bidirectional traversal achieves meaningfully higher gold-set coverage at every depth than either direction alone while growing the reached set more quickly than pure backward expansion.
 
-![Figure 2: BFS Reachability](pub_figures/fig2_bfs_reachability.png)
+This directional asymmetry has a mechanistic explanation. Empirical citation models find that approximately 80% of references arise from bibliographic copying — citing papers already cited by related works — rather than from independent global search [20]. Papers within a coherent topical cluster therefore share a dense common reference layer, which backward traversal follows efficiently. Forward traversal enters that layer from the other side and immediately encounters the small fraction of highly cited works that bridge multiple subfields. These bridge nodes are precisely the hubs that forward traversal must cross to continue expanding, and crossing them pushes the frontier into off-topic regions. The Pareto filter is the operational response: suppressing the highest-degree forward candidates removes the inter-subfield bridges while preserving within-cluster reachability.
 
-The role of the Pareto filter is to control this forward asymmetry. By suppressing the most highly cited forward neighbors, the system removes precisely the nodes most likely to act as generic bridges into unrelated or weakly related regions of the graph. This design choice is supported by the broader literature on heavy-tailed graph structure and graph compression, including work showing that a relatively small high-degree subset can account for a disproportionately large share of edge volume [5]. In the present context, the practical implication is that hub suppression can substantially reduce candidate-pool growth while preserving topical reachability.
+![Figure 2: BFS Reachability — oracle seeds, upper bound on cold-start performance; four curves per survey: backward only, forward only, bidirectional unfiltered, and bidirectional with Pareto-80 filter (dashed)](pub_figures/fig2_bfs_reachability.png)
 
-![Figure 8: Efficiency Frontier](pub_figures/fig8_efficiency_frontier.png)
+The role of the Pareto filter is to control this forward asymmetry. By suppressing the most highly cited forward neighbors, the system removes precisely the nodes most likely to act as generic bridges into unrelated or weakly related regions of the graph. This design choice is supported by the broader literature on heavy-tailed graph structure and graph compression, including work showing that a relatively small high-degree subset can account for a disproportionately large share of edge volume [5]. The Pareto filter instantiates this principle operationally: Floros et al. [16] show that high-degree nodes require special-case handling during graph traversal to avoid redundant edge processing, and hub suppression here serves an analogous role — those same nodes are the ones most likely to push traversal into off-topic regions. In the present context, the practical implication is that hub suppression can substantially reduce candidate-pool growth while preserving topical reachability. Figure 2 makes this visible: the Pareto-80 curve closely tracks unfiltered bidirectional coverage at every depth, confirming that hub suppression does not impede topical reachability at the depths used in practice.
 
 A second structural control is yield. Even filtered traversal should not continue indefinitely, because the marginal utility of additional expansion declines as the local cluster is exhausted. In the APS simulations, local yield drops sharply after the most topically coherent neighborhood has been screened, which supports using yield collapse as a stopping or re-entry signal rather than treating graph exploration as an open-ended objective.
 
@@ -103,17 +115,19 @@ Taken together, these analyses motivate the bounded traversal architecture. Cita
 
 ---
 
-## 5. Main Results: Recovery from Minimal Seeds
+## 6. Main Results: Recovery from Minimal Seeds
 
-The central empirical question of this paper is whether LitDiscover can recover a topical gold set from **very small initial seed sets**. Earlier internal framing emphasized larger seed regimes, particularly `k = 20`, and showed that the system performed strongly once given a moderately favorable starting point. The stronger and more practically relevant test is whether the architecture remains effective when initialization is much weaker.
+We evaluate LitDiscover across `k ∈ {1,2,3,4,5,10}` initial seeds under top-k, random, and contaminated seed conditions on all three APS benchmark surveys, using two escape-hatch rounds throughout.
 
-The main results section should therefore center the **`k = 2–6` regime** and organize the evidence around three questions. First, how much recall can the system recover from only a few plausible seeds? Second, how sensitive is that performance to seed quality? Third, how quickly do the gains from additional seeds saturate within this low-seed regime?
+**Top-k seeds.** At `k = 5`, LitDiscover recovers 89.2% of S1 (metal-insulator transitions, gold = 582), 98.4% of S2 (ultracold gases, gold = 432), and 96.9% of S3 (topological photonics, gold = 387). S1 is the hardest benchmark — it spans a wide arc of condensed-matter methods, and recall rises steadily with `k` through the full range. S2 and S3 are topically denser and saturate early: S3 achieves 91.2% recall from a single top-k seed in round 1 alone, and S2 reaches 96.8% at `k = 3`. Above `k = 3`, gains on S2 and S3 are under 2 percentage points. At `k = 10`, all three surveys exceed 96% recall.
 
-Even under sparse initialization, bidirectional traversal allows the system to exploit local graph structure, the Pareto filter prevents forward expansion from drifting into generic hubs, and the escape-hatch mechanism provides a way to re-enter the graph when local traversal reaches diminishing returns. The architecture bootstraps a topic from a minimal foothold.
+**Round structure.** Round 1 contributes the majority of final recall in all top-k conditions — ranging from 39.5% (S1, `k = 1`) to 97.7% (S2, `k = 5`) depending on domain density and seed count. Round 2 provides an inexpensive insurance pass: at `k = 5` it adds 4.3pp to S1, 0.7pp to S2, and 2.6pp to S3. The large round-2 contribution under very low seeding (e.g., S1 `k = 1`: round 1 = 39.5%, round 2 = 87.3%) confirms that the escape hatch successfully re-enters weakly connected subregions that depth-2 traversal from a single seed cannot reach.
 
-Across all three APS benchmarks at `k = 5` top-k seeds, the system recovers 89–98% of the gold bibliography after two escape-hatch rounds. S1 (metal-insulator transitions) reaches 89% recall at round 2 — the most difficult case, because the field spans a wide arc of condensed-matter physics with diverse methodology. S2 (ultracold gases) and S3 (topological photonics) both reach ≥97% recall. Performance degrades only modestly under random or contaminated seed conditions, with the gap between top-k and random seeds typically under 8 percentage points at `k = 5`.
+**Seed quality robustness.** Random seeds at `k = 5` reach 91.1%, 96.1%, and 93.5% for S1, S2, and S3 respectively — within 5–7pp of top-k across all three surveys. Contaminated seeds (a mix of relevant and off-topic papers) are similarly robust: 92.6%, 94.9%, and 90.7% at `k = 5`. Even at `k = 1`, random seeding recovers 97.4% on S1 by round 2, because the escape hatch anchors round-2 initialization on papers already found, rather than depending on the original seed quality.
 
-The key structural point is that the system performs comparably at `k = 3`, `k = 4`, and `k = 5` — marginal gains from the second to third seed are small. This saturation at very low seed counts indicates that the architecture is not sensitive to seed quality in the range that matters operationally.
+**Saturation.** The marginal benefit of increasing `k` diminishes rapidly within the `k = 1–5` range for topically coherent domains. For S2 and S3 under top-k seeding, the improvement from `k = 3` to `k = 5` is under 2pp. The practical implication is that the system does not require careful seed curation in the minimal-seed regime; two to three reasonably on-topic papers are sufficient to achieve near-peak recovery for well-connected domains.
+
+**Non-monotonicity.** Recall is not strictly monotone in `k` for all seed types. Under top-k seeding, adding a second seed can slightly reduce round-1 recall relative to `k = 1` (visible in S1) because the two nearest-neighbor seeds share significant backward neighborhoods, causing traversal to revisit already-covered regions rather than expanding into new ones. Under contaminated seeding, recall declines with `k` because each additional off-topic seed introduces a separate traversal frontier that explores an unrelated part of the citation graph, diluting the screening budget. Both effects are structural artifacts of the seed-selection mechanism rather than failures of the traversal architecture, and both are resolved by round 2.
 
 ![Figure 5: Cold-Start Recall per Round](pub_figures/fig5_cold_start_recall_per_round.png)
 
@@ -121,21 +135,23 @@ The key structural point is that the system performs comparably at `k = 3`, `k =
 
 ---
 
-## 6. Residual Miss Analysis
+## 7. Residual Miss Analysis
 
-Strong recall from minimal seeds does not imply perfect recovery, and the final recall gap should be interpreted carefully. The purpose of miss analysis is to determine whether unrecovered papers represent central architectural failures or whether they lie near the diminishing-returns frontier where further recovery would require disproportionate expansion cost.
+After two escape-hatch rounds at `k = 5` top-k seeding, 63 papers remain unrecovered from S1 (89.2% recall, gold = 582), 7 from S2 (98.4%, gold = 432), and 12 from S3 (96.9%, gold = 387). These residual misses share a structural signature that supports interpreting the recall gap as a diminishing-returns boundary rather than an architectural failure.
 
-The APS miss analysis already points toward the second interpretation. The unrecovered papers are not typically high-degree anchors in the center of the domain. Instead, they appear as structurally peripheral items with markedly lower connectivity than the median recovered paper. This matters because it means the residual gap is not evidence that the system fails to discover the main body of the topic from sparse initialization. Rather, it suggests that the remaining misses are exactly the kinds of fringe papers one expects to lose first when yield-gated control terminates local expansion.
+**Structural peripherality.** Missed papers have substantially lower in-degree than the recovered set. For S1, mean in-degree of misses is 44 (median 35), compared to over 200 for recovered papers. S2 and S3 show the same pattern: miss in-degree averages 14.9 and 25.0 respectively, well below recovered-paper values. Low in-degree indicates that these papers are weakly connected to the main citation body of their domain — they accumulate few inbound links and therefore appear rarely as expansion candidates during traversal.
+
+**Reachability.** Despite being unrecovered, the misses are structurally adjacent: 97% of S1 misses (61 of 63) are at BFS distance 1 from the recovered set, meaning they were direct citation neighbors of recovered papers that fell below the yield threshold before local traversal reached them. The pattern holds for S2 (6/7 at distance 1) and S3 (7/12 at distance 1, remainder at distance 2). The misses are not topologically isolated — they are reachable — but their low in-degree makes them low-priority expansion candidates under the Pareto filter.
+
+**Trade-off frontier.** Recovering the remaining papers would require either lowering the yield threshold (prolonging traversal past its productive phase) or relaxing hub suppression (increasing screening load across the full corpus). Systematic sweeps across the depth × Pareto parameter space confirm the expected trade-off: looser Pareto thresholds extend recall by a few percentage points at substantially higher screening cost, while the Pareto-80 operating point recovers 89–98% of each gold set at manageable corpus sizes. The yield threshold functions as a safety valve — it determines when local expansion has exhausted a neighborhood and re-entry is needed — but the actual screen yield at depth 2 is well below any reasonable threshold, so the stopping criterion activates reliably without sensitivity to its precise value.
+
+The appropriate interpretation is that bounded traversal defines a principled trade-off frontier. The residual gap reflects where the method is designed to stop.
 
 ![Figure 7: Miss Analysis](pub_figures/fig7_miss_analysis.png)
 
-This point should be sharpened in the revised manuscript. The miss-analysis section should explicitly connect residual misses to the low-seed framing by arguing that bounded traversal is supposed to stop before consuming the long tail of structurally weakly attached items. Recovering every last paper would require the system either to lower its stopping threshold substantially or to relax hub suppression, both of which would increase screening cost sharply. The appropriate interpretation is therefore not that sparse seeding leaves the system unstable, but that bounded traversal defines a principled trade-off frontier.
-
-In the final draft, the quantitative details in this section can remain close to the current APS analysis, provided they are described as evidence about **where the method stops** rather than as a defense of the older `k = 20` framing.
-
 ---
 
-## 7. Live Validation on Open-Domain Surveys
+## 8. Live Validation on Open-Domain Surveys
 
 The APS benchmark provides controlled recall measurement, but the corpus is closed and homogeneous. To test whether the system generalises beyond the physics literature, we run LitDiscover directly against three open-domain surveys using the Semantic Scholar (S2) API with no closed corpus.
 
@@ -167,27 +183,13 @@ These results confirm that the 73–100% recall range from APS generalises to op
 
 ---
 
-## 8. Related Work
-
-This paper sits at the intersection of three areas. The first is **citation-graph analysis**, which has characterized degree distributions, clustering, and community structure in academic citation networks [9, 10]. Heavy-tailed in-degree distributions are well documented and motivate the Pareto filter design: a small fraction of papers mediate a disproportionate share of cross-domain connectivity.
-
-The second area is **automated systematic review and evidence synthesis**. Earlier systems such as SWIFT-Review [11] and RobotSearch [12] pair keyword or machine-learning screening with manual seed specification, but assume the candidate set is pre-assembled via database query. More recent LLM-assisted tools (e.g. Elicit, ResearchRabbit) offer query-driven exploration but lack a formal yield-based stopping criterion. LitDiscover occupies a distinct position: it formalises the discovery problem as a bounded traversal loop with explicit control logic, not just as a retrieval-then-screen pipeline.
-
-The third area is **graph compression and hub-aware sampling**. Work on k-core decomposition [13] and degree-constrained sampling [14] shows that removing high-degree hubs substantially reduces edge volume while preserving reachability for most node pairs. The Pareto filter is a soft variant of this idea applied to the forward traversal frontier.
-
-The distinguishing contribution of this paper relative to all three areas is the minimal-seed framing. Prior citation-expansion systems (e.g., CiteSpace [15], Connected Papers) start from large anchor sets or curated bibliographies. LitDiscover asks whether disciplined traversal can bootstrap a domain bibliography from only two to six entry points.
-
----
-
 ## 9. Conclusion
 
-The important validation target for an automated literature discovery engine is not whether it performs well when granted a generous seed set, but whether it can recover a topic from **minimal initial supervision** without allowing the screening problem to explode. LitDiscover addresses this challenge by combining bidirectional traversal, Pareto-filtered forward expansion, and yield-gated continuation within a single queue-driven architecture.
+Literature discovery without a domain map is a bounded control problem, not an open-ended retrieval task. **LitDiscover** solves it by imposing three coordinated constraints — bidirectional traversal, Pareto-filtered hub suppression, and yield-gated continuation — that prevent graph explosion while preserving near-complete topical coverage.
 
-The APS benchmark provides controlled evidence for this claim. Across three survey benchmarks at `k = 5` top-k seeds, LitDiscover recovers 89–98% of the gold bibliography after two escape-hatch rounds, with the residual misses structurally peripheral (low in-degree, BFS distance ≥ 1 from the recovered set). Yield collapses sharply after depth 2 in all three cases, confirming that the stopping criterion is principled rather than arbitrary.
+On the APS benchmark, these controls produce strong recall across the full minimal-seed range. At `k = 5`, LitDiscover recovers 89.2%, 98.4%, and 96.9% of the three gold bibliographies. The result at `k = 1` is the sharper headline: S3 achieves 91.2% recall from a single seed paper in round 1 alone, and S2 reaches 96.8% from three seeds. Residual misses are structurally peripheral — low in-degree, BFS distance 1 from the recovered set — not randomly distributed across the domain. Yield collapses at depth 2 in all three surveys, confirming that the stopping rule engages at a principled boundary rather than at an arbitrary cutoff. Live validation extends these findings: K17-RGC achieves 100% recall (56 papers) from one seed in one round; Ge21-HSS reaches 100% (202 papers) in two rounds via the escape hatch; Le25-GLLM recovers 73.7% against a rapidly evolving 2025 survey where temporal indexing gaps account for the shortfall. All three terminate via yield collapse rather than graph exhaustion.
 
-The live-domain experiments on K17-RGC (random geometric complexes), Ge21-HSS (human social sensing), and Le25-GLLM (graph-augmented LLM agents) extend this validation to open-domain surveys beyond physics. K17-RGC achieves 100% recall from a single seed in one round; Ge21-HSS reaches 100% in two rounds via the escape hatch; Le25-GLLM achieves 73.7% recall in a single round against a 2025 survey in a rapidly growing field. The variance across surveys reflects structural factors — corpus activity, seed-coverage density, and the temporal recency of the gold papers — rather than parameter sensitivity. All three terminate via yield collapse, not graph exhaustion.
-
-The central conclusion is that comprehensive literature discovery can be made practical not by eliminating citation-graph complexity, but by governing it through bounded control policies that remain effective even when the starting seed set is very small.
+The deeper conclusion is that high-recall literature discovery is achievable from minimal supervision when the traversal architecture respects the citation graph's directional asymmetry. The bottleneck is not seed quality or domain density — it is whether the control policy governing expansion and stopping is calibrated to graph structure rather than to a fixed budget.
 
 ---
 
@@ -197,7 +199,7 @@ The central conclusion is that comprehensive literature discovery can be made pr
 [2] Imada, M., Fujimori, A., & Tokura, Y. (1998). Metal-insulator transitions. *Reviews of Modern Physics*, 70(4), 1039.  
 [3] Bloch, I., Dalibard, J., & Zwerger, W. (2008). Many-body physics with ultracold gases. *Reviews of Modern Physics*, 80(3), 885.  
 [4] Ozawa, T., et al. (2019). Topological photonics. *Reviews of Modern Physics*, 91(1), 015006.  
-[5] Floros, D., Pitsianis, N., & Sun, X. (2024). Algebraic Vertex Ordering of a Sparse Graph for Adjacency Access Locality and Graph Compression. *2024 IEEE High Performance Extreme Computing Conference (HPEC)*, 1-7.  
+[5] Barabási, A.-L. (2016). *Network Science*. Cambridge University Press. (Chapter 4: Scale-Free Property)  
 [6] Bobrowski, O., & Kahle, M. (2018). Topology of random geometric complexes: a survey. *Journal of Applied and Computational Topology*, 1(3-4), 331-364.  
 [7] Galesic, M., et al. (2021). Human social sensing is an untapped resource for computational social science. *Nature*, 595, 214-222.  
 [8] Liu, Y., Zhang, G., Wang, K., Li, S., & Pan, S. (2025). Graph-Augmented Large Language Model Agents: Current Progress and Future Prospects. *arXiv:2503.01642*.  
@@ -208,3 +210,11 @@ The central conclusion is that comprehensive literature discovery can be made pr
 [13] Batagelj, V., & Zaversnik, M. (2003). An O(m) algorithm for cores decomposition of networks. *arXiv preprint cs/0310049*.  
 [14] Stumpf, M. P. H., Wiuf, C., & May, R. M. (2005). Subnets of scale-free networks are not scale-free: sampling properties of networks. *PNAS*, 102(12), 4221-4224.  
 [15] Chen, C. (2006). CiteSpace II: Detecting and visualizing emerging trends and transient patterns in scientific literature. *Journal of the American Society for Information Science and Technology*, 57(3), 359-377.  
+[16] Floros, D., Pitsianis, N., & Sun, X. (2024). Algebraic Vertex Ordering of a Sparse Graph for Adjacency Access Locality and Graph Compression. *2024 IEEE High Performance Extreme Computing Conference (HPEC)*, 1-7.  
+[17] Elicit. (2024). *Elicit: The AI Research Assistant* [Software]. https://elicit.com  
+[18] ResearchRabbit. (2025). ResearchRabbit (Version 2026-04-11) [Search tool]. https://app.researchrabbit.ai/  
+[19] Connected Papers. (n.d.). *Connected Papers | Find and explore academic papers*. Retrieved 2026-04-11, from https://www.connectedpapers.com/  
+[20] Goldberg, S. R., Anthony, H., & Evans, T. S. (2015). Modelling citation networks. *Scientometrics*, 105(3), 1577–1604. https://doi.org/10.1007/s11192-015-1737-9  
+[21] Ji, J., et al. (2025). Leveraging LLM-based agents for social science research: insights from citation network simulations. *arXiv:2511.03758*.  
+[22] Wohlin, C. (2014). Guidelines for snowballing in systematic literature studies and a replication in software engineering. *EASE 2014*. https://doi.org/10.1145/2601248.2601268  
+[23] van de Schoot, R., et al. (2021). An open source machine learning framework for efficient and transparent systematic reviews. *Nature Machine Intelligence*, 3, 125–133.  

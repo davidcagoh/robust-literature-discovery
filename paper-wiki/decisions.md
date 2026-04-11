@@ -7,14 +7,42 @@ Choices that have already been made and why. Read this before changing any param
 ## Algorithm Parameters
 
 ### N_ROUNDS = 2 (not 4)
-**Decision date:** ~2026-04-06
-**Why:** N_ROUNDS_Extension.md shows round 1 does 85–98% of the work; round 2 adds 1–7pp depending on survey age. Rounds 3–4 add <0.5pp. Two rounds is the honest stopping point and makes the "cheap insurance" narrative credible.
+**Decision date:** ~2026-04-06. Reviewed 2026-04-10.
+**Why:** N_ROUNDS_Extension.md shows round 1 does 85–98% of the work; round 2 adds modest insurance. The hyperparameter sweep (script 08, k_escape=5, yield=0.05, pareto80) shows:
+
+| n_rounds | S1     | S2     | S3     |
+|----------|--------|--------|--------|
+| 1        | 84.9%  | 97.7%  | 94.3%  |
+| 2        | 86.9%  | 98.1%  | 95.3%  |
+| 3        | 89.3%  | 98.1%  | 95.6%  |
+
+Round 3 adds 2.4pp for S1 but negligible for S2/S3. The "cheap insurance" story holds for n_rounds=2. Adding round 3 would improve S1 from ~87% to ~89% at modest additional cost (~6% more corpus). This is a marginal gain.
+
+**Decision:** Keep n_rounds=2 as the canonical setting. S1's residual gap at 89% (cold_start 04b) is explained by structural miss analysis (§6), not insufficient rounds.
+
+**Open question:** Should we add n_rounds=3 as an optional robustness sweep? This would not change the main result but would show S1 can reach ~90-92%.
 **Implication:** Script 04b (k=1–5,10) is the canonical experiment, not script 04 (k=5/10/20/50).
 
 ### PARETO_P = 80 (suppress top 20% out-degree in forward traversal — simulation only)
-**Decision date:** Set in original architecture.
-**Why:** Empirically chosen. Conservative — preserves most forward candidates while cutting the biggest hubs. Script 08 hyperparameter sweep (1980 rows, completed) provides post-hoc justification.
-**Implication:** This choice is asserted, not derived. The sweep covers the full grid and confirms Pareto-80 is a safe default.
+**Decision date:** Set in original architecture. Confirmed 2026-04-10.
+**Why:** The full hyperparameter sweep (script 08) shows that under yield stopping (the actual operating condition), Pareto threshold significantly affects recall:
+
+| pareto_p | S1 r2  | S2 r2  | S3 r2  |
+|----------|--------|--------|--------|
+| 50       | 80.4%  | 93.5%  | 91.5%  |
+| 70       | 86.6%  | 96.8%  | 94.6%  |
+| 80       | 86.9%  | 98.1%  | 95.3%  |
+| 90       | 89.0%  | 98.1%  | 96.4%  |
+| 95       | 89.7%  | 98.6%  | 96.4%  |
+| none     | 100%   | 100%   | 100%   |
+
+(k_escape=5, yield=0.05, n_rounds=2)
+
+Pareto-80 is the chosen operating point: meaningful corpus reduction vs pareto-none, while maintaining good recall. Pareto-50 is significantly worse for S1 (80.4% vs 86.9%). This is because with yield stopping, a tighter filter reduces the number of nodes explored per round, directly reducing recall.
+
+**CRITICAL DISTINCTION:** At full depth without yield stopping (fig3), ALL pareto values reach 100% recall — the filter appears "free." This is because at depth 6, the graph is fully explored regardless. Under yield stopping (operational), the filter genuinely trades recall for corpus size. Fig3 and fig8/fig9b tell different stories and both are correct — they are showing different operating conditions. The paper must make this explicit.
+
+**Implication:** The "Pareto-80 optimal" label in fig3 is correct but requires justification in the figure caption — it's optimal in the yield-stopped operational setting, not in the full-depth setting fig3 shows.
 
 **IMPORTANT — what the filter actually does (SETTLED):**
 - **APS simulation (scripts 03, 04b, 05, 08)**: filters FORWARD CANDIDATES (citers) by their own **out-degree** (number of papers they cite). High out-degree citer = survey-like behaviour → removed. This is the CORRECT semantics for the APS simulation and is finalized across all scripts.
@@ -68,6 +96,19 @@ The paper should describe the production semantics (in-degree of frontier paper)
 **Why:** APS is controlled benchmark (closed corpus, known gold). Live experiments (Kahle + Galesic) are the operational claim. Paper is primarily about a usable system, so live comes first.
 
 ---
+
+## Fig9 dropped entirely (2026-04-10)
+**Decision:** Remove fig9a–d from the paper. §6 space repurposed for live experiment results.
+**Reasoning:**
+- **fig9b (yield threshold sweep):** Vacuous. Depth-2 screen yield for these survey types is 0.3–1.5%, which falls below even the lowest tested yield threshold (1%). BFS stops at depth=2 regardless of threshold, so all sweep rows are identical. The overlap is a missing parameter region, not robustness evidence. One-sentence methods note is sufficient.
+- **fig9a (Pareto×yield heatmap):** Covered by fig8c.
+- **fig9c (recall vs N_rounds):** Covered by fig4 (stacked bar showing round contribution).
+- **fig9d (corpus size heatmap):** Covered by fig8b (depth×pareto heatmap).
+
+## Yield threshold = safety valve, not tuning knob (2026-04-10)
+**Decision:** Yield threshold gets one sentence in methods, no standalone claim or figure.
+**Wording:** "We set yield threshold at 5%; any value above ~1% produces identical results for these survey types, as depth-2 screen yield (0.3–1.5%) falls below any practical threshold."
+**Rationale:** For niche/specialised topics with low screen yield, the threshold is effectively inactive — the BFS naturally terminates when the graph is exhausted. Framing it as a tunable robustness knob would be misleading given the empirical data.
 
 ## Naming
 

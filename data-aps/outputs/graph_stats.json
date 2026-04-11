@@ -1,0 +1,370 @@
+{
+  "n_nodes": 709803,
+  "n_edges": 9833191,
+  "in_degree_gini": 0.6926925661954229,
+  "out_degree_gini": 0.43520256785393996,
+  "in_degree_gamma": 2.931154602320624,
+  "in_degree_k_sat": 13.704737618597298,
+  "in_degree_k_cut": 49999.999996628765,
+  "out_degree_gamma": 1.0,
+  "out_degree_k_sat": 200.0,
+  "out_degree_k_cut": 14.546910177736443,
+  "n_wccs": 408,
+  "largest_wcc_size": 708756,
+  "largest_wcc_frac": 0.9985249428362517,
+  "bfs_by_direction": {
+    "S1_MIT": {
+      "backward": [
+        {
+          "depth": 0,
+          "overlap": 0.00859106529209622,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.10481099656357389,
+          "corpus_size": 264
+        },
+        {
+          "depth": 2,
+          "overlap": 0.36254295532646047,
+          "corpus_size": 2478
+        },
+        {
+          "depth": 3,
+          "overlap": 0.5085910652920962,
+          "corpus_size": 10315
+        },
+        {
+          "depth": 4,
+          "overlap": 0.5584192439862543,
+          "corpus_size": 25746
+        },
+        {
+          "depth": 5,
+          "overlap": 0.563573883161512,
+          "corpus_size": 46436
+        },
+        {
+          "depth": 6,
+          "overlap": 0.563573883161512,
+          "corpus_size": 65375
+        }
+      ],
+      "forward": [
+        {
+          "depth": 0,
+          "overlap": 0.00859106529209622,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.04639175257731959,
+          "corpus_size": 16481
+        },
+        {
+          "depth": 2,
+          "overlap": 0.21305841924398625,
+          "corpus_size": 101776
+        },
+        {
+          "depth": 3,
+          "overlap": 0.6151202749140894,
+          "corpus_size": 246235
+        },
+        {
+          "depth": 4,
+          "overlap": 0.865979381443299,
+          "corpus_size": 387982
+        },
+        {
+          "depth": 5,
+          "overlap": 0.9192439862542955,
+          "corpus_size": 507621
+        },
+        {
+          "depth": 6,
+          "overlap": 0.936426116838488,
+          "corpus_size": 574578
+        }
+      ],
+      "both": [
+        {
+          "depth": 0,
+          "overlap": 0.00859106529209622,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.140893470790378,
+          "corpus_size": 16704
+        },
+        {
+          "depth": 2,
+          "overlap": 1.0,
+          "corpus_size": 149991
+        },
+        {
+          "depth": 3,
+          "overlap": 1.0,
+          "corpus_size": 503630
+        },
+        {
+          "depth": 4,
+          "overlap": 1.0,
+          "corpus_size": 687653
+        },
+        {
+          "depth": 5,
+          "overlap": 1.0,
+          "corpus_size": 706277
+        },
+        {
+          "depth": 6,
+          "overlap": 1.0,
+          "corpus_size": 708270
+        }
+      ]
+    },
+    "S2_UCG": {
+      "backward": [
+        {
+          "depth": 0,
+          "overlap": 0.011574074074074073,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.05324074074074074,
+          "corpus_size": 202
+        },
+        {
+          "depth": 2,
+          "overlap": 0.10416666666666667,
+          "corpus_size": 1334
+        },
+        {
+          "depth": 3,
+          "overlap": 0.12962962962962962,
+          "corpus_size": 5755
+        },
+        {
+          "depth": 4,
+          "overlap": 0.1527777777777778,
+          "corpus_size": 19706
+        },
+        {
+          "depth": 5,
+          "overlap": 0.1597222222222222,
+          "corpus_size": 46044
+        },
+        {
+          "depth": 6,
+          "overlap": 0.16435185185185186,
+          "corpus_size": 73888
+        }
+      ],
+      "forward": [
+        {
+          "depth": 0,
+          "overlap": 0.011574074074074073,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.3148148148148148,
+          "corpus_size": 10406
+        },
+        {
+          "depth": 2,
+          "overlap": 0.8194444444444444,
+          "corpus_size": 93380
+        },
+        {
+          "depth": 3,
+          "overlap": 0.875,
+          "corpus_size": 280806
+        },
+        {
+          "depth": 4,
+          "overlap": 0.9074074074074074,
+          "corpus_size": 451373
+        },
+        {
+          "depth": 5,
+          "overlap": 0.9444444444444444,
+          "corpus_size": 566349
+        },
+        {
+          "depth": 6,
+          "overlap": 0.9629629629629629,
+          "corpus_size": 616735
+        }
+      ],
+      "both": [
+        {
+          "depth": 0,
+          "overlap": 0.011574074074074073,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.3402777777777778,
+          "corpus_size": 10500
+        },
+        {
+          "depth": 2,
+          "overlap": 1.0,
+          "corpus_size": 138519
+        },
+        {
+          "depth": 3,
+          "overlap": 1.0,
+          "corpus_size": 545127
+        },
+        {
+          "depth": 4,
+          "overlap": 1.0,
+          "corpus_size": 694245
+        },
+        {
+          "depth": 5,
+          "overlap": 1.0,
+          "corpus_size": 706959
+        },
+        {
+          "depth": 6,
+          "overlap": 1.0,
+          "corpus_size": 708372
+        }
+      ]
+    },
+    "S3_TOPO": {
+      "backward": [
+        {
+          "depth": 0,
+          "overlap": 0.012919896640826873,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.09302325581395349,
+          "corpus_size": 710
+        },
+        {
+          "depth": 2,
+          "overlap": 0.16279069767441862,
+          "corpus_size": 5112
+        },
+        {
+          "depth": 3,
+          "overlap": 0.1834625322997416,
+          "corpus_size": 27414
+        },
+        {
+          "depth": 4,
+          "overlap": 0.20930232558139536,
+          "corpus_size": 78573
+        },
+        {
+          "depth": 5,
+          "overlap": 0.22997416020671835,
+          "corpus_size": 145950
+        },
+        {
+          "depth": 6,
+          "overlap": 0.22997416020671835,
+          "corpus_size": 200535
+        }
+      ],
+      "forward": [
+        {
+          "depth": 0,
+          "overlap": 0.012919896640826873,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.4263565891472868,
+          "corpus_size": 12879
+        },
+        {
+          "depth": 2,
+          "overlap": 0.6795865633074936,
+          "corpus_size": 45658
+        },
+        {
+          "depth": 3,
+          "overlap": 0.7260981912144703,
+          "corpus_size": 82168
+        },
+        {
+          "depth": 4,
+          "overlap": 0.7364341085271318,
+          "corpus_size": 111632
+        },
+        {
+          "depth": 5,
+          "overlap": 0.7416020671834626,
+          "corpus_size": 135379
+        },
+        {
+          "depth": 6,
+          "overlap": 0.7416020671834626,
+          "corpus_size": 151498
+        }
+      ],
+      "both": [
+        {
+          "depth": 0,
+          "overlap": 0.012919896640826873,
+          "corpus_size": 5
+        },
+        {
+          "depth": 1,
+          "overlap": 0.48320413436692505,
+          "corpus_size": 13452
+        },
+        {
+          "depth": 2,
+          "overlap": 1.0,
+          "corpus_size": 102827
+        },
+        {
+          "depth": 3,
+          "overlap": 1.0,
+          "corpus_size": 464686
+        },
+        {
+          "depth": 4,
+          "overlap": 1.0,
+          "corpus_size": 675782
+        },
+        {
+          "depth": 5,
+          "overlap": 1.0,
+          "corpus_size": 705637
+        },
+        {
+          "depth": 6,
+          "overlap": 1.0,
+          "corpus_size": 708207
+        }
+      ]
+    }
+  },
+  "pareto_stats": {
+    "S1_MIT": {
+      "gini": 0.3555752301531281,
+      "top20_edge_share": 0.44199279052098994
+    },
+    "S2_UCG": {
+      "gini": 0.30144196023231995,
+      "top20_edge_share": 0.40135678520117996
+    },
+    "S3_TOPO": {
+      "gini": 0.3133958839403306,
+      "top20_edge_share": 0.40921781100648275
+    }
+  }
+}

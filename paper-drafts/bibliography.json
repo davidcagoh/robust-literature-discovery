@@ -1,0 +1,353 @@
+{
+  "refs": [
+    {
+      "key": "APS2022",
+      "id": 1,
+      "type": "dataset",
+      "authors": ["American Physical Society"],
+      "year": 2022,
+      "title": "APS Data Sets for Research",
+      "url": "https://journals.aps.org/datasets",
+      "note": "APS 2022 citation dataset; 709,803 papers, 9,833,191 edges"
+    },
+    {
+      "key": "Imada1998",
+      "id": 2,
+      "type": "article",
+      "authors": ["Imada, M.", "Fujimori, A.", "Tokura, Y."],
+      "year": 1998,
+      "title": "Metal-insulator transitions",
+      "journal": "Reviews of Modern Physics",
+      "volume": 70,
+      "issue": 4,
+      "pages": "1039",
+      "doi": "10.1103/RevModPhys.70.1039",
+      "note": "S1 survey — gold set 582 APS papers"
+    },
+    {
+      "key": "Bloch2008",
+      "id": 3,
+      "type": "article",
+      "authors": ["Bloch, I.", "Dalibard, J.", "Zwerger, W."],
+      "year": 2008,
+      "title": "Many-body physics with ultracold gases",
+      "journal": "Reviews of Modern Physics",
+      "volume": 80,
+      "issue": 3,
+      "pages": "885",
+      "doi": "10.1103/RevModPhys.80.885",
+      "note": "S2 survey — gold set 432 APS papers"
+    },
+    {
+      "key": "Ozawa2019",
+      "id": 4,
+      "type": "article",
+      "authors": ["Ozawa, T.", "et al."],
+      "year": 2019,
+      "title": "Topological photonics",
+      "journal": "Reviews of Modern Physics",
+      "volume": 91,
+      "issue": 1,
+      "pages": "015006",
+      "doi": "10.1103/RevModPhys.91.015006",
+      "note": "S3 survey — gold set 387 APS papers"
+    },
+    {
+      "key": "Barabasi2016",
+      "id": 5,
+      "type": "book",
+      "authors": ["Barabási, A.-L."],
+      "year": 2016,
+      "title": "Network Science",
+      "publisher": "Cambridge University Press",
+      "chapter": "4: Scale-Free Property",
+      "url": "http://networksciencebook.com",
+      "note": "Heavy-tail / scale-free motivation for hub suppression; cite for citation graph asymmetry claims"
+    },
+    {
+      "key": "Bobrowski2018",
+      "id": 6,
+      "type": "article",
+      "authors": ["Bobrowski, O.", "Kahle, M."],
+      "year": 2018,
+      "title": "Topology of random geometric complexes: a survey",
+      "journal": "Journal of Applied and Computational Topology",
+      "volume": 1,
+      "issue": "3-4",
+      "pages": "331-364",
+      "doi": "10.1007/s41468-017-0010-0",
+      "note": "K17-RGC live validation survey — 56 gold papers, 100% recall"
+    },
+    {
+      "key": "Galesic2021",
+      "id": 7,
+      "type": "article",
+      "authors": ["Galesic, M.", "et al."],
+      "year": 2021,
+      "title": "Human social sensing is an untapped resource for computational social science",
+      "journal": "Nature",
+      "volume": 595,
+      "pages": "214-222",
+      "doi": "10.1038/s41586-021-03649-2",
+      "note": "Ge21-HSS live validation survey — 202 gold papers, 100% recall in 2 rounds"
+    },
+    {
+      "key": "Liu2025",
+      "id": 8,
+      "type": "preprint",
+      "authors": ["Liu, Y.", "Zhang, G.", "Wang, K.", "Li, S.", "Pan, S."],
+      "year": 2025,
+      "title": "Graph-Augmented Large Language Model Agents: Current Progress and Future Prospects",
+      "arxiv": "2503.01642",
+      "note": "Le25-GLLM live validation survey — 57 gold papers, 73.7% recall in 1 round"
+    },
+    {
+      "key": "BarabasiAlbert1999",
+      "id": 9,
+      "type": "article",
+      "authors": ["Barabási, A.-L.", "Albert, R."],
+      "year": 1999,
+      "title": "Emergence of scaling in random networks",
+      "journal": "Science",
+      "volume": 286,
+      "issue": 5439,
+      "pages": "509-512",
+      "doi": "10.1126/science.286.5439.509",
+      "note": "Power-law degree distributions in citation networks; cite alongside [5] for heavy-tail claims"
+    },
+    {
+      "key": "Price1965",
+      "id": 10,
+      "type": "article",
+      "authors": ["Price, D. J. de S."],
+      "year": 1965,
+      "title": "Networks of scientific papers",
+      "journal": "Science",
+      "volume": 149,
+      "issue": 3683,
+      "pages": "510-515",
+      "doi": "10.1126/science.149.3683.510",
+      "note": "Early citation network structure analysis"
+    },
+    {
+      "key": "Howard2016",
+      "id": 11,
+      "type": "article",
+      "authors": ["Howard, B. E.", "et al."],
+      "year": 2016,
+      "title": "SWIFT-Review: a text-mining workbench for systematic review",
+      "journal": "PLOS ONE",
+      "volume": 11,
+      "issue": 2,
+      "pages": "e0148669",
+      "doi": "10.1371/journal.pone.0148669",
+      "note": "Automated systematic review tool — pre-assembled candidate sets, no graph traversal"
+    },
+    {
+      "key": "Marshall2019",
+      "id": 12,
+      "type": "article",
+      "authors": ["Marshall, I. J.", "Wallace, B. C."],
+      "year": 2019,
+      "title": "Toward systematic review automation: a practical guide to using machine learning tools in research synthesis",
+      "journal": "Systematic Reviews",
+      "volume": 8,
+      "issue": 1,
+      "pages": "163",
+      "doi": "10.1186/s13643-019-1074-9",
+      "note": "ML-based screening for systematic review automation"
+    },
+    {
+      "key": "Batagelj2003",
+      "id": 13,
+      "type": "preprint",
+      "authors": ["Batagelj, V.", "Zaversnik, M."],
+      "year": 2003,
+      "title": "An O(m) algorithm for cores decomposition of networks",
+      "arxiv": "cs/0310049",
+      "note": "k-core decomposition; hub removal for graph compression"
+    },
+    {
+      "key": "Stumpf2005",
+      "id": 14,
+      "type": "article",
+      "authors": ["Stumpf, M. P. H.", "Wiuf, C.", "May, R. M."],
+      "year": 2005,
+      "title": "Subnets of scale-free networks are not scale-free: sampling properties of networks",
+      "journal": "PNAS",
+      "volume": 102,
+      "issue": 12,
+      "pages": "4221-4224",
+      "doi": "10.1073/pnas.0501179102",
+      "note": "Degree-constrained sampling; related to Pareto filter design"
+    },
+    {
+      "key": "Chen2006",
+      "id": 15,
+      "type": "article",
+      "authors": ["Chen, C."],
+      "year": 2006,
+      "title": "CiteSpace II: Detecting and visualizing emerging trends and transient patterns in scientific literature",
+      "journal": "Journal of the American Society for Information Science and Technology",
+      "volume": 57,
+      "issue": 3,
+      "pages": "359-377",
+      "doi": "10.1002/asi.20317",
+      "note": "Citation-expansion from large anchor sets; contrast with LitDiscover minimal-seed framing"
+    },
+    {
+      "key": "Floros2024",
+      "id": 16,
+      "type": "inproceedings",
+      "authors": ["Floros, D.", "Pitsianis, N.", "Sun, X."],
+      "year": 2024,
+      "title": "Algebraic Vertex Ordering of a Sparse Graph for Adjacency Access Locality and Graph Compression",
+      "booktitle": "2024 IEEE High Performance Extreme Computing Conference (HPEC)",
+      "pages": "1-7",
+      "doi": "10.1109/HPEC62836.2024.10664476",
+      "note": "Hub-node special handling during graph traversal — justifies Pareto filter as principled, not heuristic"
+    },
+    {
+      "key": "Elicit2024",
+      "id": 17,
+      "type": "software",
+      "authors": ["Elicit"],
+      "year": 2024,
+      "title": "Elicit: The AI Research Assistant",
+      "url": "https://elicit.com",
+      "note": "LLM-assisted literature search tool — query-driven, no formal yield-based stopping criterion. Cite in §2 Related Work alongside ResearchRabbit.",
+      "bib_entry": "@software{elicit, author = {{Elicit}}, title = {Elicit: The AI Research Assistant}, url = {https://elicit.com}, year = {2024}, note = {Accessed: 2026-04-11} }"
+    },
+    {
+      "key": "ResearchRabbit2025",
+      "id": 18,
+      "type": "software",
+      "authors": ["ResearchRabbit"],
+      "year": 2025,
+      "title": "ResearchRabbit",
+      "version": "2026-04-11",
+      "url": "https://app.researchrabbit.ai/",
+      "note": "Citation discovery tool — graph-based exploration from anchor papers, but starts from large anchor sets not minimal seeds. Cite in §2 Related Work.",
+      "bib_entry": "ResearchRabbit. (2025). ResearchRabbit (Version 2026-04-11) [Search tool]. https://app.researchrabbit.ai/"
+    },
+    {
+      "key": "ConnectedPapers",
+      "id": 19,
+      "type": "software",
+      "authors": ["Connected Papers"],
+      "year": null,
+      "title": "Connected Papers | Find and explore academic papers",
+      "url": "https://www.connectedpapers.com/",
+      "note": "Graph-based literature exploration from curated bibliographies — no formal publication. Contrast with LitDiscover's minimal-seed framing in §2 Related Work.",
+      "bib_entry": "Connected Papers. (n.d.). Connected Papers | Find and explore academic papers. Retrieved 2026-04-11, from https://www.connectedpapers.com/"
+    },
+    {
+      "key": "Goldberg2015",
+      "id": 20,
+      "type": "article",
+      "authors": ["Goldberg, S. R.", "Anthony, H.", "Evans, T. S."],
+      "year": 2015,
+      "title": "Modelling citation networks",
+      "journal": "Scientometrics",
+      "volume": 105,
+      "issue": 3,
+      "pages": "1577–1604",
+      "doi": "10.1007/s11192-015-1737-9",
+      "note": "~80% of citations arise from bibliographic copying of references-of-references (local search); ~20% from global search. Directly corroborates backward traversal priority in LitDiscover. Cite in §3 (Architecture) or §5 (Structural Motivation)."
+    },
+    {
+      "key": "Ji2025CiteAgent",
+      "id": 21,
+      "type": "preprint",
+      "authors": ["Ji, Jiarui", "Lei, Runlin", "Pan, Xuchen", "Wei, Zhewei", "Sun, Hao", "Lin, Yankai", "Chen, Xu", "Yang, Yongzheng", "Li, Yaliang", "Ding, Bolin", "Wen, Ji-Rong"],
+      "year": 2025,
+      "title": "Leveraging LLM-based agents for social science research: insights from citation network simulations",
+      "arxiv": "2511.03758",
+      "note": "CiteAgent: LLM agents simulate citation network formation. Key finding: recommendation algorithm (not citation bias) drives preferential attachment — suppressing high-citation paper visibility reduces hub formation. Directly supports Pareto filter rationale. Cite in §2 (citation-graph analysis area) and §5 (hub formation mechanism)."
+    }
+    ,
+    {
+      "key": "Wohlin2014",
+      "id": 22,
+      "type": "inproceedings",
+      "authors": ["Wohlin, C."],
+      "year": 2014,
+      "title": "Guidelines for snowballing in systematic literature studies and a replication in software engineering",
+      "booktitle": "International Conference on Evaluation and Assessment in Software Engineering (EASE)",
+      "doi": "10.1145/2601248.2601268",
+      "note": "Defines snowballing methodology: backward (following references) and forward (following citations) chaining from seed papers. LitDiscover automates exactly this process. Cite in §2 Related Work to establish that we are formalising and automating a known manual methodology."
+    },
+    {
+      "key": "vandeSchoot2021",
+      "id": 23,
+      "type": "article",
+      "authors": ["van de Schoot, R.", "de Bruin, J.", "Schram, R.", "Zahedi, P.", "de Boer, J.", "Weijdema, F.", "Kramer, B.", "Huijts, M.", "Hoogerwerf, M.", "Ferdinands, G.", "Harkema, A.", "Willemsen, J. E.", "Ma, Y.", "Fang, Q.", "Hindriks, S.", "Tummers, L.", "Oberski, D."],
+      "year": 2021,
+      "title": "An open source machine learning framework for efficient and transparent systematic reviews",
+      "journal": "Nature Machine Intelligence",
+      "volume": 3,
+      "pages": "125–133",
+      "doi": "10.1038/s42256-020-00287-7",
+      "note": "ASReview: active learning framework for systematic review screening. Key contrast with LitDiscover: ASReview assumes a pre-assembled candidate set and prioritises screening order; LitDiscover discovers the candidate set via citation traversal before screening begins. Cite in §2 (automated systematic review area) alongside SWIFT-Review [11] and RobotSearch [12]."
+    }
+  ],
+  "_citation_gaps": [
+    {
+      "location": "§1 para 2",
+      "text": "citation networks are highly asymmetric... high-degree hubs",
+      "suggested_refs": [5, 9],
+      "status": "MISSING — add to paper text inline"
+    },
+    {
+      "location": "§2 para 3 (Related Work)",
+      "text": "In a heavy-tailed network, a relatively small fraction of nodes mediate a disproportionate share of edges",
+      "suggested_refs": [5],
+      "status": "MISSING — add to paper text inline"
+    },
+    {
+      "location": "§5 para 1",
+      "text": "The graph is heavy-tailed in its in-degree distribution",
+      "suggested_refs": [5, 9],
+      "status": "MISSING — add to paper text inline"
+    },
+    {
+      "location": "§2 (Related Work) — existing paragraph",
+      "text": "Heavy-tailed in-degree distributions are well documented",
+      "suggested_refs": [5, 9, 10],
+      "status": "already cited via [9, 10] in Related Work paragraph"
+    },
+    {
+      "location": "§2 para 2 (Related Work)",
+      "text": "More recent LLM-assisted tools (e.g. Elicit, ResearchRabbit)",
+      "suggested_refs": [17, 18],
+      "status": "FILLED — refs 17 (Elicit2024) and 18 (ResearchRabbit2025) added"
+    },
+    {
+      "location": "§2 para 4 (Related Work)",
+      "text": "Prior citation-expansion systems (e.g., CiteSpace [15], Connected Papers)",
+      "suggested_refs": [19],
+      "status": "FILLED — ref 19 (ConnectedPapers) added"
+    },
+    {
+      "location": "§1/§2",
+      "text": "[CITATION NEEDED] yellow-highlighted locations in PDF",
+      "suggested_refs": "unknown — user to identify from PDF",
+      "status": "PENDING — user has PDF with yellow highlights"
+    }
+  ],
+  "_inbox_assessed_2026-04-11": {
+    "Goldberg2015": "ADDED as ref [20]",
+    "Ji2025CiteAgent": "ADDED as ref [21]",
+    "Thelwall2016": "SKIPPED — lognormal vs power-law debate; tangential. Could add footnote in §5 if reviewers flag fig1.",
+    "Ren2012": "SKIPPED — clustering model, subsumed by Goldberg2015",
+    "Monechi2017": "SKIPPED — adjacent possible / innovation theory, too tangential",
+    "Cao2016": "SKIPPED — citation impact prediction, not relevant",
+    "Cena2022": "SKIPPED — bibliometric index validation, not relevant",
+    "RodriguezNavarro2019": "SKIPPED — research assessment metrics, not relevant",
+    "Viiu2018": "SKIPPED — lognormal/CSS scientometrics, not relevant",
+    "Patelli2023": "SKIPPED — geography of science, not relevant"
+  },
+  "_zotero_note": "User's Zotero library is at /Users/davidgoh/Downloads/refs.bib — general library, does NOT contain LitDiscover-specific entries. Elicit/ResearchRabbit/ConnectedPapers were added manually above. To export a focused .bib: in Zotero, select only the LitDiscover collection → right-click → Export Collection → Better BibTeX.",
+  "_latex_note": "To convert to LaTeX: pandoc -s paper.md -o paper.tex --citeproc --bibliography=refs.bib --csl=your-style.csl. Citation keys in this file (e.g. Barabasi2016, Floros2024, Elicit2024) are ready to use as \\cite{} keys once .bib is generated.",
+  "_venue_note": "Venue not yet decided. Top candidates: JCDL 2026 (best topical fit — digital libraries + IR), JASIST journal (systematic review automation, longer cycle), EMNLP Findings 2026 (LLM angle, broader audience), CIKM 2026 (IR+graphs). Recommend arXiv preprint first, then target JCDL or JASIST."
+}

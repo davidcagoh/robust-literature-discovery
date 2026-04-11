@@ -249,7 +249,7 @@ for ax, skey in zip(axes, surveys):
     ax.set_yticks(range(len(pivot.index)))
     ax.set_yticklabels(pivot.index, fontsize=8)
     ax.set_xlabel("Yield threshold")
-    ax.set_ylabel("Pareto percentile (999=None)")
+    ax.set_ylabel("Pareto percentile")
     ax.set_title(f"{survey_short[skey]}\n(N_rounds=2, K_escape=20)", fontsize=10)
 
     for i in range(len(pivot.index)):
@@ -283,7 +283,7 @@ for ax, skey in zip(axes, surveys):
         ax.plot([pareto_label(p) for p in s["pareto_p"]], s["recall"],
                 marker="o", color=color, lw=2, ms=5, label=f"yield={yt:.2f}")
     ax.axhline(1.0, color="gray", lw=0.8, ls="--", alpha=0.5)
-    ax.set_xlabel("Pareto percentile (999=None)")
+    ax.set_xlabel("Pareto percentile  (rightmost tick = no filter)")
     ax.set_ylabel("Final recall")
     ax.set_title(survey_short[skey], fontsize=10)
     ax.tick_params(axis="x", rotation=45)
@@ -345,7 +345,7 @@ for ax, skey in zip(axes, surveys):
     ax.set_yticks(range(len(pivot_k.index)))
     ax.set_yticklabels(pivot_k.index, fontsize=8)
     ax.set_xlabel("Yield threshold")
-    ax.set_ylabel("Pareto percentile (999=None)")
+    ax.set_ylabel("Pareto percentile")
     ax.set_title(f"{survey_short[skey]}\n(corpus size ×1k)", fontsize=10)
 
     for i in range(len(pivot_k.index)):

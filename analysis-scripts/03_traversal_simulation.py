@@ -58,7 +58,7 @@ plt.rcParams.update({
 })
 
 MAX_DEPTH = 6
-PARETO_PERCENTILES = [50, 70, 80, 90]
+PARETO_PERCENTILES = [10, 20, 30, 40, 50, 70, 80, 90]
 
 # ── Load ──────────────────────────────────────────────────────────────────────
 print("Loading APS citation graph...")
