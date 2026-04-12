@@ -4,6 +4,25 @@ Reverse-chronological log of what was done each session. Read this at the start 
 
 ---
 
+## 2026-04-12 (session 11) — Wiki relocation decision; memory architecture settled
+
+### What was done
+- Decided to move `paper-wiki/` out of `lit-review/robust-literature-discovery/` to `citation-networks/wiki/` at the repo root, since it now covers both citation-dynamics and lit-review
+- Decided to `git init` at `citation-networks/` root so the shared wiki is version-controlled; nested lit-review repo stays as-is (git ignores nested repos)
+- Clarified two-layer memory architecture: `citation-networks/wiki/` for human-readable between-session state; `~/.claude-shared/projects/` for Claude cross-session context (should have a pointer + key facts about this project)
+- No code or wiki files changed this session — decisions only
+
+### State at end of session
+- `paper-wiki/` still at old location (`lit-review/robust-literature-discovery/paper-wiki/`) — move deferred to next session
+- All prior session 10 changes committed (a114e26)
+
+### What to do next session
+1. `git init` at `citation-networks/`; move `paper-wiki/` → `citation-networks/wiki/`; update any cross-references; commit in outer repo
+2. Add citation-networks project entry to `~/.claude-shared/projects/MEMORY.md` (Zeitgeist hypothesis, pipeline stages, SOTA gap question)
+3. Run SOTA gap assessment for citation-dynamics (Q-SOTA in open-questions.md) — search 2024–2026 for temporal citation phase analysis and LLM-based synthesis work
+
+---
+
 ## 2026-04-12 (session 10) — Codebase reorganized; citation-dynamics/ scoped as synthesis stage; SOTA gap surfaced
 
 ### What was done

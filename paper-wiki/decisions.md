@@ -4,6 +4,11 @@ Choices that have already been made and why. Read this before changing any param
 
 ---
 
+## Wiki lives at `citation-networks/wiki/` (top-level), not inside lit-review
+**Decision date:** 2026-04-12
+**Why:** The wiki covers both citation-dynamics and robust-literature-discovery. Keeping it inside `lit-review/robust-literature-discovery/paper-wiki/` implies wrong ownership and buries shared decisions inside one sub-project. Top-level placement is neutral and discoverable. Version control is preserved by `git init`-ing at `citation-networks/` root; the nested lit-review `.git` is unaffected (git doesn't recurse into nested repos). The `~/.claude-shared/projects/` memory system handles Claude cross-session context; the wiki handles human-readable state.
+**Implication:** Next session: move `paper-wiki/` → `citation-networks/wiki/`, init outer git, update any cross-references inside wiki files.
+
 ## Project Architecture (2026-04-12)
 
 ### `thesis/` renamed to `citation-dynamics/`; positioned as synthesis stage
