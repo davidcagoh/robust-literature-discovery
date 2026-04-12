@@ -1,15 +1,16 @@
 %% litdiscover.tex — Annotation draft for PI review
 %% Compile: pdflatex litdiscover && bibtex litdiscover && pdflatex litdiscover && pdflatex litdiscover
-\documentclass[12pt,a4paper]{article}
+% \documentclass[12pt,a4paper]{article}
+\documentclass[conference]{IEEEtran}
 
-\usepackage[margin=1.25in, top=1in, bottom=1in]{geometry}
+% \usepackage[margin=1.25in, top=1in, bottom=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{parskip}
-\usepackage{setspace}
-\usepackage{titlesec}
+% \usepackage{parskip}
+% \usepackage{setspace}
+% \usepackage{titlesec}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
@@ -22,7 +23,7 @@
 \usepackage{soul}         % for \hl{} yellow highlight
 \usepackage{mdframed}
 \usepackage{amsmath}
-\usepackage{natbib}
+\usepackage[numbers]{natbib}
 
 % ── Colours ──────────────────────────────────────────────────────────────────
 \definecolor{litblue}{RGB}{33,102,172}
@@ -41,40 +42,29 @@
 % ── Figure path ───────────────────────────────────────────────────────────────
 \graphicspath{{../data-aps/outputs/pub_figures/}}
 
-% ── Section formatting ────────────────────────────────────────────────────────
-\titleformat{\section}{\large\bfseries}{{\thesection.}}{0.5em}{}
-\titleformat{\subsection}{\normalsize\bfseries}{}{0em}{}
-\titlespacing{\section}{0pt}{1.4ex plus 0.4ex}{0.6ex plus 0.2ex}
-\titlespacing{\subsection}{0pt}{1.0ex plus 0.2ex}{0.3ex}
-
 % ── Convenience macros ────────────────────────────────────────────────────────
 \newcommand{\ldiscover}{\textsc{LitDiscover}}
 \newcommand{\todo}[1]{\textcolor{missingcite}{\textbf{[#1]}}}
 \newcommand{\cn}{\todo{CITATION NEEDED}}   % missing citation marker
 
-% ── Line spacing ─────────────────────────────────────────────────────────────
-\onehalfspacing
-
 % ─────────────────────────────────────────────────────────────────────────────
+\title{Robust Literature Discovery from Minimal Seeds:\\
+  Validating \ldiscover{} on APS Citation Benchmarks and Live Surveys}
+
+\author{%
+  \IEEEauthorblockN{David Goh}
+  \IEEEauthorblockA{Department of Computer Science\\University of Toronto\\daveed@cs.toronto.edu}
+  \and
+  \IEEEauthorblockN{Xiaobai Sun}
+  \IEEEauthorblockA{Department of Computer Science\\Duke University\\xiaobai@cs.duke.edu}
+}
+
 \begin{document}
 
-\begin{center}
-  {\LARGE\bfseries Robust Literature Discovery from Minimal Seeds}\\[0.6em]
-  {\large Validating \ldiscover{} on APS Citation Benchmarks and Live Surveys}\\[1.2em]
-  {\normalsize \textit{April 2026 — Annotation draft for PI review}}\\[0.3em]
-  {\small\color{missingcite}
-    \textbf{Annotation guide:} Red \cn{} markers indicate locations where a citation
-    is required but not yet identified. Yellow highlighting (if any) marks claims
-    that need supporting references. Please annotate directly on this PDF.}
-\end{center}
-
-\vspace{0.5em}
-\hrule
-\vspace{1em}
+\maketitle
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{abstract}
-\noindent
 Automated literature discovery must do something retrieval cannot: recover a topic's
 literature from almost nothing. We introduce \textbf{\ldiscover{}}, a queue-driven engine
 that navigates citation graphs through three coordinated mechanisms --- bidirectional
@@ -91,10 +81,6 @@ rapidly expanding field where temporal indexing gaps dominate. Yield collapses r
 depth 2 across all experiments, confirming that the stopping criterion is structural rather
 than parametric.
 \end{abstract}
-
-\vspace{0.8em}
-\hrule
-\vspace{1em}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Introduction}
@@ -300,14 +286,14 @@ and much more constrained in its out-degree distribution. A small number of pape
 very large citation counts, while the number of references made by a typical paper remains
 much more limited. This asymmetry creates a directional imbalance in traversal cost.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig1_degree_distributions}
   \caption{\textbf{Degree distributions of the APS citation graph.} In-degree (citations
   received) is heavy-tailed; out-degree (references made) is bounded. The asymmetry motivates
   why forward traversal explodes while backward traversal stays local.}
   \label{fig:degree}
-\end{figure}
+\end{figure*}
 
 Backward traversal is naturally disciplined by bibliography length. If a paper cites 20 to
 50 relevant predecessors, then expanding backward from it remains relatively local. Forward
@@ -336,7 +322,7 @@ continue expanding, and crossing them pushes the frontier into off-topic regions
 filter is the operational response: suppressing the highest-degree forward candidates removes
 the inter-subfield bridges while preserving within-cluster reachability.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig2_bfs_reachability}
   \caption{\textbf{BFS overlap with gold bibliography by traversal direction} (oracle seeds:
@@ -346,7 +332,7 @@ the inter-subfield bridges while preserving within-cluster reachability.
   tracks unfiltered bidirectional coverage, confirming hub suppression does not impede
   topical reachability at the depths used in practice.}
   \label{fig:bfs}
-\end{figure}
+\end{figure*}
 
 The role of the Pareto filter is to control this forward asymmetry. By suppressing the most
 highly cited forward neighbours, the system removes precisely the nodes most likely to act
@@ -359,7 +345,7 @@ is that hub suppression can substantially reduce candidate-pool growth while pre
 reachability. Figure~\ref{fig:bfs} makes this visible: the Pareto-80 curve closely tracks
 unfiltered bidirectional coverage at every depth.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig3_strategy_comparison}
   \caption{\textbf{Coverage--cost trade-off: recall vs corpus size at BFS depth 3.} All
@@ -367,7 +353,7 @@ unfiltered bidirectional coverage at every depth.
   default) achieves near-identical recall to unfiltered bidirectional at substantially
   reduced corpus size.}
   \label{fig:strategy}
-\end{figure}
+\end{figure*}
 
 A second structural control is yield. Even filtered traversal should not continue
 indefinitely, because the marginal utility of additional expansion declines as the local
@@ -375,7 +361,7 @@ cluster is exhausted. In the APS simulations, local yield drops sharply after th
 topically coherent neighbourhood has been screened, which supports using yield collapse as
 a stopping or re-entry signal.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig4_screen_yield_collapse}
   \caption{\textbf{Screen yield collapse by BFS depth.} Stacked bars show gold papers
@@ -384,7 +370,7 @@ a stopping or re-entry signal.
   increment (1--4\%); the stopping criterion fires reliably at depth 2 without
   parameter sensitivity.}
   \label{fig:yield}
-\end{figure}
+\end{figure*}
 
 Taken together, these analyses motivate the bounded traversal architecture. Citation graphs
 contain enough structure to support literature discovery, but they must be navigated through
@@ -428,7 +414,7 @@ because the two nearest-neighbour seeds share significant backward neighbourhood
 contaminated seeding, recall declines with $k$ because each additional off-topic seed opens
 a separate traversal frontier. Both effects resolve by round 2.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig5_cold_start_recall_per_round}
   \caption{\textbf{Cold-start recall per round at $k = 5$}, for top-$k$, random, and
@@ -436,9 +422,9 @@ a separate traversal frontier. Both effects resolve by round 2.
   small but consistent insurance increment. All seed types converge to $\geq$90\% by
   round 2.}
   \label{fig:rounds}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig6_recall_vs_seed_size}
   \caption{\textbf{Final recall vs seed size $k \in \{1,2,3,4,5,10\}$} (after two rounds)
@@ -446,7 +432,7 @@ a separate traversal frontier. Both effects resolve by round 2.
   seeds share backward neighbourhoods; contaminated recall declines with $k$ because each
   off-topic seed opens a new traversal frontier. Both effects resolve by round 2.}
   \label{fig:seedsize}
-\end{figure}
+\end{figure*}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Residual Miss Analysis}
@@ -485,7 +471,7 @@ activates reliably without sensitivity to its precise value.
 The appropriate interpretation is that bounded traversal defines a principled trade-off
 frontier. The residual gap reflects where the method is designed to stop.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
   \centering
   \includegraphics[width=\linewidth]{fig7_miss_analysis}
   \caption{\textbf{Anatomy of the residual coverage gap.} \textit{Left:} In-degree
@@ -494,7 +480,7 @@ frontier. The residual gap reflects where the method is designed to stop.
   the recovered set to missed papers. Nearly all misses are within 2 hops --- structurally
   adjacent but not reached before yield collapse.}
   \label{fig:miss}
-\end{figure}
+\end{figure*}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Live Validation on Open-Domain Surveys}
@@ -583,7 +569,7 @@ control policy governing expansion and stopping is calibrated to graph structure
 than to a fixed budget.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\bibliographystyle{abbrvnat}
+\bibliographystyle{IEEEtran}
 \bibliography{refs}
 
 \end{document}

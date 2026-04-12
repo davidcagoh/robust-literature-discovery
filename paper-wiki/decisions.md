@@ -4,6 +4,20 @@ Choices that have already been made and why. Read this before changing any param
 
 ---
 
+## Project Architecture (2026-04-12)
+
+### `thesis/` renamed to `citation-dynamics/`; positioned as synthesis stage
+**Decision date:** 2026-04-12
+**Why:** The thesis project is formally titled *"Recognizing Signature Patterns and Phases of Time-Varying Networks"* — it is about characterizing temporal propagation dynamics (emergence, growth, persistence, decay, transition) in citation graphs, not just exploratory statistics. The name `citation-dynamics/` is accurate and discoverable. The pipeline is: citation-dynamics (understand structure) → robust-literature-discovery (discover papers) → synthesis (apply citation-dynamics methods to discovered paper sets to produce structured lit reviews). This positions the two projects as adjacent stages rather than independent workstreams.
+**Implication:** The synthesis step — running Leiden community detection, temporal window slicing, and SG-t-SNE embedding on the *output* of a discovery run — is the planned next research contribution. All methods already exist in `citation-dynamics/`; they need to be applied to discovered sets rather than the full APS corpus.
+
+### Canonical data lives in `citation-dynamics/data/processed/`; lit-review symlinks there
+**Decision date:** 2026-04-12
+**Why:** The APS .mat files (662 MB) were duplicated verbatim across both projects. Keeping one canonical copy in `citation-dynamics/` (the older project that originally compiled them) and symlinking from `data-aps/processed/` eliminates 662 MB of duplication without changing any script paths. The symlink is gitignored in the lit-review repo.
+**Implication:** If the APS dataset is updated, update `citation-dynamics/data/processed/` only — the lit-review project will automatically see the change.
+
+---
+
 ## Algorithm Parameters
 
 ### N_ROUNDS = 2 (not 4)

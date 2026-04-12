@@ -48,7 +48,7 @@ Current pub figures:
 
 ---
 
-## One-line status (2026-04-11)
+## One-line status (2026-04-12)
 
 - **Thesis**: defined ✅
 - **Paper name**: LitDiscover ✅ — "Robust Literature Discovery from Minimal Seeds: Validating LitDiscover on APS Citation Benchmarks and Live Surveys"
@@ -62,15 +62,15 @@ Current pub figures:
 - **Live experiment Le25-GLLM**: ✅ COMPLETE — 73.7% recall (42/57), 1 round, temporal gap
 - **Venue**: not yet decided — see venue analysis below
 - **Paper text**: rewrite complete ✅ (Abstract, §1, §2, §5, §9 rewritten; §3–§8 intact)
+- **citation-dynamics/**: renamed from `thesis/`; README written; data deduplicated via symlink ✅
+- **citation-dynamics/ SOTA gap**: NOT yet assessed — lit review is ~2 years old; Nakis 2024 was cutting edge then
 
 ## Next priorities
 
-1. ~~Elicit/ResearchRabbit/ConnectedPapers citations~~ ✅ DONE (refs 17–19)
-2. ~~Related-work paper sweep~~ ✅ DONE (CiteAgent [21], Goldberg2015 [20] added; inbox processed)
-3. ~~Full paper rewrite~~ ✅ DONE
-4. ~~Figure fixes~~ ✅ DONE — fig2 oracle label, fig3 annotation, fig7 redesign, fig8/8b/8c dropped
-5. **[CITATION NEEDED] yellow-highlight locations** — user will check final PDF (Q11)
-6. **Venue decision** — share with PI first; ICASR 2026 watch for call
+1. **[CITATION NEEDED] yellow-highlight locations** — user will check final PDF (Q11)
+2. **Venue decision** — share with PI first; ICASR 2026 watch for call
+3. **SOTA gap assessment for citation-dynamics** — search 2024–2026 for temporal citation phase analysis, community detection in citation graphs, LLM-based synthesis; is the Zeitgeist approach still novel?
+4. **Figure fixes** — Q2 (k=5 or k=20 in miss analysis?), Q3 (non-monotone recall for contaminated seeds), Q7, Q8
 
 ## Venue analysis
 

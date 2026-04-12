@@ -4,6 +4,78 @@ Reverse-chronological log of what was done each session. Read this at the start 
 
 ---
 
+## 2026-04-12 (session 10) — Codebase reorganized; citation-dynamics/ scoped as synthesis stage; SOTA gap surfaced
+
+### What was done
+
+**Explored and mapped the relationship between `thesis/` (now `citation-dynamics/`) and `lit-review/robust-literature-discovery/`:**
+
+- Read all writings in `thesis/writings/`: abstract (Sept 2024, supervisor Xiaobai Sun), literature review (~50 papers), thesis draft outline, year-by-year notes
+- The thesis project is formally titled *"Recognizing Signature Patterns and Phases of Time-Varying Networks"* with three claimed contributions: (1) time-dependent spatial embedding, (2) backward mapping for influence tracing, (3) quantitative propagation phase characterization
+- The core intellectual concept is the **Zeitgeist hypothesis**: the global APS citation distribution is a mixture of subcommunity distributions, each scale-free, corresponding to distinct research generations
+- The lit review (written ~2022–2024) identified Nakis et al. 2024 (Single Event Networks / Dynamic Impact Embedding) as the cutting edge — this is now ~2 years old and the field may have moved
+
+**Reorganized the `citation-networks/` directory structure:**
+
+- Renamed `thesis/` → `citation-dynamics/` (reflects actual research content)
+- Deleted `lit-review/deps-matlab/` (gitignored, byte-for-byte copy of `citation-dynamics/deps/`)
+- Replaced `data-aps/processed/` (662 MB of duplicate files) with a relative symlink → `../../../citation-dynamics/data/processed`
+- Fixed `.gitignore` to cover the symlink (added `data-aps/processed` without trailing slash)
+- Wrote `citation-dynamics/README.md` describing the project, data schema, and pipeline relationship
+
+**Identified the pipeline architecture:**
+
+```
+citation-dynamics/          →   robust-literature-discovery/   →   [synthesis — planned]
+Understand network              Discover papers from               Post-discovery clustering,
+structure (Zeitgeist,           minimal seeds (89–99%              temporal phase analysis,
+phases, embedding)              recall at k=5)                     backward influence mapping
+```
+
+The synthesis step — applying Leiden community detection, temporal window slicing, and SG-t-SNE embedding to a *discovered* paper set — is the natural next contribution and draws directly on `citation-dynamics/` methods.
+
+### State at end of session
+- `citation-dynamics/` renamed and has README; all MATLAB scripts intact
+- `data-aps/processed` symlink working correctly (verified: ls resolves 4 files)
+- `deps-matlab/` deleted; `.gitignore` updated
+- Paper itself (lit-review) unchanged — Q1–Q11 open questions carry forward
+- No analysis scripts run this session
+
+### What to do next session
+1. **SOTA gap assessment for citation-dynamics**: Do a literature search (2024–2026) for work on temporal citation network phase analysis, community detection in citation graphs, and synthesis of literature reviews. Specifically check: has SEN/Dynamic Impact Embedding (Nakis 2024) been followed up? Is there LLM-based synthesis work that makes the Zeitgeist approach redundant or complementary?
+2. **Resume paper**: Q11 (PDF yellow-highlight [CITATION NEEDED] locations), venue decision (ICASR 2026 / ALTARS 2026), figure fixes Q2/Q3/Q7/Q8
+3. **Scope the synthesis step concretely**: If SOTA check shows citation-dynamics is still novel, draft what a "synthesis pipeline" experiment would look like — taking robust-literature-discovery output and running it through Leiden + temporal analysis
+
+---
+
+## 2026-04-11 (session 9) — LaTeX compile fixed; IEEEtran structure corrected
+
+### What was done
+
+**`paper-drafts/litdiscover.tex` fixed and successfully compiles to PDF (9 pages).**
+
+Five structural problems were present:
+
+1. `\titleformat`/`\titlespacing` were called but `\usepackage{titlesec}` was commented out → removed the four dead lines.
+2. `\usepackage{parskip}` conflicts with IEEEtran column layout → commented out.
+3. `\usepackage{setspace}` + `\onehalfspacing` don't apply to IEEEtran → commented out.
+4. Title was in a manual `\begin{center}` block and `\author{}` was orphaned in the body. Restructured to proper IEEEtran form: `\title{}` and `\author{}` in the preamble, `\maketitle` at document open.
+5. `\usepackage{natbib}` was loaded without options; IEEEtran.bst uses numbered citations, causing a "Bibliography not compatible with author-year" error → changed to `\usepackage[numbers]{natbib}`.
+
+The `\citep{}` / `\citet{}` natbib commands throughout the document are preserved and work correctly in numbered mode.
+
+### State at end of session
+- `litdiscover.tex`: ✅ compiles cleanly (pdflatex + bibtex + pdflatex × 2), 9-page PDF
+- No content changes — purely structural/preamble fixes
+- Open questions unchanged from session 8
+
+### What to do next session
+1. User reviews PDF for [CITATION NEEDED] yellow-highlight locations (Q11)
+2. Venue decision: check ICASR 2026 and ALTARS 2026 deadlines
+3. Figure fixes: Q7 (out-degree to Fig 7), Q8 (oracle label on Fig 2) — see open-questions.md for current status
+
+---
+
 ## 2026-04-11 (session 8) — Full paper rewrite: Abstract, §1, §2, §5, §9 rewritten; Q12 and Q13 closed
 
 ### What was done

@@ -4,6 +4,8 @@ This repository contains the APS-based empirical validation for **LitDiscover**,
 
 The manuscript lives at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (active, fully rewritten April 2026). The compiled PDF is generated from `paper-drafts/litdiscover.tex`.
 
+**LaTeX format:** `litdiscover.tex` uses `\documentclass[conference]{IEEEtran}` with `\usepackage[numbers]{natbib}`. In-body citation commands are `\citep{}` / `\citet{}` (natbib numbered mode). Do **not** add `\usepackage{titlesec}`, `\usepackage{parskip}`, or `\usepackage{setspace}` — all three conflict with IEEEtran. Title/author live in the preamble; `\maketitle` is the first body command.
+
 ## What matters most
 
 The repository is a **data pipeline**, not a package. Most work happens in `analysis-scripts/`, and the important cross-file dependency is the JSON/CSV artifact chain written to **`data-aps/outputs/`**. Publication figures land in `data-aps/outputs/pub_figures/`.
@@ -26,7 +28,7 @@ The APS citation CSV is expected at:
 data-aps/processed/aps-dataset-citations-2022.csv
 ```
 
-All scripts resolve paths automatically via `Path(__file__).parent.parent` — no path editing needed.
+`data-aps/processed/` is a symlink → `../../../citation-dynamics/data/processed` (canonical data lives in the sibling project). All scripts resolve paths automatically via `Path(__file__).parent.parent` — no path editing needed.
 
 ## Common commands
 

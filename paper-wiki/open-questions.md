@@ -4,6 +4,20 @@ Unresolved issues that block or weaken the paper. Ordered by importance.
 
 ---
 
+## BROADER PROJECT QUESTIONS (citation-dynamics / synthesis stage)
+
+### Q-SOTA: Is the citation-dynamics lit review still current? What is the state of the art in 2026?
+**Why it matters:** The literature review in `citation-dynamics/writings/` was written ~2022–2024. The cutting edge at that time was Nakis et al. 2024 (Single Event Networks / Dynamic Impact Single-Event Embedding). Two years have passed. The field may have produced: (a) follow-ups to SEN embedding that make the Zeitgeist approach redundant; (b) LLM-based synthesis tools that reframe the problem entirely; (c) new temporal community detection methods.
+**How to resolve:** Run a literature search (Semantic Scholar / Google Scholar, 2024–2026) on: temporal citation phase analysis, time-varying citation community detection, LLM-based literature synthesis/review generation, Zeitgeist models, citation cascade evolution. Check Google Scholar forward citations on Nakis 2024.
+**Blocking:** Scoping the synthesis stage contribution. If SOTA has moved significantly, the Zeitgeist hypothesis needs repositioning.
+
+### Q-SYNTH: What does the synthesis pipeline experiment look like concretely?
+**Why it matters:** The planned synthesis step is: take a discovered paper set (output of robust-literature-discovery), apply Leiden community detection + temporal window slicing + SG-t-SNE to produce a structured lit review. But this is vague — what would the output actually be? A cluster map? Temporal narrative? Something else?
+**How to resolve:** Design a concrete experiment: (1) run robust-literature-discovery on one of the existing surveys (K17-RGC, Ge21-HSS), (2) take recovered papers as input to citation-dynamics pipeline, (3) define what "structured lit review" means as output — clusters with representative papers? Temporal emergence curves? Influence hubs?
+**Blocking:** Starting the synthesis implementation.
+
+---
+
 ## RESOLVED
 
 ### ~~MAX_DEPTH vs N_ROUNDS — are they redundant?~~

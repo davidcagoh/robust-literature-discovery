@@ -22,7 +22,9 @@ __pycache__/
 *.pyd
 
 # ── Large raw data (not reproducible without APS dataset license) ─────────────
+# Both patterns needed: trailing slash matches real dirs, no slash matches symlinks
 data-aps/processed/
+data-aps/processed
 
 # ── Regenerable intermediate outputs ─────────────────────────────────────────
 # Intermediate figure dirs (run 06_publication_figures.py to regenerate)
