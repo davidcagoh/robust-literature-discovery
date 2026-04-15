@@ -4,6 +4,23 @@ Reverse-chronological log of what was done each session. Read this at the start 
 
 ---
 
+## 2026-04-15 (session 12c) — Table spacing standardised; live validation labels removed
+
+### What was done
+- Table III (`tab:live`): replaced non-uniform `\\[4pt]` row gaps with `\addlinespace` (booktabs) between each row — consistent with booktabs conventions; Tables I and II needed no changes (single-height rows)
+- Removed "(complete)" and "(round 1 complete)" status labels from the three result paragraph headers in §7 (live validation); results themselves unchanged and confirmed up to date (Bobrowski & Kahle 100%/56, Galesic 100%/202, Liu 73.7%/42)
+
+### State at end of session
+Clean — all three tables consistently formatted; live validation section reads cleanly.
+
+### What to do next session
+1. PI re-review of compiled PDF
+2. Address Q11 [CITATION NEEDED] yellow-highlighted locations
+3. Venue decision — watch for ICASR 2026 call
+4. SOTA gap assessment for citation-dynamics (Q-SOTA)
+
+---
+
 ## 2026-04-15 (session 12b) — Fix (author?) rendering: switched to IEEEtranN.bst
 
 ### What was done
