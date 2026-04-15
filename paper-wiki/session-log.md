@@ -4,6 +4,24 @@ Reverse-chronological log of what was done each session. Read this at the start 
 
 ---
 
+## 2026-04-15 (session 12b) — Fix (author?) rendering: switched to IEEEtranN.bst
+
+### What was done
+- All `\citet{}` calls were rendering as "(author?) [N]" because `IEEEtran.bst` does not emit natbib-compatible `\bibitem[Author(Year)]{key}` entries
+- Fixed by changing `\bibliographystyle{IEEEtran}` → `\bibliographystyle{IEEEtranN}` in `litdiscover.tex`; `IEEEtranN.bst` is the natbib-compatible variant shipped with IEEEtran
+- Recompiled (pdflatex → bibtex → pdflatex × 2); all "Author undefined" warnings gone; `\citet{}` now resolves correctly throughout
+
+### State at end of session
+Clean — PDF compiles with only benign font-shape and Underfull warnings; author names display correctly in all inline citations.
+
+### What to do next session
+1. PI re-review of compiled PDF — confirm author names display and table formatting looks right
+2. Address Q11 [CITATION NEEDED] yellow-highlighted locations
+3. Venue decision — watch for ICASR 2026 call
+4. SOTA gap assessment for citation-dynamics (Q-SOTA)
+
+---
+
 ## 2026-04-15 (session 12) — PI review comments applied; litdiscover.tex revised throughout
 
 ### What was done
