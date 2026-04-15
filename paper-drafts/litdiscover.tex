@@ -66,7 +66,7 @@
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{abstract}
 Automated literature discovery must do something retrieval cannot: recover a topic's
-literature from almost nothing. We introduce \textbf{\ldiscover{}}, a queue-driven engine
+literature from almost nothing. We introduce \ldiscover{}, a queue-driven engine
 that navigates citation graphs through three coordinated mechanisms --- bidirectional
 traversal, Pareto-filtered hub suppression, and yield-gated continuation. Using the
 American Physical Society (APS) 2022 dataset (709,803 papers, 9,833,191 edges) as a
@@ -102,7 +102,7 @@ bibliography length, whereas forward traversal rapidly encounters generic high-d
 that connect many otherwise distant parts of the literature. Unconstrained exploration
 therefore turns a promising discovery process into an intractable screening problem.
 
-\textbf{\ldiscover{}} addresses this problem as a bounded traversal architecture. Rather
+\ldiscover{} addresses this problem as a bounded traversal architecture. Rather
 than treating literature discovery as open-ended graph expansion, it organises discovery
 around a queue-driven loop in which search, screening, traversal, and escape operations
 are all subordinated to a single yield-governed control policy. Three architectural ideas
@@ -579,7 +579,7 @@ via yield collapse rather than graph exhaustion.
 \section{Conclusion}
 
 Literature discovery without a domain map is a bounded control problem, not an open-ended
-retrieval task. \textbf{\ldiscover{}} solves it by imposing three coordinated constraints
+retrieval task. \ldiscover{} solves it by imposing three coordinated constraints
 --- bidirectional traversal, Pareto-filtered hub suppression, and yield-gated continuation
 --- that prevent graph explosion while preserving near-complete topical coverage.
 
