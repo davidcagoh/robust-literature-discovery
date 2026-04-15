@@ -541,31 +541,33 @@ indexing gaps are expected to account for a significant share of any residual mi
 \toprule
 Survey & Gold & Seeds & Recall \\
 \midrule
-\citet{Bobrowski2018} \newline (random geometric complexes) & 56 & 1 & \textbf{100\%} \\[4pt]
-\citet{Galesic2021} \newline (human social sensing) & 202 & 3 & \textbf{100\%} \\[4pt]
+\citet{Bobrowski2018} \newline (random geometric complexes) & 56 & 1 & \textbf{100\%} \\
+\addlinespace
+\citet{Galesic2021} \newline (human social sensing) & 202 & 3 & \textbf{100\%} \\
+\addlinespace
 \citet{Liu2025} \newline (graph-augmented LLMs) & 57 & 3 & \textbf{73.7\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{\citet{Bobrowski2018}} (complete): Starting from 1 resolved seed paper, \ldiscover{}
+\textbf{\citet{Bobrowski2018}}: Starting from 1 resolved seed paper, \ldiscover{}
 recovered 100\% of the 56-paper gold bibliography in a single round, stopping at depth 2
 (yield 0.16\% at depth 2, below the 5\% threshold). Corpus size at termination: 31,168
 papers, consistent with predictions for a niche bounded field.
 
-\textbf{\citet{Galesic2021}} (complete): Starting from 3 seeds, round 1 recovered 18.8\%
+\textbf{\citet{Galesic2021}}: Starting from 3 seeds, round 1 recovered 18.8\%
 (38/202 gold papers), stopping at depth 2 on yield = 0.1\%. The Escape step selected 20
 new seeds from the recovered set, confirming that the methodology subclusters were
 structurally disconnected from the initial traversal frontier. Round 2 recovered the
 remaining 164 papers --- reaching \textbf{100\% recall} (202/202) --- triggering the
 early-exit on 100\% recall with corpus = 44,577 papers.
 
-\textbf{\citet{Liu2025}} (round 1 complete): Starting from 3 seeds, round 1 recovered
-73.7\% (42/57 gold papers), stopping at depth 2 on yield = 0.03\% with corpus = 150,197
-papers. The active and rapidly growing nature of this field produces a substantially
-larger traversal corpus than the niche-domain surveys. The 26.3\% miss rate is concentrated
-in papers published after the seed papers' citation histories were indexed, confirming that
-the structural-periphery hypothesis extends to temporal coverage gaps in very recent
+\textbf{\citet{Liu2025}}: Starting from 3 seeds, round 1 recovered 73.7\% (42/57 gold
+papers), stopping at depth 2 on yield = 0.03\% with corpus = 150,197 papers. The active
+and rapidly growing nature of this field produces a substantially larger traversal corpus
+than the niche-domain surveys. The 26.3\% miss rate is concentrated in papers published
+after the seed papers' citation histories were indexed, confirming that the
+structural-periphery hypothesis extends to temporal coverage gaps in very recent
 literature.
 
 The niche- and interdisciplinary-domain surveys achieved 100\% recall with corpora in the
