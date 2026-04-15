@@ -4,6 +4,35 @@ Reverse-chronological log of what was done each session. Read this at the start 
 
 ---
 
+## 2026-04-15 (session 12) — PI review comments applied; litdiscover.tex revised throughout
+
+### What was done
+- Applied 13 editorial revisions from PI review to `paper-drafts/litdiscover.tex`; added Redner 2005 to `refs.bib`
+- **Abstract**: trimmed specific K=5 numbers; replaced with higher-level framing of what near-complete recall means structurally
+- **Introduction**: added `\citep{Redner2005}` near "Citation graphs provide...keyword search alone cannot recover"
+- **Contributions §1**: added context for contribution 3 (structural peripherality → principled boundary vs failure) and contribution 4 (yield collapse offline vs in deployment)
+- **Related work**: added `\citep{Redner2005, Barabasi2016}` for "Heavy-tailed in-degree is well documented"; added intersection paragraph before snowballing citation explaining how the three areas (citation-graph analysis, systematic review, hub sampling) converge to motivate LitDiscover
+- **Architecture**: renamed all "escape hatch" occurrences to "Escape"; added specificity — Escape selects new topical anchor from recovered set, or in deployment issues fresh query to Semantic Scholar; rewrote unclear "validated at the level of control behaviour" sentence
+- **Table II** (experimental design): fixed overflow by switching second column to `p{4.2cm}`; updated "escape-hatch re-entry" → "Escape re-entry"
+- **Residual miss analysis**: rewrote low in-degree motivation — explains why low-in-degree = rarely surfaced as forward candidate = principled stopping boundary, not failure
+- **Live validation**: removed K17-RGC/Ge21-HSS/Le25-GLLM shorthand labels from narrative text; replaced with `\citet{}` references throughout; added selection context paragraph (three surveys chosen to span niche math field, interdisciplinary social science, rapidly growing AI field)
+- **Table III** (live validation): rebuilt with `p{3.4cm}` first column; removed six-column format that overflowed; dropped "Domain" and "Rounds" columns (noted in text)
+- **Conclusion**: replaced weak final sentence ("calibrated to graph structure rather than to a fixed budget") with forward-looking paragraph on citation dynamics synthesis — Leiden community detection, temporal phase segmentation, influence trajectories as the natural next step
+- PDF compiles clean: no errors, no Overfull boxes (17 non-fatal natbib "Author undefined" warnings are pre-existing, not introduced this session)
+
+### State at end of session
+- `litdiscover.tex` and `refs.bib` updated; PDF recompiled ✅
+- All editorial comments addressed; paper ready for PI re-review
+- Pre-existing natbib + IEEEtran author-resolution warnings remain (Ji2025CiteAgent, Floros2024, etc.) — they are not new and do not affect PDF output
+
+### What to do next session
+1. PI re-review of compiled PDF — check that table formatting resolves visually and all section changes read correctly
+2. Address remaining Q11 [CITATION NEEDED] yellow-highlighted locations in tex
+3. Venue decision — share with PI; watch for ICASR 2026 call announcement
+4. SOTA gap assessment for citation-dynamics (Q-SOTA) — search 2024–2026 for temporal citation phase analysis and LLM-based synthesis work
+
+---
+
 ## 2026-04-12 (session 11) — Wiki relocation decision; memory architecture settled
 
 ### What was done

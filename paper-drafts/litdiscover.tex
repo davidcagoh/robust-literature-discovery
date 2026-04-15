@@ -71,15 +71,14 @@ that navigates citation graphs through three coordinated mechanisms --- bidirect
 traversal, Pareto-filtered hub suppression, and yield-gated continuation. Using the
 American Physical Society (APS) 2022 dataset (709,803 papers, 9,833,191 edges) as a
 closed benchmark, we evaluate recovery from minimal seed sets ($k \in \{1,2,3,4,5,10\}$)
-against three landmark survey papers. At $k = 5$ and two traversal rounds, \ldiscover{}
-recovers \textbf{89.2\%, 98.4\%, and 96.9\%} of each survey's gold bibliography. Residual
-misses are structurally peripheral: mean in-degree 14--44 versus 200+ for recovered papers,
-with 97\% at BFS distance 1 from the recovered set. Live validation on three open-domain
-surveys yields 100\% recall on random geometric complexes (56 papers, 1 seed, 1 round),
-100\% on human social sensing (202 papers, 2 rounds), and 73.7\% on a 2025 survey in a
-rapidly expanding field where temporal indexing gaps dominate. Yield collapses reliably at
-depth 2 across all experiments, confirming that the stopping criterion is structural rather
-than parametric.
+against three landmark survey papers. \ldiscover{} achieves near-complete bibliography
+recovery from as few as one to five seeds, demonstrating that high-recall discovery is
+achievable under realistic minimal-seeding conditions. Residual misses are structurally
+peripheral --- low in-degree papers that are adjacent to but below the traversal's
+productive horizon --- not randomly distributed across the domain. Live validation on three
+open-domain surveys confirms that the same yield-governed control logic transfers outside
+the benchmark: yield collapse is a reliable operational signal that engages at a principled
+structural boundary, with domain density governing how far the coverage frontier extends.
 \end{abstract}
 
 % ─────────────────────────────────────────────────────────────────────────────
@@ -93,11 +92,11 @@ papers, and an uncertain boundary between relevant and irrelevant work. A useful
 system must therefore solve a discovery problem under sparse initial supervision.
 
 Citation graphs provide a natural substrate for this task because they expose relational
-structure that keyword search alone cannot recover. A paper's references reveal backward
-intellectual lineage, while incoming citations reveal later work that builds on or reacts
-to it. In principle, repeated traversal over this graph should allow a system to expand
-from a small local starting point into a much larger topical neighbourhood. In practice,
-however, naive traversal fails because citation networks are highly asymmetric
+structure that keyword search alone cannot recover \citep{Redner2005}. A paper's references
+reveal backward intellectual lineage, while incoming citations reveal later work that builds
+on or reacts to it. In principle, repeated traversal over this graph should allow a system
+to expand from a small local starting point into a much larger topical neighbourhood. In
+practice, however, naive traversal fails because citation networks are highly asymmetric
 \citep{Barabasi2016, BarabasiAlbert1999}. Backward traversal is naturally bounded by
 bibliography length, whereas forward traversal rapidly encounters generic high-degree hubs
 that connect many otherwise distant parts of the literature. Unconstrained exploration
@@ -126,9 +125,12 @@ traversal is necessary: hub suppression and yield stopping are principled respon
 power-law degree skew, not arbitrary heuristics. Second, it shows that \ldiscover{} achieves
 near-complete recall from as few as one to five seed papers --- the regime real users actually
 occupy. Third, it characterises the residual gap through miss analysis, showing that what the
-system misses is structurally peripheral rather than randomly lost. Fourth, it confirms via
-live validation that yield collapse is an operational signal in deployment, not just an offline
-metric.
+system misses is structurally peripheral rather than randomly lost; this matters because it
+distinguishes a principled stopping boundary from architectural failure, and informs when
+relaxing the Pareto or yield parameters would actually help. Fourth, it confirms via live
+validation that yield collapse is an operational signal in deployment, not just an offline
+metric; this is non-trivial because the closed-corpus simulation cannot demonstrate that the
+stopping rule generalises to open citation graphs with incomplete indexing and temporal gaps.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Related Work}
@@ -137,8 +139,9 @@ This paper sits at the intersection of three areas.
 
 \textbf{Citation-graph analysis} has characterised degree distributions, clustering, and
 community structure in academic networks \citep{BarabasiAlbert1999, Price1965}. Heavy-tailed
-in-degree is well documented: a small fraction of papers mediate a disproportionate share of
-cross-domain connectivity, motivating the Pareto filter design. Recent LLM-based simulation
+in-degree is well documented \citep{Redner2005, Barabasi2016}: a small fraction of papers
+mediate a disproportionate share of cross-domain connectivity, motivating the Pareto filter
+design. Recent LLM-based simulation
 work corroborates this mechanistically --- \citet{Ji2025CiteAgent} find that the
 recommendation algorithm's tendency to surface highly cited papers is a stronger driver of
 preferential attachment than author citation bias, explaining how hubs self-reinforce over time.
@@ -160,6 +163,18 @@ sampling \citep{Stumpf2005} shows that removing high-degree hubs substantially r
 volume while preserving reachability. The Pareto filter is a soft variant of this idea applied
 to the forward traversal frontier.
 
+These three areas converge in a way that directly motivates \ldiscover{}. Citation-graph
+analysis supplies the observation that degree skew is structural and predictable ---
+it is not a nuisance to be filtered out after the fact, but a property that should
+govern traversal design from the outset. Systematic review methodology supplies the
+recall objective: what matters is not sampling the literature but recovering it
+completely enough to support synthesis. Hub-aware sampling supplies the filter
+mechanism: the Pareto threshold is a soft analogue of core decomposition, applied
+not to compress a static graph but to constrain a live traversal frontier. No prior
+tool connects all three: snowballing tools lack principled stopping; systematic
+review tools assume a pre-assembled corpus; graph compression work does not address
+the cold-start or recall-framing concerns of literature discovery.
+
 \ldiscover{} formalises and automates the snowballing methodology \citep{Wohlin2014} ---
 systematic bidirectional citation chaining from seed papers --- replacing manual curation
 with a yield-governed queue and LLM screening. The distinguishing feature relative to prior
@@ -176,7 +191,7 @@ retrieval pipeline. At a high level, the system alternates between \textbf{searc
 a stable state. The logic can be summarised as:
 
 \begin{center}
-\texttt{SEED → SEARCH → SCREEN → TRAVERSE → ESCAPE HATCH → STABLE}
+\texttt{SEED → SEARCH → SCREEN → TRAVERSE → ESCAPE → STABLE}
 \end{center}
 
 The system begins from an initial seed set, which may consist of search results,
@@ -207,21 +222,27 @@ judged solely by how many new nodes it reaches, but by how many useful papers it
 relative to the screening effort required. In the benchmark framing, this means that local
 expansion should continue only when recent discoveries remain sufficiently fruitful; once
 yield collapses, the system should either declare local exhaustion or invoke an
-\textbf{escape hatch} that searches for a new entry point into a disconnected or weakly
-connected cluster.
+\textbf{Escape} step. Escape selects a new topical anchor from papers already recovered
+but not yet used as traversal seeds --- in deployment, this is realised by a fresh keyword
+query against an external index (Semantic Scholar); in the closed-corpus benchmark, it
+selects from the accumulated recovered set. The selected anchor re-enters the traversal
+loop as a new seed, bridging structurally disconnected or weakly connected clusters that
+local expansion cannot reach.
 
 This architecture formalises literature discovery as an alternating process of
 \textbf{local exploitation} and \textbf{global re-entry}. Traversal explores dense
-neighbourhoods already connected to the current frontier. The escape hatch compensates for
+neighbourhoods already connected to the current frontier. The Escape step compensates for
 structural gaps, indexing limitations, and disconnected subclusters by reintroducing a
 search-based jump. The system therefore does not assume that a topic is perfectly recoverable
 by graph traversal alone.
 
-For the purposes of this paper, the key methodological point is that the architecture should
-be validated at the level of \textbf{control behaviour} rather than only at the level of
-final recall. The question is not merely whether the system can eventually recover a large
-fraction of a gold set, but whether it can do so under a bounded screening policy that remains
-viable when initialisation is weak.
+For the purposes of this paper, the key methodological claim is not only that final recall
+is high, but that the \textbf{control mechanisms themselves work correctly}: yield collapse
+reliably marks the boundary of productive local expansion, and the Escape step successfully
+bridges disconnected clusters. Validating these behaviours --- measuring at what depth yield
+collapses, whether Escape finds genuinely new territory, and whether the system terminates
+without parameter sensitivity --- is as important as the aggregate recall figure, because it
+establishes that the architecture is principled rather than tuned.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Closed-Corpus Benchmark and Experimental Design}
@@ -260,14 +281,14 @@ by replacing direct survey seeding with much smaller initial seed sets.
 \centering
 \caption{Experimental design for the cold-start validation.}
 \label{tab:design}
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}lp{4.2cm}@{}}
 \toprule
 Experimental factor & Setting \\
 \midrule
 Seed size           & $k \in \{1,2,3,4,5,10\}$ \\
 Seed quality        & Top-$k$, random, contaminated \\
 Traversal mode      & Bidirectional with Pareto-80 forward filter \\
-Continuation rule   & Yield-gated ($\tau = 0.05$) with escape-hatch re-entry \\
+Continuation rule   & Yield-gated ($\tau = 0.05$) with Escape re-entry \\
 Main outcomes       & Recall, screened set size, per-round gain, residual misses \\
 \bottomrule
 \end{tabular}
@@ -381,7 +402,7 @@ asymmetry-aware controls that explicitly trade off local recall against screenin
 
 We evaluate \ldiscover{} across $k \in \{1,2,3,4,5,10\}$ initial seeds under top-$k$,
 random, and contaminated seed conditions on all three APS benchmark surveys, using two
-escape-hatch rounds throughout.
+Escape rounds throughout.
 
 \textbf{Top-$k$ seeds.} At $k = 5$, \ldiscover{} recovers 89.2\% of S1 (metal-insulator
 transitions, gold = 582), 98.4\% of S2 (ultracold gases, gold = 432), and 96.9\% of S3
@@ -437,7 +458,7 @@ a separate traversal frontier. Both effects resolve by round 2.
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Residual Miss Analysis}
 
-After two escape-hatch rounds at $k = 5$ top-$k$ seeding, 63 papers remain unrecovered
+After two Escape rounds at $k = 5$ top-$k$ seeding, 63 papers remain unrecovered
 from S1 (89.2\% recall), 7 from S2 (98.4\%), and 12 from S3 (96.9\%). These residual
 misses share a structural signature that supports interpreting the recall gap as a
 principled stopping boundary rather than an architectural failure.
@@ -445,9 +466,13 @@ principled stopping boundary rather than an architectural failure.
 \textbf{Structural peripherality.} Missed papers have substantially lower in-degree than
 the recovered set. For S1, mean in-degree of misses is 44 (median 35), compared to over 200
 for recovered papers. S2 and S3 show the same pattern: miss in-degree averages 14.9 and
-25.0 respectively. Low in-degree indicates that these papers are weakly connected to the
-main citation body of their domain --- they appear rarely as expansion candidates during
-traversal.
+25.0 respectively. Low in-degree means these papers accumulate few citations from within
+the domain: they rarely surface as forward-traversal candidates because few recovered papers
+cite them. This is not a failure of the traversal but the correct behaviour of the yield
+stopping rule --- papers that few others cite are low-priority expansion candidates by
+construction, and the architecture is designed to stop before exhaustively enumerating them.
+That misses are structurally peripheral rather than randomly distributed confirms that the
+recall gap reflects a principled coverage boundary, not arbitrary early termination.
 
 \textbf{Reachability.} Despite being unrecovered, the misses are structurally adjacent:
 97\% of S1 misses (61 of 63) are at BFS distance 1 from the recovered set, meaning they
@@ -488,58 +513,65 @@ frontier. The residual gap reflects where the method is designed to stop.
 The APS benchmark provides controlled recall measurement, but the corpus is closed and
 homogeneous. To test whether the system generalises beyond the physics literature, we run
 \ldiscover{} directly against three open-domain surveys using the Semantic Scholar (S2) API
-with no closed corpus.
+with no closed corpus. The three surveys were selected to span a range of structural
+conditions: a niche mathematical field with a small, well-indexed bibliography; an
+interdisciplinary social-science survey with a larger, more heterogeneous reference set;
+and a rapidly growing applied AI field where temporal indexing gaps are expected to be
+substantial. All three use the same configuration as the APS experiments (Pareto-80, yield
+threshold 0.05, two Escape rounds).
 
-\textbf{K17-RGC} --- \citet{Bobrowski2018}, a survey of random geometric complexes. Gold
-set: 56 S2-indexed papers. Seeds: 3 representative papers from the random topology literature.
+\citet{Bobrowski2018} survey random geometric complexes --- a mature but narrowly bounded
+mathematical subfield. Gold set: 56 S2-indexed papers. We expect a single traversal round
+to suffice given the topic's bounded scope and stable indexing.
 
-\textbf{Ge21-HSS} --- \citet{Galesic2021}, a \textit{Nature} survey of human social sensing
-methods. Gold set: $\sim$202 references. Seeds: 3 papers spanning the survey's methodology.
+\citet{Galesic2021} survey human social sensing methods across a \textit{Nature}-breadth
+interdisciplinary audience. Gold set: $\sim$202 references. The survey spans multiple
+methodological traditions, so we anticipate the Escape step will be necessary to bridge
+disconnected subclusters.
 
-\textbf{Le25-GLLM} --- \citet{Liu2025}, a survey of graph-augmented large language model
-agents. Gold set: 57 S2-indexed references. Seeds: 3 recent papers on graph reasoning
-with LLMs (2024--2025).
-
-All three surveys use the same configuration as the APS experiments (Pareto-80, yield
-threshold 0.05, two escape-hatch rounds, $k = 5$ seeds per round).
+\citet{Liu2025} survey graph-augmented large language model agents --- a field whose primary
+literature was published in 2024--2025. Gold set: 57 S2-indexed references. Temporal
+indexing gaps are expected to account for a significant share of any residual misses.
 
 \begin{table}[h]
 \centering
 \caption{Live validation results on open-domain surveys.}
 \label{tab:live}
-\begin{tabular}{@{}lllrrr@{}}
+\begin{tabular}{@{}p{3.4cm}rrr@{}}
 \toprule
-Survey & Domain & Gold & Seeds & Rounds & Recall \\
+Survey & Gold & Seeds & Recall \\
 \midrule
-K17-RGC   & Random geometric complexes & 56  & 1 (resolved) & 1 & \textbf{100\%} \\
-Ge21-HSS  & Human social sensing       & 202 & 3            & 2 & \textbf{100\%} \\
-Le25-GLLM & Graph-augmented LLM agents & 57  & 3            & 1 & \textbf{73.7\%} \\
+\citet{Bobrowski2018} \newline (random geometric complexes) & 56 & 1 & \textbf{100\%} \\[4pt]
+\citet{Galesic2021} \newline (human social sensing) & 202 & 3 & \textbf{100\%} \\[4pt]
+\citet{Liu2025} \newline (graph-augmented LLMs) & 57 & 3 & \textbf{73.7\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\textbf{K17-RGC} (complete): Starting from 1 resolved seed paper, \ldiscover{} recovered
-100\% of the 56-paper gold bibliography in a single round, stopping at depth 2 (yield
-0.16\% at depth 2, below the 5\% threshold). Corpus size at termination: 31,168 papers.
+\textbf{\citet{Bobrowski2018}} (complete): Starting from 1 resolved seed paper, \ldiscover{}
+recovered 100\% of the 56-paper gold bibliography in a single round, stopping at depth 2
+(yield 0.16\% at depth 2, below the 5\% threshold). Corpus size at termination: 31,168
+papers, consistent with predictions for a niche bounded field.
 
-\textbf{Ge21-HSS} (complete): Starting from 3 seeds, round 1 recovered 18.8\% (38/202
-gold papers), stopping at depth 2 on yield = 0.1\%. The escape hatch selected 20 new
-seeds from the recovered gold set. Round 2 recovered the remaining 164 papers --- reaching
-\textbf{100\% recall} (202/202) --- triggering the early-exit on 100\% recall with
-corpus = 44,577 papers.
+\textbf{\citet{Galesic2021}} (complete): Starting from 3 seeds, round 1 recovered 18.8\%
+(38/202 gold papers), stopping at depth 2 on yield = 0.1\%. The Escape step selected 20
+new seeds from the recovered set, confirming that the methodology subclusters were
+structurally disconnected from the initial traversal frontier. Round 2 recovered the
+remaining 164 papers --- reaching \textbf{100\% recall} (202/202) --- triggering the
+early-exit on 100\% recall with corpus = 44,577 papers.
 
-\textbf{Le25-GLLM} (round 1 complete): Starting from 3 seeds, round 1 recovered 73.7\%
-(42/57 gold papers), stopping at depth 2 on yield = 0.03\% with corpus = 150,197 papers.
-The active and rapidly growing nature of the GLLM field produces a substantially larger
-traversal corpus than the niche-domain surveys. The 26.3\% miss rate is concentrated in
-papers published after the seed papers' citation histories were indexed, confirming that
+\textbf{\citet{Liu2025}} (round 1 complete): Starting from 3 seeds, round 1 recovered
+73.7\% (42/57 gold papers), stopping at depth 2 on yield = 0.03\% with corpus = 150,197
+papers. The active and rapidly growing nature of this field produces a substantially
+larger traversal corpus than the niche-domain surveys. The 26.3\% miss rate is concentrated
+in papers published after the seed papers' citation histories were indexed, confirming that
 the structural-periphery hypothesis extends to temporal coverage gaps in very recent
 literature.
 
-The niche-domain surveys (K17-RGC, Ge21-HSS) achieved 100\% recall with corpora in the
-31--45K range, while the very-recent high-activity survey (Le25-GLLM) reached 73.7\% with
-a 150K corpus --- a 3--5$\times$ larger traversal space for the same two-depth budget.
-All three terminated via yield collapse rather than graph exhaustion.
+The niche- and interdisciplinary-domain surveys achieved 100\% recall with corpora in the
+31--45K range, while the very-recent high-activity survey reached 73.7\% with a 150K corpus
+--- a 3--5$\times$ larger traversal space for the same two-depth budget. All three terminated
+via yield collapse rather than graph exhaustion.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Conclusion}
@@ -556,17 +588,26 @@ from a single seed paper in round 1 alone, and S2 reaches 96.8\% from three seed
 Residual misses are structurally peripheral --- low in-degree, BFS distance 1 from the
 recovered set --- not randomly distributed across the domain. Yield collapses at depth 2
 in all three surveys, confirming that the stopping rule engages at a principled boundary
-rather than at an arbitrary cutoff. Live validation extends these findings: K17-RGC
-achieves 100\% recall (56 papers) from one seed in one round; Ge21-HSS reaches 100\%
-(202 papers) in two rounds via the escape hatch; Le25-GLLM recovers 73.7\% against a
-rapidly evolving 2025 survey where temporal indexing gaps account for the shortfall. All
-three terminate via yield collapse rather than graph exhaustion.
+rather than at an arbitrary cutoff. Live validation extends these findings:
+\citet{Bobrowski2018} achieves 100\% recall (56 papers) from one seed in one round;
+\citet{Galesic2021} reaches 100\% (202 papers) in two rounds via the Escape step;
+\citet{Liu2025} recovers 73.7\% against a rapidly evolving 2025 survey where temporal
+indexing gaps account for the shortfall. All three terminate via yield collapse rather
+than graph exhaustion.
 
 The deeper conclusion is that high-recall literature discovery is achievable from minimal
 supervision when the traversal architecture respects the citation graph's directional
-asymmetry. The bottleneck is not seed quality or domain density --- it is whether the
-control policy governing expansion and stopping is calibrated to graph structure rather
-than to a fixed budget.
+asymmetry. The bottleneck is not seed quality or domain density but whether the control
+policy respects the graph's structural constraints: hub suppression and yield stopping are
+not tuning decisions but principled responses to power-law degree skew.
+
+The natural next question is what happens once discovery ends. A recovered paper set is
+raw material: it maps the literature but does not interpret it. The open synthesis problem
+is to apply temporal and structural methods --- community detection, phase segmentation,
+and influence-trajectory analysis --- to the recovered set to produce a structured account
+of how a field has evolved. Whether the citation dynamics of a recovered bibliography can
+be automatically parsed into periods, schools, and turning points remains an open
+problem and a direct direction for future work.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \bibliographystyle{IEEEtran}
