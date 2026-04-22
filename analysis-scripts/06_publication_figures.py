@@ -199,7 +199,7 @@ ax3.legend(loc="upper left")
 fig.suptitle("APS Citation Graph: Structural Properties (709,803 papers, 9,833,191 edges)",
              fontsize=12, y=1.01)
 fig.tight_layout()
-fig.savefig(FIGS / "fig1_degree_distributions.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig1_degree_distributions.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig1_degree_distributions.png")
 
@@ -253,7 +253,7 @@ fig.suptitle(
     "(oracle seeds: k=5 drawn from gold bibliography — upper bound on cold-start performance; dashed = Pareto-80 operational default)",
     fontsize=12, y=1.02)
 fig.tight_layout()
-fig.savefig(FIGS / "fig2_bfs_reachability.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig2_bfs_reachability.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig2_bfs_reachability.png")
 
@@ -307,7 +307,7 @@ axes[1].legend(handles=handles, loc="lower right", ncol=2, fontsize=8.5)
 fig.suptitle("Coverage–Cost Trade-off: Recall vs Corpus Size at BFS Depth 3",
              fontsize=12, y=1.01)
 fig.tight_layout()
-fig.savefig(FIGS / "fig3_strategy_comparison.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig3_strategy_comparison.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig3_strategy_comparison.png")
 
@@ -394,7 +394,7 @@ fig.suptitle(
     fontsize=11, y=1.03,
 )
 fig.tight_layout()
-fig.savefig(FIGS / "fig4_screen_yield_collapse.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig4_screen_yield_collapse.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig4_screen_yield_collapse.png")
 
@@ -434,7 +434,7 @@ fig.suptitle(
     fontsize=11, y=1.03,
 )
 fig.tight_layout()
-fig.savefig(FIGS / "fig5_cold_start_recall_per_round.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig5_cold_start_recall_per_round.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig5_cold_start_recall_per_round.png")
 
@@ -474,7 +474,7 @@ fig.suptitle(
     fontsize=10, y=1.03,
 )
 fig.tight_layout()
-fig.savefig(FIGS / "fig6_recall_vs_seed_size.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig6_recall_vs_seed_size.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig6_recall_vs_seed_size.png")
 
@@ -599,7 +599,7 @@ fig.suptitle(
     "and are structurally adjacent (BFS distance ≤ 2) to the recovered set.",
     fontsize=11, y=1.03)
 fig.tight_layout()
-fig.savefig(FIGS / "fig7_miss_analysis.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig7_miss_analysis.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig7_miss_analysis.png")
 
@@ -651,7 +651,7 @@ fig.suptitle("Efficiency Frontier: Pareto Filter Threshold vs Corpus Size at Dep
              "(All strategies achieve 100% recall — the filter only reduces cost)",
              fontsize=11, y=1.03)
 fig.tight_layout()
-fig.savefig(FIGS / "fig8_efficiency_frontier.png", dpi=150, bbox_inches="tight")
+fig.savefig(FIGS / "fig8_efficiency_frontier.png", dpi=300, bbox_inches="tight")
 plt.close(fig)
 print("  Saved fig8_efficiency_frontier.png")
 
