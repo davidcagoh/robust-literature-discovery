@@ -67,3 +67,4 @@ paper-drafts/**/*.fls
 paper-drafts/**/*.fdb_latexmk
 paper-drafts/**/*.synctex.gz
 paper-drafts/**/*.toc
+paper-drafts/**/*.spl
