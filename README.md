@@ -19,7 +19,7 @@ The paper repository is self-contained — you can reproduce all benchmark resul
 
 ## Manuscript
 
-The active manuscript is at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md`. The compiled PDF is generated from `paper-drafts/litdiscover.tex`.
+The active manuscript is at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md`. The active submission target compiles from `paper-drafts/tois-submission/litdiscover_tois.tex` (ACM TOIS). Earlier submission attempts (JCDL, JASIST) and the legacy IEEEtran draft are kept for reference in `paper-drafts/archive/`.
 
 ## Quick start (reproduce all paper figures)
 
@@ -47,4 +47,4 @@ python3 06_publication_figures.py    # writes fig1–fig7 to data-aps/outputs/pu
 | `app-validation-data/` | Exported supporting validation summaries |
 | `validation-surveys/` | Reference PDFs for live experiment ground truth |
 | `seed-papers/` | Seed paper PDFs |
-| `paper-drafts/` | Manuscript source (`.md` and `.tex`) |
+| `paper-drafts/` | Manuscript source. Root: prose + refs. `tois-submission/`: active LaTeX target. `archive/`: dead-end submission attempts + legacy draft |

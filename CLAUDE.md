@@ -2,16 +2,22 @@
 
 This repository contains the APS-based empirical validation for **LitDiscover**, a queue-driven literature discovery engine. The codebase is a set of sequential Python analysis scripts that simulate the production system's core logic: **bidirectional citation traversal**, a **forward-direction Pareto hub filter**, and **screen-yield-based stopping** inside a multi-round **Escape Hatch** loop.
 
-The manuscript lives at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (prose source of truth). Two LaTeX targets exist:
+The manuscript lives at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (prose source of truth). `paper-drafts/` root holds only the live prose source, `bibliography.json`, and `refs.bib`; every dead-end LaTeX target has been moved to `paper-drafts/archive/` (2026-07-06 reorg) so the active submission is unambiguous:
 
 | File | Format | Purpose |
 |---|---|---|
-| `paper-drafts/litdiscover.tex` | IEEEtran (legacy) | PI annotation draft — do not delete |
-| `paper-drafts/jcdl-submission/litdiscover_jcdl.tex` | ACM sigconf | **Active submission target** — JCDL 2026 |
+| `paper-drafts/tois-submission/litdiscover_tois.tex` | acmart `manuscript` mode | **Active submission target** — ACM TOIS (rolling submission, no deadline) |
+| `paper-drafts/archive/litdiscover_ieeetran_legacy.tex` | IEEEtran (legacy) | PI annotation draft — do not delete, but not a submission target |
+| `paper-drafts/archive/jasist-submission/litdiscover_jasist.tex` | plain `article`, `apalike` refs | **Abandoned** — reformatted for JASIST 2026-07-06, superseded same day by TOIS (better scope fit + faster, better-documented review process — 24% acceptance, ~2 months/round) |
+| `paper-drafts/archive/jcdl-submission/litdiscover_jcdl.tex` | ACM sigconf | **Abandoned** — JCDL 2026 deadline (June 30) missed, never submitted |
 
-**JCDL submission format:** `\documentclass[sigconf,anonymous,review]{acmart}`. Abstract must appear **before** `\maketitle`. Do **not** add `\usepackage{caption}`, `\usepackage{subcaption}`, `\usepackage{hyperref}`, `\usepackage{natbib}`, or `\usepackage{geometry}` — acmart loads all of these and conflicts will crash the build. Citation commands `\citep{}` / `\citet{}` work normally (acmart pre-loads natbib). `refs.bib` is copied into `jcdl-submission/` and patched; edit the copy, not the original, for submission-specific changes.
+**TOIS submission format:** `\documentclass[manuscript,review,anonymous]{acmart}` — single-column journal mode, ACM double-anonymous review (author identity hidden from reviewers, visible only to editors). Solo-authored (David Goh only — Xiaobai Sun dropped, no contribution to this paper; author block stays commented until acceptance, matching the anonymous-review requirement). Uses `\acmJournal{TOIS}` instead of `\acmConference{}`; `\acmVolume`/`\acmNumber`/`\acmArticle`/`\acmDOI` stay commented until production fills them in post-acceptance. Includes a "Use of Generative AI" section before the bibliography, matching the disclosure in `tois-submission/cover_letter.md`. Same body content, figures, and `refs.bib` as the JCDL draft (both use acmart, so the swap was just `sigconf`→`manuscript` plus journal metadata). Compiles clean: `pdflatex && bibtex && pdflatex && pdflatex`, no errors/undefined refs, 12 pages single-column.
 
-**Camera-ready:** remove `anonymous,review` from `\documentclass`; uncomment author/affiliation/ORCID block; fill `\acmDOI`; run `exiftool -all= litdiscover_jcdl.pdf`.
+**JASIST submission format (archived, kept for reference):** `\documentclass[12pt]{article}` with `geometry`, `natbib`, `apalike` bibliography style, double-spaced. No ACM scaffolding. `\Description{}` kept as a no-op macro; `figure*` downgraded to plain `figure`.
+
+**JCDL submission format (archived, kept for reference):** `\documentclass[sigconf,anonymous,review]{acmart}`. Abstract must appear **before** `\maketitle`. Do **not** add `\usepackage{caption}`, `\usepackage{subcaption}`, `\usepackage{hyperref}`, `\usepackage{natbib}`, or `\usepackage{geometry}` — acmart loads all of these and conflicts will crash the build.
+
+**2026-07-06 repo cleanup:** `jcdl-submission/`'s LaTeX build artifacts (`.aux`/`.log`/`.bbl`/`.blg`/`.out`) were accidentally committed to git because `.gitignore`'s LaTeX-artifact patterns only matched `paper-drafts/*.ext`, not subdirectories — fixed with recursive `paper-drafts/**/*.ext` patterns and `git rm --cached` on the already-tracked files. Also removed: `data-aps/sample/*.mat` (two orphaned MATLAB relics, referenced only by a script that itself lives under `citation-dynamics/archive/matlab-misc/` in the sibling repo — dead weight on dead weight), the empty `data-aps/raw/` placeholder, empty `out/` build dirs, a stray unrelated `paper-drafts/.claude/settings.local.json`, and the 1.2GB `data-live/cache/papers/` (gitignored, fully regenerable via `09_live_validation.py` — re-running it will simply re-fetch and repopulate the cache).
 
 ## What matters most
 
@@ -52,7 +58,7 @@ Run from the repository root.
 | Regenerate publication figures | `cd analysis-scripts && python3 06_publication_figures.py` |
 | Hyperparameter sweep (complete, 1980 rows) | `cd analysis-scripts && python3 08_hyperparameter_sweep.py` |
 | Live validation experiments | `cd analysis-scripts && python3 09_live_validation.py` |
-| Compile paper PDF | `cd paper-drafts && pdflatex litdiscover && bibtex litdiscover && pdflatex litdiscover && pdflatex litdiscover` |
+| Compile active (TOIS) paper PDF | `cd paper-drafts/tois-submission && pdflatex litdiscover_tois && bibtex litdiscover_tois && pdflatex litdiscover_tois && pdflatex litdiscover_tois` |
 
 ## Pipeline architecture
 
@@ -91,4 +97,3 @@ The distinction between **within-round stopping** (yield threshold on BFS depth)
 
 - Top-level constants, explicit script-local helpers, JSON/CSV artifact handoff, reproducible random seeding.
 - No build system, linter, or test suite. Validation = rerunning the affected script and checking downstream artifacts.
-- `deps-matlab/` is ancillary (SG-t-SNE work) and not part of the APS pipeline.

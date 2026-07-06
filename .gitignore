@@ -54,12 +54,16 @@ inbox-papers/*.pdf
 inbox-papers/processed/
 
 # ── LaTeX build artifacts ─────────────────────────────────────────────────────
-paper-drafts/*.aux
-paper-drafts/*.log
-paper-drafts/*.bbl
-paper-drafts/*.blg
-paper-drafts/*.out
-paper-drafts/*.fls
-paper-drafts/*.fdb_latexmk
-paper-drafts/*.synctex.gz
-paper-drafts/*.toc
+# Recursive (**) so these are also ignored inside submission subfolders
+# (jcdl-submission/, jasist-submission/, tois-submission/, archive/**) — not just paper-drafts/ root.
+# Submission-folder PDFs are still tracked (snapshot of what was actually submitted);
+# only the root-level litdiscover.pdf is excluded, per the Manuscripts section above.
+paper-drafts/**/*.aux
+paper-drafts/**/*.log
+paper-drafts/**/*.bbl
+paper-drafts/**/*.blg
+paper-drafts/**/*.out
+paper-drafts/**/*.fls
+paper-drafts/**/*.fdb_latexmk
+paper-drafts/**/*.synctex.gz
+paper-drafts/**/*.toc
