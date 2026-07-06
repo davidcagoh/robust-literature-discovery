@@ -80,3 +80,9 @@ robust-literature-discovery/
 | `validation-surveys/` | Reference PDFs for live experiment ground truth |
 | `seed-papers/` | Seed paper PDFs |
 | `paper-drafts/` | Manuscript source. Root: prose + refs. `ipm-submission/`: active LaTeX target. `archive/`: dead-end submission attempts + legacy draft |
+
+## License
+
+MIT — see [LICENSE](LICENSE). Note the third-party APS citation dataset itself is not covered
+by this license and is not redistributed here; obtain it separately per APS's own terms (see
+`data-aps/processed/` note above).
