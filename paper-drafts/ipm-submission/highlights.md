@@ -1,0 +1,5 @@
+- LitDiscover recovers 89-98% of survey bibliographies from just 1-5 seed papers.
+- Bidirectional traversal with Pareto filtering controls citation-graph explosion.
+- Yield-gated stopping reliably engages at a principled depth-2 boundary.
+- Live validation on three open-domain surveys reaches 74-100% recall.
+- Residual misses are structurally peripheral, not randomly distributed.

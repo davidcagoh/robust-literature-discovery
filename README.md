@@ -1,6 +1,6 @@
 # robust-literature-discovery
 
-This repository contains the analysis, figures, and reproducibility materials for the paper **Robust Literature Discovery from Minimal Seeds**, which validates the [LitDiscover](https://github.com/davidcagoh/automated-lit-reviews-v2) engine on the APS citation corpus.
+This repository contains the analysis, figures, and reproducibility materials for the paper **Robust Literature Discovery from Minimal Seeds**, which validates the [LitDiscover](https://github.com/davidcagoh/automated-lit-reviews-v2) engine (private repository) on the APS citation corpus.
 
 ## Scope
 
@@ -8,12 +8,12 @@ The contents here are intended to support the paper's empirical claims and repro
 
 ## Relationship to LitDiscover
 
-This repository is intentionally separate from **[LitDiscover (automated-lit-reviews-v2)](https://github.com/davidcagoh/automated-lit-reviews-v2)**.
+This repository is intentionally separate from **[LitDiscover (automated-lit-reviews-v2)](https://github.com/davidcagoh/automated-lit-reviews-v2)** (private repository).
 
 | Repository | Role |
 |---|---|
-| `robust-literature-discovery` (this repo) | Paper and reproducibility repository: APS benchmark, analysis pipeline, publication figures, manuscript |
-| [**LitDiscover**](https://github.com/davidcagoh/automated-lit-reviews-v2) | Deployed engine: queue loop, DB integrations, LLM screening, extraction, synthesis |
+| `robust-literature-discovery` (this repo, public) | Paper and reproducibility repository: APS benchmark, analysis pipeline, publication figures, manuscript |
+| [**LitDiscover**](https://github.com/davidcagoh/automated-lit-reviews-v2) (private repository) | Deployed engine: queue loop, DB integrations, LLM screening, extraction, synthesis |
 
 The paper repository is self-contained — you can reproduce all benchmark results without the full application.
 
