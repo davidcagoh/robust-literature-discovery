@@ -19,68 +19,72 @@ The paper repository is self-contained — you can reproduce all benchmark resul
 
 ## Manuscript
 
-The active manuscript is at `paper-drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md`. The active submission target compiles from `paper-drafts/ipm-submission/litdiscover_ipm.tex` (Information Processing & Management). Earlier submission attempts (JCDL, JASIST, TOIS) and the legacy IEEEtran draft are kept for reference in `paper-drafts/archive/`.
+The active manuscript is at `drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md`. The active submission target compiles from `drafts/ipm-submission/litdiscover_ipm.tex` (Information Processing & Management). Earlier submission attempts (JCDL, JASIST, TOIS) and the legacy IEEEtran draft are kept for reference in `drafts/archive/`.
 
 ## Quick start (reproduce all paper figures)
 
 ```bash
 pip install pandas numpy matplotlib scipy networkx
 
-# Place the APS citation CSV at data-aps/processed/aps-dataset-citations-2022.csv
+# Place the APS citation CSV at closed-corpus-eval/data/processed/aps-dataset-citations-2022.csv
 # then run the full pipeline:
-cd analysis-scripts
+cd closed-corpus-eval/scripts/eval
 python3 01_extract_ground_truth.py
 python3 02_graph_characterisation.py
 python3 03_traversal_simulation.py
 python3 04b_cold_start_lowseed.py   # canonical experiment (k=1–10, 2 rounds)
 python3 05_miss_analysis.py
-python3 06_publication_figures.py    # writes fig1–fig7 to data-aps/outputs/pub_figures/
+python3 06_publication_figures.py    # writes fig1–fig7 to data/outputs/pub_figures/
 ```
 
 ## Directory structure
 
-This repo is organized around two parallel evaluation pipelines — a closed-corpus APS
-benchmark (`data-aps/`) and a live open-domain validation (`data-live/`) — plus the paper
-itself. The two pipelines are kept as separate top-level directories on purpose: they have
-genuinely different data lifecycles (a static historical corpus vs. live-fetched API
-results), so nesting them under one generic `data/` would just hide that distinction one
-level deeper without simplifying anything.
+This repo is two evaluation tracks plus the paper. Each track owns both its scripts and its
+data — there's no shared top-level `scripts/`, because the coupling is real: the closed-corpus
+scripts never touch live data and vice versa. Grouping by track (not by "kind of file") means
+opening one directory gets you everything relevant to that track.
 
 ```
 robust-literature-discovery/
-├── analysis-scripts/        # Python pipeline: ground truth → traversal sim → figures
-├── paper-drafts/
-│   ├── Robust_Literature_Discovery_from_Minimal_Seeds.md   # prose source of truth
-│   ├── bibliography.json, refs.bib                         # shared citation data
-│   ├── ipm-submission/      # ACTIVE — Information Processing & Management (elsarticle)
-│   └── archive/             # dead-end submission attempts, kept for reference:
-│       ├── jcdl-submission/     # JCDL 2026 — deadline missed, never submitted
-│       ├── jasist-submission/   # JASIST — superseded same-day by TOIS
-│       ├── tois-submission/     # TOIS — dropped over 20-page minimum, paper is 12pp
-│       └── litdiscover_ieeetran_legacy.tex + Whitepaper_legacy.{md,pdf}
-├── data-aps/                # closed-corpus APS benchmark
-│   ├── processed/               # symlink → ../../../citation-dynamics/data/processed
-│   └── outputs/                 # JSON/CSV artifacts + pub_figures/ (fig1–fig7)
-├── data-live/                # live open-domain validation (Semantic Scholar API)
-│   ├── gold-sets/, seeds/       # curated per-survey ground truth (tracked in git)
-│   ├── seed-papers/             # seed PDFs for the 3 live-validation surveys (RGC/HSS/GLLM)
-│   ├── validation-surveys/      # the 3 survey PDFs themselves (ground-truth bibliographies)
-│   ├── outputs/                 # validated results (tracked in git)
-│   └── cache/                   # API response cache (gitignored, regenerable)
-└── inbox-papers/             # drop zone for related-work triage (see inbox-papers/README.md)
+├── closed-corpus-eval/            # closed-corpus APS benchmark
+│   ├── scripts/
+│   │   ├── eval/                          # the validation pipeline — produces every paper claim/figure
+│   │   └── sweep/                         # parameter-justification scripts (why N_ROUNDS=2, PARETO_P=80)
+│   └── data/
+│       ├── processed/                     # symlink → ../../../../citation-dynamics/data/processed
+│       └── outputs/                       # JSON/CSV artifacts + pub_figures/ (fig1–fig7)
+├── live-survey-eval/              # live open-domain validation (Semantic Scholar API)
+│   ├── scripts/                       # 09_live_validation.py
+│   └── data/
+│       ├── gold-sets/, seeds/             # curated per-survey ground truth (tracked in git)
+│       ├── seed-papers/                   # seed PDFs for the 3 live-validation surveys (RGC/HSS/GLLM)
+│       ├── validation-surveys/            # the 3 survey PDFs themselves (ground-truth bibliographies)
+│       ├── outputs/                       # validated results (tracked in git)
+│       └── cache/                         # API response cache (gitignored, regenerable)
+└── drafts/
+    ├── Robust_Literature_Discovery_from_Minimal_Seeds.md   # prose source of truth
+    ├── bibliography.json, refs.bib                         # shared citation data
+    ├── ipm-submission/      # ACTIVE — Information Processing & Management (elsarticle)
+    └── archive/             # dead-end submission attempts, kept for reference:
+        ├── jcdl-submission/     # JCDL 2026 — deadline missed, never submitted
+        ├── jasist-submission/   # JASIST — superseded same-day by TOIS
+        ├── tois-submission/     # TOIS — dropped over 20-page minimum, paper is 12pp
+        └── litdiscover_ieeetran_legacy.tex + Whitepaper_legacy.{md,pdf}
 ```
 
 | Path | Purpose |
 |---|---|
-| `analysis-scripts/` | Core APS benchmark and figure-generation scripts |
-| `data-aps/outputs/pub_figures/` | Generated publication figures (fig1–fig7) |
-| `data-aps/outputs/` | All JSON/CSV artifacts and intermediate figures |
-| `data-live/validation-surveys/` | Reference PDFs for live experiment ground truth |
-| `data-live/seed-papers/` | Seed paper PDFs |
-| `paper-drafts/` | Manuscript source. Root: prose + refs. `ipm-submission/`: active LaTeX target. `archive/`: dead-end submission attempts + legacy draft |
+| `closed-corpus-eval/scripts/eval/` | The validation pipeline — every paper-claimed number/figure |
+| `closed-corpus-eval/scripts/sweep/` | Parameter-justification scripts (N_ROUNDS, PARETO_P sweeps) |
+| `closed-corpus-eval/data/outputs/pub_figures/` | Generated publication figures (fig1–fig7) |
+| `closed-corpus-eval/data/outputs/` | All JSON/CSV artifacts and intermediate figures |
+| `live-survey-eval/scripts/` | Live Semantic Scholar validation script |
+| `live-survey-eval/data/validation-surveys/` | Reference PDFs for live experiment ground truth |
+| `live-survey-eval/data/seed-papers/` | Seed paper PDFs |
+| `drafts/` | Manuscript source. Root: prose + refs. `ipm-submission/`: active LaTeX target. `archive/`: dead-end submission attempts + legacy draft |
 
 ## License
 
 MIT — see [LICENSE](LICENSE). Note the third-party APS citation dataset itself is not covered
 by this license and is not redistributed here; obtain it separately per APS's own terms (see
-`data-aps/processed/` note above).
+`closed-corpus-eval/data/processed/` note above).

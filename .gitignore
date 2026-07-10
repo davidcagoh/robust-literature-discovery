@@ -1,12 +1,12 @@
 # ── Manuscripts ──────────────────────────────────────────────────────────────
 # Track the active draft and bibliography; exclude legacy artifacts
-paper-drafts/*_legacy*
-paper-drafts/*_Whitepaper*
+drafts/*_legacy*
+drafts/*_Whitepaper*
 # compiled PDFs are build outputs, not source
-paper-drafts/*.pdf
+drafts/*.pdf
 # LaTeX source and bibliography — track these
-!paper-drafts/*.tex
-!paper-drafts/*.bib
+!drafts/*.tex
+!drafts/*.bib
 
 # ── Local noise ──────────────────────────────────────────────────────────────
 .DS_Store
@@ -23,24 +23,24 @@ __pycache__/
 
 # ── Large raw data (not reproducible without APS dataset license) ─────────────
 # Both patterns needed: trailing slash matches real dirs, no slash matches symlinks
-data-aps/processed/
-data-aps/processed
+closed-corpus-eval/data/processed/
+closed-corpus-eval/data/processed
 
 # ── Regenerable intermediate outputs ─────────────────────────────────────────
 # Intermediate figure dirs (run 06_publication_figures.py to regenerate)
-data-aps/outputs/figures/
-data-aps/outputs/figures_lowseed/
+closed-corpus-eval/data/outputs/figures/
+closed-corpus-eval/data/outputs/figures_lowseed/
 # Deprecated / dropped figures
-data-aps/outputs/pub_figures/deprecated/
+closed-corpus-eval/data/outputs/pub_figures/deprecated/
 # Live API cache (1.2 GB+, fully regenerable via 09_live_validation.py)
-data-live/cache/
+live-survey-eval/data/cache/
 
 # Track curated live-experiment outputs:
-#   data-live/gold-sets/    — manual curation
-#   data-live/seeds/        — resolved seed records
-#   data-live/outputs/*.json, *.csv — validated results
+#   live-survey-eval/data/gold-sets/    — manual curation
+#   live-survey-eval/data/seeds/        — resolved seed records
+#   live-survey-eval/data/outputs/*.json, *.csv — validated results
 # The live pub_figures are regenerable so exclude them too:
-data-live/outputs/pub_figures/
+live-survey-eval/data/outputs/pub_figures/
 
 # ── MATLAB/Julia dependencies (large, installable via package manager) ────────
 deps-matlab/
@@ -48,23 +48,18 @@ deps-matlab/
 # ── Secrets ──────────────────────────────────────────────────────────────────
 .env
 
-# ── PDFs dropped for reading (not paper artifacts) ───────────────────────────
-paper-wiki/*.pdf
-inbox-papers/*.pdf
-inbox-papers/processed/
-
 # ── LaTeX build artifacts ─────────────────────────────────────────────────────
 # Recursive (**) so these are also ignored inside submission subfolders
-# (jcdl-submission/, jasist-submission/, tois-submission/, archive/**) — not just paper-drafts/ root.
+# (jcdl-submission/, jasist-submission/, tois-submission/, archive/**) — not just drafts/ root.
 # Submission-folder PDFs are still tracked (snapshot of what was actually submitted);
 # only the root-level litdiscover.pdf is excluded, per the Manuscripts section above.
-paper-drafts/**/*.aux
-paper-drafts/**/*.log
-paper-drafts/**/*.bbl
-paper-drafts/**/*.blg
-paper-drafts/**/*.out
-paper-drafts/**/*.fls
-paper-drafts/**/*.fdb_latexmk
-paper-drafts/**/*.synctex.gz
-paper-drafts/**/*.toc
-paper-drafts/**/*.spl
+drafts/**/*.aux
+drafts/**/*.log
+drafts/**/*.bbl
+drafts/**/*.blg
+drafts/**/*.out
+drafts/**/*.fls
+drafts/**/*.fdb_latexmk
+drafts/**/*.synctex.gz
+drafts/**/*.toc
+drafts/**/*.spl
