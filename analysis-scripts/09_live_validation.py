@@ -79,35 +79,35 @@ for d in [CACHE_DIR, SRCH_DIR, GOLD_DIR, SEED_DIR, OUT_DIR, FIG_DIR]:
 #             Leave None to use PDF parsing fallback.
 SURVEYS: dict[str, dict] = {
     "Ge21-HSS": {
-        "survey_pdf": REPO / "validation-surveys" / "Ge21-HSS.pdf",
+        "survey_pdf": DATA_LIVE / "validation-surveys" / "Ge21-HSS.pdf",
         "survey_doi": "10.1038/s41586-021-03649-2",
         "survey_s2_id": None,  # will resolve via DOI
         "seed_pdfs": [
-            REPO / "seed-papers" / "HSS1_G18.pdf",
-            REPO / "seed-papers" / "HSS2_NK19.pdf",
-            REPO / "seed-papers" / "HSS3_A21.pdf",
+            DATA_LIVE / "seed-papers" / "HSS1_G18.pdf",
+            DATA_LIVE / "seed-papers" / "HSS2_NK19.pdf",
+            DATA_LIVE / "seed-papers" / "HSS3_A21.pdf",
         ],
         "label": "Galesic 2021 (Human Social Sensing)",
     },
     "K17-RGC": {
         "survey_doi": None,
         "survey_s2_id": "f75ae5929e4a3c94062959caa954393a4217aeb5",  # resolved manually
-        "survey_pdf": REPO / "validation-surveys" / "K17-RGC.pdf",
+        "survey_pdf": DATA_LIVE / "validation-surveys" / "K17-RGC.pdf",
         "seed_pdfs": [
-            REPO / "seed-papers" / "RGC1_BDER15.pdf",
-            REPO / "seed-papers" / "RGC2_AM21.pdf",
-            REPO / "seed-papers" / "RGC3_LMSY21.pdf",
+            DATA_LIVE / "seed-papers" / "RGC1_BDER15.pdf",
+            DATA_LIVE / "seed-papers" / "RGC2_AM21.pdf",
+            DATA_LIVE / "seed-papers" / "RGC3_LMSY21.pdf",
         ],
         "label": "Bobrowski & Kahle 2017 (Random Geometric Complexes)",
     },
     "Le25-GLLM": {
-        "survey_pdf": REPO / "validation-surveys" / "Le25-GLLM.pdf",
+        "survey_pdf": DATA_LIVE / "validation-surveys" / "Le25-GLLM.pdf",
         "survey_doi": None,    # arXiv — add DOI or arXiv ID once known
         "survey_s2_id": "d9fcf869c0d2fef88b0330fe94a0c405b1104c16",
         "seed_pdfs": [
-            REPO / "seed-papers" / "GLLM1_Je24.pdf",
-            REPO / "seed-papers" / "GLLM2_MXC25.pdf",
-            REPO / "seed-papers" / "GLLM3_We25.pdf",
+            DATA_LIVE / "seed-papers" / "GLLM1_Je24.pdf",
+            DATA_LIVE / "seed-papers" / "GLLM2_MXC25.pdf",
+            DATA_LIVE / "seed-papers" / "GLLM3_We25.pdf",
         ],
         "label": "Liu et al. 2025 (Graph-Augmented LLM Agents)",
     },

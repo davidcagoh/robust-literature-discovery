@@ -63,12 +63,11 @@ robust-literature-discovery/
 │   └── outputs/                 # JSON/CSV artifacts + pub_figures/ (fig1–fig7)
 ├── data-live/                # live open-domain validation (Semantic Scholar API)
 │   ├── gold-sets/, seeds/       # curated per-survey ground truth (tracked in git)
+│   ├── seed-papers/             # seed PDFs for the 3 live-validation surveys (RGC/HSS/GLLM)
+│   ├── validation-surveys/      # the 3 survey PDFs themselves (ground-truth bibliographies)
 │   ├── outputs/                 # validated results (tracked in git)
 │   └── cache/                   # API response cache (gitignored, regenerable)
-├── seed-papers/              # seed PDFs for the 3 live-validation surveys (RGC/HSS/GLLM)
-├── validation-surveys/       # the 3 survey PDFs themselves (ground-truth bibliographies)
-├── inbox-papers/             # drop zone for related-work triage (see inbox-papers/README.md)
-└── app-validation-data/      # exported summaries from the deployed LitDiscover app
+└── inbox-papers/             # drop zone for related-work triage (see inbox-papers/README.md)
 ```
 
 | Path | Purpose |
@@ -76,9 +75,8 @@ robust-literature-discovery/
 | `analysis-scripts/` | Core APS benchmark and figure-generation scripts |
 | `data-aps/outputs/pub_figures/` | Generated publication figures (fig1–fig7) |
 | `data-aps/outputs/` | All JSON/CSV artifacts and intermediate figures |
-| `app-validation-data/` | Exported supporting validation summaries |
-| `validation-surveys/` | Reference PDFs for live experiment ground truth |
-| `seed-papers/` | Seed paper PDFs |
+| `data-live/validation-surveys/` | Reference PDFs for live experiment ground truth |
+| `data-live/seed-papers/` | Seed paper PDFs |
 | `paper-drafts/` | Manuscript source. Root: prose + refs. `ipm-submission/`: active LaTeX target. `archive/`: dead-end submission attempts + legacy draft |
 
 ## License
