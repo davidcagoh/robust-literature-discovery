@@ -2,7 +2,9 @@
 
 This repository contains the APS-based empirical validation for **LitDiscover**, a queue-driven literature discovery engine. The codebase is a set of sequential Python analysis scripts that simulate the production system's core logic: **bidirectional citation traversal**, a **forward-direction Pareto hub filter**, and **screen-yield-based stopping** inside a multi-round **Escape Hatch** loop.
 
-The manuscript lives at `drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (prose source of truth). `drafts/` root holds only the live prose source, `bibliography.json`, and `refs.bib`; every dead-end LaTeX target has been moved to `drafts/archive/` (2026-07-06 reorg) so the active submission is unambiguous:
+The manuscript lives at `drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (prose source of truth). `drafts/` root holds only the live prose source, `bibliography.json`, and the canonical `refs.bib`; every dead-end LaTeX target has been moved to `drafts/archive/` (2026-07-06 reorg) so the active submission is unambiguous:
+
+**2026-07-13:** `drafts/ipm-submission/litdiscover_ipm.tex` and `litdiscover_ipm_anonymous.tex` no longer inline their Related Work section — both `\input{related-work}`, pulling from the shared `drafts/ipm-submission/related-work.tex` (single-sourced since the two `.tex` files' Related Work content was byte-identical). `drafts/ipm-submission/refs.bib` is now a **symlink** to `../refs.bib` — a real independent copy had drifted between the two locations before being merged back; edit `drafts/refs.bib` only. The full desk-rejected IP&M submission (both `.tex` files, PDFs, cover letter, highlights, build artifacts, as they stood pre-redo) is snapshotted at `drafts/archive/ipm-submission-rejected-2026-07-07/` — a complete, standalone copy, not touched by the ongoing redo.
 
 | File | Format | Purpose |
 |---|---|---|

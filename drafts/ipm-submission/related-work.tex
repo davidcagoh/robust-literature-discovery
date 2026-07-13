@@ -1,0 +1,80 @@
+\section{Related Work}
+
+This paper sits at the intersection of three areas.
+
+\textbf{Automated systematic review and evidence synthesis} spans a spectrum from
+manual-heavy to fully automated. Early tools such as SWIFT-Review \citep{Howard2016,Howard2020}
+and RobotSearch \citep{Marshall2018RobotSearch} combine rule/keyword-based tagging with a
+supervised ML classifier trained on a manually labelled seed set --- the manual step is training
+the classifier, not assembling the corpus, which in both tools comes from a standard database
+search. Active-learning frameworks such as ASReview \citep{vandeSchoot2021} go further
+by prioritising which pre-assembled candidates to screen first, substantially reducing manual
+effort --- but all of these, like LLM-assisted exploration tools such as Elicit
+\citep{Bernard2025Elicit,Lau2025Elicit} and ResearchRabbit \citep{ColeBoutet2023ResearchRabbit},
+assume the candidate pool is already given or explored without a formal stopping criterion:
+independent evaluation of Elicit found non-reproducible repeat-search results (three identical
+queries returning 246, 169, and 172 candidates) and 39.5\% average sensitivity against formal
+systematic searches' 94.5\%, and ResearchRabbit's own documentation describes its similarity
+ranking only as citation networks plus unspecified additional signal, with no published stopping
+rule. The current LLM-native
+generation of the field has moved past screening-assist and toward full pipeline automation,
+but converges on the same assumption from the opposite direction: \citet{Wang2024AutoSurvey}'s
+AutoSurvey and its direct forks assemble a complete draft survey from retrieved references, and
+\citet{Go2026LiRA}'s LiRA improves citation grounding and generation quality substantially over
+that baseline --- but both, and the broader generation-focused cohort they represent, take the
+reference set as an input to be written from, not a target to be discovered. LiRA's own stated
+future work names exactly this: ``integration of the screening and search criteria definition
+steps within the pipeline'' as unaddressed. A second cohort integrates discovery, screening, and
+human oversight into one system, and \citet{Afonso2025ProfOlaf}'s ProfOlaf is the field's most
+complete instance --- though its completeness is invisible to citation alone. ProfOlaf's iterative
+snowballing with human-in-the-loop screening resolves, in mechanism if not in citation, problems
+three other systems name explicitly without ProfOlaf ever citing them: it supplies the
+inclusion/exclusion criteria and multi-database search \citet{Sami2024SLRAgents}'s system
+concedes it lacks; it supplies the convergence measurement and independently-validated screening
+that ResearchRabbit's own documented gap --- no formal stopping rule, no published validation
+\citep{ColeBoutet2023ResearchRabbit} --- leaves open; and it supplies the human-feedback
+mechanism \citet{Haryanto2024LLAssist}'s LLAssist names as its own unaddressed future work.
+\citet{Mulla2026HCRA}'s human-centred automation framework reaches the same human-in-the-loop
+conclusion independently, via a head-to-head screening comparison --- external validation of the
+same design choice from a second angle, one this paper's own staged-not-autopilot design shares.
+Yet even ProfOlaf, having implicitly absorbed the field's scattered answers to three separate
+named gaps, does not do citation-graph traversal, offers no formal recall guarantee, and is
+validated only on a single snowballing session, not against a real published bibliography.
+\ldiscover{} sits at the gap this convergence leaves open: it \textit{constructs} the candidate
+pool via bidirectional citation-graph traversal before screening begins, governed by an explicit
+yield-based termination rule, and validates the result against real published bibliographies
+rather than assuming the reference set was correctly assembled to begin with.
+
+\textbf{Citation-graph analysis} has characterised degree distributions, clustering, and
+community structure in academic networks \citep{BarabasiAlbert1999, Price1965}. Heavy-tailed
+in-degree is well documented \citep{Redner2005, Barabasi2016}: a small fraction of papers
+mediate a disproportionate share of cross-domain connectivity, motivating the Pareto filter
+design. Recent LLM-based simulation
+work corroborates this mechanistically --- \citet{Ji2025CiteAgent} find that the
+recommendation algorithm's tendency to surface highly cited papers is a stronger driver of
+preferential attachment than author citation bias, explaining how hubs self-reinforce over time.
+
+\textbf{Graph compression and hub-aware sampling} provides the theoretical grounding for the
+Pareto filter. Work on $k$-core decomposition \citep{Batagelj2003} and degree-constrained
+sampling \citep{Stumpf2005} shows that removing high-degree hubs substantially reduces edge
+volume while preserving reachability. The Pareto filter is a soft variant of this idea applied
+to the forward traversal frontier.
+
+These three areas converge in a way that directly motivates \ldiscover{}. Automated review
+methodology supplies the recall objective and the gap: current systems either assume the
+reference set is already given, or discover it without exploiting the citation graph's own
+structure. Citation-graph analysis supplies the observation that fills that gap structurally ---
+degree skew is not a nuisance to be filtered out after the fact, but a predictable property that
+should govern traversal design from the outset. Hub-aware sampling supplies the filter
+mechanism: the Pareto threshold is a soft analogue of core decomposition, applied not to
+compress a static graph but to constrain a live traversal frontier. No prior tool connects all
+three: the automated-review cohorts above either lack principled stopping, assume a
+pre-assembled corpus, or omit citation-graph traversal entirely; graph compression work, in
+turn, does not address the cold-start or recall-framing concerns of literature discovery.
+
+\ldiscover{} formalises and automates the snowballing methodology \citep{Wohlin2014} ---
+systematic bidirectional citation chaining from seed papers --- replacing manual curation
+with a yield-governed queue and LLM screening. The distinguishing feature relative to prior
+citation-expansion tools (CiteSpace~\citep{Chen2006}, Connected Papers~\citep{ConnectedPapers})
+is the minimal-seed framing: those systems assume a large anchor set; \ldiscover{} bootstraps
+a domain bibliography from two to five entry points.

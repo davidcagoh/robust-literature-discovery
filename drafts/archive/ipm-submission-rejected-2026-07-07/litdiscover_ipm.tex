@@ -1,8 +1,5 @@
-%% litdiscover_ipm_anonymous.tex — "Manuscript without author details" upload for IP&M's
-%% anonymized review. Derived from litdiscover_ipm.tex with all author-identifying info
-%% stripped (frontmatter author/affiliation/email block + CRediT statement name).
-%% If the paper itself changes, edit litdiscover_ipm.tex first and re-derive this file.
-%% Compile: pdflatex litdiscover_ipm_anonymous && bibtex litdiscover_ipm_anonymous && pdflatex litdiscover_ipm_anonymous && pdflatex litdiscover_ipm_anonymous
+%% litdiscover_ipm.tex — Information Processing & Management submission (elsarticle)
+%% Compile: pdflatex litdiscover_ipm && bibtex litdiscover_ipm && pdflatex litdiscover_ipm && pdflatex litdiscover_ipm
 
 \documentclass[authoryear,preprint,12pt]{elsarticle}
 
@@ -41,6 +38,12 @@
 
 \title{Robust Literature Discovery from Minimal Seeds:\\
   Validating \ldiscover{} on APS Citation Benchmarks and Live Surveys}
+
+\author{David Goh}
+\ead{daveed@cs.toronto.edu}
+\affiliation{organization={Department of Computer Science, University of Toronto},
+             city={Toronto},
+             country={Canada}}
 
 \begin{abstract}
 Automated literature discovery must do something retrieval cannot: recover a topic's
@@ -118,7 +121,54 @@ metric; this is non-trivial because the closed-corpus simulation cannot demonstr
 stopping rule generalises to open citation graphs with incomplete indexing and temporal gaps.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\input{related-work}
+\section{Related Work}
+
+This paper sits at the intersection of three areas.
+
+\textbf{Citation-graph analysis} has characterised degree distributions, clustering, and
+community structure in academic networks \citep{BarabasiAlbert1999, Price1965}. Heavy-tailed
+in-degree is well documented \citep{Redner2005, Barabasi2016}: a small fraction of papers
+mediate a disproportionate share of cross-domain connectivity, motivating the Pareto filter
+design. Recent LLM-based simulation
+work corroborates this mechanistically --- \citet{Ji2025CiteAgent} find that the
+recommendation algorithm's tendency to surface highly cited papers is a stronger driver of
+preferential attachment than author citation bias, explaining how hubs self-reinforce over time.
+
+\textbf{Automated systematic review and evidence synthesis} spans a spectrum from
+manual-heavy to fully automated. Early tools such as SWIFT-Review \citep{Howard2016} and
+RobotSearch \citep{Marshall2019} combine keyword or ML-based screening with manual corpus
+assembly. Active-learning frameworks such as ASReview \citep{vandeSchoot2021} go further
+by prioritising which pre-assembled candidates to screen first, substantially reducing manual
+effort --- but all of these assume the candidate pool is already given. LLM-assisted
+exploration tools (Elicit~\citep{Elicit2024}, ResearchRabbit~\citep{ResearchRabbit2025})
+extend this with query-driven discovery, but without a formal stopping criterion. \ldiscover{}
+sits at the missing end of this spectrum: it \textit{constructs} the candidate pool via graph
+traversal before screening begins, governed by an explicit yield-based termination rule.
+
+\textbf{Graph compression and hub-aware sampling} provides the theoretical grounding for the
+Pareto filter. Work on $k$-core decomposition \citep{Batagelj2003} and degree-constrained
+sampling \citep{Stumpf2005} shows that removing high-degree hubs substantially reduces edge
+volume while preserving reachability. The Pareto filter is a soft variant of this idea applied
+to the forward traversal frontier.
+
+These three areas converge in a way that directly motivates \ldiscover{}. Citation-graph
+analysis supplies the observation that degree skew is structural and predictable ---
+it is not a nuisance to be filtered out after the fact, but a property that should
+govern traversal design from the outset. Systematic review methodology supplies the
+recall objective: what matters is not sampling the literature but recovering it
+completely enough to support synthesis. Hub-aware sampling supplies the filter
+mechanism: the Pareto threshold is a soft analogue of core decomposition, applied
+not to compress a static graph but to constrain a live traversal frontier. No prior
+tool connects all three: snowballing tools lack principled stopping; systematic
+review tools assume a pre-assembled corpus; graph compression work does not address
+the cold-start or recall-framing concerns of literature discovery.
+
+\ldiscover{} formalises and automates the snowballing methodology \citep{Wohlin2014} ---
+systematic bidirectional citation chaining from seed papers --- replacing manual curation
+with a yield-governed queue and LLM screening. The distinguishing feature relative to prior
+citation-expansion tools (CiteSpace~\citep{Chen2006}, Connected Papers~\citep{ConnectedPapers})
+is the minimal-seed framing: those systems assume a large anchor set; \ldiscover{} bootstraps
+a domain bibliography from two to five entry points.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section{Architecture and Control Logic}
@@ -571,7 +621,7 @@ problem and a direct direction for future work.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{CRediT authorship contribution statement}
-\textbf{Author:} Conceptualization, Methodology, Software, Validation, Formal analysis,
+\textbf{David Goh:} Conceptualization, Methodology, Software, Validation, Formal analysis,
 Investigation, Data curation, Writing -- original draft, Writing -- review \& editing,
 Visualization.
 
