@@ -1,0 +1,104 @@
+{
+  "S1_MIT": {
+    "survey_id": "S1_MIT",
+    "gold_size": 582,
+    "seed_count": 5,
+    "baseline_recall": 0.00859106529209622,
+    "backward_traversal": {
+      "recall": 0.10481099656357389,
+      "precision": 0.22519083969465647,
+      "candidates": 262,
+      "new_gold_found": 59,
+      "wall_seconds": 0.0,
+      "recall_per_call": 0.0
+    },
+    "forward_traversal": {
+      "recall": 0.04639175257731959,
+      "precision": 0.0016710764517476676,
+      "candidates": 14362,
+      "new_gold_found": 24,
+      "hub_threshold": 7263.200000000001,
+      "hub_percentile": 80,
+      "wall_seconds": 0.03,
+      "recall_per_call": 0.0
+    },
+    "union_recall": 0.140893470790378,
+    "union_precision": 0.005275779376498801,
+    "ablation": {
+      "recall_without_backward": 0.04639175257731959,
+      "recall_drop_backward": 0.09450171821305842,
+      "recall_without_forward": 0.10481099656357389,
+      "recall_drop_forward": 0.03608247422680412
+    },
+    "author_expansion": "NOT_RUN \u2014 author/DOI linkage in the .mat file is MCOS-encoded and not decodable with available tools, see module docstring",
+    "venue_expansion": "NOT_RUN \u2014 no venue/journal field in the closed corpus beyond DOI-prefix inference (_infer_venue_from_doi), not benchmarked separately here"
+  },
+  "S2_UCG": {
+    "survey_id": "S2_UCG",
+    "gold_size": 432,
+    "seed_count": 5,
+    "baseline_recall": 0.011574074074074073,
+    "backward_traversal": {
+      "recall": 0.05324074074074074,
+      "precision": 0.09595959595959595,
+      "candidates": 198,
+      "new_gold_found": 19,
+      "wall_seconds": 0.0,
+      "recall_per_call": 0.0
+    },
+    "forward_traversal": {
+      "recall": 0.30787037037037035,
+      "precision": 0.0175033921302578,
+      "candidates": 7370,
+      "new_gold_found": 129,
+      "hub_threshold": 2788.4,
+      "hub_percentile": 80,
+      "wall_seconds": 0.01,
+      "recall_per_call": 0.0
+    },
+    "union_recall": 0.3333333333333333,
+    "union_precision": 0.018620227729403884,
+    "ablation": {
+      "recall_without_backward": 0.30787037037037035,
+      "recall_drop_backward": 0.025462962962962965,
+      "recall_without_forward": 0.05324074074074074,
+      "recall_drop_forward": 0.28009259259259256
+    },
+    "author_expansion": "NOT_RUN \u2014 author/DOI linkage in the .mat file is MCOS-encoded and not decodable with available tools, see module docstring",
+    "venue_expansion": "NOT_RUN \u2014 no venue/journal field in the closed corpus beyond DOI-prefix inference (_infer_venue_from_doi), not benchmarked separately here"
+  },
+  "S3_TOPO": {
+    "survey_id": "S3_TOPO",
+    "gold_size": 387,
+    "seed_count": 5,
+    "baseline_recall": 0.012919896640826873,
+    "backward_traversal": {
+      "recall": 0.09302325581395349,
+      "precision": 0.04936530324400564,
+      "candidates": 709,
+      "new_gold_found": 35,
+      "wall_seconds": 0.0,
+      "recall_per_call": 0.0
+    },
+    "forward_traversal": {
+      "recall": 0.35400516795865633,
+      "precision": 0.011817226890756302,
+      "candidates": 11424,
+      "new_gold_found": 135,
+      "hub_threshold": 4955.200000000001,
+      "hub_percentile": 80,
+      "wall_seconds": 0.02,
+      "recall_per_call": 0.0
+    },
+    "union_recall": 0.4134366925064599,
+    "union_precision": 0.01291881980330055,
+    "ablation": {
+      "recall_without_backward": 0.35400516795865633,
+      "recall_drop_backward": 0.059431524547803594,
+      "recall_without_forward": 0.09302325581395349,
+      "recall_drop_forward": 0.32041343669250644
+    },
+    "author_expansion": "NOT_RUN \u2014 author/DOI linkage in the .mat file is MCOS-encoded and not decodable with available tools, see module docstring",
+    "venue_expansion": "NOT_RUN \u2014 no venue/journal field in the closed corpus beyond DOI-prefix inference (_infer_venue_from_doi), not benchmarked separately here"
+  }
+}

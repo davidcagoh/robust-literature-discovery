@@ -1,0 +1,3246 @@
+{
+  "S1_MIT": {
+    "top_k": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 73227,
+          "recall": 0.3951890034364261,
+          "tp": 230,
+          "new_nodes": 73227,
+          "new_gold": 230,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 6906,
+              "recall": 0.013745704467353952,
+              "tp": 8,
+              "new_nodes": 6905,
+              "new_gold": 7,
+              "screen_yield": 0.0010137581462708182
+            },
+            {
+              "depth": 2,
+              "corpus_size": 73227,
+              "recall": 0.3951890034364261,
+              "tp": 230,
+              "new_nodes": 66321,
+              "new_gold": 222,
+              "screen_yield": 0.0033473560410729633
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 210267,
+          "recall": 0.872852233676976,
+          "tp": 508,
+          "new_nodes": 137040,
+          "new_gold": 278,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 87443,
+              "recall": 0.47766323024054985,
+              "tp": 278,
+              "new_nodes": 14196,
+              "new_gold": 45,
+              "screen_yield": 0.0031699070160608623
+            },
+            {
+              "depth": 2,
+              "corpus_size": 210267,
+              "recall": 0.872852233676976,
+              "tp": 508,
+              "new_nodes": 122824,
+              "new_gold": 230,
+              "screen_yield": 0.0018725981892789682
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 79540,
+          "recall": 0.43986254295532645,
+          "tp": 256,
+          "new_nodes": 79540,
+          "new_gold": 256,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 7916,
+              "recall": 0.013745704467353952,
+              "tp": 8,
+              "new_nodes": 7914,
+              "new_gold": 6,
+              "screen_yield": 0.000758150113722517
+            },
+            {
+              "depth": 2,
+              "corpus_size": 79540,
+              "recall": 0.43986254295532645,
+              "tp": 256,
+              "new_nodes": 71624,
+              "new_gold": 248,
+              "screen_yield": 0.0034625265274209763
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 189682,
+          "recall": 0.8230240549828178,
+          "tp": 479,
+          "new_nodes": 110142,
+          "new_gold": 223,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 90946,
+              "recall": 0.48109965635738833,
+              "tp": 280,
+              "new_nodes": 11386,
+              "new_gold": 22,
+              "screen_yield": 0.0019321974354470403
+            },
+            {
+              "depth": 2,
+              "corpus_size": 189682,
+              "recall": 0.8230240549828178,
+              "tp": 479,
+              "new_nodes": 98736,
+              "new_gold": 199,
+              "screen_yield": 0.0020154756117322964
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 90410,
+          "recall": 0.47079037800687284,
+          "tp": 274,
+          "new_nodes": 90410,
+          "new_gold": 274,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 10562,
+              "recall": 0.020618556701030927,
+              "tp": 12,
+              "new_nodes": 10559,
+              "new_gold": 9,
+              "screen_yield": 0.0008523534425608486
+            },
+            {
+              "depth": 2,
+              "corpus_size": 90410,
+              "recall": 0.47079037800687284,
+              "tp": 274,
+              "new_nodes": 79848,
+              "new_gold": 262,
+              "screen_yield": 0.003281234345255986
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 197690,
+          "recall": 0.8333333333333334,
+          "tp": 485,
+          "new_nodes": 107280,
+          "new_gold": 211,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 101476,
+              "recall": 0.5171821305841925,
+              "tp": 301,
+              "new_nodes": 11046,
+              "new_gold": 25,
+              "screen_yield": 0.0022632627195364836
+            },
+            {
+              "depth": 2,
+              "corpus_size": 197690,
+              "recall": 0.8333333333333334,
+              "tp": 485,
+              "new_nodes": 96214,
+              "new_gold": 184,
+              "screen_yield": 0.0019124036003076476
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 94785,
+          "recall": 0.5137457044673539,
+          "tp": 299,
+          "new_nodes": 94785,
+          "new_gold": 299,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 11479,
+              "recall": 0.02577319587628866,
+              "tp": 15,
+              "new_nodes": 11475,
+              "new_gold": 11,
+              "screen_yield": 0.0009586056644880174
+            },
+            {
+              "depth": 2,
+              "corpus_size": 94785,
+              "recall": 0.5137457044673539,
+              "tp": 299,
+              "new_nodes": 83306,
+              "new_gold": 284,
+              "screen_yield": 0.0034091181907665714
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 192382,
+          "recall": 0.845360824742268,
+          "tp": 492,
+          "new_nodes": 97597,
+          "new_gold": 193,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 104859,
+              "recall": 0.5549828178694158,
+              "tp": 323,
+              "new_nodes": 10054,
+              "new_gold": 22,
+              "screen_yield": 0.002188183807439825
+            },
+            {
+              "depth": 2,
+              "corpus_size": 192382,
+              "recall": 0.845360824742268,
+              "tp": 492,
+              "new_nodes": 87523,
+              "new_gold": 169,
+              "screen_yield": 0.0019309210150474732
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 116455,
+          "recall": 0.8487972508591065,
+          "tp": 494,
+          "new_nodes": 116455,
+          "new_gold": 494,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 13533,
+              "recall": 0.1323024054982818,
+              "tp": 77,
+              "new_nodes": 13528,
+              "new_gold": 72,
+              "screen_yield": 0.005322294500295683
+            },
+            {
+              "depth": 2,
+              "corpus_size": 116455,
+              "recall": 0.8487972508591065,
+              "tp": 494,
+              "new_nodes": 102922,
+              "new_gold": 417,
+              "screen_yield": 0.0040516119002739935
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 196435,
+          "recall": 0.8917525773195877,
+          "tp": 519,
+          "new_nodes": 79980,
+          "new_gold": 25,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 124014,
+              "recall": 0.8505154639175257,
+              "tp": 495,
+              "new_nodes": 7539,
+              "new_gold": 1,
+              "screen_yield": 0.00013264358668258389
+            },
+            {
+              "depth": 2,
+              "corpus_size": 196435,
+              "recall": 0.8917525773195877,
+              "tp": 519,
+              "new_nodes": 72421,
+              "new_gold": 24,
+              "screen_yield": 0.0003313955896770274
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 171450,
+          "recall": 0.9312714776632303,
+          "tp": 542,
+          "new_nodes": 171450,
+          "new_gold": 542,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 19993,
+              "recall": 0.17697594501718214,
+              "tp": 103,
+              "new_nodes": 19983,
+              "new_gold": 93,
+              "screen_yield": 0.0046539558624831105
+            },
+            {
+              "depth": 2,
+              "corpus_size": 171450,
+              "recall": 0.9312714776632303,
+              "tp": 542,
+              "new_nodes": 151457,
+              "new_gold": 439,
+              "screen_yield": 0.002898512449077956
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 203164,
+          "recall": 0.9621993127147767,
+          "tp": 560,
+          "new_nodes": 31714,
+          "new_gold": 18,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 174187,
+              "recall": 0.9415807560137457,
+              "tp": 548,
+              "new_nodes": 2717,
+              "new_gold": 5,
+              "screen_yield": 0.001840264998159735
+            },
+            {
+              "depth": 2,
+              "corpus_size": 203164,
+              "recall": 0.9621993127147767,
+              "tp": 560,
+              "new_nodes": 28977,
+              "new_gold": 12,
+              "screen_yield": 0.00041412154467336163
+            }
+          ]
+        }
+      ]
+    },
+    "random": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 1604,
+          "recall": 0.13058419243986255,
+          "tp": 76,
+          "new_nodes": 1604,
+          "new_gold": 76,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 64,
+              "recall": 0.00859106529209622,
+              "tp": 5,
+              "new_nodes": 63,
+              "new_gold": 4,
+              "screen_yield": 0.06349206349206349
+            },
+            {
+              "depth": 2,
+              "corpus_size": 1604,
+              "recall": 0.13058419243986255,
+              "tp": 76,
+              "new_nodes": 1540,
+              "new_gold": 71,
+              "screen_yield": 0.046103896103896105
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 257472,
+          "recall": 0.9742268041237113,
+          "tp": 567,
+          "new_nodes": 255868,
+          "new_gold": 491,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 38924,
+              "recall": 0.3024054982817869,
+              "tp": 176,
+              "new_nodes": 37300,
+              "new_gold": 94,
+              "screen_yield": 0.0025201072386058982
+            },
+            {
+              "depth": 2,
+              "corpus_size": 257472,
+              "recall": 0.9742268041237113,
+              "tp": 567,
+              "new_nodes": 218548,
+              "new_gold": 391,
+              "screen_yield": 0.0017890806596262607
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 10439,
+          "recall": 0.5034364261168385,
+          "tp": 293,
+          "new_nodes": 10439,
+          "new_gold": 293,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 538,
+              "recall": 0.0429553264604811,
+              "tp": 25,
+              "new_nodes": 536,
+              "new_gold": 23,
+              "screen_yield": 0.04291044776119403
+            },
+            {
+              "depth": 2,
+              "corpus_size": 10439,
+              "recall": 0.5034364261168385,
+              "tp": 293,
+              "new_nodes": 9901,
+              "new_gold": 268,
+              "screen_yield": 0.02706797293202707
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 252415,
+          "recall": 0.9089347079037801,
+          "tp": 529,
+          "new_nodes": 241976,
+          "new_gold": 236,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 42947,
+              "recall": 0.5498281786941581,
+              "tp": 320,
+              "new_nodes": 32488,
+              "new_gold": 26,
+              "screen_yield": 0.0008002954937207584
+            },
+            {
+              "depth": 2,
+              "corpus_size": 252415,
+              "recall": 0.9089347079037801,
+              "tp": 529,
+              "new_nodes": 209468,
+              "new_gold": 209,
+              "screen_yield": 0.0009977657685183417
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 6631,
+          "recall": 0.5567010309278351,
+          "tp": 324,
+          "new_nodes": 6631,
+          "new_gold": 324,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 192,
+              "recall": 0.07388316151202749,
+              "tp": 43,
+              "new_nodes": 189,
+              "new_gold": 40,
+              "screen_yield": 0.21164021164021163
+            },
+            {
+              "depth": 2,
+              "corpus_size": 6631,
+              "recall": 0.5567010309278351,
+              "tp": 324,
+              "new_nodes": 6439,
+              "new_gold": 281,
+              "screen_yield": 0.043640316819381894
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 237416,
+          "recall": 0.9381443298969072,
+          "tp": 546,
+          "new_nodes": 230785,
+          "new_gold": 222,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 38236,
+              "recall": 0.6254295532646048,
+              "tp": 364,
+              "new_nodes": 31585,
+              "new_gold": 37,
+              "screen_yield": 0.001171442140256451
+            },
+            {
+              "depth": 2,
+              "corpus_size": 237416,
+              "recall": 0.9381443298969072,
+              "tp": 546,
+              "new_nodes": 199180,
+              "new_gold": 182,
+              "screen_yield": 0.0009137463600763128
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 14267,
+          "recall": 0.6993127147766323,
+          "tp": 407,
+          "new_nodes": 14267,
+          "new_gold": 407,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 514,
+              "recall": 0.07903780068728522,
+              "tp": 46,
+              "new_nodes": 510,
+              "new_gold": 42,
+              "screen_yield": 0.08235294117647059
+            },
+            {
+              "depth": 2,
+              "corpus_size": 14267,
+              "recall": 0.6993127147766323,
+              "tp": 407,
+              "new_nodes": 13753,
+              "new_gold": 361,
+              "screen_yield": 0.026248818439613176
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 221999,
+          "recall": 0.8883161512027491,
+          "tp": 517,
+          "new_nodes": 207732,
+          "new_gold": 110,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 36335,
+              "recall": 0.7268041237113402,
+              "tp": 423,
+              "new_nodes": 22048,
+              "new_gold": 14,
+              "screen_yield": 0.0006349782293178519
+            },
+            {
+              "depth": 2,
+              "corpus_size": 221999,
+              "recall": 0.8883161512027491,
+              "tp": 517,
+              "new_nodes": 185664,
+              "new_gold": 94,
+              "screen_yield": 0.0005062909341606342
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 8402,
+          "recall": 0.5962199312714777,
+          "tp": 347,
+          "new_nodes": 8402,
+          "new_gold": 347,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 282,
+              "recall": 0.070446735395189,
+              "tp": 41,
+              "new_nodes": 277,
+              "new_gold": 36,
+              "screen_yield": 0.1299638989169675
+            },
+            {
+              "depth": 2,
+              "corpus_size": 8402,
+              "recall": 0.5962199312714777,
+              "tp": 347,
+              "new_nodes": 8120,
+              "new_gold": 306,
+              "screen_yield": 0.037684729064039406
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 221134,
+          "recall": 0.9106529209621993,
+          "tp": 530,
+          "new_nodes": 212732,
+          "new_gold": 183,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 36995,
+              "recall": 0.654639175257732,
+              "tp": 381,
+              "new_nodes": 28573,
+              "new_gold": 31,
+              "screen_yield": 0.0010849403282819445
+            },
+            {
+              "depth": 2,
+              "corpus_size": 221134,
+              "recall": 0.9106529209621993,
+              "tp": 530,
+              "new_nodes": 184139,
+              "new_gold": 149,
+              "screen_yield": 0.0008091713325259723
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 38122,
+          "recall": 0.8694158075601375,
+          "tp": 506,
+          "new_nodes": 38122,
+          "new_gold": 506,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1571,
+              "recall": 0.16151202749140894,
+              "tp": 94,
+              "new_nodes": 1561,
+              "new_gold": 84,
+              "screen_yield": 0.053811659192825115
+            },
+            {
+              "depth": 2,
+              "corpus_size": 38122,
+              "recall": 0.8694158075601375,
+              "tp": 506,
+              "new_nodes": 36551,
+              "new_gold": 412,
+              "screen_yield": 0.011271921424858417
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 204859,
+          "recall": 0.9261168384879725,
+          "tp": 539,
+          "new_nodes": 166737,
+          "new_gold": 33,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 54039,
+              "recall": 0.8780068728522337,
+              "tp": 511,
+              "new_nodes": 15897,
+              "new_gold": 4,
+              "screen_yield": 0.00025161980247845507
+            },
+            {
+              "depth": 2,
+              "corpus_size": 204859,
+              "recall": 0.9261168384879725,
+              "tp": 539,
+              "new_nodes": 150820,
+              "new_gold": 28,
+              "screen_yield": 0.00018565177032223843
+            }
+          ]
+        }
+      ]
+    },
+    "contaminated": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 59568,
+          "recall": 1.0,
+          "tp": 582,
+          "new_nodes": 59568,
+          "new_gold": 582,
+          "stop_depth": 3,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 48,
+              "recall": 0.022336769759450172,
+              "tp": 13,
+              "new_nodes": 47,
+              "new_gold": 12,
+              "screen_yield": 0.2553191489361702
+            },
+            {
+              "depth": 2,
+              "corpus_size": 2089,
+              "recall": 0.20962199312714777,
+              "tp": 122,
+              "new_nodes": 2041,
+              "new_gold": 109,
+              "screen_yield": 0.053405193532582065
+            },
+            {
+              "depth": 3,
+              "corpus_size": 59568,
+              "recall": 1.0,
+              "tp": 582,
+              "new_nodes": 57479,
+              "new_gold": 460,
+              "screen_yield": 0.008002922806590233
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 4962,
+          "recall": 0.048109965635738834,
+          "tp": 28,
+          "new_nodes": 4962,
+          "new_gold": 28,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 37,
+              "recall": 0.00859106529209622,
+              "tp": 5,
+              "new_nodes": 35,
+              "new_gold": 4,
+              "screen_yield": 0.11428571428571428
+            },
+            {
+              "depth": 2,
+              "corpus_size": 4962,
+              "recall": 0.048109965635738834,
+              "tp": 28,
+              "new_nodes": 4925,
+              "new_gold": 23,
+              "screen_yield": 0.0046700507614213195
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 207352,
+          "recall": 1.0,
+          "tp": 582,
+          "new_nodes": 202390,
+          "new_gold": 554,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 41623,
+              "recall": 1.0,
+              "tp": 582,
+              "new_nodes": 36641,
+              "new_gold": 549,
+              "screen_yield": 0.01498321552359379
+            },
+            {
+              "depth": 2,
+              "corpus_size": 207352,
+              "recall": 1.0,
+              "tp": 582,
+              "new_nodes": 165729,
+              "new_gold": 0,
+              "screen_yield": 0.0
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 3493,
+          "recall": 0.21305841924398625,
+          "tp": 124,
+          "new_nodes": 3493,
+          "new_gold": 124,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 124,
+              "recall": 0.01718213058419244,
+              "tp": 10,
+              "new_nodes": 121,
+              "new_gold": 9,
+              "screen_yield": 0.0743801652892562
+            },
+            {
+              "depth": 2,
+              "corpus_size": 3493,
+              "recall": 0.21305841924398625,
+              "tp": 124,
+              "new_nodes": 3369,
+              "new_gold": 114,
+              "screen_yield": 0.03383793410507569
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 223237,
+          "recall": 0.9896907216494846,
+          "tp": 576,
+          "new_nodes": 219744,
+          "new_gold": 452,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 34025,
+              "recall": 0.5360824742268041,
+              "tp": 312,
+              "new_nodes": 30512,
+              "new_gold": 181,
+              "screen_yield": 0.00593209229155742
+            },
+            {
+              "depth": 2,
+              "corpus_size": 223237,
+              "recall": 0.9896907216494846,
+              "tp": 576,
+              "new_nodes": 189212,
+              "new_gold": 264,
+              "screen_yield": 0.0013952603428957994
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 5956,
+          "recall": 0.20446735395189003,
+          "tp": 119,
+          "new_nodes": 5956,
+          "new_gold": 119,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 166,
+              "recall": 0.02577319587628866,
+              "tp": 15,
+              "new_nodes": 162,
+              "new_gold": 13,
+              "screen_yield": 0.08024691358024691
+            },
+            {
+              "depth": 2,
+              "corpus_size": 5956,
+              "recall": 0.20446735395189003,
+              "tp": 119,
+              "new_nodes": 5790,
+              "new_gold": 104,
+              "screen_yield": 0.017962003454231434
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 222364,
+          "recall": 0.9673539518900344,
+          "tp": 563,
+          "new_nodes": 216408,
+          "new_gold": 444,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 38013,
+              "recall": 0.3797250859106529,
+              "tp": 221,
+              "new_nodes": 32037,
+              "new_gold": 100,
+              "screen_yield": 0.003121390891781378
+            },
+            {
+              "depth": 2,
+              "corpus_size": 222364,
+              "recall": 0.9673539518900344,
+              "tp": 563,
+              "new_nodes": 184351,
+              "new_gold": 342,
+              "screen_yield": 0.0018551567390467098
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 6325,
+          "recall": 0.4415807560137457,
+          "tp": 257,
+          "new_nodes": 6325,
+          "new_gold": 257,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 181,
+              "recall": 0.03608247422680412,
+              "tp": 21,
+              "new_nodes": 176,
+              "new_gold": 19,
+              "screen_yield": 0.10795454545454546
+            },
+            {
+              "depth": 2,
+              "corpus_size": 6325,
+              "recall": 0.4415807560137457,
+              "tp": 257,
+              "new_nodes": 6144,
+              "new_gold": 236,
+              "screen_yield": 0.038411458333333336
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 238715,
+          "recall": 0.9261168384879725,
+          "tp": 539,
+          "new_nodes": 232390,
+          "new_gold": 282,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 33168,
+              "recall": 0.5085910652920962,
+              "tp": 296,
+              "new_nodes": 26823,
+              "new_gold": 36,
+              "screen_yield": 0.0013421317526003803
+            },
+            {
+              "depth": 2,
+              "corpus_size": 238715,
+              "recall": 0.9261168384879725,
+              "tp": 539,
+              "new_nodes": 205547,
+              "new_gold": 243,
+              "screen_yield": 0.001182211367716386
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 14165,
+          "recall": 0.6907216494845361,
+          "tp": 402,
+          "new_nodes": 14165,
+          "new_gold": 402,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 443,
+              "recall": 0.09621993127147767,
+              "tp": 56,
+              "new_nodes": 433,
+              "new_gold": 51,
+              "screen_yield": 0.11778290993071594
+            },
+            {
+              "depth": 2,
+              "corpus_size": 14165,
+              "recall": 0.6907216494845361,
+              "tp": 402,
+              "new_nodes": 13722,
+              "new_gold": 346,
+              "screen_yield": 0.025214983238594956
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 235429,
+          "recall": 0.936426116838488,
+          "tp": 545,
+          "new_nodes": 221264,
+          "new_gold": 143,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 50310,
+              "recall": 0.7405498281786942,
+              "tp": 431,
+              "new_nodes": 36125,
+              "new_gold": 25,
+              "screen_yield": 0.0006920415224913495
+            },
+            {
+              "depth": 2,
+              "corpus_size": 235429,
+              "recall": 0.936426116838488,
+              "tp": 545,
+              "new_nodes": 185119,
+              "new_gold": 114,
+              "screen_yield": 0.000615820094101632
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "S2_UCG": {
+    "top_k": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 35368,
+          "recall": 0.3287037037037037,
+          "tp": 142,
+          "new_nodes": 35368,
+          "new_gold": 142,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 2567,
+              "recall": 0.020833333333333332,
+              "tp": 9,
+              "new_nodes": 2566,
+              "new_gold": 8,
+              "screen_yield": 0.003117692907248636
+            },
+            {
+              "depth": 2,
+              "corpus_size": 35368,
+              "recall": 0.3287037037037037,
+              "tp": 142,
+              "new_nodes": 32801,
+              "new_gold": 133,
+              "screen_yield": 0.004054754428218652
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 146334,
+          "recall": 0.8472222222222222,
+          "tp": 366,
+          "new_nodes": 110966,
+          "new_gold": 224,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 45796,
+              "recall": 0.4351851851851852,
+              "tp": 188,
+              "new_nodes": 10408,
+              "new_gold": 42,
+              "screen_yield": 0.004035357417371253
+            },
+            {
+              "depth": 2,
+              "corpus_size": 146334,
+              "recall": 0.8472222222222222,
+              "tp": 366,
+              "new_nodes": 100538,
+              "new_gold": 178,
+              "screen_yield": 0.0017704748453321133
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 61741,
+          "recall": 0.4537037037037037,
+          "tp": 196,
+          "new_nodes": 61741,
+          "new_gold": 196,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 4737,
+              "recall": 0.03009259259259259,
+              "tp": 13,
+              "new_nodes": 4735,
+              "new_gold": 11,
+              "screen_yield": 0.0023231256599788807
+            },
+            {
+              "depth": 2,
+              "corpus_size": 61741,
+              "recall": 0.4537037037037037,
+              "tp": 196,
+              "new_nodes": 57004,
+              "new_gold": 183,
+              "screen_yield": 0.003210301031506561
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 176546,
+          "recall": 0.8888888888888888,
+          "tp": 384,
+          "new_nodes": 114805,
+          "new_gold": 188,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 72652,
+              "recall": 0.5439814814814815,
+              "tp": 235,
+              "new_nodes": 10891,
+              "new_gold": 34,
+              "screen_yield": 0.003121843724175925
+            },
+            {
+              "depth": 2,
+              "corpus_size": 176546,
+              "recall": 0.8888888888888888,
+              "tp": 384,
+              "new_nodes": 103894,
+              "new_gold": 149,
+              "screen_yield": 0.0014341540416193427
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 79383,
+          "recall": 0.9259259259259259,
+          "tp": 400,
+          "new_nodes": 79383,
+          "new_gold": 400,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 6296,
+              "recall": 0.16666666666666666,
+              "tp": 72,
+              "new_nodes": 6293,
+              "new_gold": 69,
+              "screen_yield": 0.010964563801048785
+            },
+            {
+              "depth": 2,
+              "corpus_size": 79383,
+              "recall": 0.9259259259259259,
+              "tp": 400,
+              "new_nodes": 73087,
+              "new_gold": 328,
+              "screen_yield": 0.004487802208327062
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 169320,
+          "recall": 0.9675925925925926,
+          "tp": 418,
+          "new_nodes": 89937,
+          "new_gold": 18,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 88302,
+              "recall": 0.9328703703703703,
+              "tp": 403,
+              "new_nodes": 8899,
+              "new_gold": 1,
+              "screen_yield": 0.0001123721766490617
+            },
+            {
+              "depth": 2,
+              "corpus_size": 169320,
+              "recall": 0.9675925925925926,
+              "tp": 418,
+              "new_nodes": 81018,
+              "new_gold": 15,
+              "screen_yield": 0.00018514404206472636
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 93838,
+          "recall": 0.9606481481481481,
+          "tp": 415,
+          "new_nodes": 93838,
+          "new_gold": 415,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 7648,
+              "recall": 0.2708333333333333,
+              "tp": 117,
+              "new_nodes": 7644,
+              "new_gold": 113,
+              "screen_yield": 0.01478283621140764
+            },
+            {
+              "depth": 2,
+              "corpus_size": 93838,
+              "recall": 0.9606481481481481,
+              "tp": 415,
+              "new_nodes": 86190,
+              "new_gold": 298,
+              "screen_yield": 0.003457477665622462
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 163374,
+          "recall": 0.9814814814814815,
+          "tp": 424,
+          "new_nodes": 69536,
+          "new_gold": 9,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 100208,
+              "recall": 0.9629629629629629,
+              "tp": 416,
+              "new_nodes": 6350,
+              "new_gold": 1,
+              "screen_yield": 0.00015748031496062991
+            },
+            {
+              "depth": 2,
+              "corpus_size": 163374,
+              "recall": 0.9814814814814815,
+              "tp": 424,
+              "new_nodes": 63166,
+              "new_gold": 8,
+              "screen_yield": 0.00012665041319697304
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 97474,
+          "recall": 0.9768518518518519,
+          "tp": 422,
+          "new_nodes": 97474,
+          "new_gold": 422,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 8561,
+              "recall": 0.3125,
+              "tp": 135,
+              "new_nodes": 8556,
+              "new_gold": 130,
+              "screen_yield": 0.015194015895278168
+            },
+            {
+              "depth": 2,
+              "corpus_size": 97474,
+              "recall": 0.9768518518518519,
+              "tp": 422,
+              "new_nodes": 88913,
+              "new_gold": 287,
+              "screen_yield": 0.0032278744390584055
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 174824,
+          "recall": 0.9837962962962963,
+          "tp": 425,
+          "new_nodes": 77350,
+          "new_gold": 3,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 104561,
+              "recall": 0.9768518518518519,
+              "tp": 422,
+              "new_nodes": 7067,
+              "new_gold": 0,
+              "screen_yield": 0.0
+            },
+            {
+              "depth": 2,
+              "corpus_size": 174824,
+              "recall": 0.9837962962962963,
+              "tp": 425,
+              "new_nodes": 70263,
+              "new_gold": 3,
+              "screen_yield": 4.269672516118014e-05
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 155287,
+          "recall": 0.9861111111111112,
+          "tp": 426,
+          "new_nodes": 155287,
+          "new_gold": 426,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 14080,
+              "recall": 0.4097222222222222,
+              "tp": 177,
+              "new_nodes": 14070,
+              "new_gold": 167,
+              "screen_yield": 0.011869225302061123
+            },
+            {
+              "depth": 2,
+              "corpus_size": 155287,
+              "recall": 0.9861111111111112,
+              "tp": 426,
+              "new_nodes": 141207,
+              "new_gold": 249,
+              "screen_yield": 0.0017633686715247828
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 210527,
+          "recall": 0.9884259259259259,
+          "tp": 427,
+          "new_nodes": 55240,
+          "new_gold": 1,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 160751,
+              "recall": 0.9861111111111112,
+              "tp": 426,
+              "new_nodes": 5444,
+              "new_gold": 0,
+              "screen_yield": 0.0
+            },
+            {
+              "depth": 2,
+              "corpus_size": 210527,
+              "recall": 0.9884259259259259,
+              "tp": 427,
+              "new_nodes": 49776,
+              "new_gold": 1,
+              "screen_yield": 2.0090003214400513e-05
+            }
+          ]
+        }
+      ]
+    },
+    "random": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 5092,
+          "recall": 0.4444444444444444,
+          "tp": 192,
+          "new_nodes": 5092,
+          "new_gold": 192,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 79,
+              "recall": 0.046296296296296294,
+              "tp": 20,
+              "new_nodes": 78,
+              "new_gold": 19,
+              "screen_yield": 0.24358974358974358
+            },
+            {
+              "depth": 2,
+              "corpus_size": 5092,
+              "recall": 0.4444444444444444,
+              "tp": 192,
+              "new_nodes": 5013,
+              "new_gold": 172,
+              "screen_yield": 0.034310791940953524
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 229820,
+          "recall": 0.9560185185185185,
+          "tp": 413,
+          "new_nodes": 224728,
+          "new_gold": 221,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 33749,
+              "recall": 0.5300925925925926,
+              "tp": 229,
+              "new_nodes": 28637,
+              "new_gold": 35,
+              "screen_yield": 0.0012221950623319481
+            },
+            {
+              "depth": 2,
+              "corpus_size": 229820,
+              "recall": 0.9560185185185185,
+              "tp": 413,
+              "new_nodes": 196071,
+              "new_gold": 184,
+              "screen_yield": 0.0009384355667079782
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 7563,
+          "recall": 0.6273148148148148,
+          "tp": 271,
+          "new_nodes": 7563,
+          "new_gold": 271,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 263,
+              "recall": 0.09490740740740741,
+              "tp": 41,
+              "new_nodes": 261,
+              "new_gold": 39,
+              "screen_yield": 0.14942528735632185
+            },
+            {
+              "depth": 2,
+              "corpus_size": 7563,
+              "recall": 0.6273148148148148,
+              "tp": 271,
+              "new_nodes": 7300,
+              "new_gold": 230,
+              "screen_yield": 0.031506849315068496
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 277602,
+          "recall": 0.9050925925925926,
+          "tp": 391,
+          "new_nodes": 270039,
+          "new_gold": 120,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 43080,
+              "recall": 0.6712962962962963,
+              "tp": 290,
+              "new_nodes": 35497,
+              "new_gold": 17,
+              "screen_yield": 0.0004789137110178325
+            },
+            {
+              "depth": 2,
+              "corpus_size": 277602,
+              "recall": 0.9050925925925926,
+              "tp": 391,
+              "new_nodes": 234522,
+              "new_gold": 101,
+              "screen_yield": 0.0004306632213608958
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 8049,
+          "recall": 0.7800925925925926,
+          "tp": 337,
+          "new_nodes": 8049,
+          "new_gold": 337,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 272,
+              "recall": 0.09027777777777778,
+              "tp": 39,
+              "new_nodes": 269,
+              "new_gold": 36,
+              "screen_yield": 0.13382899628252787
+            },
+            {
+              "depth": 2,
+              "corpus_size": 8049,
+              "recall": 0.7800925925925926,
+              "tp": 337,
+              "new_nodes": 7777,
+              "new_gold": 298,
+              "screen_yield": 0.038318117526038316
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 238378,
+          "recall": 0.9421296296296297,
+          "tp": 407,
+          "new_nodes": 230329,
+          "new_gold": 70,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 36003,
+              "recall": 0.8055555555555556,
+              "tp": 348,
+              "new_nodes": 27934,
+              "new_gold": 11,
+              "screen_yield": 0.0003937853511849359
+            },
+            {
+              "depth": 2,
+              "corpus_size": 238378,
+              "recall": 0.9421296296296297,
+              "tp": 407,
+              "new_nodes": 202375,
+              "new_gold": 59,
+              "screen_yield": 0.00029153798641136505
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 14264,
+          "recall": 0.6759259259259259,
+          "tp": 292,
+          "new_nodes": 14264,
+          "new_gold": 292,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 369,
+              "recall": 0.08333333333333333,
+              "tp": 36,
+              "new_nodes": 365,
+              "new_gold": 32,
+              "screen_yield": 0.08767123287671233
+            },
+            {
+              "depth": 2,
+              "corpus_size": 14264,
+              "recall": 0.6759259259259259,
+              "tp": 292,
+              "new_nodes": 13895,
+              "new_gold": 256,
+              "screen_yield": 0.01842389348686578
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 249212,
+          "recall": 0.9074074074074074,
+          "tp": 392,
+          "new_nodes": 234948,
+          "new_gold": 100,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 39034,
+              "recall": 0.6967592592592593,
+              "tp": 301,
+              "new_nodes": 24750,
+              "new_gold": 9,
+              "screen_yield": 0.0003636363636363636
+            },
+            {
+              "depth": 2,
+              "corpus_size": 249212,
+              "recall": 0.9074074074074074,
+              "tp": 392,
+              "new_nodes": 210178,
+              "new_gold": 91,
+              "screen_yield": 0.00043296634281418607
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 25320,
+          "recall": 0.8773148148148148,
+          "tp": 379,
+          "new_nodes": 25320,
+          "new_gold": 379,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1388,
+              "recall": 0.17592592592592593,
+              "tp": 76,
+              "new_nodes": 1383,
+              "new_gold": 71,
+              "screen_yield": 0.05133767172812726
+            },
+            {
+              "depth": 2,
+              "corpus_size": 25320,
+              "recall": 0.8773148148148148,
+              "tp": 379,
+              "new_nodes": 23932,
+              "new_gold": 303,
+              "screen_yield": 0.01266087247200401
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 229036,
+          "recall": 0.9606481481481481,
+          "tp": 415,
+          "new_nodes": 203716,
+          "new_gold": 36,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 44754,
+              "recall": 0.8819444444444444,
+              "tp": 381,
+              "new_nodes": 19414,
+              "new_gold": 2,
+              "screen_yield": 0.00010301844030081384
+            },
+            {
+              "depth": 2,
+              "corpus_size": 229036,
+              "recall": 0.9606481481481481,
+              "tp": 415,
+              "new_nodes": 184282,
+              "new_gold": 34,
+              "screen_yield": 0.00018449984263248717
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 33740,
+          "recall": 0.9444444444444444,
+          "tp": 408,
+          "new_nodes": 33740,
+          "new_gold": 408,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1462,
+              "recall": 0.2222222222222222,
+              "tp": 96,
+              "new_nodes": 1452,
+              "new_gold": 86,
+              "screen_yield": 0.05922865013774105
+            },
+            {
+              "depth": 2,
+              "corpus_size": 33740,
+              "recall": 0.9444444444444444,
+              "tp": 408,
+              "new_nodes": 32278,
+              "new_gold": 312,
+              "screen_yield": 0.009666026395687465
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 199931,
+          "recall": 0.9768518518518519,
+          "tp": 422,
+          "new_nodes": 166191,
+          "new_gold": 14,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 50422,
+              "recall": 0.9490740740740741,
+              "tp": 410,
+              "new_nodes": 16662,
+              "new_gold": 1,
+              "screen_yield": 6.0016804705317486e-05
+            },
+            {
+              "depth": 2,
+              "corpus_size": 199931,
+              "recall": 0.9768518518518519,
+              "tp": 422,
+              "new_nodes": 149509,
+              "new_gold": 12,
+              "screen_yield": 8.02627266585958e-05
+            }
+          ]
+        }
+      ]
+    },
+    "contaminated": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 1846,
+          "recall": 0.25462962962962965,
+          "tp": 110,
+          "new_nodes": 1846,
+          "new_gold": 110,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 73,
+              "recall": 0.0625,
+              "tp": 27,
+              "new_nodes": 72,
+              "new_gold": 26,
+              "screen_yield": 0.3611111111111111
+            },
+            {
+              "depth": 2,
+              "corpus_size": 1846,
+              "recall": 0.25462962962962965,
+              "tp": 110,
+              "new_nodes": 1773,
+              "new_gold": 83,
+              "screen_yield": 0.046813310772701636
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 230312,
+          "recall": 0.9884259259259259,
+          "tp": 427,
+          "new_nodes": 228466,
+          "new_gold": 317,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 24360,
+              "recall": 0.4930555555555556,
+              "tp": 213,
+              "new_nodes": 22494,
+              "new_gold": 99,
+              "screen_yield": 0.004401173646305681
+            },
+            {
+              "depth": 2,
+              "corpus_size": 230312,
+              "recall": 0.9884259259259259,
+              "tp": 427,
+              "new_nodes": 205952,
+              "new_gold": 214,
+              "screen_yield": 0.0010390770665009322
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 3783,
+          "recall": 0.14351851851851852,
+          "tp": 62,
+          "new_nodes": 3783,
+          "new_gold": 62,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 161,
+              "recall": 0.016203703703703703,
+              "tp": 7,
+              "new_nodes": 159,
+              "new_gold": 6,
+              "screen_yield": 0.03773584905660377
+            },
+            {
+              "depth": 2,
+              "corpus_size": 3783,
+              "recall": 0.14351851851851852,
+              "tp": 62,
+              "new_nodes": 3622,
+              "new_gold": 55,
+              "screen_yield": 0.015184980673660961
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 164651,
+          "recall": 1.0,
+          "tp": 432,
+          "new_nodes": 160868,
+          "new_gold": 370,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 22309,
+              "recall": 1.0,
+              "tp": 432,
+              "new_nodes": 18506,
+              "new_gold": 364,
+              "screen_yield": 0.01966929644439641
+            },
+            {
+              "depth": 2,
+              "corpus_size": 164651,
+              "recall": 1.0,
+              "tp": 432,
+              "new_nodes": 142342,
+              "new_gold": 0,
+              "screen_yield": 0.0
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 7356,
+          "recall": 0.4097222222222222,
+          "tp": 177,
+          "new_nodes": 7356,
+          "new_gold": 177,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 198,
+              "recall": 0.037037037037037035,
+              "tp": 16,
+              "new_nodes": 195,
+              "new_gold": 15,
+              "screen_yield": 0.07692307692307693
+            },
+            {
+              "depth": 2,
+              "corpus_size": 7356,
+              "recall": 0.4097222222222222,
+              "tp": 177,
+              "new_nodes": 7158,
+              "new_gold": 161,
+              "screen_yield": 0.02249231628946633
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 228743,
+          "recall": 0.9375,
+          "tp": 405,
+          "new_nodes": 221387,
+          "new_gold": 228,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 33542,
+              "recall": 0.5231481481481481,
+              "tp": 226,
+              "new_nodes": 26166,
+              "new_gold": 47,
+              "screen_yield": 0.0017962241076205764
+            },
+            {
+              "depth": 2,
+              "corpus_size": 228743,
+              "recall": 0.9375,
+              "tp": 405,
+              "new_nodes": 195201,
+              "new_gold": 179,
+              "screen_yield": 0.0009170034989574848
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 10508,
+          "recall": 0.5046296296296297,
+          "tp": 218,
+          "new_nodes": 10508,
+          "new_gold": 218,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 391,
+              "recall": 0.05324074074074074,
+              "tp": 23,
+              "new_nodes": 387,
+              "new_gold": 21,
+              "screen_yield": 0.05426356589147287
+            },
+            {
+              "depth": 2,
+              "corpus_size": 10508,
+              "recall": 0.5046296296296297,
+              "tp": 218,
+              "new_nodes": 10117,
+              "new_gold": 195,
+              "screen_yield": 0.019274488484728673
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 252880,
+          "recall": 0.9050925925925926,
+          "tp": 391,
+          "new_nodes": 242372,
+          "new_gold": 173,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 40051,
+              "recall": 0.5509259259259259,
+              "tp": 238,
+              "new_nodes": 29523,
+              "new_gold": 20,
+              "screen_yield": 0.0006774379297496867
+            },
+            {
+              "depth": 2,
+              "corpus_size": 252880,
+              "recall": 0.9050925925925926,
+              "tp": 391,
+              "new_nodes": 212829,
+              "new_gold": 153,
+              "screen_yield": 0.0007188869937837419
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 15515,
+          "recall": 0.27314814814814814,
+          "tp": 118,
+          "new_nodes": 15515,
+          "new_gold": 118,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1123,
+              "recall": 0.006944444444444444,
+              "tp": 3,
+              "new_nodes": 1118,
+              "new_gold": 1,
+              "screen_yield": 0.0008944543828264759
+            },
+            {
+              "depth": 2,
+              "corpus_size": 15515,
+              "recall": 0.27314814814814814,
+              "tp": 118,
+              "new_nodes": 14392,
+              "new_gold": 115,
+              "screen_yield": 0.007990550305725402
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 220908,
+          "recall": 0.9490740740740741,
+          "tp": 410,
+          "new_nodes": 205393,
+          "new_gold": 292,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 35608,
+              "recall": 0.48842592592592593,
+              "tp": 211,
+              "new_nodes": 20073,
+              "new_gold": 91,
+              "screen_yield": 0.004533452896926219
+            },
+            {
+              "depth": 2,
+              "corpus_size": 220908,
+              "recall": 0.9490740740740741,
+              "tp": 410,
+              "new_nodes": 185300,
+              "new_gold": 199,
+              "screen_yield": 0.0010739341608202915
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 57188,
+          "recall": 0.7291666666666666,
+          "tp": 315,
+          "new_nodes": 57188,
+          "new_gold": 315,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1131,
+              "recall": 0.06712962962962964,
+              "tp": 29,
+              "new_nodes": 1121,
+              "new_gold": 24,
+              "screen_yield": 0.021409455842997322
+            },
+            {
+              "depth": 2,
+              "corpus_size": 57188,
+              "recall": 0.7291666666666666,
+              "tp": 315,
+              "new_nodes": 56057,
+              "new_gold": 286,
+              "screen_yield": 0.005101949801095314
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 217563,
+          "recall": 0.8518518518518519,
+          "tp": 368,
+          "new_nodes": 160375,
+          "new_gold": 53,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 74474,
+              "recall": 0.7407407407407407,
+              "tp": 320,
+              "new_nodes": 17266,
+              "new_gold": 4,
+              "screen_yield": 0.00023166917641607784
+            },
+            {
+              "depth": 2,
+              "corpus_size": 217563,
+              "recall": 0.8518518518518519,
+              "tp": 368,
+              "new_nodes": 143089,
+              "new_gold": 48,
+              "screen_yield": 0.0003354555556332073
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "S3_TOPO": {
+    "top_k": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 52063,
+          "recall": 0.9121447028423773,
+          "tp": 353,
+          "new_nodes": 52063,
+          "new_gold": 353,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 5007,
+              "recall": 0.27648578811369506,
+              "tp": 107,
+              "new_nodes": 5006,
+              "new_gold": 106,
+              "screen_yield": 0.02117459049141031
+            },
+            {
+              "depth": 2,
+              "corpus_size": 52063,
+              "recall": 0.9121447028423773,
+              "tp": 353,
+              "new_nodes": 47056,
+              "new_gold": 246,
+              "screen_yield": 0.005227813668820129
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 158266,
+          "recall": 0.9664082687338501,
+          "tp": 374,
+          "new_nodes": 106203,
+          "new_gold": 21,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 62654,
+              "recall": 0.9224806201550387,
+              "tp": 357,
+              "new_nodes": 10571,
+              "new_gold": 4,
+              "screen_yield": 0.00037839371866427016
+            },
+            {
+              "depth": 2,
+              "corpus_size": 158266,
+              "recall": 0.9664082687338501,
+              "tp": 374,
+              "new_nodes": 95612,
+              "new_gold": 17,
+              "screen_yield": 0.0001778019495460821
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 59884,
+          "recall": 0.9147286821705426,
+          "tp": 354,
+          "new_nodes": 59884,
+          "new_gold": 354,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 5747,
+              "recall": 0.3049095607235142,
+              "tp": 118,
+              "new_nodes": 5745,
+              "new_gold": 116,
+              "screen_yield": 0.02019147084421236
+            },
+            {
+              "depth": 2,
+              "corpus_size": 59884,
+              "recall": 0.9147286821705426,
+              "tp": 354,
+              "new_nodes": 54137,
+              "new_gold": 236,
+              "screen_yield": 0.004359310637826255
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 156699,
+          "recall": 0.9689922480620154,
+          "tp": 375,
+          "new_nodes": 96815,
+          "new_gold": 21,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 70166,
+              "recall": 0.9250645994832042,
+              "tp": 358,
+              "new_nodes": 10262,
+              "new_gold": 4,
+              "screen_yield": 0.0003897875657766517
+            },
+            {
+              "depth": 2,
+              "corpus_size": 156699,
+              "recall": 0.9689922480620154,
+              "tp": 375,
+              "new_nodes": 86533,
+              "new_gold": 17,
+              "screen_yield": 0.00019645684305409498
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 74598,
+          "recall": 0.9224806201550387,
+          "tp": 357,
+          "new_nodes": 74598,
+          "new_gold": 357,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 8794,
+              "recall": 0.34366925064599485,
+              "tp": 133,
+              "new_nodes": 8791,
+              "new_gold": 130,
+              "screen_yield": 0.014787851211466273
+            },
+            {
+              "depth": 2,
+              "corpus_size": 74598,
+              "recall": 0.9224806201550387,
+              "tp": 357,
+              "new_nodes": 65804,
+              "new_gold": 224,
+              "screen_yield": 0.0034040483861163457
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 154063,
+          "recall": 0.9715762273901809,
+          "tp": 376,
+          "new_nodes": 79465,
+          "new_gold": 19,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 83529,
+              "recall": 0.9328165374677002,
+              "tp": 361,
+              "new_nodes": 8911,
+              "new_gold": 4,
+              "screen_yield": 0.00044888340253619125
+            },
+            {
+              "depth": 2,
+              "corpus_size": 154063,
+              "recall": 0.9715762273901809,
+              "tp": 376,
+              "new_nodes": 70534,
+              "new_gold": 15,
+              "screen_yield": 0.00021266339637621574
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 77366,
+          "recall": 0.9276485788113695,
+          "tp": 359,
+          "new_nodes": 77366,
+          "new_gold": 359,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 9721,
+              "recall": 0.38242894056847543,
+              "tp": 148,
+              "new_nodes": 9717,
+              "new_gold": 144,
+              "screen_yield": 0.014819388700216115
+            },
+            {
+              "depth": 2,
+              "corpus_size": 77366,
+              "recall": 0.9276485788113695,
+              "tp": 359,
+              "new_nodes": 67645,
+              "new_gold": 211,
+              "screen_yield": 0.003119225367728583
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 157365,
+          "recall": 0.9715762273901809,
+          "tp": 376,
+          "new_nodes": 79999,
+          "new_gold": 17,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 86065,
+              "recall": 0.9302325581395349,
+              "tp": 360,
+              "new_nodes": 8679,
+              "new_gold": 1,
+              "screen_yield": 0.00011522064754003918
+            },
+            {
+              "depth": 2,
+              "corpus_size": 157365,
+              "recall": 0.9715762273901809,
+              "tp": 376,
+              "new_nodes": 71300,
+              "new_gold": 16,
+              "screen_yield": 0.0002244039270687237
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 86807,
+          "recall": 0.9431524547803618,
+          "tp": 365,
+          "new_nodes": 86807,
+          "new_gold": 365,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 11213,
+              "recall": 0.40310077519379844,
+              "tp": 156,
+              "new_nodes": 11208,
+              "new_gold": 151,
+              "screen_yield": 0.013472519628836546
+            },
+            {
+              "depth": 2,
+              "corpus_size": 86807,
+              "recall": 0.9431524547803618,
+              "tp": 365,
+              "new_nodes": 75594,
+              "new_gold": 209,
+              "screen_yield": 0.0027647696907161946
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 150241,
+          "recall": 0.9689922480620154,
+          "tp": 375,
+          "new_nodes": 63434,
+          "new_gold": 10,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 93532,
+              "recall": 0.9483204134366925,
+              "tp": 367,
+              "new_nodes": 6705,
+              "new_gold": 2,
+              "screen_yield": 0.0002982848620432513
+            },
+            {
+              "depth": 2,
+              "corpus_size": 150241,
+              "recall": 0.9689922480620154,
+              "tp": 375,
+              "new_nodes": 56709,
+              "new_gold": 8,
+              "screen_yield": 0.00014107108219153926
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 99227,
+          "recall": 0.9509043927648578,
+          "tp": 368,
+          "new_nodes": 99227,
+          "new_gold": 368,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 14874,
+              "recall": 0.5452196382428941,
+              "tp": 211,
+              "new_nodes": 14864,
+              "new_gold": 201,
+              "screen_yield": 0.013522604951560819
+            },
+            {
+              "depth": 2,
+              "corpus_size": 99227,
+              "recall": 0.9509043927648578,
+              "tp": 368,
+              "new_nodes": 84353,
+              "new_gold": 157,
+              "screen_yield": 0.001861226038196626
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 152807,
+          "recall": 0.9741602067183462,
+          "tp": 377,
+          "new_nodes": 53580,
+          "new_gold": 9,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 105525,
+              "recall": 0.9560723514211886,
+              "tp": 370,
+              "new_nodes": 6278,
+              "new_gold": 2,
+              "screen_yield": 0.00031857279388340236
+            },
+            {
+              "depth": 2,
+              "corpus_size": 152807,
+              "recall": 0.9741602067183462,
+              "tp": 377,
+              "new_nodes": 47282,
+              "new_gold": 7,
+              "screen_yield": 0.0001480478829152743
+            }
+          ]
+        }
+      ]
+    },
+    "random": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 13715,
+          "recall": 0.7648578811369509,
+          "tp": 296,
+          "new_nodes": 13715,
+          "new_gold": 296,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 294,
+              "recall": 0.10852713178294573,
+              "tp": 42,
+              "new_nodes": 293,
+              "new_gold": 41,
+              "screen_yield": 0.13993174061433447
+            },
+            {
+              "depth": 2,
+              "corpus_size": 13715,
+              "recall": 0.7648578811369509,
+              "tp": 296,
+              "new_nodes": 13421,
+              "new_gold": 254,
+              "screen_yield": 0.018925564413978094
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 285951,
+          "recall": 0.9405684754521964,
+          "tp": 364,
+          "new_nodes": 272236,
+          "new_gold": 68,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 50545,
+              "recall": 0.7881136950904393,
+              "tp": 305,
+              "new_nodes": 36810,
+              "new_gold": 7,
+              "screen_yield": 0.0001901657158380875
+            },
+            {
+              "depth": 2,
+              "corpus_size": 285951,
+              "recall": 0.9405684754521964,
+              "tp": 364,
+              "new_nodes": 235406,
+              "new_gold": 59,
+              "screen_yield": 0.0002506308250426922
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 16775,
+          "recall": 0.7131782945736435,
+          "tp": 276,
+          "new_nodes": 16775,
+          "new_gold": 276,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 234,
+              "recall": 0.09043927648578812,
+              "tp": 35,
+              "new_nodes": 232,
+              "new_gold": 33,
+              "screen_yield": 0.14224137931034483
+            },
+            {
+              "depth": 2,
+              "corpus_size": 16775,
+              "recall": 0.7131782945736435,
+              "tp": 276,
+              "new_nodes": 16541,
+              "new_gold": 241,
+              "screen_yield": 0.014569856719666284
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 245401,
+          "recall": 0.8630490956072352,
+          "tp": 334,
+          "new_nodes": 228626,
+          "new_gold": 58,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 48552,
+              "recall": 0.7260981912144703,
+              "tp": 281,
+              "new_nodes": 31757,
+              "new_gold": 4,
+              "screen_yield": 0.00012595648203545676
+            },
+            {
+              "depth": 2,
+              "corpus_size": 245401,
+              "recall": 0.8630490956072352,
+              "tp": 334,
+              "new_nodes": 196849,
+              "new_gold": 53,
+              "screen_yield": 0.0002692419062326961
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 19934,
+          "recall": 0.7002583979328165,
+          "tp": 271,
+          "new_nodes": 19934,
+          "new_gold": 271,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 430,
+              "recall": 0.11369509043927649,
+              "tp": 44,
+              "new_nodes": 427,
+              "new_gold": 41,
+              "screen_yield": 0.09601873536299765
+            },
+            {
+              "depth": 2,
+              "corpus_size": 19934,
+              "recall": 0.7002583979328165,
+              "tp": 271,
+              "new_nodes": 19504,
+              "new_gold": 227,
+              "screen_yield": 0.011638638228055784
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 218529,
+          "recall": 0.8940568475452196,
+          "tp": 346,
+          "new_nodes": 198595,
+          "new_gold": 75,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 40819,
+              "recall": 0.7209302325581395,
+              "tp": 279,
+              "new_nodes": 20865,
+              "new_gold": 6,
+              "screen_yield": 0.0002875629043853343
+            },
+            {
+              "depth": 2,
+              "corpus_size": 218529,
+              "recall": 0.8940568475452196,
+              "tp": 346,
+              "new_nodes": 177710,
+              "new_gold": 67,
+              "screen_yield": 0.0003770187383940127
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 24029,
+          "recall": 0.7648578811369509,
+          "tp": 296,
+          "new_nodes": 24029,
+          "new_gold": 296,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 624,
+              "recall": 0.082687338501292,
+              "tp": 32,
+              "new_nodes": 620,
+              "new_gold": 28,
+              "screen_yield": 0.04516129032258064
+            },
+            {
+              "depth": 2,
+              "corpus_size": 24029,
+              "recall": 0.7648578811369509,
+              "tp": 296,
+              "new_nodes": 23405,
+              "new_gold": 264,
+              "screen_yield": 0.011279641102328562
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 251241,
+          "recall": 0.9250645994832042,
+          "tp": 358,
+          "new_nodes": 227212,
+          "new_gold": 62,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 50284,
+              "recall": 0.7777777777777778,
+              "tp": 301,
+              "new_nodes": 26235,
+              "new_gold": 5,
+              "screen_yield": 0.0001905850962454736
+            },
+            {
+              "depth": 2,
+              "corpus_size": 251241,
+              "recall": 0.9250645994832042,
+              "tp": 358,
+              "new_nodes": 200957,
+              "new_gold": 57,
+              "screen_yield": 0.0002836427693486666
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 49012,
+          "recall": 0.8449612403100775,
+          "tp": 327,
+          "new_nodes": 49012,
+          "new_gold": 327,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1436,
+              "recall": 0.165374677002584,
+              "tp": 64,
+              "new_nodes": 1431,
+              "new_gold": 59,
+              "screen_yield": 0.04122990915443746
+            },
+            {
+              "depth": 2,
+              "corpus_size": 49012,
+              "recall": 0.8449612403100775,
+              "tp": 327,
+              "new_nodes": 47576,
+              "new_gold": 263,
+              "screen_yield": 0.005527997309567849
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 156738,
+          "recall": 0.9354005167958657,
+          "tp": 362,
+          "new_nodes": 107726,
+          "new_gold": 35,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 64263,
+              "recall": 0.8630490956072352,
+              "tp": 334,
+              "new_nodes": 15231,
+              "new_gold": 7,
+              "screen_yield": 0.0004595889961263213
+            },
+            {
+              "depth": 2,
+              "corpus_size": 156738,
+              "recall": 0.9354005167958657,
+              "tp": 362,
+              "new_nodes": 92475,
+              "new_gold": 28,
+              "screen_yield": 0.0003027845363611787
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 50165,
+          "recall": 0.9354005167958657,
+          "tp": 362,
+          "new_nodes": 50165,
+          "new_gold": 362,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1464,
+              "recall": 0.3333333333333333,
+              "tp": 129,
+              "new_nodes": 1454,
+              "new_gold": 119,
+              "screen_yield": 0.08184319119669876
+            },
+            {
+              "depth": 2,
+              "corpus_size": 50165,
+              "recall": 0.9354005167958657,
+              "tp": 362,
+              "new_nodes": 48701,
+              "new_gold": 233,
+              "screen_yield": 0.004784296010348864
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 183655,
+          "recall": 0.958656330749354,
+          "tp": 371,
+          "new_nodes": 133490,
+          "new_gold": 9,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 62254,
+              "recall": 0.937984496124031,
+              "tp": 363,
+              "new_nodes": 12069,
+              "new_gold": 1,
+              "screen_yield": 8.285690612312537e-05
+            },
+            {
+              "depth": 2,
+              "corpus_size": 183655,
+              "recall": 0.958656330749354,
+              "tp": 371,
+              "new_nodes": 121401,
+              "new_gold": 8,
+              "screen_yield": 6.589731550810949e-05
+            }
+          ]
+        }
+      ]
+    },
+    "contaminated": {
+      "1": [
+        {
+          "round": 1,
+          "corpus_size": 9963,
+          "recall": 0.6718346253229974,
+          "tp": 260,
+          "new_nodes": 9963,
+          "new_gold": 260,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 41,
+              "recall": 0.056847545219638244,
+              "tp": 22,
+              "new_nodes": 40,
+              "new_gold": 21,
+              "screen_yield": 0.525
+            },
+            {
+              "depth": 2,
+              "corpus_size": 9963,
+              "recall": 0.6718346253229974,
+              "tp": 260,
+              "new_nodes": 9922,
+              "new_gold": 238,
+              "screen_yield": 0.023987099375125984
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 282128,
+          "recall": 0.9147286821705426,
+          "tp": 354,
+          "new_nodes": 272165,
+          "new_gold": 94,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 43599,
+              "recall": 0.689922480620155,
+              "tp": 267,
+              "new_nodes": 33616,
+              "new_gold": 7,
+              "screen_yield": 0.0002082341742027606
+            },
+            {
+              "depth": 2,
+              "corpus_size": 282128,
+              "recall": 0.9147286821705426,
+              "tp": 354,
+              "new_nodes": 238529,
+              "new_gold": 87,
+              "screen_yield": 0.00036473552482088134
+            }
+          ]
+        }
+      ],
+      "2": [
+        {
+          "round": 1,
+          "corpus_size": 2688,
+          "recall": 0.10594315245478036,
+          "tp": 41,
+          "new_nodes": 2688,
+          "new_gold": 41,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 131,
+              "recall": 0.0103359173126615,
+              "tp": 4,
+              "new_nodes": 129,
+              "new_gold": 3,
+              "screen_yield": 0.023255813953488372
+            },
+            {
+              "depth": 2,
+              "corpus_size": 2688,
+              "recall": 0.10594315245478036,
+              "tp": 41,
+              "new_nodes": 2557,
+              "new_gold": 37,
+              "screen_yield": 0.014470082127493155
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 203104,
+          "recall": 0.9638242894056848,
+          "tp": 373,
+          "new_nodes": 200416,
+          "new_gold": 332,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 28373,
+              "recall": 0.524547803617571,
+              "tp": 203,
+              "new_nodes": 25665,
+              "new_gold": 152,
+              "screen_yield": 0.005922462497564777
+            },
+            {
+              "depth": 2,
+              "corpus_size": 203104,
+              "recall": 0.9638242894056848,
+              "tp": 373,
+              "new_nodes": 174731,
+              "new_gold": 170,
+              "screen_yield": 0.0009729240947513606
+            }
+          ]
+        }
+      ],
+      "3": [
+        {
+          "round": 1,
+          "corpus_size": 7242,
+          "recall": 0.2454780361757106,
+          "tp": 95,
+          "new_nodes": 7242,
+          "new_gold": 95,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 95,
+              "recall": 0.01808785529715762,
+              "tp": 7,
+              "new_nodes": 92,
+              "new_gold": 6,
+              "screen_yield": 0.06521739130434782
+            },
+            {
+              "depth": 2,
+              "corpus_size": 7242,
+              "recall": 0.2454780361757106,
+              "tp": 95,
+              "new_nodes": 7147,
+              "new_gold": 88,
+              "screen_yield": 0.012312858542045613
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 153235,
+          "recall": 0.9767441860465116,
+          "tp": 378,
+          "new_nodes": 145993,
+          "new_gold": 283,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 27006,
+              "recall": 0.6950904392764858,
+              "tp": 269,
+              "new_nodes": 19744,
+              "new_gold": 163,
+              "screen_yield": 0.008255672609400324
+            },
+            {
+              "depth": 2,
+              "corpus_size": 153235,
+              "recall": 0.9767441860465116,
+              "tp": 378,
+              "new_nodes": 126229,
+              "new_gold": 109,
+              "screen_yield": 0.0008635099699752038
+            }
+          ]
+        }
+      ],
+      "4": [
+        {
+          "round": 1,
+          "corpus_size": 13210,
+          "recall": 0.5968992248062015,
+          "tp": 231,
+          "new_nodes": 13210,
+          "new_gold": 231,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 209,
+              "recall": 0.03875968992248062,
+              "tp": 15,
+              "new_nodes": 205,
+              "new_gold": 13,
+              "screen_yield": 0.06341463414634146
+            },
+            {
+              "depth": 2,
+              "corpus_size": 13210,
+              "recall": 0.5968992248062015,
+              "tp": 231,
+              "new_nodes": 13001,
+              "new_gold": 216,
+              "screen_yield": 0.016614106607184063
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 259178,
+          "recall": 0.9431524547803618,
+          "tp": 365,
+          "new_nodes": 245968,
+          "new_gold": 134,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 43428,
+              "recall": 0.6640826873385013,
+              "tp": 257,
+              "new_nodes": 30198,
+              "new_gold": 23,
+              "screen_yield": 0.0007616398436982581
+            },
+            {
+              "depth": 2,
+              "corpus_size": 259178,
+              "recall": 0.9431524547803618,
+              "tp": 365,
+              "new_nodes": 215750,
+              "new_gold": 108,
+              "screen_yield": 0.0005005793742757822
+            }
+          ]
+        }
+      ],
+      "5": [
+        {
+          "round": 1,
+          "corpus_size": 31194,
+          "recall": 0.7260981912144703,
+          "tp": 281,
+          "new_nodes": 31194,
+          "new_gold": 281,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1676,
+              "recall": 0.09819121447028424,
+              "tp": 38,
+              "new_nodes": 1671,
+              "new_gold": 36,
+              "screen_yield": 0.02154398563734291
+            },
+            {
+              "depth": 2,
+              "corpus_size": 31194,
+              "recall": 0.7260981912144703,
+              "tp": 281,
+              "new_nodes": 29518,
+              "new_gold": 243,
+              "screen_yield": 0.008232265058608306
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 156188,
+          "recall": 0.9069767441860465,
+          "tp": 351,
+          "new_nodes": 124994,
+          "new_gold": 70,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 46714,
+              "recall": 0.7467700258397932,
+              "tp": 289,
+              "new_nodes": 15500,
+              "new_gold": 7,
+              "screen_yield": 0.00045161290322580643
+            },
+            {
+              "depth": 2,
+              "corpus_size": 156188,
+              "recall": 0.9069767441860465,
+              "tp": 351,
+              "new_nodes": 109474,
+              "new_gold": 62,
+              "screen_yield": 0.000566344520160038
+            }
+          ]
+        }
+      ],
+      "10": [
+        {
+          "round": 1,
+          "corpus_size": 39201,
+          "recall": 0.8888888888888888,
+          "tp": 344,
+          "new_nodes": 39201,
+          "new_gold": 344,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 1172,
+              "recall": 0.18863049095607234,
+              "tp": 73,
+              "new_nodes": 1162,
+              "new_gold": 68,
+              "screen_yield": 0.058519793459552494
+            },
+            {
+              "depth": 2,
+              "corpus_size": 39201,
+              "recall": 0.8888888888888888,
+              "tp": 344,
+              "new_nodes": 38029,
+              "new_gold": 271,
+              "screen_yield": 0.007126140576928134
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "corpus_size": 194822,
+          "recall": 0.9250645994832042,
+          "tp": 358,
+          "new_nodes": 155621,
+          "new_gold": 14,
+          "stop_depth": 2,
+          "curve": [
+            {
+              "depth": 1,
+              "corpus_size": 53450,
+              "recall": 0.8914728682170543,
+              "tp": 345,
+              "new_nodes": 14229,
+              "new_gold": 1,
+              "screen_yield": 7.027900766041184e-05
+            },
+            {
+              "depth": 2,
+              "corpus_size": 194822,
+              "recall": 0.9250645994832042,
+              "tp": 358,
+              "new_nodes": 141372,
+              "new_gold": 13,
+              "screen_yield": 9.195597430891548e-05
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

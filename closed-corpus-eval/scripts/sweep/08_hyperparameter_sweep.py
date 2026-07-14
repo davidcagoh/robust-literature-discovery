@@ -14,24 +14,56 @@ Output:
   data/outputs/hyperparameter_sweep.csv   — one row per config × survey
   data/outputs/pub_figures/fig9_param_sweep.png  — summary heatmaps
 
-Runtime estimate: ~495 configs × 3 surveys. Each config takes <5s on a modern
-laptop. Total ~30–60 min depending on I/O.
+**Traversal engine updated 2026-07-14** to call litdiscover's real production
+operators (backward_traversal_operator, forward_traversal_operator) via a
+ClosedCorpusSource, matching eval/03/04b/05 and sweep/04/07_rounds_sweep.py —
+see wiki/litdiscover/phase-discovery-roadmap.md §1.3. Same design split as
+eval/03: PARETO_P_VALS is an explicit percentile sweep, so each threshold is
+computed directly (np.percentile over the frontier's own citation_count,
+production's actual pre-expansion filter point) rather than through
+pareto_hub_threshold()'s Gini-adaptive override, which would silently
+overrule some swept values.
+
+**Not run to completion after this migration — this is a real, not
+theoretical, cost concern, flagged rather than silently attempted.** The
+original runtime estimate below ("~30-60 min") was measured against the old
+dict-lookup traversal. eval/03's migration (33 conditions, unfiltered
+strategies included) already took ~30-40 min against the production
+ThreadPoolExecutor-based operators at this corpus scale (see
+wiki/litdiscover/phase-discovery-roadmap.md §1.4's "real-world performance
+finding"). This script is 1980 configs (660 configs × 3 surveys) — orders of
+magnitude more operator calls — and would likely take hours, not tens of
+minutes, under the same engine. Code correctness was verified by matching
+this script's traversal shape line-for-line against eval/04b's and eval/03's
+already-validated migrations, not by re-running to completion. If this sweep
+is needed again, consider adding a `pdf_workers`-style batch cap or a
+non-threaded code path to backward_traversal_operator first.
+
+Original runtime estimate (pre-migration, dict-lookup traversal): ~495
+configs × 3 surveys, <5s/config, ~30-60 min.
 """
+from __future__ import annotations
 
 import json
 import csv
 import itertools
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from collections import defaultdict
 from pathlib import Path
 import time
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from _corpus_loader import load_adjacency, build_closed_corpus_source  # noqa: E402
+
+from litdiscover.discovery.traverse import (
+    backward_traversal_operator, forward_traversal_operator,
+)
+
 _REPO   = Path(__file__).parent.parent.parent
-APS_CSV = _REPO / "data" / "processed" / "aps-dataset-citations-2022.csv"
 OUT     = _REPO / "data" / "outputs"
 FIGS    = OUT / "pub_figures"
 FIGS.mkdir(parents=True, exist_ok=True)
@@ -54,19 +86,15 @@ print(f"Sweep grid: {len(PARETO_P_VALS)} pareto × "
       f"× 3 surveys")
 
 # ── Load ──────────────────────────────────────────────────────────────────────
-print("Loading APS citation graph...")
-df = pd.read_csv(APS_CSV)
-print(f"  {len(df):,} edges")
+print("Loading APS citation graph via shared _corpus_loader...")
+cites, cited_by = load_adjacency()
+print(f"  {sum(len(v) for v in cites.values()):,} edges")
+
+source, doi_to_paper = build_closed_corpus_source(cites, cited_by)
 
 with open(OUT / "ground_truth.json") as f:
     gt = json.load(f)
 
-print("Building adjacency index...")
-cites    = defaultdict(set)
-cited_by = defaultdict(set)
-for row in df.itertuples(index=False):
-    cites[row.citing_doi].add(row.cited_doi)
-    cited_by[row.cited_doi].add(row.citing_doi)
 all_nodes = set(cites.keys()) | set(cited_by.keys())
 print(f"  {len(all_nodes):,} nodes. Done.")
 
@@ -75,7 +103,7 @@ def make_seeds_top_k(gold_refs, k):
     scored = sorted(gold_refs, key=lambda x: len(cited_by.get(x, set())), reverse=True)
     return set(scored[:k])
 
-# ── Core traversal ────────────────────────────────────────────────────────────
+# ── Core traversal (real litdiscover production operators) ────────────────────
 def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
                             pareto_p=80, yield_thresh=0.05, max_depth=MAX_DEPTH):
     visited  = set(visited_already) if visited_already else set()
@@ -91,28 +119,26 @@ def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
         prev_size = len(visited)
         prev_gold = len(visited & gold_refs)
 
+        frontier_papers = [doi_to_paper[doi] for doi in frontier if doi in doi_to_paper]
+        if not frontier_papers:
+            stop_depth = d
+            break
+
+        bwd = backward_traversal_operator(frontier_papers, source=source)
+
+        if pareto_p is not None:
+            cit_counts = [p["citation_count"] for p in frontier_papers
+                          if p.get("citation_count") is not None]
+            threshold = float(np.percentile(cit_counts, pareto_p)) if cit_counts else float("inf")
+        else:
+            threshold = float("inf")
+        fwd = forward_traversal_operator(frontier_papers, hub_threshold=threshold, source=source)
+
         nxt = set()
-
-        # Backward (unfiltered)
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
-
-        # Forward (Pareto-filtered on citers' out-degree)
-        fwd_candidates = [nb for node in frontier
-                          for nb in cited_by.get(node, set())
-                          if nb not in visited]
-        if fwd_candidates and pareto_p is not None:
-            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
-            threshold = np.percentile(out_degs, pareto_p)
-            for nb, od in zip(fwd_candidates, out_degs):
-                if od <= threshold and nb not in visited:
-                    visited.add(nb); nxt.add(nb)
-        elif fwd_candidates:
-            for nb in fwd_candidates:
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in bwd.candidates + fwd.candidates:
+            nb = cand.get("doi")
+            if nb and nb not in visited:
+                visited.add(nb); nxt.add(nb)
 
         frontier  = nxt
         new_nodes = len(visited) - prev_size

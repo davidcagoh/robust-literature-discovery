@@ -1,29 +1,54 @@
 """
 Phase 6-8: Cold-Start Escape Hatch Simulation
+(superseded by eval/04b_cold_start_lowseed.py — see CLAUDE.md; this script's
+own output, cold_start_results.json, has never been generated, which leaves
+sweep/07_elbow_analysis.py permanently inoperable. Left in place, migrated
+for engine consistency, not because it's an active paper-claims script.)
 
 Simulates the LitReview v2 loop starting from keyword search seeds
 (no survey paper itself), measuring how well traversal + escape hatch
 can recover the gold reference set.
 
+**Traversal engine updated 2026-07-14** to call litdiscover's real production
+operators (backward_traversal_operator, forward_traversal_operator,
+pareto_hub_threshold) via a ClosedCorpusSource, matching the correction made
+in eval/04b_cold_start_lowseed.py, eval/03_traversal_simulation.py, and
+sweep/07_rounds_sweep.py — the Pareto filter now applies pre-expansion on the
+FRONTIER paper's own citation_count (production's actual filter point), not
+post-hoc on collected CITERS' own out-degree. See
+wiki/litdiscover/phase-discovery-roadmap.md §1.3. This migration was NOT
+followed by a full run (the seed-size/N_ROUNDS regime here — k up to 50,
+N_ROUNDS=4 — is expensive at this corpus scale; see the wiki's
+"real-world performance finding" note in §1.4) — code correctness was
+verified by matching this script's traversal shape line-for-line against
+eval/04b's already-validated migration, not by re-running to completion.
+
 See experiment_design.md for full methodology.
 """
+from __future__ import annotations
 
 import json
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from collections import defaultdict
 from pathlib import Path
 import random
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from _corpus_loader import load_adjacency, build_closed_corpus_source  # noqa: E402
+
+from litdiscover.discovery.traverse import (
+    backward_traversal_operator, forward_traversal_operator, pareto_hub_threshold,
+)
 
 random.seed(42)
 np.random.seed(42)
 
 _REPO = Path(__file__).parent.parent.parent
-APS_CSV = _REPO / "data" / "processed" / "aps-dataset-citations-2022.csv"
 OUT  = _REPO / "data" / "outputs"
 FIGS = OUT / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)
@@ -42,40 +67,35 @@ SURVEY_STYLE = {
 }
 
 # ── Load ──────────────────────────────────────────────────────────────────────
-print("Loading APS citation graph...")
-df = pd.read_csv(APS_CSV)
-print(f"  {len(df):,} edges")
+print("Loading APS citation graph via shared _corpus_loader...")
+cites, cited_by = load_adjacency()
+print(f"  {sum(len(v) for v in cites.values()):,} edges")
+
+source, doi_to_paper = build_closed_corpus_source(cites, cited_by)
 
 with open(OUT / "ground_truth.json") as f:
     gt = json.load(f)
 
-print("Building adjacency index...")
-cites    = defaultdict(set)
-cited_by = defaultdict(set)
-for row in df.itertuples(index=False):
-    cites[row.citing_doi].add(row.cited_doi)
-    cited_by[row.cited_doi].add(row.citing_doi)
-print("  Done.")
-
-# ── Core traversal engine (Bidir + Pareto-80, with yield stopping) ────────────
+# ── Core traversal engine (real litdiscover production operators) ─────────────
 PARETO_P = 80
 YIELD_THRESHOLD = 0.05   # stop when screen yield drops below 5%
 MAX_DEPTH = 8
+
 
 def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
                             pareto_p=PARETO_P, yield_thresh=YIELD_THRESHOLD,
                             max_depth=MAX_DEPTH):
     """
-    Bidirectional BFS with Pareto filter on forward step.
+    Bidirectional BFS via real production operators, Pareto filter applied
+    pre-expansion on the frontier's own citation_count (see module docstring).
     Stops when screen yield (new gold / new nodes) drops below yield_thresh.
-    
+
     Returns:
         visited: set of all nodes visited
         curve:   list of dicts with per-depth stats
         stop_depth: depth at which yield threshold was triggered
     """
     visited  = set(visited_already) if visited_already else set()
-    # Add seeds
     for s in seed_set:
         visited.add(s)
     frontier = set(seed_set) - (visited_already or set())
@@ -89,25 +109,23 @@ def bidir_pareto_traversal(seed_set, gold_refs, visited_already=None,
         prev_size = len(visited)
         prev_gold = len(visited & gold_refs)
 
-        nxt = set()
-        # Backward (unfiltered)
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        frontier_papers = [doi_to_paper[doi] for doi in frontier if doi in doi_to_paper]
+        if not frontier_papers:
+            stop_depth = d
+            break
 
-        # Forward (Pareto-filtered)
-        fwd_candidates = []
-        for node in frontier:
-            for nb in cited_by.get(node, set()):
-                if nb not in visited:
-                    fwd_candidates.append(nb)
-        if fwd_candidates:
-            out_degs = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
-            threshold = np.percentile(out_degs, pareto_p)
-            for nb, od in zip(fwd_candidates, out_degs):
-                if od <= threshold and nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        bwd = backward_traversal_operator(frontier_papers, source=source)
+        if pareto_p is not None:
+            threshold, _, _ = pareto_hub_threshold(frontier_papers, base_percentile=pareto_p)
+        else:
+            threshold = float("inf")
+        fwd = forward_traversal_operator(frontier_papers, hub_threshold=threshold, source=source)
+
+        nxt = set()
+        for cand in bwd.candidates + fwd.candidates:
+            nb = cand.get("doi")
+            if nb and nb not in visited:
+                visited.add(nb); nxt.add(nb)
 
         frontier = nxt
         new_nodes = len(visited) - prev_size

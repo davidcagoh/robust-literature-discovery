@@ -2,15 +2,40 @@
 Phase 4: Simulate traversal strategies on the APS citation graph and measure
 coverage of the gold reference set at each step.
 
+**Traversal engine updated 2026-07-14** to call litdiscover's real production
+operators (backward_traversal_operator, forward_traversal_operator) via a
+ClosedCorpusSource, instead of hand-rolled BFS loops over cites/cited_by
+directly — see wiki/litdiscover/phase-discovery-roadmap.md §1.3 and
+04b_cold_start_lowseed.py's own migration for the fuller account.
+
+One deliberate design choice, different from 04b's migration: this script's
+whole point is an explicit Pareto-PERCENTILE SWEEP (10..90) as a controlled
+experimental variable. Production's pareto_hub_threshold() applies a
+Gini-adaptive override (relaxing to 90th/95th percentile for lower-Gini
+frontiers) that would silently overrule some of the requested sweep values —
+defeating the sweep's purpose. So this script computes each percentile
+threshold directly (np.percentile over the FRONTIER's own citation_count,
+matching production's pre-expansion filter POINT — see below) and passes it
+straight to forward_traversal_operator's hub_threshold, bypassing
+pareto_hub_threshold()'s Gini calibration. The actual candidate-fetching and
+filtering MECHANICS still come from the real production operator; only the
+threshold-selection policy is swapped for the sweep's sake.
+
+This also corrects the same filter-point issue 04b's migration corrected:
+the legacy version of this script (percentile applied post-hoc to collected
+CITERS' own out-degree) is replaced with production's pre-expansion filter
+on the FRONTIER paper's own citation_count (in-degree within this closed
+corpus). Expect different numbers from any previously-committed run of this
+script for the same reason 04b's numbers changed.
+
 Strategies compared (all seeded with top-5 gold refs by in-degree — NOT the survey DOI):
   A. Backward-only BFS (follow references, depth 1..6)
   B. Forward-only BFS  (follow citations,  depth 1..6)
   C. Bidirectional BFS (both directions simultaneously, depth 1..6)
   D. Bidirectional + Pareto filter on forward step
-       — at each depth, suppress forward-neighbours whose out-degree
-         exceeds the p-th percentile of the current frontier's out-degrees
-       — tested at p = 50, 70, 80, 90 (i.e. keep only papers with
-         out-degree <= p-th percentile)
+       — at each depth, suppress FRONTIER papers (not collected candidates)
+         whose own citation_count exceeds the p-th percentile of the current
+         frontier's citation_counts — tested at p = 10..90.
 
 For each strategy × survey × depth we record:
   - corpus_size:  total nodes visited so far (cost)
@@ -19,27 +44,29 @@ For each strategy × survey × depth we record:
   - precision:    gold_refs ∩ visited / visited  (how many visited are relevant)
   - f1:           harmonic mean of recall_refs and precision
 
-Gold set definition:
-  - Primary gold = gold_refs (the papers the survey explicitly cites)
-  - Extended gold = gold_1hop (refs + citers, i.e. everything 1-hop from survey)
-
 Results saved to data/outputs/traversal_results.json
 Figures saved to data/outputs/figures/
 """
+from __future__ import annotations
 
 import json
+import sys
 import numpy as np
-import pandas as pd
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
-from collections import defaultdict
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from _corpus_loader import load_adjacency, build_closed_corpus_source  # noqa: E402
+
+from litdiscover.discovery.traverse import (
+    backward_traversal_operator, forward_traversal_operator,
+)
 
 # ── Setup ─────────────────────────────────────────────────────────────────────
 _REPO = Path(__file__).parent.parent.parent
-APS_CSV = _REPO / "data" / "processed" / "aps-dataset-citations-2022.csv"
 OUT  = _REPO / "data" / "outputs"
 FIGS = OUT / "figures"
 FIGS.mkdir(parents=True, exist_ok=True)
@@ -61,22 +88,15 @@ MAX_DEPTH = 6
 PARETO_PERCENTILES = [10, 20, 30, 40, 50, 70, 80, 90]
 
 # ── Load ──────────────────────────────────────────────────────────────────────
-print("Loading APS citation graph...")
-df = pd.read_csv(APS_CSV)
-print(f"  {len(df):,} edges")
+print("Loading APS citation graph via shared _corpus_loader...")
+cites, cited_by = load_adjacency()
+print(f"  {sum(len(v) for v in cites.values()):,} edges")
+
+source, doi_to_paper = build_closed_corpus_source(cites, cited_by)
 
 with open(OUT / "ground_truth.json") as f:
     gt = json.load(f)
 
-print("Building adjacency index...")
-cites    = defaultdict(set)
-cited_by = defaultdict(set)
-for row in df.itertuples(index=False):
-    cites[row.citing_doi].add(row.cited_doi)
-    cited_by[row.cited_doi].add(row.citing_doi)
-all_nodes_03 = set(cites.keys()) | set(cited_by.keys())
-global_in_deg_03 = {n: len(cited_by.get(n, set())) for n in all_nodes_03}
-print("  Done.")
 
 # ── Helper: compute metrics ───────────────────────────────────────────────────
 def metrics(visited, gold_refs, gold_1hop):
@@ -96,95 +116,107 @@ def metrics(visited, gold_refs, gold_1hop):
         "tp_1hop":     tp_1hop,
     }
 
-# ── Strategy A: Backward-only BFS ─────────────────────────────────────────────
+
+def _frontier_papers(frontier_dois):
+    return [doi_to_paper[doi] for doi in frontier_dois if doi in doi_to_paper]
+
+
+# ── Strategy A: Backward-only BFS (real backward_traversal_operator) ──────────
 def strategy_backward(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     visited  = set(seed_set)
     frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
+        bwd = backward_traversal_operator(_frontier_papers(frontier), source=source)
         nxt = set()
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in bwd.candidates:
+            doi = cand.get("doi")
+            if doi and doi not in visited:
+                visited.add(doi); nxt.add(doi)
         frontier = nxt
         curve.append({"depth": d, **metrics(visited, gold_refs, gold_1hop)})
         if not frontier:
             break
     return curve
 
-# ── Strategy B: Forward-only BFS ──────────────────────────────────────────────
+
+# ── Strategy B: Forward-only BFS (real forward_traversal_operator, unfiltered) ─
 def strategy_forward(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     visited  = set(seed_set)
     frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
+        fwd = forward_traversal_operator(_frontier_papers(frontier),
+                                          hub_threshold=float("inf"), source=source)
         nxt = set()
-        for node in frontier:
-            for nb in cited_by.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in fwd.candidates:
+            doi = cand.get("doi")
+            if doi and doi not in visited:
+                visited.add(doi); nxt.add(doi)
         frontier = nxt
         curve.append({"depth": d, **metrics(visited, gold_refs, gold_1hop)})
         if not frontier:
             break
     return curve
 
-# ── Strategy C: Bidirectional BFS ─────────────────────────────────────────────
+
+# ── Strategy C: Bidirectional BFS (both operators, unfiltered) ────────────────
 def strategy_bidir(seed_set, gold_refs, gold_1hop, max_depth=MAX_DEPTH):
     visited  = set(seed_set)
     frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
+        papers = _frontier_papers(frontier)
+        bwd = backward_traversal_operator(papers, source=source)
+        fwd = forward_traversal_operator(papers, hub_threshold=float("inf"), source=source)
         nxt = set()
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
-            for nb in cited_by.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in bwd.candidates + fwd.candidates:
+            doi = cand.get("doi")
+            if doi and doi not in visited:
+                visited.add(doi); nxt.add(doi)
         frontier = nxt
         curve.append({"depth": d, **metrics(visited, gold_refs, gold_1hop)})
         if not frontier:
             break
     return curve
 
-# ── Strategy D: Bidirectional + Pareto filter on forward step ─────────────────
+
+# ── Strategy D: Bidirectional + Pareto filter, PRE-expansion on frontier ──────
 def strategy_bidir_pareto(seed_set, gold_refs, gold_1hop, percentile=80, max_depth=MAX_DEPTH):
     """
     At each depth:
-      - Backward step: add all references of frontier nodes (no filter)
-      - Forward step:  collect all citers of frontier nodes, then discard those
-                       whose out-degree exceeds the p-th percentile of the collected
-                       citers' out-degrees (high-out-degree citers are survey-like
-                       papers that cite broadly and tend to be off-topic).
+      - Backward step: real backward_traversal_operator, unfiltered.
+      - Forward step:  threshold = np.percentile(frontier's own citation_count,
+                       percentile) — computed directly (bypassing Gini
+                       calibration, see module docstring) — then real
+                       forward_traversal_operator(hub_threshold=threshold),
+                       which skips FETCHING citers of any frontier paper
+                       above that threshold entirely (production's actual
+                       filter point, not a post-hoc filter on already-
+                       collected candidates).
     """
     visited  = set(seed_set)
     frontier = set(seed_set)
     curve = [{"depth": 0, **metrics(visited, gold_refs, gold_1hop)}]
     for d in range(1, max_depth + 1):
+        papers = _frontier_papers(frontier)
+        bwd = backward_traversal_operator(papers, source=source)
+
+        cit_counts = [p["citation_count"] for p in papers if p.get("citation_count") is not None]
+        threshold = float(np.percentile(cit_counts, percentile)) if cit_counts else float("inf")
+        fwd = forward_traversal_operator(papers, hub_threshold=threshold, source=source)
+
         nxt = set()
-        # Backward (unfiltered)
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
-        # Forward (Pareto-filtered on citers' out-degree)
-        fwd_candidates = [nb for node in frontier
-                          for nb in cited_by.get(node, set())
-                          if nb not in visited]
-        if fwd_candidates:
-            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
-            threshold = np.percentile(out_degs, percentile)
-            for nb, od in zip(fwd_candidates, out_degs):
-                if od <= threshold and nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in bwd.candidates + fwd.candidates:
+            doi = cand.get("doi")
+            if doi and doi not in visited:
+                visited.add(doi); nxt.add(doi)
         frontier = nxt
         curve.append({"depth": d, **metrics(visited, gold_refs, gold_1hop)})
         if not frontier:
             break
     return curve
+
 
 # ── Run all strategies for all surveys ────────────────────────────────────────
 print("\nRunning traversal simulations...")
@@ -196,9 +228,6 @@ for key, info in gt.items():
     gold_1hop = set(info["gold_1hop"])
     print(f"\n  {key} ({doi})")
 
-    # Representative seed: top-5 gold refs by in-degree within APS corpus.
-    # This mirrors the realistic cold-start condition: a user starts with a handful
-    # of well-known, highly-cited papers on the topic — NOT from the survey DOI itself.
     gold_sorted = sorted(gold_refs, key=lambda x: len(cited_by.get(x, set())), reverse=True)
     seed_set    = set(gold_sorted[:5])
     print(f"    Seeds (top-5 by in-degree): {sorted(seed_set)[:3]}...")
@@ -235,7 +264,6 @@ print(f"\nSaved traversal results to {OUT / 'traversal_results.json'}")
 # ── Plotting ──────────────────────────────────────────────────────────────────
 print("Generating figures...")
 
-# ── Fig 1: Recall vs. depth for all strategies (3 surveys × 2 metrics) ────────
 fig, axes = plt.subplots(2, 3, figsize=(15, 9))
 
 strat_styles = {
@@ -272,7 +300,6 @@ for col, (key, info) in enumerate(gt.items()):
             ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x):,}"))
         ax.set_xlabel("BFS depth")
 
-# Shared legend
 handles, labels = axes[0][0].get_legend_handles_labels()
 fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8,
            bbox_to_anchor=(0.5, -0.03))
@@ -281,14 +308,10 @@ fig.tight_layout(rect=[0, 0.05, 1, 1])
 fig.savefig(FIGS / "traversal_recall_vs_depth.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
-# ── Fig 2: Recall vs. corpus size (efficiency frontier) ───────────────────────
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-
 for ax, (key, info) in zip(axes, gt.items()):
     res = all_results[key]
     s   = STYLE[key]
-    gold_size = len(info["gold_refs"])
-
     for strat, style in strat_styles.items():
         if strat not in res:
             continue
@@ -296,14 +319,12 @@ for ax, (key, info) in zip(axes, gt.items()):
         ys = [pt["recall_refs"]  for pt in res[strat]]
         ax.plot(xs, ys, color=style["color"], ls=style["ls"],
                 lw=style["lw"], label=style["label"], marker="o", ms=3)
-
     ax.set_xlabel("Corpus size (nodes visited)")
     ax.set_ylabel("Recall (gold refs)")
     ax.set_title(s["label"], fontsize=9)
     ax.set_ylim(0, 1.05)
     ax.axhline(1.0, color="grey", lw=0.8, ls=":")
     ax.xaxis.set_major_formatter(ticker.FuncFormatter(lambda x, _: f"{int(x):,}"))
-
 handles, labels = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8,
            bbox_to_anchor=(0.5, -0.03))
@@ -312,13 +333,10 @@ fig.tight_layout(rect=[0, 0.05, 1, 1])
 fig.savefig(FIGS / "traversal_efficiency_frontier.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
-# ── Fig 3: Precision-Recall curves ────────────────────────────────────────────
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-
 for ax, (key, info) in zip(axes, gt.items()):
     res = all_results[key]
     s   = STYLE[key]
-
     for strat, style in strat_styles.items():
         if strat not in res:
             continue
@@ -326,12 +344,10 @@ for ax, (key, info) in zip(axes, gt.items()):
         ys = [pt["precision"]   for pt in res[strat]]
         ax.plot(xs, ys, color=style["color"], ls=style["ls"],
                 lw=style["lw"], label=style["label"], marker="o", ms=3)
-
     ax.set_xlabel("Recall (gold refs)")
     ax.set_ylabel("Precision")
     ax.set_title(s["label"], fontsize=9)
     ax.set_xlim(0, 1.05); ax.set_ylim(0, 1.05)
-
 handles, labels = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels, loc="lower center", ncol=4, fontsize=8,
            bbox_to_anchor=(0.5, -0.03))
@@ -340,18 +356,13 @@ fig.tight_layout(rect=[0, 0.05, 1, 1])
 fig.savefig(FIGS / "traversal_precision_recall.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
-# ── Fig 4: Marginal new gold refs per depth step ──────────────────────────────
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-
 key_strats = ["backward", "bidir", "bidir_pareto80"]
 key_labels = ["Backward only", "Bidirectional", "Bidir + Pareto-80"]
 key_colors = ["#1b7837", "#000000", "#fdae61"]
-
 for ax, (key, info) in zip(axes, gt.items()):
     res = all_results[key]
     s   = STYLE[key]
-    gold_size = len(info["gold_refs"])
-
     for strat, label, color in zip(key_strats, key_labels, key_colors):
         if strat not in res:
             continue
@@ -360,11 +371,9 @@ for ax, (key, info) in zip(axes, gt.items()):
         depths   = [pt["depth"] for pt in res[strat]]
         ax.bar([d + key_strats.index(strat)*0.25 for d in depths],
                marginal, width=0.22, color=color, label=label, alpha=0.85)
-
     ax.set_xlabel("BFS depth")
     ax.set_ylabel("New gold refs discovered")
     ax.set_title(s["label"], fontsize=9)
-
 handles, labels_leg = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels_leg, loc="lower center", ncol=3, fontsize=9,
            bbox_to_anchor=(0.5, -0.03))
@@ -373,13 +382,10 @@ fig.tight_layout(rect=[0, 0.05, 1, 1])
 fig.savefig(FIGS / "traversal_marginal_discovery.png", dpi=150, bbox_inches="tight")
 plt.close(fig)
 
-# ── Fig 5: Screen yield proxy — ratio of new gold refs to new nodes at each depth
 fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-
 for ax, (key, info) in zip(axes, gt.items()):
     res = all_results[key]
     s   = STYLE[key]
-
     for strat, style in strat_styles.items():
         if strat not in res or len(res[strat]) < 2:
             continue
@@ -392,12 +398,10 @@ for ax, (key, info) in zip(axes, gt.items()):
             yields.append(new_gold / new_nodes if new_nodes > 0 else 0.0)
         ax.plot(depths, yields, color=style["color"], ls=style["ls"],
                 lw=style["lw"], label=style["label"], marker="o", ms=3)
-
     ax.set_xlabel("BFS depth")
     ax.set_ylabel("Screen yield (new gold / new nodes)")
     ax.set_title(s["label"], fontsize=9)
     ax.set_ylim(0, None)
-
 handles, labels_leg = axes[0].get_legend_handles_labels()
 fig.legend(handles, labels_leg, loc="lower center", ncol=4, fontsize=8,
            bbox_to_anchor=(0.5, -0.03))

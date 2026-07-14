@@ -1,8 +1,1 @@
 doi,in_deg,out_deg,total_deg,journal,year,bfs_dist_from_recovered,bfs_dist_from_seeds,bfs_dist_from_survey
-10.1103/PhysRevA.74.033615,8,84,92,PhysRevA,2043,1,2,1
-10.1103/PhysRevA.73.011601,14,9,23,PhysRevA,2042,1,2,1
-10.1103/PhysRevB.64.081301,45,15,60,PhysRevB,2033,1,2,1
-10.1103/PhysRevA.57.4581,10,4,14,PhysRevA,2026,1,2,1
-10.1103/PhysRevLett.96.080402,18,2,20,PhysRevLett,2053,2,2,1
-10.1103/PhysRevLett.97.190403,5,10,15,PhysRevLett,2054,1,2,1
-10.1103/PhysRevLett.96.080401,4,10,14,PhysRevLett,2053,1,2,1

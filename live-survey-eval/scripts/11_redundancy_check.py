@@ -37,23 +37,14 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
-
-try:
-    from dotenv import load_dotenv
-    load_dotenv(Path(__file__).parent.parent.parent.parent.parent / "litdiscover" / ".env")
-except ImportError:
-    pass
 
 from litdiscover.discovery.operators import co_citation_operator
 from litdiscover.discovery.traverse import forward_traversal_operator
 
-# Reuse 10_operator_benchmark.py's loaders/config rather than duplicating them
-import importlib.util
-_spec = importlib.util.spec_from_file_location(
-    "bench10", Path(__file__).parent / "10_operator_benchmark.py")
-bench10 = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(bench10)
+# Reuse 10_operator_benchmark.py's loaders/config via _shared.py (2026-07-14 —
+# previously loaded 10_operator_benchmark.py's whole module body via
+# importlib.util.spec_from_file_location; now a normal import).
+import _shared
 
 ROUND2_FRONTIER_CAP = 15  # cap round-1 candidates fed into round 2, by citation_count desc
 
@@ -67,13 +58,13 @@ def _jaccard(a: set[str], b: set[str]) -> float:
 
 def run_survey(survey_id: str) -> dict:
     print(f"\n{'='*60}\nRedundancy check: {survey_id}\n{'='*60}")
-    gold = bench10._load_gold(survey_id)
-    seed_ids = bench10._load_seed_ids(survey_id)
+    gold = _shared._load_gold(survey_id)
+    seed_ids = _shared._load_seed_ids(survey_id)
     if not gold or not seed_ids:
         print(f"  Missing gold or seeds for {survey_id}. Skipping.")
         return {}
 
-    seeds = [p for sid in seed_ids if (p := bench10._fetch_full_paper(sid)) is not None]
+    seeds = [p for sid in seed_ids if (p := _shared._fetch_full_paper(sid)) is not None]
     if not seeds:
         print("  Could not resolve seeds. Skipping.")
         return {}
@@ -133,18 +124,18 @@ def run_survey(survey_id: str) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Co-citation vs. multi-round forward traversal redundancy check")
-    parser.add_argument("--survey", choices=list(bench10.SURVEYS.keys()),
+    parser.add_argument("--survey", choices=list(_shared.SURVEYS.keys()),
                          help="Run only this survey (default: all)")
     args = parser.parse_args()
 
-    surveys_to_run = [args.survey] if args.survey else list(bench10.SURVEYS.keys())
+    surveys_to_run = [args.survey] if args.survey else list(_shared.SURVEYS.keys())
     all_results = {}
     for sid in surveys_to_run:
         result = run_survey(sid)
         if result:
             all_results[sid] = result
 
-    out_path = bench10.OUT_DIR / "redundancy_check_results.json"
+    out_path = _shared.OUT_DIR / "redundancy_check_results.json"
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
     print(f"\nResults written to {out_path}")

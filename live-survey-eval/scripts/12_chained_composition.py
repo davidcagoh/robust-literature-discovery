@@ -33,19 +33,11 @@ from __future__ import annotations
 
 import argparse
 import json
-from pathlib import Path
 
-try:
-    from dotenv import load_dotenv
-    load_dotenv(Path(__file__).parent.parent.parent.parent.parent / "litdiscover" / ".env")
-except ImportError:
-    pass
-
-import importlib.util
-_spec = importlib.util.spec_from_file_location(
-    "bench10", Path(__file__).parent / "10_operator_benchmark.py")
-bench10 = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(bench10)
+# Reuse 10_operator_benchmark.py's loaders/config via _shared.py (2026-07-14 —
+# previously loaded 10_operator_benchmark.py's whole module body via
+# importlib.util.spec_from_file_location; now a normal import).
+import _shared
 
 
 def run_chained(seeds: list[dict], cfg: dict, order: list[str],
@@ -65,7 +57,7 @@ def run_chained(seeds: list[dict], cfg: dict, order: list[str],
     total_s2_calls = 0
     curve: list[dict] = [{
         "step": "seeds_only",
-        "recall": bench10._recall(accumulated_ids, gold),
+        "recall": _shared._recall(accumulated_ids, gold),
         "new_gold": len(accumulated_ids & gold),
         "corpus_size": len(accumulated_ids),
     }]
@@ -73,7 +65,7 @@ def run_chained(seeds: list[dict], cfg: dict, order: list[str],
     for name in order:
         ranked = sorted(accumulated, key=lambda p: p.get("citation_count") or 0, reverse=True)
         print(f"  Running {name} on accumulated corpus ({len(ranked)} papers)...")
-        result, cost = bench10.OPERATORS[name](ranked, cfg)
+        result, cost = _shared.OPERATORS[name](ranked, cfg)
         total_s2_calls += cost.s2_calls
 
         new_ids_this_step: set[str] = set()
@@ -84,11 +76,11 @@ def run_chained(seeds: list[dict], cfg: dict, order: list[str],
                 accumulated.append(c)
                 new_ids_this_step.add(cid)
 
-        step_precision = bench10._precision(new_ids_this_step, gold)
+        step_precision = _shared._precision(new_ids_this_step, gold)
         step_new_gold = len(new_ids_this_step & gold)
         curve.append({
             "step": name,
-            "recall": bench10._recall(accumulated_ids, gold),
+            "recall": _shared._recall(accumulated_ids, gold),
             "new_gold": step_new_gold,
             "new_candidates_this_step": len(new_ids_this_step),
             "step_precision": step_precision,
@@ -104,9 +96,9 @@ def run_chained(seeds: list[dict], cfg: dict, order: list[str],
 
 def run_survey(survey_id: str, existing_results: dict) -> dict:
     print(f"\n{'='*60}\nComposition experiment: {survey_id}\n{'='*60}")
-    cfg = bench10.SURVEYS[survey_id]
-    gold = bench10._load_gold(survey_id)
-    seed_ids = bench10._load_seed_ids(survey_id)
+    cfg = _shared.SURVEYS[survey_id]
+    gold = _shared._load_gold(survey_id)
+    seed_ids = _shared._load_seed_ids(survey_id)
     if not gold or not seed_ids:
         print(f"  Missing gold or seeds for {survey_id}. Skipping.")
         return {}
@@ -119,15 +111,15 @@ def run_survey(survey_id: str, existing_results: dict) -> dict:
     full_recall = prior["full_recall"]
     full_precision = prior.get("full_precision")
 
-    seeds = [p for sid in seed_ids if (p := bench10._fetch_full_paper(sid)) is not None]
+    seeds = [p for sid in seed_ids if (p := _shared._fetch_full_paper(sid)) is not None]
     if not seeds:
         print("  Could not resolve seeds. Skipping.")
         return {}
 
     seed_only_ids = {s["s2_id"] for s in seeds}
-    accumulated_ids, total_s2_calls, curve = run_chained(seeds, cfg, bench10.MARGINAL_ORDER, gold)
-    chained_recall = bench10._recall(accumulated_ids, gold)
-    chained_precision = bench10._precision(accumulated_ids - seed_only_ids, gold)
+    accumulated_ids, total_s2_calls, curve = run_chained(seeds, cfg, _shared.MARGINAL_ORDER, gold)
+    chained_recall = _shared._recall(accumulated_ids, gold)
+    chained_precision = _shared._precision(accumulated_ids - seed_only_ids, gold)
     chaining_delta = chained_recall - full_recall
     precision_delta = (chained_precision - full_precision) if full_precision is not None else None
 
@@ -157,18 +149,18 @@ def run_survey(survey_id: str, existing_results: dict) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Composition experiment (chained vs. independent union)")
-    parser.add_argument("--survey", choices=list(bench10.SURVEYS.keys()),
+    parser.add_argument("--survey", choices=list(_shared.SURVEYS.keys()),
                          help="Run only this survey (default: all)")
     args = parser.parse_args()
 
-    results_path = bench10.OUT_DIR / "operator_benchmark_results.json"
+    results_path = _shared.OUT_DIR / "operator_benchmark_results.json"
     if not results_path.exists():
         print(f"Missing {results_path} — run 10_operator_benchmark.py first.")
         return
     with open(results_path) as f:
         existing_results = json.load(f)
 
-    surveys_to_run = [args.survey] if args.survey else list(bench10.SURVEYS.keys())
+    surveys_to_run = [args.survey] if args.survey else list(_shared.SURVEYS.keys())
     all_results = {}
     for sid in surveys_to_run:
         result = run_survey(sid, existing_results)
@@ -183,7 +175,7 @@ def main() -> None:
         p_str = f", precision_delta={p_delta:+.1%}" if p_delta is not None else ""
         print(f"  {sid}: chaining_delta={r['chaining_delta']:+.1%}{p_str} -> {verdict}")
 
-    out_path = bench10.OUT_DIR / "composition_experiment_results.json"
+    out_path = _shared.OUT_DIR / "composition_experiment_results.json"
     with open(out_path, "w") as f:
         json.dump(all_results, f, indent=2)
     print(f"\nResults written to {out_path}")

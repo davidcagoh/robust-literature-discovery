@@ -16,9 +16,18 @@ Properties examined:
 
 We focus on the k=20 top-k seed condition as the canonical case, but also
 compare across seed conditions to see if the miss set is stable.
+
+**Traversal engine updated 2026-07-14** to match 04b_cold_start_lowseed.py's
+promotion to the production-operator engine (backward_traversal_operator /
+forward_traversal_operator / pareto_hub_threshold via ClosedCorpusSource) —
+per this repo's own rule that 05 must mirror 04b's stopping/filter logic
+since it reconstructs the traversal from scratch rather than reading visited
+sets from the (summary-only) results JSON. See
+wiki/litdiscover/phase-discovery-roadmap.md §1.3.
 """
 
 import json
+import sys
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -28,6 +37,13 @@ import matplotlib.ticker as ticker
 from collections import defaultdict, deque
 from pathlib import Path
 import re
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from _corpus_loader import load_adjacency, build_closed_corpus_source  # noqa: E402
+
+from litdiscover.discovery.traverse import (
+    backward_traversal_operator, forward_traversal_operator, pareto_hub_threshold,
+)
 
 _REPO = Path(__file__).parent.parent.parent
 APS_CSV = _REPO / "data" / "processed" / "aps-dataset-citations-2022.csv"
@@ -49,20 +65,14 @@ SURVEY_STYLE = {
 }
 
 # ── Load ──────────────────────────────────────────────────────────────────────
-print("Loading APS citation graph...")
-df = pd.read_csv(APS_CSV)
-print(f"  {len(df):,} edges")
+print("Loading APS citation graph via shared _corpus_loader...")
+cites, cited_by = load_adjacency()
+print(f"  {sum(len(v) for v in cites.values()):,} edges")
+
+source, doi_to_paper = build_closed_corpus_source(cites, cited_by)
 
 with open(OUT / "ground_truth.json") as f:
     gt = json.load(f)
-
-print("Building adjacency index...")
-cites    = defaultdict(set)
-cited_by = defaultdict(set)
-for row in df.itertuples(index=False):
-    cites[row.citing_doi].add(row.cited_doi)
-    cited_by[row.cited_doi].add(row.citing_doi)
-print("  Done.")
 
 # ── Helper: extract journal and year from APS DOI ─────────────────────────────
 # APS DOIs look like: 10.1103/PhysRevB.52.R3412  or  10.1103/RevModPhys.70.1039
@@ -117,6 +127,12 @@ def make_seeds_top_k(gold_refs, k, cited_by_map):
     return set(scored[:k])
 
 def bidir_pareto_traversal_full(seed_set, gold_refs, visited_already=None):
+    """
+    Same per-depth BFS-with-yield-stopping shape as 04b_cold_start_lowseed.py's
+    bidir_traversal() (must be kept in sync — see this script's module
+    docstring), delegating each depth step to the real production operators
+    via a ClosedCorpusSource instead of touching cites/cited_by directly.
+    """
     visited  = set(visited_already) if visited_already else set()
     for s in seed_set:
         visited.add(s)
@@ -128,23 +144,21 @@ def bidir_pareto_traversal_full(seed_set, gold_refs, visited_already=None):
     for d in range(1, MAX_DEPTH + 1):
         prev_size = len(visited)
         prev_gold = len(visited & gold_refs)
+
+        frontier_papers = [doi_to_paper[doi] for doi in frontier if doi in doi_to_paper]
+        if not frontier_papers:
+            stop_depth = d
+            break
+
+        bwd = backward_traversal_operator(frontier_papers, source=source)
+        threshold, _, _ = pareto_hub_threshold(frontier_papers, base_percentile=PARETO_P)
+        fwd = forward_traversal_operator(frontier_papers, hub_threshold=threshold, source=source)
+
         nxt = set()
-
-        for node in frontier:
-            for nb in cites.get(node, set()):
-                if nb not in visited:
-                    visited.add(nb); nxt.add(nb)
-
-        # Forward (Pareto-filtered on citers' out-degree)
-        fwd_candidates = [nb for node in frontier
-                          for nb in cited_by.get(node, set())
-                          if nb not in visited]
-        if fwd_candidates:
-            out_degs  = np.array([len(cites.get(nb, set())) for nb in fwd_candidates])
-            threshold = np.percentile(out_degs, PARETO_P)
-            for nb, od in zip(fwd_candidates, out_degs):
-                if od <= threshold and nb not in visited:
-                    visited.add(nb); nxt.add(nb)
+        for cand in bwd.candidates + fwd.candidates:
+            nb = cand.get("doi")
+            if nb and nb not in visited:
+                visited.add(nb); nxt.add(nb)
 
         frontier = nxt
         new_nodes = len(visited) - prev_size

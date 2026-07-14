@@ -14,10 +14,27 @@ Design principles:
   - All S2 responses are cached to disk (data/cache/). Re-runs are free.
   - Gold sets are extracted once and saved to data/gold-sets/; manual corrections
     to those JSON files survive re-runs (the script never overwrites existing gold files).
-  - The Pareto filter uses out-degree (reference_count) of forward candidates,
-    matching the APS simulation semantics.
   - Run per-survey: python3 09_live_validation.py --survey Ge21-HSS
   - Run all: python3 09_live_validation.py
+
+**Traversal engine updated 2026-07-14** — bidir_pareto_traversal_live() and
+escape_hatch_loop_live() now call litdiscover's real production operators
+(backward_traversal_operator, forward_traversal_operator, pareto_hub_threshold)
+via S2Source, instead of this script's own from-scratch fetch_neighbors()-based
+BFS. This closes the drift documented in
+wiki/litdiscover/phase-discovery-roadmap.md §1.2 (Tier 1): backward traversal
+is now PDF-first (via production's real logic) instead of S2-/references-only;
+the Pareto filter now applies pre-expansion on the FRONTIER paper's own
+citation_count (production's actual filter point, Gini-adaptively calibrated)
+instead of post-hoc on collected CITERS' own reference_count — the same
+correction made across the closed-corpus track's eval/03/04b/05 and
+sweep/04/07_rounds_sweep.py/08. frontier papers are resolved via this script's
+own fetch_paper() (so its disk cache is still used — no new S2 calls beyond
+what full-record resolution already required). This migration has NOT been
+run to completion (a full 3-survey live run consumes real S2 API quota/time,
+deliberately not spent without a specific reason to) — code correctness was
+verified by matching this function's shape against the already-validated
+closed-corpus migrations and by a syntax/import check only.
 
 Usage:
   export SEMANTIC_SCHOLAR_API_KEY=<your-key>
@@ -59,6 +76,13 @@ try:
 except ImportError:
     HAS_RAPIDFUZZ = False
     print("[warn] rapidfuzz not installed — fuzzy title matching disabled. Run: pip install rapidfuzz")
+
+from litdiscover.discovery.traverse import (
+    backward_traversal_operator, forward_traversal_operator, pareto_hub_threshold,
+)
+from litdiscover.discovery.graph_source import S2Source
+
+_s2_source = S2Source()
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 REPO      = Path(__file__).parent.parent
@@ -668,41 +692,32 @@ def bidir_pareto_traversal_live(
         prev_size = len(visited)
         prev_gold = len(visited & gold_s2_ids)
 
-        nxt: set[str] = set()
+        # ── Resolve full paper records for the frontier (via this script's own
+        # fetch_paper(), so its disk cache is reused) — production operators
+        # need s2_id/doi/arxiv_id/citation_count, not bare IDs. ────────────────
+        frontier_papers = [p for pid in frontier if (p := fetch_paper(pid)) is not None]
 
-        # ── Backward: follow references of frontier ──────────────────────────
-        print(f"    depth {d}: backward traversal from {len(frontier)} frontier papers...")
-        for node in frontier:
-            refs = fetch_neighbors(node, "references")
-            for p in refs:
-                pid = p.get("s2_id")
-                if pid and pid not in visited:
-                    visited.add(pid)
-                    visited_titles[pid] = p.get("title", "")
-                    nxt.add(pid)
+        # ── Backward: real production operator (PDF-first, S2 fallback) ──────
+        print(f"    depth {d}: backward traversal from {len(frontier_papers)} frontier papers...")
+        bwd = backward_traversal_operator(frontier_papers, source=_s2_source)
 
-        # ── Forward: collect citers, apply out-degree Pareto filter ──────────
+        # ── Forward: real production operator, Pareto filter pre-expansion on
+        # the FRONTIER's own citation_count (production's actual filter point,
+        # Gini-adaptively calibrated) — not post-hoc on collected citers. ─────
         print(f"    depth {d}: forward traversal...")
-        fwd_candidates: list[dict] = []
-        for node in frontier:
-            cits = fetch_neighbors(node, "citations")
-            for p in cits:
-                pid = p.get("s2_id")
-                if pid and pid not in visited:
-                    fwd_candidates.append(p)
+        if pareto_p is not None:
+            threshold, _, _ = pareto_hub_threshold(frontier_papers, base_percentile=pareto_p)
+        else:
+            threshold = float("inf")
+        fwd = forward_traversal_operator(frontier_papers, hub_threshold=threshold, source=_s2_source)
 
-        if fwd_candidates:
-            ref_counts = np.array([p.get("reference_count") or 0 for p in fwd_candidates])
-            if pareto_p is not None and len(ref_counts) > 1:
-                threshold = np.percentile(ref_counts, pareto_p)
-            else:
-                threshold = float("inf")
-            for p, rc in zip(fwd_candidates, ref_counts):
-                pid = p.get("s2_id")
-                if pid and pid not in visited and rc <= threshold:
-                    visited.add(pid)
-                    visited_titles[pid] = p.get("title", "")
-                    nxt.add(pid)
+        nxt: set[str] = set()
+        for cand in bwd.candidates + fwd.candidates:
+            pid = cand.get("s2_id")
+            if pid and pid not in visited:
+                visited.add(pid)
+                visited_titles[pid] = cand.get("title", "")
+                nxt.add(pid)
 
         frontier  = nxt
         new_nodes = len(visited) - prev_size
