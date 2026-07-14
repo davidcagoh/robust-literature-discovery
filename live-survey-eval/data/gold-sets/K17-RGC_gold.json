@@ -60,21 +60,9 @@
     "manual_s2_id": null
   },
   {
-    "raw_title": "Tight Lower Bounds for Homology Inference",
-    "doi": null,
-    "s2_id": "f0abd5c934cd785eedc6dbee086b8001d9becc90",
-    "manual_s2_id": null
-  },
-  {
     "raw_title": "The topology of probability distributions on manifolds",
     "doi": "10.1007/s00440-014-0556-x",
     "s2_id": "328d3ba46b7f14439f65bbc55c72daaf79a89ac3",
-    "manual_s2_id": null
-  },
-  {
-    "raw_title": "Statistical Inference For Persistent Homology",
-    "doi": "10.1214/14-AOS1252",
-    "s2_id": "a9936295db584bb5d5cf37b715af0708f8aa9009",
     "manual_s2_id": null
   },
   {
@@ -123,12 +111,6 @@
     "raw_title": "A Topological View of Unsupervised Learning from Noisy Data",
     "doi": "10.1137/090762932",
     "s2_id": "c7f5b13e624af62f99bad32aeea3ea0ac2adadce",
-    "manual_s2_id": null
-  },
-  {
-    "raw_title": "Simplicial Homology of Random Configurations",
-    "doi": "10.1239/aap/1401369697",
-    "s2_id": "b25fa6485f51074b9119109caff384c89879788e",
     "manual_s2_id": null
   },
   {
@@ -327,12 +309,6 @@
     "raw_title": "On the imbedding of systems of compacta in simplicial complexes",
     "doi": "10.4064/FM-35-1-217-234",
     "s2_id": "b0350dec1e1b0d09c2a0326a80082dc11cb2ceb4",
-    "manual_s2_id": null
-  },
-  {
-    "raw_title": "CAMBRIDGE STUDIES IN ADVANCED MATHEMATICS",
-    "doi": null,
-    "s2_id": "53daaa96763bbdea8f3fb324eb59c62b4b3faac4",
     "manual_s2_id": null
   }
 ]

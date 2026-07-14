@@ -119,7 +119,10 @@ YIELD_THRESHOLD = 0.05  # stop depth when new_gold / new_nodes < 5%
 MAX_DEPTH       = 4     # live traversal: shallower than APS (API cost)
 N_ROUNDS        = 2
 K_ESCAPE        = 20
-FUZZY_THRESHOLD = 88    # rapidfuzz token_sort_ratio threshold for title match
+FUZZY_THRESHOLD = 92    # rapidfuzz token_sort_ratio threshold for title match
+                        # raised from 88 (2026-07-14) — 88 let garbled/short extracted
+                        # "titles" (series names, running-header fragments) spuriously
+                        # match unrelated real papers on S2 search; see open-questions.md
 
 # ── S2 API setup ──────────────────────────────────────────────────────────────
 S2_BASE   = "https://api.semanticscholar.org/graph/v1/paper"
@@ -409,7 +412,15 @@ def parse_references_from_text(ref_text: str) -> list[dict]:
             used_dois.add(entry_doi)
 
         # Extract title: heuristically the text in quotes or italics,
-        # or the first sentence-like string that ends with a period and is not all-caps
+        # or the first sentence-like string that ends with a period and is not all-caps.
+        # 2026-07-14: this comment's "not all-caps" was never actually implemented, and a
+        # same-day audit of the sibling function build_gold_set_from_s2 (which hits the
+        # equivalent problem via S2's API instead of PDF text) found that an all-caps/
+        # short-title rejection rule does more harm than good in practice — real,
+        # correctly-cited references are routinely short (Goodman's "Snowball sampling") or
+        # rendered all-caps in some journals' reference lists (Munkres' "ELEMENTS OF
+        # ALGEBRAIC TOPOLOGY"). Left unimplemented deliberately rather than adding a filter
+        # with unverified false-positive cost; see open-questions.md.
         raw_title = None
         # Try quoted title
         q_match = re.search(r'"([^"]{10,150})"', chunk)
@@ -467,6 +478,19 @@ def build_gold_set_from_s2(survey_id: str, survey_doi: Optional[str] = None,
     refs = fetch_neighbors(survey_paper["s2_id"], "references")
     print(f"  Got {len(refs)} references from S2")
 
+    # 2026-07-14 audit note: S2's own /references endpoint occasionally links a bad record
+    # as a "reference" (a bare book-series name with no real title, or an unrelated real
+    # paper mis-linked entirely — see open-questions.md for confirmed examples). Two
+    # automated filters were tried here (bare all-caps/<3-words, then a series-name-phrase
+    # substring match) and both reverted: every version rejected real, correctly-cited
+    # references — short titles (Goodman's "Snowball sampling"), all-caps journal-rendered
+    # titles (Munkres' "ELEMENTS OF ALGEBRAIC TOPOLOGY"), and real book titles that
+    # legitimately carry their series name in parentheses (Epstein's "Agent_Zero... (Princeton
+    # Studies in Complexity)") are indistinguishable by title shape from the genuine garbage.
+    # No automated filter is applied here — known-bad entries are corrected by hand directly
+    # in the saved gold-set JSON (see the file's own history / open-questions.md for exactly
+    # which entries were removed and why), consistent with this function's existing contract
+    # that manual corrections to a gold-set file survive re-runs.
     entries = []
     for r in refs:
         if r.get("s2_id"):

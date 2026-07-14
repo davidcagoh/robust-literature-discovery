@@ -1,0 +1,416 @@
+{
+  "survey": "K17-RGC",
+  "source_pdf": "validation-surveys/K17-RGC.pdf",
+  "annotation_method": "first-citation-occurrence, tagged by numbered top-level section (this survey has clean explicit headers 1-10); several gold-set entries are duplicate/garbled records of the same underlying textbook reference (e.g. 3 separate \"Random graphs\" variants) \u2014 assigned to the same section as their evident source rather than treated as distinct papers",
+  "section_labels": {
+    "S1_intro": "1 Introduction",
+    "S2_preliminaries": "2 Preliminaries",
+    "S3_connectivity": "3 Connectivity",
+    "S4_homology_betti": "4 Homology and Betti Numbers",
+    "S5_morse_theory": "5 Morse theory for the distance function",
+    "S6_manifolds": "6 Extending to manifolds",
+    "S7_stationary_point_processes": "7 Stationary point processes",
+    "S8_extreme_value": "8 Extreme value analysis of random geometric complexes",
+    "S9_persistent_homology": "9 Persistent homology",
+    "S10_open_problems": "10 Open problems / future directions"
+  },
+  "n_gold_total": 56,
+  "n_resolved": 52,
+  "n_unresolved": 4,
+  "resolved": [
+    {
+      "raw_title": "Algebraic topology",
+      "doi": "10.1090/mbk/109/07",
+      "s2_id": "0f1b9a40d81b92b4359e492c158272d61c2beefb",
+      "manual_s2_id": null,
+      "section": "S2_preliminaries"
+    },
+    {
+      "raw_title": "Random \u010cech complexes on Riemannian manifolds",
+      "doi": "10.1002/rsa.20800",
+      "s2_id": "7a864707891b1a98102cf9a49f178988eaabc705",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Limit theorems for persistence diagrams",
+      "doi": "10.1214/17-AAP1371",
+      "s2_id": "2fa0a49e60c809ec5178a00a4eadc41b9169ad97",
+      "manual_s2_id": null,
+      "section": "S9_persistent_homology"
+    },
+    {
+      "raw_title": "Maximally Persistent Cycles in Random Geometric Complexes",
+      "doi": "10.1214/16-AAP1232",
+      "s2_id": "f0e90f624073433f04fa1749ebc42c19c38109ab",
+      "manual_s2_id": null,
+      "section": "S9_persistent_homology"
+    },
+    {
+      "raw_title": "On the vanishing of homology in random \u010cech complexes",
+      "doi": "10.1002/rsa.20697",
+      "s2_id": "63653d5778de60b863409dfc63c31475803583d7",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Limit Theorems for Point Processes under Geometric Constraints (and Topological Crackle)",
+      "doi": "10.1214/16-AOP1106",
+      "s2_id": "6e9ca1bbf22e132e8584afe23a3f2cf3ea49c93e",
+      "manual_s2_id": null,
+      "section": "S8_extreme_value"
+    },
+    {
+      "raw_title": "Crackle: The Homology of Noise",
+      "doi": "10.1007/s00454-014-9621-6",
+      "s2_id": "d90c1f2412fd09dde46cd05394e01a75c532b329",
+      "manual_s2_id": null,
+      "section": "S8_extreme_value"
+    },
+    {
+      "raw_title": "Topological Consistency via Kernel Estimation",
+      "doi": "10.3150/15-BEJ744",
+      "s2_id": "baf885557876f53f1f593591ff827b6627290505",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Random geometric complexes in the thermodynamic regime",
+      "doi": "10.1007/s00440-015-0678-9",
+      "s2_id": "2e42774b3ca0d2b6d71a3763471f33d0c5094f4d",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Size of the giant component in a random geometric graph",
+      "doi": "10.1214/12-AIHP498",
+      "s2_id": "5970aaa20abc08aab96325ca4ed3e28c6306387b",
+      "manual_s2_id": null,
+      "section": "S3_connectivity"
+    },
+    {
+      "raw_title": "The topology of probability distributions on manifolds",
+      "doi": "10.1007/s00440-014-0556-x",
+      "s2_id": "328d3ba46b7f14439f65bbc55c72daaf79a89ac3",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Topology of random simplicial complexes: a survey",
+      "doi": "10.1090/conm/620/12367",
+      "s2_id": "94ce31282aec94b0ee1f51c6eee64b6edd66d343",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "On the topology of random complexes built over stationary point processes.",
+      "doi": "10.1214/14-AAP1075",
+      "s2_id": "5be7b73187cd69ada6bded9d85250a9e79e3f968",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Sharp vanishing thresholds for cohomology of random flag complexes",
+      "doi": "10.4007/ANNALS.2014.179.3.5",
+      "s2_id": "649b988389e48fb85a92e8d8909e1464410b18da",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Minimax rates for homology inference",
+      "doi": null,
+      "s2_id": "fd1ceb6ae8d4dd7d290b1e4252903b0c40e00ec6",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Min-type Morse theory for configuration spaces of hard spheres",
+      "doi": "10.1093/imrn/rnt012",
+      "s2_id": "8aba0d960ab52449cd828472fcc9a9d1a2d9af07",
+      "manual_s2_id": null,
+      "section": "S5_morse_theory"
+    },
+    {
+      "raw_title": "Distance Functions, Critical Points, and the Topology of Random \\v{C}ech Complexes",
+      "doi": "10.4310/HHA.2014.V16.N2.A18",
+      "s2_id": "396a344bf5d8c43a03cf64ce8260b3eec8cbbd0a",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Statistics of geometric random simplicial complexes",
+      "doi": null,
+      "s2_id": "1c52b4186a50c195ca40331beecfc7041fdf73cb",
+      "manual_s2_id": null,
+      "section": "S5_morse_theory"
+    },
+    {
+      "raw_title": "A Topological View of Unsupervised Learning from Noisy Data",
+      "doi": "10.1137/090762932",
+      "s2_id": "c7f5b13e624af62f99bad32aeea3ea0ac2adadce",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Erratum: Limit theorems for Betti numbers of random simplicial complexes",
+      "doi": "10.4310/HHA.2016.V18.N1.A7",
+      "s2_id": "ccd13ffcfbc15552f82b4e8fd4ce83ab15ded74d",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Limit theorems for Betti numbers of random simplicial complexes",
+      "doi": "10.4310/HHA.2013.V15.N1.A17",
+      "s2_id": "cb4f21bcff0e1c9fa295269e306aacc56d5c0508",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Plaquettes, Spheres, and Entanglement",
+      "doi": "10.1214/EJP.V15-804",
+      "s2_id": "c8e8840f686906a57afc56f290622a71bc39ee3d",
+      "manual_s2_id": null,
+      "section": "S10_open_problems"
+    },
+    {
+      "raw_title": "Random Geometric Complexes",
+      "doi": "10.1007/s00454-010-9319-3",
+      "s2_id": "0e6e905368590ff08b8c5febdba7888bb7617c21",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Topology and data",
+      "doi": "10.1090/S0273-0979-09-01249-X",
+      "s2_id": "a4b603ca6aaaa18968e08ac1b0ee093db8a99a6b",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "The Probabilistic Method: Alon/Probabilistic",
+      "doi": "10.1002/9780470277331",
+      "s2_id": "b2cb9e46d1f358601848cece6ef97479d4ab1cf0",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "The fundamental group of random 2-complexes",
+      "doi": "10.1090/S0894-0347-2010-00677-7",
+      "s2_id": "282a6a750b347d04ada609b5a9b050828e028f4c",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Barcodes: The persistent topology of data",
+      "doi": "10.1090/S0273-0979-07-01191-3",
+      "s2_id": "cad0bff789bb0e626245b21a47791ef76a9cd5c2",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Random Fields and Geometry",
+      "doi": "10.1007/978-0-387-48116-6",
+      "s2_id": "48caa22bd6d406d5826be014b031093c112d853b",
+      "manual_s2_id": null,
+      "section": "S10_open_problems"
+    },
+    {
+      "raw_title": "Coverage in sensor networks via persistent homology",
+      "doi": "10.2140/AGT.2007.7.339",
+      "s2_id": "25b68dffcca670674b33b513a4817517b43e9f24",
+      "manual_s2_id": null,
+      "section": "S9_persistent_homology"
+    },
+    {
+      "raw_title": "Homological connectivity of random k\u2010dimensional complexes",
+      "doi": "10.1002/rsa.20238",
+      "s2_id": "876c2a9c9a0caf5e0210a5a26b1c307a1cec1886",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Betti number signatures of homogeneous Poisson point processes.",
+      "doi": "10.1103/PhysRevE.74.061107",
+      "s2_id": "df70eabe01f3d1420d9825fe6b613f7ade1cd619",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "Homological Connectivity Of Random 2-Complexes",
+      "doi": "10.1007/S00493-006-0027-9",
+      "s2_id": "b004b2c1cfd7c27e625d6c09b03ea486b1c3c672",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "A statistical approach to persistent homology",
+      "doi": "10.4310/HHA.2007.v9.n2.a12",
+      "s2_id": "6a703287aa12f944336831d5c051dfaa5fd76c66",
+      "manual_s2_id": null,
+      "section": "S9_persistent_homology"
+    },
+    {
+      "raw_title": "Random graphs",
+      "doi": "10.1002/0471667196.ess2165.pub2",
+      "s2_id": "6e3c56010e987b1f7b0ebc64d93d0442948cf389",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Random geometric graphs.",
+      "doi": "10.1103/PhysRevE.66.016121",
+      "s2_id": "c41b7a86b527d6bd27fc6b069711686ae0a06871",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "RANDOM GRAPHS (Wiley Interscience Series in Discrete Mathematics and Optimization)",
+      "doi": "10.1017/S0024609301219274",
+      "s2_id": "4d927cbbe27bbcfab4d5d49674c7cca354962b13",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Random graphs",
+      "doi": "10.1002/9781118032718",
+      "s2_id": "0612d96b8fcdd6a9c6da44cb56931951aef5fd02",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "CONTINUUM PERCOLATION (Cambridge Tracts in Mathematics 119)",
+      "doi": "10.1112/S0024609397243808",
+      "s2_id": "8a32f095f792badb87c192a64e90d2f55388665d",
+      "manual_s2_id": null,
+      "section": "S3_connectivity"
+    },
+    {
+      "raw_title": "On the shape of a set of points in the plane",
+      "doi": "10.1109/TIT.1983.1056714",
+      "s2_id": "73942f26c21dbf6e572b31dcd070d357fc91b356",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "On a sharp transition from area law to perimeter law in a system of random surfaces",
+      "doi": "10.1007/BF01206313",
+      "s2_id": "e933bfebc15da46f690781cc2f40ddf02bdd5b97",
+      "manual_s2_id": null,
+      "section": "S10_open_problems"
+    },
+    {
+      "raw_title": "COMMUNICATIONS OF THE MOSCOW MATHEMATICAL SOCIETY: The topological classification of germs of the maximum and minimax functions of a family of functions in general position",
+      "doi": "10.1070/RM1982V037N04ABEH003952",
+      "s2_id": "3eabe95d49dc2e65b8fd4c71edef4321af0363cc",
+      "manual_s2_id": null,
+      "section": "S5_morse_theory"
+    },
+    {
+      "raw_title": "Percolation",
+      "doi": "10.1017/S0001867800035345",
+      "s2_id": "6b4f15ccdd3de1ee2ab256e5a08cd639756e5e9e",
+      "manual_s2_id": null,
+      "section": "S3_connectivity"
+    },
+    {
+      "raw_title": "Random Plane Networks",
+      "doi": "10.1137/0109045",
+      "s2_id": "2225284118536ada7325dff2d202b4bda714f1b7",
+      "manual_s2_id": null,
+      "section": "S3_connectivity"
+    },
+    {
+      "raw_title": "MORSE THEORY FOR MIN-TYPE FUNCTIONS*",
+      "doi": null,
+      "s2_id": "dd542bd82d0bd2bf7577c702e6458f657cddea3e",
+      "manual_s2_id": null,
+      "section": "S5_morse_theory"
+    },
+    {
+      "raw_title": "Topological complexity of smooth random functions",
+      "doi": "10.1007/978-3-642-19580-8",
+      "s2_id": "82e54374b8e587c952d7707300c67eca9511fa17",
+      "manual_s2_id": null,
+      "section": "S10_open_problems"
+    },
+    {
+      "raw_title": "Continuum Percolation",
+      "doi": "10.1007/978-0-387-30440-3_95",
+      "s2_id": "15c9f294d8d1b820f7a30f9c96b2674dd67c6194",
+      "manual_s2_id": null,
+      "section": "S3_connectivity"
+    },
+    {
+      "raw_title": "Random Graphs: Notation",
+      "doi": "10.1017/CBO9780511814068",
+      "s2_id": "8d8e9d75a92cc57a638ccb283bafcd6b4ea0de49",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    },
+    {
+      "raw_title": "Morse Theory",
+      "doi": "10.1090/mmono/132/03",
+      "s2_id": "dfaa5d91e8365bf53ab41eabc014236671ee9d29",
+      "manual_s2_id": null,
+      "section": "S5_morse_theory"
+    },
+    {
+      "raw_title": "The Probabilistic Method",
+      "doi": "10.1007/978-3-662-12788-9_1",
+      "s2_id": "e5cca121e9852018c141ac3bc2cf2c35fea1dc9a",
+      "manual_s2_id": null,
+      "section": "S4_homology_betti"
+    },
+    {
+      "raw_title": "ELEMENTS OF ALGEBRAIC TOPOLOGY",
+      "doi": "10.1016/B978-0-08-016160-0.50028-2",
+      "s2_id": "b2f46402f60220d4140cc76a3555be5cc678f41f",
+      "manual_s2_id": null,
+      "section": "S2_preliminaries"
+    },
+    {
+      "raw_title": "On the imbedding of systems of compacta in simplicial complexes",
+      "doi": "10.4064/FM-35-1-217-234",
+      "s2_id": "b0350dec1e1b0d09c2a0326a80082dc11cb2ceb4",
+      "manual_s2_id": null,
+      "section": "S2_preliminaries"
+    },
+    {
+      "raw_title": "Finding the Homology of Submanifolds with High Confidence from\u00a0Random\u00a0Samples",
+      "doi": "10.1007/s00454-008-9053-2",
+      "s2_id": "345d254795b1aa41c9cb38bae12a580ebec7e8e1",
+      "manual_s2_id": null,
+      "section": "S1_intro"
+    }
+  ],
+  "unresolved": [
+    {
+      "raw_title": "Tight Lower Bounds for Homology Inference",
+      "doi": null,
+      "s2_id": "f0abd5c934cd785eedc6dbee086b8001d9becc90",
+      "manual_s2_id": null,
+      "issue": "not found in K17-RGC's own 51-item numbered bibliography (checked in full) \u2014 topically adjacent to ref [7] (same author group, similar title) but likely a gold-set over-resolution, not an actual citation in this survey"
+    },
+    {
+      "raw_title": "Statistical Inference For Persistent Homology",
+      "doi": "10.1214/14-AOS1252",
+      "s2_id": "a9936295db584bb5d5cf37b715af0708f8aa9009",
+      "manual_s2_id": null,
+      "issue": "not found in K17-RGC's own 51-item numbered bibliography (checked in full) \u2014 topically adjacent to ref [19] (Bubenik-Kim) but likely a gold-set over-resolution"
+    },
+    {
+      "raw_title": "Simplicial Homology of Random Configurations",
+      "doi": "10.1239/aap/1401369697",
+      "s2_id": "b25fa6485f51074b9119109caff384c89879788e",
+      "manual_s2_id": null,
+      "issue": "not found in K17-RGC's own 51-item numbered bibliography (checked in full) \u2014 no clear match to any of the 51 refs"
+    },
+    {
+      "raw_title": "CAMBRIDGE STUDIES IN ADVANCED MATHEMATICS",
+      "doi": null,
+      "s2_id": "53daaa96763bbdea8f3fb324eb59c62b4b3faac4",
+      "manual_s2_id": null,
+      "issue": "book-series name, not a paper title \u2014 appears to be a mis-resolved metadata fragment, not a real distinct reference"
+    }
+  ]
+}

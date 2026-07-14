@@ -1,0 +1,2024 @@
+{
+  "survey": "Ge21-HSS",
+  "source_pdf": "validation-surveys/Ge21-HSS.pdf",
+  "annotation_method": "first-citation-occurrence, by numbered-reference range (Nature endnote style); Box 1 refs (178-198) folded into S1 despite tail numbering since Box 1 is physically embedded in S1",
+  "section_labels": {
+    "S0_intro": "Untitled lead section (before first header)",
+    "S1_describing_predicting": "Describing and predicting social dynamics (incl. Box 1: Accuracy of social sensing)",
+    "S2_empirically_grounded_models": "Empirically grounded models",
+    "S3_outlook": "Outlook",
+    "S4_summary": "Summary"
+  },
+  "n_gold_total": 202,
+  "n_resolved": 197,
+  "n_unresolved": 5,
+  "resolved": [
+    {
+      "raw_title": "Computational Social Psychology.",
+      "doi": "10.1146/annurev-psych-021323-040420",
+      "s2_id": "400a7e7d0dcb08ecdf209fee76b1fc462d59cbfd",
+      "manual_s2_id": null,
+      "ref_number": 42,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Becoming Human: A Theory of Ontogeny",
+      "doi": "10.38178/07183089/1325210430",
+      "s2_id": "85931bc2d10c9089a3bd082dcc2851a368baf59b",
+      "manual_s2_id": null,
+      "ref_number": 1,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Cultural drift, indirect minority influence, network structure, and their impacts on cultural change and diversity.",
+      "doi": "10.1037/amp0000844",
+      "s2_id": "69cf94199991e4c2b3276d76ba285ad4047fc886",
+      "manual_s2_id": null,
+      "ref_number": 38,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Measuring algorithmically infused societies",
+      "doi": "10.1038/s41586-021-03666-1",
+      "s2_id": "03781a553d8d0294181eed3b22b177ea683e4b71",
+      "manual_s2_id": null,
+      "ref_number": 171,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Meaningful measures of human society in the twenty-first century",
+      "doi": "10.1038/s41586-021-03660-7",
+      "s2_id": "92f7006f8ddeb78db814b17aa038f1de1cc994fc",
+      "manual_s2_id": null,
+      "ref_number": 174,
+      "section": "S4_summary",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Integrating explanation and prediction in computational social science",
+      "doi": "10.1038/s41586-021-03659-0",
+      "s2_id": "16cd0cadc4a757d85da6bd72992f6fb75a685ac7",
+      "manual_s2_id": null,
+      "ref_number": 175,
+      "section": "S4_summary",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Cognitive Strategies for Peer Judgments",
+      "doi": "10.31219/osf.io/s3hxj",
+      "s2_id": "00429c596d7af7825e52c2244eb01b159da2beac",
+      "manual_s2_id": null,
+      "ref_number": 159,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Modeling Robustness of COVID-19 Containment Policies",
+      "doi": "10.31219/osf.io/h5ua7",
+      "s2_id": "e16e6b67163b90210543ebef29a653a0fc2d0b46",
+      "manual_s2_id": null,
+      "ref_number": 40,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Interventions with Inversity in Unknown Networks Can Help Regulate Contagion",
+      "doi": null,
+      "s2_id": "8e9b8596b16fac1f8c01387cb3184c6c9224fad6",
+      "manual_s2_id": null,
+      "ref_number": 76,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Common brain networks underlying human social interactions: evidence from large-scale neuroimaging meta-analysis.",
+      "doi": "10.1016/j.neubiorev.2021.03.025",
+      "s2_id": "d57bef7e6161c10d3fd4fc1dc8594eebb6c8d1f3",
+      "manual_s2_id": null,
+      "ref_number": 180,
+      "section": "S1_describing_predicting",
+      "match_score": 0.69,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bayesian collective learning emerges from heuristic social learning.",
+      "doi": "10.1016/j.cognition.2020.104469",
+      "s2_id": "8dfa66d9deea0315df8951a61f535fb9c6a72b2b",
+      "manual_s2_id": null,
+      "ref_number": 115,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Asking about social circles improves election predictions even with many political parties",
+      "doi": "10.31219/osf.io/8g5ce",
+      "s2_id": "fd3c4c9031d6c160c6132074155e4e2bfb869acc",
+      "manual_s2_id": null,
+      "ref_number": 4,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "How Humans Judge Machines",
+      "doi": "10.7551/mitpress/13373.001.0001",
+      "s2_id": "774ce0f3cd26f792dc4ccb52137b45f569bc4100",
+      "manual_s2_id": null,
+      "ref_number": 172,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Inferring bivariate association from respondent\u2010driven sampling data",
+      "doi": "10.1111/rssc.12465",
+      "s2_id": "89598fbef9b52dd352a060e325e4da2693fbe223",
+      "manual_s2_id": null,
+      "ref_number": 137,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Experimental evidence for scale-induced category convergence across populations",
+      "doi": "10.1038/s41467-020-20037-y",
+      "s2_id": "87600439728c0504b8fe7537b0dddb471fb4e310",
+      "manual_s2_id": null,
+      "ref_number": 81,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Using geofences to collect survey data: Lessons learned from the IAB-SMART study",
+      "doi": "10.13094/SMIF-2020-00023",
+      "s2_id": "2d13605dd5b0e2ab1a7c3610f7f94a910b788664",
+      "manual_s2_id": null,
+      "ref_number": 154,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Toward a hierarchical model of social cognition: A neuroimaging meta-analysis and integrative review of empathy and theory of mind.",
+      "doi": "10.1037/bul0000303",
+      "s2_id": "9597906d73a3403230c839397981f626f8018009",
+      "manual_s2_id": null,
+      "ref_number": 178,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Quantifying machine influence over human forecasters",
+      "doi": "10.1038/s41598-020-72690-4",
+      "s2_id": "59937424e24592160767417429c2051fcb7ebdd3",
+      "manual_s2_id": null,
+      "ref_number": 167,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Impact and dynamics of hate and counter speech online",
+      "doi": "10.1140/epjds/s13688-021-00314-6",
+      "s2_id": "149585de878fad6eb54b51885e221d0d97278126",
+      "manual_s2_id": null,
+      "ref_number": 165,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Integrating social and cognitive aspects of belief dynamics: towards a unifying framework",
+      "doi": "10.1098/rsif.2020.0857",
+      "s2_id": "e5b4a2612cba2facccca8d4ec5210a6ba427341d",
+      "manual_s2_id": null,
+      "ref_number": 11,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Who you know is what you know: Modeling boundedly rational social sampling.",
+      "doi": "10.1037/XGE0000799",
+      "s2_id": "29825ba12ab2e0559c0cba47adde5bc323dc1b75",
+      "manual_s2_id": null,
+      "ref_number": 67,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Computing Unhinged",
+      "doi": "10.23919/jsc.2020.0002",
+      "s2_id": "ce580163d0a73e21594a626dd2432ca850e2f10c",
+      "manual_s2_id": null,
+      "ref_number": 170,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Egonets as systematically biased windows on society",
+      "doi": "10.1017/nws.2020.5",
+      "s2_id": "7ec72e49be74813023428916a23cb62800363005",
+      "manual_s2_id": null,
+      "ref_number": 29,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Big data meets survey science: A collection of innovative methods",
+      "doi": null,
+      "s2_id": "00d84b5d228d8cdb57cae1a16fa5ff03a03fc6c8",
+      "manual_s2_id": null,
+      "ref_number": 157,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Computational Social Science and Sociology.",
+      "doi": "10.1146/annurev-soc-121919-054621",
+      "s2_id": "be5b11775e2e4a32c1b6dca28c7b24eb158059f6",
+      "manual_s2_id": null,
+      "ref_number": 33,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Conceptual Foundations",
+      "doi": "10.1017/9781108764445.003",
+      "s2_id": "5a79ea3024265cd845a14afce9296467ba073207",
+      "manual_s2_id": null,
+      "ref_number": 113,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.56,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The effect of social balance on social fragmentation",
+      "doi": "10.1098/rsif.2020.0752",
+      "s2_id": "e81c72ff89f3109ff44abca73e307d127a686d58",
+      "manual_s2_id": null,
+      "ref_number": 122,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The polarization within and across individuals: the hierarchical Ising opinion model",
+      "doi": "10.1093/comnet/cnaa010",
+      "s2_id": "b12848e5e9ccfa34675695dc0ea5d8a748dba657",
+      "manual_s2_id": null,
+      "ref_number": 160,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "An Agent-Based Model of Opinion Polarization Driven by Emotions",
+      "doi": "10.31235/osf.io/8m2wq",
+      "s2_id": "1de30c197e20cc1841f0f4e08fa7eeaefe8259e9",
+      "manual_s2_id": null,
+      "ref_number": 118,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Strategies for integrating disparate social information",
+      "doi": "10.1098/rspb.2020.2413",
+      "s2_id": "c59d4064176b92aef04bbce925c03c4ba4fb1bcc",
+      "manual_s2_id": null,
+      "ref_number": 104,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Why Are U.S. Parties So Polarized? A \"Satisficing\" Dynamical Model",
+      "doi": "10.1137/19M1254246",
+      "s2_id": "0aab14fdbd0db6a3f00f8d6cab506b113e7c195c",
+      "manual_s2_id": null,
+      "ref_number": 84,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A Weighted Balance Model of Opinion Hyperpolarization",
+      "doi": "10.31235/osf.io/weg67",
+      "s2_id": "7bd7aa81a5b76d0bdff7cc8fe96e9175219903ba",
+      "manual_s2_id": null,
+      "ref_number": 117,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Supplemental Material for Understanding Job Satisfaction in the Causal Attitude Network (CAN) Model",
+      "doi": "10.1037/apl0000469.supp",
+      "s2_id": "979fbde2add0615d719cdfc13373f417d7c1dae0",
+      "manual_s2_id": null,
+      "ref_number": 85,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.59,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Population Size Estimation Using Multiple Respondent-Driven Sampling Surveys.",
+      "doi": "10.1093/jssam/smz055",
+      "s2_id": "b49d3f1143debf94bf96a73f9e71f194e686418a",
+      "manual_s2_id": null,
+      "ref_number": 139,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "MATRICS: A System for Human-Machine Hybrid Forecasting of Geopolitical Events",
+      "doi": "10.1109/BigData47090.2019.9006434",
+      "s2_id": "8c58b24fba839f25f3ebe607defc9271e5cb6677",
+      "manual_s2_id": null,
+      "ref_number": 168,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Wise or mad crowds? The cognitive mechanisms underlying information cascades",
+      "doi": "10.1126/sciadv.abb0266",
+      "s2_id": "c125b85578653749c4f15b75b0caaaa08789f609",
+      "manual_s2_id": null,
+      "ref_number": 101,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bit by bit: social research in the digital age",
+      "doi": "10.1080/0022250x.2019.1682802",
+      "s2_id": "ed00f9a98793115dbf367e90a9190231add7bde8",
+      "manual_s2_id": null,
+      "ref_number": 124,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Capture\u2013Recapture Techniques for Transport Survey Estimate Adjustment Using Permanently Installed Highway-Sensors",
+      "doi": "10.1177/0894439319874684",
+      "s2_id": "bdd9253976e756746d8e38751debce014ead1556",
+      "manual_s2_id": null,
+      "ref_number": 142,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "How humans learn and represent networks",
+      "doi": "10.1073/pnas.1912328117",
+      "s2_id": "70a5185748a7d8c40408e8fe20f1c67e985a03d3",
+      "manual_s2_id": null,
+      "ref_number": 187,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Honesty via Choice-Matching",
+      "doi": "10.2139/SSRN.2905447",
+      "s2_id": "c89d6d38f417fd7f11cf521a6cd832431f804ae2",
+      "manual_s2_id": null,
+      "ref_number": 149,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "SAGE: A Hybrid Geopolitical Event Forecasting System",
+      "doi": "10.24963/ijcai.2019/955",
+      "s2_id": "66d41f6cfb0591643420528edc0436cc3f436467",
+      "manual_s2_id": null,
+      "ref_number": 169,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Reports of social circles' and own vaccination behavior: A national longitudinal survey.",
+      "doi": "10.1037/hea0000771",
+      "s2_id": "4960b93270b58144a9cf19fc8645e15f02c9b698",
+      "manual_s2_id": null,
+      "ref_number": 5,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Friendship paradox biases perceptions in directed networks",
+      "doi": "10.1038/s41467-020-14394-x",
+      "s2_id": "87db89f24956c387985032965c36946e30c30325",
+      "manual_s2_id": null,
+      "ref_number": 48,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Machine behaviour",
+      "doi": "10.1038/s41586-019-1138-y",
+      "s2_id": "84f21d04b1c2a9541cd463f352fa7330d28a711f",
+      "manual_s2_id": null,
+      "ref_number": 173,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical Physics Of Opinion Formation: Is it a SPOOF?",
+      "doi": "10.1016/j.crhy.2019.05.002",
+      "s2_id": "cc72166cb5ab0b405f122b3ca297089ef4b9c9ad",
+      "manual_s2_id": null,
+      "ref_number": 87,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Using Gossips to Spread Information: Theory and Evidence from Two Randomized Controlled Trials",
+      "doi": "10.1093/restud/rdz008",
+      "s2_id": "f94a585c9419044433f24a47669275db8eb336ad",
+      "manual_s2_id": null,
+      "ref_number": 198,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Citizen science frontiers: Efficiency, engagement, and serendipitous discovery with human\u2013machine systems",
+      "doi": "10.1073/pnas.1807190116",
+      "s2_id": "a291d4e9dcc28401cb57563969bd502d616b6283",
+      "manual_s2_id": null,
+      "ref_number": 176,
+      "section": "S4_summary",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Collecting Survey and Smartphone Sensor Data With an App: Opportunities and Challenges Around Privacy and Informed Consent",
+      "doi": "10.1177/0894439318816389",
+      "s2_id": "7d7e0b3ceb3d45ae3aea26266dc664322ad6f896",
+      "manual_s2_id": null,
+      "ref_number": 26,
+      "section": "S0_intro",
+      "match_score": 0.63,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Reality-inspired voter models: A mini-review",
+      "doi": "10.1016/j.crhy.2019.05.004",
+      "s2_id": "390d5fe0298dfd79fd643957378ee03076c514bd",
+      "manual_s2_id": null,
+      "ref_number": 88,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Recent research advances on interactive machine learning",
+      "doi": "10.1007/s12650-018-0531-1",
+      "s2_id": "9adfdba705e8303f91cf1091908c125d865ef017",
+      "manual_s2_id": null,
+      "ref_number": 162,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Attitudinal Entropy (AE) Framework as a General Theory of Individual Attitudes",
+      "doi": "10.1080/1047840X.2018.1537246",
+      "s2_id": "98961f47535914662619db7f6a6c8b30e86fb390",
+      "manual_s2_id": null,
+      "ref_number": 121,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A Survey on Automatic Detection of Hate Speech in Text",
+      "doi": "10.1145/3232676",
+      "s2_id": "f9c56fb6e3001f3acbc994a894b4190d78270e1b",
+      "manual_s2_id": null,
+      "ref_number": 164,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Dynamic Epistemic Logics of Diffusion and Prediction in Social Networks",
+      "doi": "10.1007/s11225-018-9804-x",
+      "s2_id": "0ada994ca5381fc6f2212785ced62542497fcf6d",
+      "manual_s2_id": null,
+      "ref_number": 116,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "How Behavior Spreads: The Science of Complex Contagions",
+      "doi": "10.1126/science.aav1974",
+      "s2_id": "bfbb6677dab5a342a649376ebd1482a289da81a8",
+      "manual_s2_id": null,
+      "ref_number": 22,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A Sampling Model of Social Judgment",
+      "doi": "10.1037/rev0000096",
+      "s2_id": "727d3b7ac907d8bc543b11e87e9f4496f6460adf",
+      "manual_s2_id": null,
+      "ref_number": 69,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Media, Political Polarization, and Political Disinformation: A Review of the Scientific Literature",
+      "doi": "10.2139/SSRN.3144139",
+      "s2_id": "6924de9691e8f1bb5477da3907e2f5372ad0e565",
+      "manual_s2_id": null,
+      "ref_number": 46,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Asking about social circles improves election predictions",
+      "doi": "10.1038/s41562-018-0302-y",
+      "s2_id": "5d17d30b4605953c5691fb0281969f4681d2aa7f",
+      "manual_s2_id": null,
+      "ref_number": 2,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "\u201cWhat Do Your Friends Think?\u201d: Efficient Polling Methods for Networks Using Friendship Paradox",
+      "doi": "10.1109/TKDE.2019.2940914",
+      "s2_id": "5c2ca4d9c270340778d8ab5d7a464a9128c398ee",
+      "manual_s2_id": null,
+      "ref_number": 136,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Age of Social Sensing",
+      "doi": "10.1109/MC.2018.2890173",
+      "s2_id": "4d5688ee3ddf2978792a96622b30ceba4fa15d11",
+      "manual_s2_id": null,
+      "ref_number": 45,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Homophily and minority-group size explain perception biases in social networks",
+      "doi": "10.1038/s41562-019-0677-4",
+      "s2_id": "42e6c4114ec1f82b9919ffaec55c1f75dc814382",
+      "manual_s2_id": null,
+      "ref_number": 30,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Understanding the 2016 US Presidential Polls: The Importance of Hidden Trump Supporters",
+      "doi": "10.1515/SPP-2017-0003",
+      "s2_id": "ff8872cf9deb65e6c2afa7f0b0a9ac460573e5a4",
+      "manual_s2_id": null,
+      "ref_number": 43,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Data ex Machina: Introduction to Big Data",
+      "doi": "10.1146/ANNUREV-SOC-060116-053457",
+      "s2_id": "b1b2c709b29623d1a8215315e9096f7b93f5c5b6",
+      "manual_s2_id": null,
+      "ref_number": 27,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social learning strategies for matters of taste",
+      "doi": "10.1038/s41562-018-0343-2",
+      "s2_id": "d348d3e3781c1ec7815f1024923c50b63e954a1a",
+      "manual_s2_id": null,
+      "ref_number": 103,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bayesian markets to elicit private information",
+      "doi": "10.1073/pnas.1703486114",
+      "s2_id": "1c157cdd6bc71eb1cb69c586ec562a1c60f700ca",
+      "manual_s2_id": null,
+      "ref_number": 148,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical physics models of belief dynamics: Theory and empirical tests",
+      "doi": "10.1016/J.PHYSA.2018.12.011",
+      "s2_id": "ed22fcb402309a3a8085d05395f01ab88155ae1b",
+      "manual_s2_id": null,
+      "ref_number": 110,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical physics of human cooperation",
+      "doi": "10.1016/j.physrep.2017.05.004",
+      "s2_id": "33b971746b312c1c6796f16a90432822cadd68d5",
+      "manual_s2_id": null,
+      "ref_number": 120,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Evolution of Covert Signaling",
+      "doi": "10.1038/s41598-018-22926-1",
+      "s2_id": "02b5ea0770d3dfa2af4f2a08023f025bd663ee18",
+      "manual_s2_id": null,
+      "ref_number": 47,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Network structure from rich but noisy data",
+      "doi": "10.1038/s41567-018-0076-1",
+      "s2_id": "9ace9e0fc733fd2ded33898dae608e20504362d6",
+      "manual_s2_id": null,
+      "ref_number": 94,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Understanding the Formation of Consumers' Stock Market Expectations",
+      "doi": "10.1111/JOCA.12110",
+      "s2_id": "20560c908a97ffc8a8a59632c310b8df9842b686",
+      "manual_s2_id": null,
+      "ref_number": 50,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A solution to the single-question crowd wisdom problem",
+      "doi": "10.1038/nature21054",
+      "s2_id": "ffce7be6e25c7d29bc816b895610ddf7b788c415",
+      "manual_s2_id": null,
+      "ref_number": 151,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A tutorial on modeling and analysis of dynamic social networks. Part I",
+      "doi": "10.1016/j.arcontrol.2017.03.002",
+      "s2_id": "9e828da624a42f70481ccfe7a14d9a1cf8d17dbe",
+      "manual_s2_id": null,
+      "ref_number": 37,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Structure of Social Cognition: In(ter)dependence of Sociocognitive Processes.",
+      "doi": "10.1146/annurev-psych-010416-044046",
+      "s2_id": "180a878a1d889473fc4c0c378dfdd83d71723076",
+      "manual_s2_id": null,
+      "ref_number": 14,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Extracting multistage screening rules from online dating activity data",
+      "doi": "10.1073/pnas.1522494113",
+      "s2_id": "40977c3609f93dd8c7fae4f36368893e5bc395de",
+      "manual_s2_id": null,
+      "ref_number": 83,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The wisdom of crowds: What do citizens forecast for the 2015 British General Election?",
+      "doi": "10.1016/J.ELECTSTUD.2015.11.018",
+      "s2_id": "6f1c7db35946161e47079acaec7278c8a84d408f",
+      "manual_s2_id": null,
+      "ref_number": 55,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Heuristics: The Foundations of Adaptive Behavior",
+      "doi": null,
+      "s2_id": "d3921b29ce33fcfb5c0d805d3a0a7d9832f69cba",
+      "manual_s2_id": null,
+      "ref_number": 63,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Collective Dynamics of Belief Evolution under Cognitive Coherence and Social Conformity",
+      "doi": "10.1371/journal.pone.0165910",
+      "s2_id": "c31104ecad632895f970b64fcd0a40adf87a570e",
+      "manual_s2_id": null,
+      "ref_number": 123,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A decision network account of reasoning about other people's choices.",
+      "doi": "10.1016/j.cognition.2015.05.006",
+      "s2_id": "d3452b0a8dc6f362389ca409c956f8472bd64678",
+      "manual_s2_id": null,
+      "ref_number": 184,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social network targeting to maximise population behaviour change: a cluster randomised controlled trial.",
+      "doi": "10.1016/S0140-6736(15)60095-2",
+      "s2_id": "7d273dcd0be7502155b7a291440583b19156687d",
+      "manual_s2_id": null,
+      "ref_number": 77,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Influence maximization in complex networks through optimal percolation",
+      "doi": "10.1038/nature14604",
+      "s2_id": "9855e98fbfcc0aa81e554636bfd1fc74108f317b",
+      "manual_s2_id": null,
+      "ref_number": 128,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The \"Majority Illusion\" in Social Networks",
+      "doi": "10.1371/journal.pone.0147617",
+      "s2_id": "306421d98edae2f92ed4a7577fa13a95f8d3c3dd",
+      "manual_s2_id": null,
+      "ref_number": 31,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Hidden Population Size Estimation From Respondent-Driven Sampling: A Network Approach",
+      "doi": "10.1080/01621459.2017.1285775",
+      "s2_id": "20db06a33b5a5701bfd2e0d3813c55c9fe34d77d",
+      "manual_s2_id": null,
+      "ref_number": 141,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A Cognitive Model of Dynamic Cooperation With Varied Interdependency Information",
+      "doi": "10.1111/cogs.12170",
+      "s2_id": "e2ede9e21534d4cbcb3216123b5cdc287bbb4694",
+      "manual_s2_id": null,
+      "ref_number": 97,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "An agent-based model of the housing market bubble in metropolitan Washington, D.C.",
+      "doi": null,
+      "s2_id": "bb53587e5a05b9b5090fe6edfa188a10b352fb87",
+      "manual_s2_id": null,
+      "ref_number": 39,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "manual_correction"
+    },
+    {
+      "raw_title": "Big Data: New Tricks for Econometrics",
+      "doi": "10.1257/JEP.28.2.3",
+      "s2_id": "9b0dd87208a03e78105491e3727213b9b8ac0419",
+      "manual_s2_id": null,
+      "ref_number": 28,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Epinets: The Epistemic Structure and Dynamics of Social Networks",
+      "doi": "10.5860/choice.185028",
+      "s2_id": "8496a0ede9014dd800dbb56d82c23a438b161f41",
+      "manual_s2_id": null,
+      "ref_number": 24,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Agent_Zero: Toward Neurocognitive Foundations for Generative Social Science",
+      "doi": "10.1353/book.36715",
+      "s2_id": "6cd85d2feb8727521203f7f3f87f6bcd3c42a4ec",
+      "manual_s2_id": null,
+      "ref_number": 34,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Physics: How Social Networks Can Make Us Smarter",
+      "doi": null,
+      "s2_id": "6ecf5891a9e918748d39cdfd49e6868cccdb95cb",
+      "manual_s2_id": null,
+      "ref_number": 36,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Snowball sampling",
+      "doi": "10.1136/bmj.f7511",
+      "s2_id": "aa686c7a94c0ddadf16f6a7d82b66408dc3a90db",
+      "manual_s2_id": null,
+      "ref_number": 19,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Is the sky falling? new technology, changing media, and the future of surveys",
+      "doi": "10.18148/SRM/2013.V7I3.5751",
+      "s2_id": "d9c5a6a5a48908f82990da2d9d02b39d4724059c",
+      "manual_s2_id": null,
+      "ref_number": 156,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Influence and the Collective Dynamics of Opinion Formation",
+      "doi": "10.1371/journal.pone.0078433",
+      "s2_id": "4fb20ba0e882ba9a92952c3e333407327a7f1d8f",
+      "manual_s2_id": null,
+      "ref_number": 102,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Intuitive judgments of social statistics : How exhaustive does sampling need to be?",
+      "doi": "10.1016/J.JESP.2013.07.004",
+      "s2_id": "6bacd2e02a18a399f346288429b22e993bbb6790",
+      "manual_s2_id": null,
+      "ref_number": 64,
+      "section": "S1_describing_predicting",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Learning: An Introduction to Mechanisms, Methods, and Models",
+      "doi": "10.23943/princeton/9780691150703.001.0001",
+      "s2_id": "86174a0c4f606ea173189c1c4e9367cd99eafa4d",
+      "manual_s2_id": null,
+      "ref_number": 109,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Determinants of social desirability bias in sensitive surveys: a literature review",
+      "doi": "10.1007/S11135-011-9640-9",
+      "s2_id": "d85a5081709d4218d233b0f7c6b830bcf31907e0",
+      "manual_s2_id": null,
+      "ref_number": 44,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Modeling and Analysing Respondent Driven Sampling as a Counting Process",
+      "doi": null,
+      "s2_id": "3050db512f434351398282c34603c27d68e025d3",
+      "manual_s2_id": null,
+      "ref_number": 140,
+      "section": "S3_outlook",
+      "match_score": 0.98,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Simple heuristics in a social world",
+      "doi": "10.1093/ACPROF:OSO/9780195388435.001.0001",
+      "s2_id": "dd83be3df539d77ebc09db408fecf1df810dde42",
+      "manual_s2_id": null,
+      "ref_number": 66,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Using Friends as Sensors to Detect Global-Scale Contagious Outbreaks",
+      "doi": "10.1371/journal.pone.0092413",
+      "s2_id": "e8b38953260b5b9d293c35407e6410ad8834c71d",
+      "manual_s2_id": null,
+      "ref_number": 10,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Sampling Explains Apparent Biases in Judgments of Social Environments",
+      "doi": "10.1177/0956797612445313",
+      "s2_id": "66f225ae18daa37b06bb017f1b09736490d4a483",
+      "manual_s2_id": null,
+      "ref_number": 192,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social sampling",
+      "doi": "10.1145/2339530.2339572",
+      "s2_id": "d919c2267fecb3f562d65c0089aa08a3853cf202",
+      "manual_s2_id": null,
+      "ref_number": 135,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Measuring the Prevalence of Questionable Research Practices With Incentives for Truth Telling",
+      "doi": "10.1177/0956797611430953",
+      "s2_id": "3813c9cb1bbbf699998b622fe4c8dbb02c9db482",
+      "manual_s2_id": null,
+      "ref_number": 150,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Perception and Social Reality: Why Accuracy Dominates Bias and Self-Fulfilling Prophecy",
+      "doi": "10.1093/acprof:oso/9780195366600.001.0001",
+      "s2_id": "732d4941961134f12f9d8c8f67a67eaaf8e7264a",
+      "manual_s2_id": null,
+      "ref_number": 59,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Forecasting Elections: Voter Intentions Versus Expectations",
+      "doi": "10.2139/SSRN.1884644",
+      "s2_id": "9621233e7cdfe6a224ca41d9a9031738926263dc",
+      "manual_s2_id": null,
+      "ref_number": 9,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Econophysics review: II. Agent-based models",
+      "doi": "10.1080/14697688.2010.539249",
+      "s2_id": "dffd04095a56af2344823a412e405a525a75c8c0",
+      "manual_s2_id": null,
+      "ref_number": 32,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Real and perceived attitude agreement in social networks.",
+      "doi": "10.1037/a0020697",
+      "s2_id": "680d72b8fd00a3e87a9e9bc2790cc72d96193657",
+      "manual_s2_id": null,
+      "ref_number": 189,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social Network Sensors for Early Detection of Contagious Outbreaks",
+      "doi": "10.1371/journal.pone.0012948",
+      "s2_id": "65cfac267bb16a95b98988a7a38381df71f3f659",
+      "manual_s2_id": null,
+      "ref_number": 6,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Multirelational organization of large-scale social networks in an online world",
+      "doi": "10.1073/pnas.1004008107",
+      "s2_id": "350bdb162f1a02791db10ad887b84fdf231c92e5",
+      "manual_s2_id": null,
+      "ref_number": 79,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Can Female Adolescents Tell Whether They Will Test Positive for Chlamydia Infection?",
+      "doi": "10.1177/0272989X09343308",
+      "s2_id": "ac00c2521935e060998586914dbe5b46e308f2b5",
+      "manual_s2_id": null,
+      "ref_number": 52,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "7. Respondent-Driven Sampling: An Assessment of Current Methodology",
+      "doi": "10.1111/j.1467-9531.2010.01223.x",
+      "s2_id": "917ecb3f5be57dd09f5d46b24ae7a86fc7dc37ff",
+      "manual_s2_id": null,
+      "ref_number": 138,
+      "section": "S3_outlook",
+      "match_score": 0.98,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Essai Sur L'Application de L'Analyse a la Probabilite Des Decisions Rendues a la Pluralite Des Voix",
+      "doi": "10.1017/cbo9781139923972",
+      "s2_id": "73d65ba95368eb9f7273c86af89d8f810341fe16",
+      "manual_s2_id": null,
+      "ref_number": 107,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Complex Adaptive Systems: An Introduction to Computational Models of Social Life",
+      "doi": "10.1080/01488370802162558",
+      "s2_id": "0f60de630b2167edafacc02a20251de387a7b7f2",
+      "manual_s2_id": null,
+      "ref_number": 35,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Prediction market accuracy in the long run",
+      "doi": "10.1016/J.IJFORECAST.2008.03.007",
+      "s2_id": "e111fad5fce99731cd45e6a29f984c0a03bc81c1",
+      "manual_s2_id": null,
+      "ref_number": 8,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Inferences under time pressure: how opportunity costs affect strategy selection.",
+      "doi": "10.1016/J.ACTPSY.2007.05.004",
+      "s2_id": "96bc3b0ab4907349c954f17e488c6a7c486515ed",
+      "manual_s2_id": null,
+      "ref_number": 182,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Neighborhood Chance and Neighborhood Change",
+      "doi": null,
+      "s2_id": "7ed62c362eff7e88318b94339fe69593e8420266",
+      "manual_s2_id": null,
+      "ref_number": 82,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.95,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Complex Contagions and the Weakness of Long Ties1",
+      "doi": "10.1086/521848",
+      "s2_id": "c0615bfafc58665f2c513d09e90dd3a669be729f",
+      "manual_s2_id": null,
+      "ref_number": 80,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical physics of social dynamics",
+      "doi": "10.1103/RevModPhys.81.591",
+      "s2_id": "e419cfbbdd1de7f9a2ed6bb2d5392840dcb2a4fd",
+      "manual_s2_id": null,
+      "ref_number": 119,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Can adolescents predict significant life events?",
+      "doi": "10.1016/J.JADOHEALTH.2007.03.014",
+      "s2_id": "191881643f4aa49eaededa08d1f79c5dd6d41d32",
+      "manual_s2_id": null,
+      "ref_number": 51,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Legitimacy as a Social Process",
+      "doi": "10.1146/ANNUREV.SOC.32.061604.123101",
+      "s2_id": "97dab362c56135b8d3b4da493217320e64e674a5",
+      "manual_s2_id": null,
+      "ref_number": 93,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Probabilistic models of cognition: conceptual foundations.",
+      "doi": "10.1016/J.TICS.2006.05.007",
+      "s2_id": "4ddb495661f1458ed54cb8643b5a459fe59836ca",
+      "manual_s2_id": null,
+      "ref_number": 113,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Neighborhood Choice and Neighborhood Change1",
+      "doi": "10.1086/507856",
+      "s2_id": "9c3239eedca7f4cc4b26947815f88c3185aa68e7",
+      "manual_s2_id": null,
+      "ref_number": 82,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Why most people disapprove of me: experience sampling in impression formation.",
+      "doi": "10.1037/0033-295X.112.4.951",
+      "s2_id": "f46c69860208c4233b0506282e03a459ed950291",
+      "manual_s2_id": null,
+      "ref_number": 96,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Eliciting Informative Feedback: The Peer-Prediction Method",
+      "doi": "10.1287/mnsc.1050.0379",
+      "s2_id": "653459e3fd788e7209e90265b81857a7d98a5e37",
+      "manual_s2_id": null,
+      "ref_number": 147,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The power of a good idea: Quantitative modeling of the spread of ideas from epidemiological models",
+      "doi": "10.1016/j.physa.2005.08.083",
+      "s2_id": "6ab8c1ee082095448d03fcf6ce8b6a20d34c233b",
+      "manual_s2_id": null,
+      "ref_number": 130,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bias and Accuracy in Close Relationships: An Integrative Review",
+      "doi": "10.1207/s15327957pspr0804_1",
+      "s2_id": "b5d1cf38bd489890c15a80c4468df3a8f7891a67",
+      "manual_s2_id": null,
+      "ref_number": 188,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A Bayesian Truth Serum for Subjective Data",
+      "doi": "10.1126/SCIENCE.1102081",
+      "s2_id": "52c9e15facda9999e54b8876d8ad5f2edd885d9f",
+      "manual_s2_id": null,
+      "ref_number": 146,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Biases in social comparative judgments: the role of nonmotivated factors in above-average and comparative-optimism effects.",
+      "doi": "10.1037/0033-2909.130.5.813",
+      "s2_id": "110ea6387283425cd70f750d306d6f1598cee4fa",
+      "manual_s2_id": null,
+      "ref_number": 17,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Towards a balanced social psychology: Causes, consequences, and cures for the problem-seeking approach to social behavior and cognition",
+      "doi": "10.1017/S0140525X04000081",
+      "s2_id": "d4c3b96499db07233d20815586b03a8940fa8361",
+      "manual_s2_id": null,
+      "ref_number": 15,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Social influence: compliance and conformity.",
+      "doi": "10.1146/ANNUREV.PSYCH.55.090902.142015",
+      "s2_id": "dfbb01269f07a6a72559c323c00553fbd80718d1",
+      "manual_s2_id": null,
+      "ref_number": 98,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Internet-Based Virtual Stock Markets for Business Forecasting",
+      "doi": "10.1287/mnsc.49.10.1310.17314",
+      "s2_id": "d26a532ac129ec5bc44c59574a5c8470e64f3162",
+      "manual_s2_id": null,
+      "ref_number": 56,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "3. Measuring the Frequency of Regular Behaviors: Comparing the \u201cTypical Week\u201d to the \u201cPast Week\u201d",
+      "doi": "10.1111/j.0081-1750.2003.t01-1-00127.x",
+      "s2_id": "950ad7e98b6f0d76dd2f19c4e7cd1ef8494466e8",
+      "manual_s2_id": null,
+      "ref_number": 196,
+      "section": "S1_describing_predicting",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Dynamics of majority rule in two-state interacting spin systems.",
+      "doi": "10.1103/PhysRevLett.90.238701",
+      "s2_id": "7d4553cde7a7053e1f85fb9557219a58dd4f0958",
+      "manual_s2_id": null,
+      "ref_number": 108,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Cognitive neuroscience: Cognitive neuroscience of human social behaviour",
+      "doi": "10.1038/nrn1056",
+      "s2_id": "dac90ff64ae17476aa33a5b0b471c029d89287c2",
+      "manual_s2_id": null,
+      "ref_number": 179,
+      "section": "S1_describing_predicting",
+      "match_score": 0.81,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Interactive machine learning",
+      "doi": "10.1145/604045.604056",
+      "s2_id": "a3db81e35f1890511c38d685a2f57de476820518",
+      "manual_s2_id": null,
+      "ref_number": 161,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Detecting measurement bias in respondent reports of personal networks",
+      "doi": "10.1016/S0378-8733(02)00013-8",
+      "s2_id": "f3f2f943f0273520d80d0a538158a7436ece9f70",
+      "manual_s2_id": null,
+      "ref_number": 197,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Predictive Validity of Subjective Probabilities of Survival",
+      "doi": "10.1111/1468-0297.00065",
+      "s2_id": "60697d753675577339b13049b479a27ca6c56402",
+      "manual_s2_id": null,
+      "ref_number": 53,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Efficient immunization strategies for computer networks and populations.",
+      "doi": "10.1103/PhysRevLett.91.247901",
+      "s2_id": "dc9c8da03a1f411a4050fbf5e1a71836989a0e7c",
+      "manual_s2_id": null,
+      "ref_number": 75,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Culture and Cognition",
+      "doi": "10.1002/0471214426.PAS0213",
+      "s2_id": "5dbf5428303e5492223ed5fb8e31d64068ae0a65",
+      "manual_s2_id": null,
+      "ref_number": 92,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Psychology of Survey Response",
+      "doi": "10.1198/JASA.2002.S454",
+      "s2_id": "aa7331767b2b7f8ddcf7e699ab0e0bcace240768",
+      "manual_s2_id": null,
+      "ref_number": 143,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Interactive machine learning: letting users build classifiers",
+      "doi": "10.1006/IJHC.2001.0499",
+      "s2_id": "78dbb716be61fc1a0b123fbe63c00ba4e7c352a6",
+      "manual_s2_id": null,
+      "ref_number": 163,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Birds of a Feather: Homophily in Social Networks",
+      "doi": "10.1146/ANNUREV.SOC.27.1.415",
+      "s2_id": "228bafce55e6f1cbe2c1df75b1949a1fb9c93eb3",
+      "manual_s2_id": null,
+      "ref_number": 68,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Beware of samples! A cognitive-ecological sampling approach to judgment biases.",
+      "doi": "10.1037/0033-295X.107.4.659",
+      "s2_id": "d80a6896b06b0057b8b881cbf9f7ce432a99d148",
+      "manual_s2_id": null,
+      "ref_number": 61,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Unskilled and unaware of it: how difficulties in recognizing one's own incompetence lead to inflated self-assessments.",
+      "doi": "10.1037/0022-3514.77.6.1121",
+      "s2_id": "f2c80eef3585e0569e93ace0b9770cf76c8ebabc",
+      "manual_s2_id": null,
+      "ref_number": 72,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "manual_doi"
+    },
+    {
+      "raw_title": "Lake Wobegon be gone! The \"below-average effect\" and the egocentric nature of comparative ability judgments.",
+      "doi": "10.1037/0022-3514.77.2.221",
+      "s2_id": "cfbdc5b51daf603ece166861b509ef613fb231e9",
+      "manual_s2_id": null,
+      "ref_number": 71,
+      "section": "S1_describing_predicting",
+      "match_score": 0.6,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Voters as forecasters: a micromodel of election prediction",
+      "doi": "10.1016/S0169-2070(98)00063-6",
+      "s2_id": "427a391634c214ad3c1022778c869e8adc367d2c",
+      "manual_s2_id": null,
+      "ref_number": 54,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Strategies for estimating behavioural frequency in survey interviews.",
+      "doi": "10.1080/741942603",
+      "s2_id": "0ec6475266f2ac1fd27a062ff9e22ca170d4148e",
+      "manual_s2_id": null,
+      "ref_number": 186,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Respondent-driven sampling : A new approach to the study of hidden populations",
+      "doi": "10.2307/3096941",
+      "s2_id": "08a8922636fc5365d17421123546e08c18dd4923",
+      "manual_s2_id": null,
+      "ref_number": 20,
+      "section": "S0_intro",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Being and feeling unique: statistical deviance and psychological marginality.",
+      "doi": "10.1111/J.1467-6494.1993.TB00280.X",
+      "s2_id": "051330aafdb20c15ea4cc5d44fbf691c0a13b57c",
+      "manual_s2_id": null,
+      "ref_number": 70,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Exemplar-Based Model of Social Judgment",
+      "doi": "10.1037/0033-295X.99.1.3",
+      "s2_id": "2522baff66140f8211943bd4dcb033d0d45e1295",
+      "manual_s2_id": null,
+      "ref_number": 95,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical mechanics of social impact.",
+      "doi": "10.1103/PHYSREVA.45.763",
+      "s2_id": "278a689c989602041fa8a6b19c61914b4d9022c9",
+      "manual_s2_id": null,
+      "ref_number": 127,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Why Your Friends Have More Friends Than You Do",
+      "doi": "10.1086/229693",
+      "s2_id": "10fd8229a71f040297670c013bf97cfc8b6b95d2",
+      "manual_s2_id": null,
+      "ref_number": 74,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Why Your Friends Have More Friends Than You Do",
+      "doi": "10.1086/229693",
+      "s2_id": "140d045a73d90dffdc2cd24e42343031002f4618",
+      "manual_s2_id": null,
+      "ref_number": 74,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "From Tools to Theories: A Heuristic of Discovery in Cognitive Psychology.",
+      "doi": "10.1037/0033-295X.98.2.254",
+      "s2_id": "b58f6f62fb2f19ac398a9851e6013529c0332e40",
+      "manual_s2_id": null,
+      "ref_number": 134,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "From private attitude to public opinion: A dynamic theory of social impact.",
+      "doi": "10.1037/0033-295X.97.3.362",
+      "s2_id": "3b2a311dd30ba27021b35858345d3cecd3e4621f",
+      "manual_s2_id": null,
+      "ref_number": 41,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Adaptive Character of Thought",
+      "doi": "10.2307/3172518",
+      "s2_id": "33025edfa79cc676cd0126ba4c481f6bbac0a3b8",
+      "manual_s2_id": null,
+      "ref_number": 112,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Test theory without an answer key",
+      "doi": "10.1007/BF02294195",
+      "s2_id": "8d2a2b9d78721629764ab43afb0e3d22c63567ff",
+      "manual_s2_id": null,
+      "ref_number": 144,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Cognitive Structure and Informant Accuracy",
+      "doi": "10.1525/AA.1987.89.2.02A00020",
+      "s2_id": "4b1f4f8f5277e8335eeed606a5a4e959e8dd844b",
+      "manual_s2_id": null,
+      "ref_number": 195,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Models of man",
+      "doi": "10.1038/322767B0",
+      "s2_id": "7338e01d16da94818739690b9646cb892fc2a51d",
+      "manual_s2_id": null,
+      "ref_number": 65,
+      "section": "S1_describing_predicting",
+      "match_score": 0.57,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Culture as Consensus: A Theory of Culture and Informant Accuracy",
+      "doi": "10.1525/AA.1986.88.2.02A00020",
+      "s2_id": "dd0d45ede8a0b63f85fe4a897081d95c90a2477c",
+      "manual_s2_id": null,
+      "ref_number": 145,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Perception of social distributions.",
+      "doi": "10.1037/0022-3514.48.2.297",
+      "s2_id": "ee872afd319d6624241b9c8f1bfbd127843d44d2",
+      "manual_s2_id": null,
+      "ref_number": 191,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "INFORMANT ACCURACY IN SOCIAL NETWORK DATA II",
+      "doi": "10.1111/J.1468-2958.1977.TB00591.X",
+      "s2_id": "3bb2be9399d45993cd96f5cbe36223c892861cf4",
+      "manual_s2_id": null,
+      "ref_number": 194,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The \u201cfalse consensus effect\u201d: An egocentric bias in social perception and attribution processes",
+      "doi": "10.1016/0022-1031(77)90049-X",
+      "s2_id": "da68edc4476cdf2c0f223a77be86082ede9d6277",
+      "manual_s2_id": null,
+      "ref_number": 16,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Informant Accuracy in Social Network Data",
+      "doi": "10.17730/humo.35.3.10215j2m359266n2",
+      "s2_id": "94e97cbf311433d00838066e318be1184bfd023e",
+      "manual_s2_id": null,
+      "ref_number": 193,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Reaching a Consensus",
+      "doi": "10.1080/01621459.1974.10480137",
+      "s2_id": "224462e7ca603df32c712ceb2aea68fb25bdc975",
+      "manual_s2_id": null,
+      "ref_number": 106,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Epidemics and Rumours",
+      "doi": "10.1038/2041118A0",
+      "s2_id": "b7547dbd75e9d9ccc90a3df7bd41ed50b25c7781",
+      "manual_s2_id": null,
+      "ref_number": 131,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Models Of Man : Social And Rational",
+      "doi": "10.2307/2109314",
+      "s2_id": "289e5715bdbaafb891c51b1645e2586f1f60d75e",
+      "manual_s2_id": null,
+      "ref_number": 65,
+      "section": "S1_describing_predicting",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "UTILITY THEORIES IN FIELD PHYSICS AND MATHEMATICAL ECONOMICS (I)*",
+      "doi": "10.1093/bjps/V.17.47",
+      "s2_id": "b13c72c14b1d2024bda07459ade314b47a3f0b5c",
+      "manual_s2_id": null,
+      "ref_number": 125,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The conceptual framework of psychology",
+      "doi": "10.1037/H0049873",
+      "s2_id": "55a93dea88e9ef7045c5bee2e5f6dc15fc08e712",
+      "manual_s2_id": null,
+      "ref_number": 60,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Sociometry, Experimental Method and the Science of Society",
+      "doi": "10.2307/586817",
+      "s2_id": "68697329618b0876f35201e51c66a7b5aefaf028",
+      "manual_s2_id": null,
+      "ref_number": 18,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The Division of Labour in Society",
+      "doi": "10.2307/1331279",
+      "s2_id": "1994c1ba7c94870626942cab55ab4bcb51466776",
+      "manual_s2_id": null,
+      "ref_number": 90,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Becoming Human: A Theory of Ontogeny",
+      "doi": "10.9793/elsj.38.2_276",
+      "s2_id": "f471620e0bf31280907c4b8fa70528cfd0f76abe",
+      "manual_s2_id": null,
+      "ref_number": 1,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Changing Beliefs about Scientific Issues: The Role of Moral and Social Belief Networks",
+      "doi": null,
+      "s2_id": "4a7f09212c1a94feea61b8b4e0e3a991412764b7",
+      "manual_s2_id": null,
+      "ref_number": 13,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Linking Sensitive Data: Methods and Techniques for Practical Privacy-Preserving Information Sharing",
+      "doi": "10.1007/978-3-030-59706-1",
+      "s2_id": "f2f8862dd815df719ca4abbd058e70870e4f5b45",
+      "manual_s2_id": null,
+      "ref_number": 155,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bit by Bit: Social Research in the Digital Age",
+      "doi": null,
+      "s2_id": "036ffba6746b5311bf38882579ee0116d3cc2f79",
+      "manual_s2_id": null,
+      "ref_number": 124,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Toward a formalized account of attitudes: The Causal Attitude Network (CAN) model.",
+      "doi": "10.1037/a0039802",
+      "s2_id": "5a440a659fd309bbcbe0dbbc62cde62a36f7d542",
+      "manual_s2_id": null,
+      "ref_number": 85,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Dangerous speech and dangerous ideology: an integrated model for monitoring and prevention",
+      "doi": "10.5038/1911-9933.9.3.1317",
+      "s2_id": "83d20601052af9c70f19142e13773bece661b031",
+      "manual_s2_id": null,
+      "ref_number": 166,
+      "section": "S3_outlook",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Culture And The Evolutionary Process",
+      "doi": null,
+      "s2_id": "fca5538004adb3faef3237f33dc9567ec26fdc80",
+      "manual_s2_id": null,
+      "ref_number": 105,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Homophily in social networks",
+      "doi": "10.2298/ZMSDN1656325B",
+      "s2_id": "b7ee089f299e73ff629c3432edeb810582a0fb09",
+      "manual_s2_id": null,
+      "ref_number": 68,
+      "section": "S1_describing_predicting",
+      "match_score": 0.75,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Information Sampling And Adaptive Cognition",
+      "doi": "10.1017/cbo9780511614576",
+      "s2_id": "f881cd4e754b87cdcaec4d105ae3de3f91c493d3",
+      "manual_s2_id": null,
+      "ref_number": 62,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Probabilistic models of cognition Probabilistic models of cognition : Conceptual foundations",
+      "doi": null,
+      "s2_id": "f37c4a7c6441636397430d2447719e922788bc53",
+      "manual_s2_id": null,
+      "ref_number": 113,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.76,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Accuracy of Vote Expectation Surveys in Forecasting Elections",
+      "doi": "10.1093/POQ/NFU008",
+      "s2_id": "cefa4cb262a4389deb0135907e8e143043612eef",
+      "manual_s2_id": null,
+      "ref_number": 7,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Agent_Zero: Toward Neurocognitive Foundations for Generative Social Science (Princeton Studies in Complexity) by Joshua M. Epstein",
+      "doi": null,
+      "s2_id": "899ed7cf3d5d073e7a0731219161ece131118086",
+      "manual_s2_id": null,
+      "ref_number": 34,
+      "section": "S0_intro",
+      "match_score": 0.74,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Introduction to Big Data",
+      "doi": "10.1016/B978-0-12-405891-0.00001-5",
+      "s2_id": "52ac2f046d532e299a510f803985a1f739f11e33",
+      "manual_s2_id": null,
+      "ref_number": 27,
+      "section": "S0_intro",
+      "match_score": 0.75,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Bayesian Theory of Mind: Modeling Joint Belief-Desire Attribution",
+      "doi": null,
+      "s2_id": "58eee36a6e0c59622d800ae4131c29b96f1595c8",
+      "manual_s2_id": null,
+      "ref_number": 114,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Sports forecasting: a comparison of the forecast accuracy of prediction markets, betting odds and tipsters",
+      "doi": "10.1002/FOR.1091",
+      "s2_id": "729dda156c9f5981beb764c1dbf49b0d5fa93368",
+      "manual_s2_id": null,
+      "ref_number": 58,
+      "section": "S1_describing_predicting",
+      "match_score": 0.86,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Conformists and mavericks: the empirics of frequency-dependent cultural transmission",
+      "doi": "10.1016/J.EVOLHUMBEHAV.2007.08.003",
+      "s2_id": "9a39da745f6dffb50a3bbeaded9e9661fb350f94",
+      "manual_s2_id": null,
+      "ref_number": 99,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The theory of cognitive dissonance By",
+      "doi": null,
+      "s2_id": "c3d47111d20ec12e36a44c4fcd49b5ce2a8b625a",
+      "manual_s2_id": null,
+      "ref_number": 126,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.9,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Healthcare Epidemiology: Use of Prediction Markets to Forecast Infectious Disease Activity",
+      "doi": null,
+      "s2_id": "c610c55b23d6c9b58ed3c5d22d85e048f123cc23",
+      "manual_s2_id": null,
+      "ref_number": 57,
+      "section": "S1_describing_predicting",
+      "match_score": 0.84,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The evolution of cultural evolution",
+      "doi": "10.1002/EVAN.10110",
+      "s2_id": "8caefda9c77e6c82aa23be3736973dd2939be049",
+      "manual_s2_id": null,
+      "ref_number": 132,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "A social network approach to estimating seroprevalence in the United States",
+      "doi": "10.1016/S0378-8733(96)00305-X",
+      "s2_id": "b3fe9194c02871f796040675e8c4863fac29c00f",
+      "manual_s2_id": null,
+      "ref_number": 21,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Culture and cognition",
+      "doi": "10.1146/ANNUREV.SOC.23.1.263",
+      "s2_id": "a56ec6dfbc1c4bfac8639ffea74784a5e5b4e8bf",
+      "manual_s2_id": null,
+      "ref_number": 92,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Classification and cognition",
+      "doi": "10.5771/0943-7444-1979-2-71",
+      "s2_id": "61e79a9d4865dfd80a73eaaaa24386c594a819c1",
+      "manual_s2_id": null,
+      "ref_number": 181,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Mental Leaps: Analogy in Creative Thought",
+      "doi": "10.7551/mitpress/4549.001.0001",
+      "s2_id": "928a61768b492a3614e4c21453e079419d662891",
+      "manual_s2_id": null,
+      "ref_number": 133,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Thin slices of expressive behavior as predictors of interpersonal consequences: A meta-analysis.",
+      "doi": "10.1037/0033-2909.111.2.256",
+      "s2_id": "df0c9ca7be20ee0b7c5436332c20dcf46b2109d7",
+      "manual_s2_id": null,
+      "ref_number": 183,
+      "section": "S1_describing_predicting",
+      "match_score": 0.91,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Invariants of human behavior.",
+      "doi": "10.1146/ANNUREV.PS.41.020190.000245",
+      "s2_id": "476a740ca1c10df04b4a4602ef852002e9993ec8",
+      "manual_s2_id": null,
+      "ref_number": 89,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Statistical criteria for establishing a truly false consensus effect",
+      "doi": "10.1016/0022-1031(89)90036-X",
+      "s2_id": "d8624d8fdb878551ba98fec994c732e5e1574f1b",
+      "manual_s2_id": null,
+      "ref_number": 190,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "NEW DEVELOPMENTS IN THE SAMPLING OF SPECIAL POPULATIONS",
+      "doi": "10.1146/ANNUREV.SO.12.080186.002153",
+      "s2_id": "b76374ae055d03b9b847dcb78ff84d8185df5dab",
+      "manual_s2_id": null,
+      "ref_number": 73,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Asking questions: A practical guide to questionnaire design",
+      "doi": "10.1016/0191-8869(83)90107-1",
+      "s2_id": "acf58df64b3b8438bfc1835328c7fd61a70f58c5",
+      "manual_s2_id": null,
+      "ref_number": 49,
+      "section": "S1_describing_predicting",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "The child in America: Behavior problems and programs.",
+      "doi": "10.1037/H0065549",
+      "s2_id": "2236455e8c5a9c7cdcad0ed91ee33608be83c8a5",
+      "manual_s2_id": null,
+      "ref_number": 91,
+      "section": "S2_empirically_grounded_models",
+      "match_score": 0.99,
+      "match_method": "title_fuzzy"
+    },
+    {
+      "raw_title": "Moral and Social Foundations of Beliefs about Scientific Issues: Predicting and Understanding Belief Change",
+      "doi": "10.31219/osf.io/zs7dq",
+      "s2_id": "09116a43f4b17dfb47449d3a6aa027d17171717d",
+      "manual_s2_id": null,
+      "ref_number": 12,
+      "section": "S0_intro",
+      "match_score": 1.0,
+      "match_method": "title_fuzzy"
+    }
+  ],
+  "unresolved": [
+    {
+      "raw_title": "The Integrative Review.",
+      "doi": "10.1111/2047-3095.12208",
+      "s2_id": "368584375ffbc56e09e270867d28e896fc08a4e0",
+      "manual_s2_id": null,
+      "issue": "unresolved \u2014 gold-set title/DOI too generic to confidently match a numbered ref"
+    },
+    {
+      "raw_title": "The Network Approach",
+      "doi": "10.4324/9780367274689-5",
+      "s2_id": "bdfaff780fc86d67a84a7bbe5852041df73241c3",
+      "manual_s2_id": null,
+      "issue": "unresolved \u2014 gold-set title/DOI too generic to confidently match a numbered ref"
+    },
+    {
+      "raw_title": "A Meta-analysis: Effect of Stem Cells Transplantation on Rehabilitation of Diabetes Mellitus with Limb Ischemia",
+      "doi": "10.3724/SP.J.1329.2017.01049",
+      "s2_id": "5cb1b78dd524764fb494586c33fe1eff78dc6218",
+      "manual_s2_id": null,
+      "issue": "gold-set DOI/title appears unrelated to the survey topic entirely \u2014 likely a bad DOI resolution upstream in gold-set construction, not a section-tagging failure"
+    },
+    {
+      "raw_title": "Mini review",
+      "doi": "10.5924/abgri.43.1",
+      "s2_id": "de1259e8810551b4ab598dc13e3b7d53cab99fbb",
+      "manual_s2_id": null,
+      "issue": "unresolved \u2014 gold-set title/DOI too generic to confidently match a numbered ref"
+    },
+    {
+      "raw_title": "A Review of the Scientific Literature as it Pertains to Gulf War Illnesses",
+      "doi": "10.7249/MR1018.7",
+      "s2_id": "ddc93f2ee4411fec026e4f68d3095d7dd894cd15",
+      "manual_s2_id": null,
+      "issue": "gold-set DOI/title appears unrelated to the survey topic entirely \u2014 likely a bad DOI resolution upstream in gold-set construction, not a section-tagging failure"
+    }
+  ]
+}
