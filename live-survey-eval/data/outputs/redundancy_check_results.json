@@ -1,0 +1,38 @@
+{
+  "Ge21-HSS": {
+    "survey_id": "Ge21-HSS",
+    "multi_round_fwd_candidates": 307,
+    "multi_round_fwd_new_gold": 3,
+    "co_citation_candidates": 66,
+    "co_citation_new_gold": 19,
+    "candidate_jaccard": 0.024725274725274724,
+    "gold_jaccard": 0.1,
+    "shared_gold": 2,
+    "fwd_only_gold": 1,
+    "cc_only_gold": 17
+  },
+  "K17-RGC": {
+    "survey_id": "K17-RGC",
+    "multi_round_fwd_candidates": 203,
+    "multi_round_fwd_new_gold": 0,
+    "co_citation_candidates": 40,
+    "co_citation_new_gold": 4,
+    "candidate_jaccard": 0.004132231404958678,
+    "gold_jaccard": 0.0,
+    "shared_gold": 0,
+    "fwd_only_gold": 0,
+    "cc_only_gold": 4
+  },
+  "Le25-GLLM": {
+    "survey_id": "Le25-GLLM",
+    "multi_round_fwd_candidates": 1712,
+    "multi_round_fwd_new_gold": 1,
+    "co_citation_candidates": 143,
+    "co_citation_new_gold": 2,
+    "candidate_jaccard": 0.004331348132106118,
+    "gold_jaccard": 0.0,
+    "shared_gold": 0,
+    "fwd_only_gold": 1,
+    "cc_only_gold": 2
+  }
+}

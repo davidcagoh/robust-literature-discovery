@@ -1,0 +1,593 @@
+{
+  "K17-RGC": {
+    "survey_id": "K17-RGC",
+    "gold_size": 52,
+    "seed_count": 1,
+    "baseline_recall": 0.0,
+    "single_operator": {
+      "backward_traversal": {
+        "recall": 0.07692307692307693,
+        "precision": 0.05333333333333334,
+        "candidates": 75,
+        "new_gold_found": 4,
+        "s2_calls": 1,
+        "wall_seconds": 1.4,
+        "recall_per_call": 4.0,
+        "stats": {
+          "backward_count": 75,
+          "pdf_hits": 0,
+          "s2_ref_fallbacks": 1
+        }
+      },
+      "forward_traversal": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 28,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 1.2,
+        "recall_per_call": 0.0,
+        "stats": {
+          "forward_count": 28,
+          "hub_filtered": 0
+        }
+      },
+      "embedding_search": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 20,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 1.4,
+        "recall_per_call": 0.0,
+        "stats": {
+          "seeds_queried": 1,
+          "recommendations_found": 20
+        }
+      },
+      "co_citation": {
+        "recall": 0.07692307692307693,
+        "precision": 0.1,
+        "candidates": 40,
+        "new_gold_found": 4,
+        "s2_calls": 21,
+        "wall_seconds": 25.6,
+        "recall_per_call": 0.19047619047619047,
+        "stats": {
+          "seeds_processed": 1,
+          "citers_examined": 20,
+          "candidates_found": 40
+        }
+      },
+      "author_expansion": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 32,
+        "new_gold_found": 0,
+        "s2_calls": 4,
+        "wall_seconds": 4.7,
+        "recall_per_call": 0.0,
+        "stats": {
+          "authors_resolved": 2,
+          "authors_not_found": 0,
+          "author_papers_found": 32
+        }
+      },
+      "venue_expansion": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 1,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 1.5,
+        "recall_per_call": 0.0,
+        "stats": {
+          "venues_queried": 1,
+          "venue_papers_found": 1
+        }
+      },
+      "recency_search": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 100,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 1.8,
+        "recall_per_call": 0.0,
+        "stats": {
+          "results_found": 100
+        }
+      }
+    },
+    "marginal_curve": [
+      {
+        "step": "seeds_only",
+        "recall": 0.0,
+        "new_gold": 0,
+        "cumulative_candidates": 1
+      },
+      {
+        "step": "backward_traversal",
+        "recall": 0.07692307692307693,
+        "new_gold": 4,
+        "new_candidates_this_step": 75,
+        "step_precision": 0.05333333333333334,
+        "cumulative_candidates": 76
+      },
+      {
+        "step": "forward_traversal",
+        "recall": 0.07692307692307693,
+        "new_gold": 0,
+        "new_candidates_this_step": 28,
+        "step_precision": 0.0,
+        "cumulative_candidates": 104
+      },
+      {
+        "step": "embedding_search",
+        "recall": 0.07692307692307693,
+        "new_gold": 0,
+        "new_candidates_this_step": 20,
+        "step_precision": 0.0,
+        "cumulative_candidates": 124
+      },
+      {
+        "step": "co_citation",
+        "recall": 0.1346153846153846,
+        "new_gold": 3,
+        "new_candidates_this_step": 26,
+        "step_precision": 0.11538461538461539,
+        "cumulative_candidates": 150
+      },
+      {
+        "step": "author_expansion",
+        "recall": 0.1346153846153846,
+        "new_gold": 0,
+        "new_candidates_this_step": 29,
+        "step_precision": 0.0,
+        "cumulative_candidates": 179
+      },
+      {
+        "step": "venue_expansion",
+        "recall": 0.1346153846153846,
+        "new_gold": 0,
+        "new_candidates_this_step": 1,
+        "step_precision": 0.0,
+        "cumulative_candidates": 180
+      },
+      {
+        "step": "recency_search",
+        "recall": 0.1346153846153846,
+        "new_gold": 0,
+        "new_candidates_this_step": 95,
+        "step_precision": 0.0,
+        "cumulative_candidates": 275
+      }
+    ],
+    "full_recall": 0.1346153846153846,
+    "full_precision": 0.025547445255474453,
+    "ablation": {
+      "backward_traversal": {
+        "recall_without": 0.07692307692307693,
+        "recall_drop": 0.05769230769230768
+      },
+      "forward_traversal": {
+        "recall_without": 0.1346153846153846,
+        "recall_drop": 0.0
+      },
+      "embedding_search": {
+        "recall_without": 0.1346153846153846,
+        "recall_drop": 0.0
+      },
+      "co_citation": {
+        "recall_without": 0.07692307692307693,
+        "recall_drop": 0.05769230769230768
+      },
+      "author_expansion": {
+        "recall_without": 0.1346153846153846,
+        "recall_drop": 0.0
+      },
+      "venue_expansion": {
+        "recall_without": 0.1346153846153846,
+        "recall_drop": 0.0
+      },
+      "recency_search": {
+        "recall_without": 0.1346153846153846,
+        "recall_drop": 0.0
+      }
+    }
+  },
+  "Ge21-HSS": {
+    "survey_id": "Ge21-HSS",
+    "gold_size": 200,
+    "seed_count": 3,
+    "baseline_recall": 0.005,
+    "single_operator": {
+      "backward_traversal": {
+        "recall": 0.015,
+        "precision": 0.5,
+        "candidates": 4,
+        "new_gold_found": 2,
+        "s2_calls": 3,
+        "wall_seconds": 3.7,
+        "recall_per_call": 0.6666666666666666,
+        "stats": {
+          "backward_count": 4,
+          "pdf_hits": 2,
+          "s2_ref_fallbacks": 1
+        }
+      },
+      "forward_traversal": {
+        "recall": 0.01,
+        "precision": 0.03125,
+        "candidates": 32,
+        "new_gold_found": 1,
+        "s2_calls": 3,
+        "wall_seconds": 3.7,
+        "recall_per_call": 0.3333333333333333,
+        "stats": {
+          "forward_count": 32,
+          "hub_filtered": 0
+        }
+      },
+      "embedding_search": {
+        "recall": 0.005,
+        "precision": 0.0,
+        "candidates": 40,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 3.7,
+        "recall_per_call": 0.0,
+        "stats": {
+          "seeds_queried": 3,
+          "recommendations_found": 40
+        }
+      },
+      "co_citation": {
+        "recall": 0.1,
+        "precision": 0.2878787878787879,
+        "candidates": 66,
+        "new_gold_found": 19,
+        "s2_calls": 24,
+        "wall_seconds": 29.1,
+        "recall_per_call": 0.7916666666666666,
+        "stats": {
+          "seeds_processed": 3,
+          "citers_examined": 21,
+          "candidates_found": 66
+        }
+      },
+      "author_expansion": {
+        "recall": 0.035,
+        "precision": 0.03571428571428571,
+        "candidates": 196,
+        "new_gold_found": 7,
+        "s2_calls": 18,
+        "wall_seconds": 21.5,
+        "recall_per_call": 0.3888888888888889,
+        "stats": {
+          "authors_resolved": 9,
+          "authors_not_found": 0,
+          "author_papers_found": 196
+        }
+      },
+      "venue_expansion": {
+        "recall": 0.005,
+        "precision": 0.0,
+        "candidates": 81,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 4.0,
+        "recall_per_call": 0.0,
+        "stats": {
+          "venues_queried": 3,
+          "venue_papers_found": 81
+        }
+      },
+      "recency_search": {
+        "recall": 0.005,
+        "precision": 0.0,
+        "candidates": 100,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 1.9,
+        "recall_per_call": 0.0,
+        "stats": {
+          "results_found": 100
+        }
+      }
+    },
+    "marginal_curve": [
+      {
+        "step": "seeds_only",
+        "recall": 0.005,
+        "new_gold": 1,
+        "cumulative_candidates": 3
+      },
+      {
+        "step": "backward_traversal",
+        "recall": 0.015,
+        "new_gold": 2,
+        "new_candidates_this_step": 3,
+        "step_precision": 0.6666666666666666,
+        "cumulative_candidates": 6
+      },
+      {
+        "step": "forward_traversal",
+        "recall": 0.015,
+        "new_gold": 0,
+        "new_candidates_this_step": 30,
+        "step_precision": 0.0,
+        "cumulative_candidates": 36
+      },
+      {
+        "step": "embedding_search",
+        "recall": 0.015,
+        "new_gold": 0,
+        "new_candidates_this_step": 40,
+        "step_precision": 0.0,
+        "cumulative_candidates": 76
+      },
+      {
+        "step": "co_citation",
+        "recall": 0.1,
+        "new_gold": 17,
+        "new_candidates_this_step": 57,
+        "step_precision": 0.2982456140350877,
+        "cumulative_candidates": 133
+      },
+      {
+        "step": "author_expansion",
+        "recall": 0.12,
+        "new_gold": 4,
+        "new_candidates_this_step": 177,
+        "step_precision": 0.022598870056497175,
+        "cumulative_candidates": 310
+      },
+      {
+        "step": "venue_expansion",
+        "recall": 0.12,
+        "new_gold": 0,
+        "new_candidates_this_step": 81,
+        "step_precision": 0.0,
+        "cumulative_candidates": 391
+      },
+      {
+        "step": "recency_search",
+        "recall": 0.12,
+        "new_gold": 0,
+        "new_candidates_this_step": 99,
+        "step_precision": 0.0,
+        "cumulative_candidates": 490
+      }
+    ],
+    "full_recall": 0.12,
+    "full_precision": 0.04722792607802875,
+    "ablation": {
+      "backward_traversal": {
+        "recall_without": 0.12,
+        "recall_drop": 0.0
+      },
+      "forward_traversal": {
+        "recall_without": 0.12,
+        "recall_drop": 0.0
+      },
+      "embedding_search": {
+        "recall_without": 0.12,
+        "recall_drop": 0.0
+      },
+      "co_citation": {
+        "recall_without": 0.04,
+        "recall_drop": 0.07999999999999999
+      },
+      "author_expansion": {
+        "recall_without": 0.1,
+        "recall_drop": 0.01999999999999999
+      },
+      "venue_expansion": {
+        "recall_without": 0.12,
+        "recall_drop": 0.0
+      },
+      "recency_search": {
+        "recall_without": 0.12,
+        "recall_drop": 0.0
+      }
+    }
+  },
+  "Le25-GLLM": {
+    "survey_id": "Le25-GLLM",
+    "gold_size": 57,
+    "seed_count": 3,
+    "baseline_recall": 0.0,
+    "single_operator": {
+      "backward_traversal": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 56,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 3.8,
+        "recall_per_call": 0.0,
+        "stats": {
+          "backward_count": 57,
+          "pdf_hits": 3,
+          "s2_ref_fallbacks": 0
+        }
+      },
+      "forward_traversal": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 160,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 3.5,
+        "recall_per_call": 0.0,
+        "stats": {
+          "forward_count": 160,
+          "hub_filtered": 0
+        }
+      },
+      "embedding_search": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 56,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 4.0,
+        "recall_per_call": 0.0,
+        "stats": {
+          "seeds_queried": 3,
+          "recommendations_found": 60
+        }
+      },
+      "co_citation": {
+        "recall": 0.03508771929824561,
+        "precision": 0.013986013986013986,
+        "candidates": 143,
+        "new_gold_found": 2,
+        "s2_calls": 33,
+        "wall_seconds": 39.8,
+        "recall_per_call": 0.06060606060606061,
+        "stats": {
+          "seeds_processed": 3,
+          "citers_examined": 30,
+          "candidates_found": 143
+        }
+      },
+      "author_expansion": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 242,
+        "new_gold_found": 0,
+        "s2_calls": 32,
+        "wall_seconds": 38.5,
+        "recall_per_call": 0.0,
+        "stats": {
+          "authors_resolved": 16,
+          "authors_not_found": 0,
+          "author_papers_found": 243
+        }
+      },
+      "venue_expansion": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 82,
+        "new_gold_found": 0,
+        "s2_calls": 3,
+        "wall_seconds": 4.1,
+        "recall_per_call": 0.0,
+        "stats": {
+          "venues_queried": 3,
+          "venue_papers_found": 82
+        }
+      },
+      "recency_search": {
+        "recall": 0.0,
+        "precision": 0.0,
+        "candidates": 100,
+        "new_gold_found": 0,
+        "s2_calls": 1,
+        "wall_seconds": 2.0,
+        "recall_per_call": 0.0,
+        "stats": {
+          "results_found": 100
+        }
+      }
+    },
+    "marginal_curve": [
+      {
+        "step": "seeds_only",
+        "recall": 0.0,
+        "new_gold": 0,
+        "cumulative_candidates": 3
+      },
+      {
+        "step": "backward_traversal",
+        "recall": 0.0,
+        "new_gold": 0,
+        "new_candidates_this_step": 56,
+        "step_precision": 0.0,
+        "cumulative_candidates": 59
+      },
+      {
+        "step": "forward_traversal",
+        "recall": 0.0,
+        "new_gold": 0,
+        "new_candidates_this_step": 159,
+        "step_precision": 0.0,
+        "cumulative_candidates": 218
+      },
+      {
+        "step": "embedding_search",
+        "recall": 0.0,
+        "new_gold": 0,
+        "new_candidates_this_step": 52,
+        "step_precision": 0.0,
+        "cumulative_candidates": 270
+      },
+      {
+        "step": "co_citation",
+        "recall": 0.03508771929824561,
+        "new_gold": 2,
+        "new_candidates_this_step": 125,
+        "step_precision": 0.016,
+        "cumulative_candidates": 395
+      },
+      {
+        "step": "author_expansion",
+        "recall": 0.03508771929824561,
+        "new_gold": 0,
+        "new_candidates_this_step": 238,
+        "step_precision": 0.0,
+        "cumulative_candidates": 633
+      },
+      {
+        "step": "venue_expansion",
+        "recall": 0.03508771929824561,
+        "new_gold": 0,
+        "new_candidates_this_step": 77,
+        "step_precision": 0.0,
+        "cumulative_candidates": 710
+      },
+      {
+        "step": "recency_search",
+        "recall": 0.03508771929824561,
+        "new_gold": 0,
+        "new_candidates_this_step": 72,
+        "step_precision": 0.0,
+        "cumulative_candidates": 782
+      }
+    ],
+    "full_recall": 0.03508771929824561,
+    "full_precision": 0.0025673940949935813,
+    "ablation": {
+      "backward_traversal": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      },
+      "forward_traversal": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      },
+      "embedding_search": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      },
+      "co_citation": {
+        "recall_without": 0.0,
+        "recall_drop": 0.03508771929824561
+      },
+      "author_expansion": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      },
+      "venue_expansion": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      },
+      "recency_search": {
+        "recall_without": 0.03508771929824561,
+        "recall_drop": 0.0
+      }
+    }
+  }
+}
