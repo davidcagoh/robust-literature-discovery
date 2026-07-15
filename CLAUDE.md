@@ -6,7 +6,7 @@ This repository contains the APS-based empirical validation for **LitDiscover**,
 
 The manuscript lives at `drafts/Robust_Literature_Discovery_from_Minimal_Seeds.md` (prose source of truth). `drafts/` root holds only the live prose source, `bibliography.json`, and the canonical `refs.bib`; every dead-end LaTeX target has been moved to `drafts/archive/` (2026-07-06 reorg) so the active submission is unambiguous:
 
-**2026-07-13:** `drafts/ipm-submission/litdiscover_ipm.tex` and `litdiscover_ipm_anonymous.tex` no longer inline their Related Work section — both `\input{related-work}`, pulling from the shared `drafts/ipm-submission/related-work.tex` (single-sourced since the two `.tex` files' Related Work content was byte-identical). `drafts/ipm-submission/refs.bib` is now a **symlink** to `../refs.bib` — a real independent copy had drifted between the two locations before being merged back; edit `drafts/refs.bib` only. The full desk-rejected IP&M submission (both `.tex` files, PDFs, cover letter, highlights, build artifacts, as they stood pre-redo) is snapshotted at `drafts/archive/ipm-submission-rejected-2026-07-07/` — a complete, standalone copy, not touched by the ongoing redo.
+`drafts/ipm-submission/litdiscover_ipm.tex` and `litdiscover_ipm_anonymous.tex` both `\input{related-work}`, pulling from the shared `drafts/ipm-submission/related-work.tex` (single-sourced, not duplicated). `drafts/ipm-submission/refs.bib` is a **symlink** to `../refs.bib` — edit `drafts/refs.bib` only, never the symlink target directly. The full desk-rejected IP&M submission as it stood pre-redo is snapshotted at `drafts/archive/ipm-submission-rejected-2026-07-07/` — a complete, standalone copy, not touched by the ongoing redo.
 
 | File | Format | Purpose |
 |---|---|---|
@@ -24,9 +24,13 @@ The manuscript lives at `drafts/Robust_Literature_Discovery_from_Minimal_Seeds.m
 
 **JCDL submission format (archived, kept for reference):** `\documentclass[sigconf,anonymous,review]{acmart}`. Abstract must appear **before** `\maketitle`. Do **not** add `\usepackage{caption}`, `\usepackage{subcaption}`, `\usepackage{hyperref}`, `\usepackage{natbib}`, or `\usepackage{geometry}` — acmart loads all of these and conflicts will crash the build.
 
-**2026-07-06 repo cleanup:** `jcdl-submission/`'s LaTeX build artifacts (`.aux`/`.log`/`.bbl`/`.blg`/`.out`) were accidentally committed to git because `.gitignore`'s LaTeX-artifact patterns only matched `drafts/*.ext`, not subdirectories — fixed with recursive `drafts/**/*.ext` patterns and `git rm --cached` on the already-tracked files. Also removed: `closed-corpus-eval/data/sample/*.mat` (two orphaned MATLAB relics, referenced only by a script that itself lives under `citation-dynamics/archive/matlab-misc/` in the sibling repo — dead weight on dead weight), the empty `closed-corpus-eval/data/raw/` placeholder, empty `out/` build dirs, a stray unrelated `drafts/.claude/settings.local.json`, and the 1.2GB `live-survey-eval/data/cache/papers/` (gitignored, fully regenerable via `09_live_validation.py` — re-running it will simply re-fetch and repopulate the cache). The two later-abandoned submission folders (`jasist-submission/`, `tois-submission/`) were also folded into `drafts/archive/` once IP&M became the active target, so `drafts/` root never has more than one live LaTeX target at a time.
+`drafts/` root never has more than one live LaTeX target at a time — abandoned submission
+attempts (`jasist-submission/`, `tois-submission/`, `jcdl-submission/`) live in `drafts/archive/`.
 
-**2026-07-10 repo restructure:** Split the former single `scripts/` + `eval/` split into two self-contained tracks, `closed-corpus-eval/` and `live-survey-eval/`, each owning both its own `scripts/` and `data/`. Verified by reading every script in full: scripts 01–08 (+ 03b) touch only APS closed-corpus data and never reference live data or vice versa for `09_live_validation.py` — there was no real shared `scripts/`, just 10 files for one track and 1 file for the other artificially combined. Also deleted `inbox-papers/` (an ad hoc related-work-triage workflow judged redundant with the systematic 366-paper sweep now tracked in the `litdiscover` repo's wiki) and `app-validation-data/` (orphaned output of an already-deleted dead script).
+`closed-corpus-eval/` and `live-survey-eval/` are separate self-contained tracks, each owning its
+own `scripts/` and `data/` — verified by reading every script in full: scripts 01–08 (+ 03b)
+touch only APS closed-corpus data and never reference `09_live_validation.py`'s live data or vice
+versa. There is deliberately no shared top-level `scripts/`.
 
 ## What matters most
 

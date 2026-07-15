@@ -51,7 +51,7 @@ robust-literature-discovery/
 │   │   ├── eval/                          # the validation pipeline — produces every paper claim/figure
 │   │   └── sweep/                         # parameter-justification scripts (why N_ROUNDS=2, PARETO_P=80)
 │   └── data/
-│       ├── processed/                     # symlink → ../../../../citation-dynamics/data/processed
+│       ├── processed/                     # symlink → ../../../../zeitgeist/data/processed
 │       └── outputs/                       # JSON/CSV artifacts + pub_figures/ (fig1–fig7)
 ├── live-survey-eval/              # live open-domain validation (Semantic Scholar API)
 │   ├── scripts/                       # 09_live_validation.py
